@@ -1,0 +1,132 @@
+{
+  "_name": "Deutsch",
+  "title": "Smart Pangya Calculator",
+  "lang_label": "Sprache:",
+
+  "label_course": "Kurs:",
+  "label_map": "Karte",
+  "label_hole": "Loch",
+  "label_pin": "Pin",
+
+  "tab_cal": "Berechnungen",
+  "tab_overlay": "Overlays",
+  "tab_stats": "Statistiken",
+  "tab_config": "Einstellungen",
+  "tab_slope": "Erweiterte Optionen",
+
+  "card_shot_config": "Schusskonfiguration",
+  "label_club": "Schläger",
+  "label_shot": "Schusstyp",
+  "label_power_shot": "Power Shot",
+
+  "shot_dunk": "Dunk",
+  "shot_tomahawk": "Tomahawk",
+  "shot_spike": "Spike",
+  "shot_cobra": "Cobra",
+
+  "min_ps_none": "Ohne PS",
+  "min_ps_1": "1 PS",
+  "min_ps_2": "2 PS",
+  "min_ps_15y": "15y PS",
+
+  "ps_none": "Ohne Power Shot",
+  "ps_1": "1 Power Shot",
+  "ps_2": "2 Power Shots",
+  "ps_15y": "Power Shot 15y",
+
+  "label_distance": "Distanz",
+  "label_height": "Höhe",
+  "label_wind": "Wind",
+  "label_degree": "Winkel",
+  "label_spin": "Spin",
+  "ideal_spin": "Optimierter Spin",
+  "apply-spin": "Spin anwenden",
+  "label_curve": "Curve",
+  "label_ground": "Ground",
+  "label_slope_break": "Slope (Break)",
+
+  "btn_reset_params": "Teil-Reset",
+  "btn_reset_hall": "Komplett‑Reset",
+  "btn_calc_shot": "SCHUSS BERECHNEN",
+  "label_card_spin": "Max Spin",
+
+  "card_wind": "Windberechnung",
+  "label_arrow_size": "Pfeilgröße",
+  "label_angle": "Winkel: 0°",
+
+  "label_image_params": "Bildparameter",
+  "placeholder_folder": "Capture-Ordner auswählen...",
+  "btn_browse": "Durchsuchen…",
+  "btn_refresh": "Aktualisieren",
+  "btn_clear_folder": "Ordner leeren",
+  "label_adjust_image": "Bild anpassen",
+
+  "card_overlays": "Overlay-Verwaltung",
+  "card_calcul_overlay": "Berechnungsfenster",
+  "label_calcul_overlay": "Fenster anzeigen",
+
+  "card_ruler": "Versatzlineal",
+  "label_show_ruler": "Lineal anzeigen",
+  "label_lock_ruler": "Overlay sperren (nicht anklickbar)",
+  "label_ruler_adjust": "Overlay-Anpassung",
+
+  "card_spin": "Spin-Markierung",
+
+  "card_wind_overlay": "Winkelrechner",
+  "label_show_wind_overlay": "Rechner anzeigen",
+  "label_lock_wind_overlay": "Overlay sperren (nicht anklickbar)",
+  "label_wind_overlay_adjust": "Overlay-Anpassung",
+  "lock_wind": "Winkelanzeige sperren",
+
+  "card_stats": "Charakterstatistiken",
+  "label_power": "Power",
+  "label_ring_power": "Ring Power",
+  "label_card_power": "Card Power",
+  "label_mascot_power": "Mascot Power",
+  "label_card_ps_power": "Card PS Power",
+
+  "card_slope": "Erweiterte Optionen",
+  "label_myce_degree": "Degree",
+  "label_align_degree": "Align Degree",
+  "btn_calc_slope": "Slope break:",
+
+  "card_param": "Anwendungseinstellungen",
+  "label_theme": "Theme:",
+  "card_screen_config": "Spielclient-Einstellungen",
+  "label_width": "Width:",
+  "label_height_screen": "Height",
+  "label_smart_dev": "Smart deviation limit",
+  "label_auto_fit": "Automatische Anpassung",
+
+  "modal_title": "⚠️ Warnung",
+  "modal_body": "Möchten Sie wirklich ALLE Bilder in diesem Ordner löschen? Diese Aktion ist unwiderruflich.",
+  "modal_confirm": "Ja, löschen",
+  "modal_cancel": "Abbrechen",
+
+  "card_spin_defaut": "Standard-Spin-Einstellung",
+  "spin_dunk": "Spin Dunk",
+  "spin_toma": "Spin Tomahawk",
+  "spin_spike": "Spin Spike",
+  "spin_cobra": "Spin Cobra",
+
+  "show_label_calc": "Overlay-Anzeige",
+  "show_ruler": "Lineal",
+  "show_spin": "Spin-Markierung",
+  "show_wind": "Winkelrechner",
+
+  "error_shot_too_short": "Der Schuss konnte nicht berechnet werden; er ist zu kurz oder zu schwach.",
+  "error_shot_shot_short": "Berechnung unmöglich",
+
+  "card_offset_config": "Spin-Zifferblatt Offset-Konfiguration",
+  "label_offset_x": "Spin-Zifferblatt Mitte - X",
+  "label_offset_y": "Spin-Zifferblatt Mitte - Y",
+  "label_capture_spin": "Leertaste drücken, um die Cursorposition zu erfassen",
+  "xy_default_values": "Standardwerte",
+
+  "dunk_out_of_range": "Schlag außerhalb der Reichweite des Schlägers, unabhängig vom getesteten Spin.",
+  "shot_out_of_range": "Schlag außerhalb der Reichweite des Schlägers, unabhängig vom getesteten Spin.",
+  "shot_extended_spin_used": "Hoher Spin (außerhalb des üblichen Bereichs) erforderlich, um den Schlag unter 100 % Kraft zu bringen.",
+  "shot_fallback_spin_used": "Kein Spin im Bereich erfüllt die Einschränkung, Standard-Spin verwendet.",
+
+  "footer": "Entwickelt von Onezim, basierend auf dem Originalrechner von Acrisio SuperSS Dev (MIT-Lizenz)."
+}

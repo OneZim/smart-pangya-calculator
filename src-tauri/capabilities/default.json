@@ -1,0 +1,55 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Capability for the main window",
+  "windows": [
+    "main",
+    "ruler_overlay",
+    "input_overlay",
+    "wind_overlay",
+    "spin_overlay"
+  ],
+  "permissions": [
+    "core:default",
+    "opener:default",
+    "store:default",
+    "core:window:default",
+    "core:webview:allow-webview-show",
+    "core:webview:allow-webview-hide",
+    "core:window:allow-set-position",
+    "core:window:allow-set-size",
+    "core:window:allow-outer-position",
+    "core:window:allow-start-dragging",
+    "core:webview:default",
+    "dialog:allow-open",
+    "core:window:allow-set-ignore-cursor-events",
+    "core:window:allow-show",
+    "core:window:allow-hide",
+    "core:window:allow-close",
+    "core:window:allow-minimize",
+    "core:window:allow-maximize",
+    "core:window:allow-unmaximize",
+    "core:window:allow-is-maximized",
+    "global-shortcut:allow-register",
+    "global-shortcut:allow-unregister",
+    {
+      "identifier": "core:event:allow-emit",
+      "allow": [
+        { "window": "main" },
+        { "window": "ruler_overlay" },
+        { "window": "input_overlay" },
+        { "window": "spin_overlay" }
+      ]
+    },
+    {
+      "identifier": "core:event:allow-listen",
+      "allow": [
+        { "window": "main" },
+        { "window": "ruler_overlay" },
+        { "window": "input_overlay" },
+        { "window": "wind_overlay" },
+        { "window": "spin_overlay" }
+      ]
+    }
+  ]
+}

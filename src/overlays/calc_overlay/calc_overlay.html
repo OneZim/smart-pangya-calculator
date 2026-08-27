@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Smart Pangya Calculator - Calc_Overlay</title>
+    <link rel="stylesheet" href="calc_overlay.css" />
+  </head>
+  <body>
+    <div id="interactive-bar" class="horizontal-calculator-bar">
+      <div class="error_calc">
+        <span
+          id="short-error"
+          class="short-error"
+          data-i18n="error_shot_shot_short"
+          style="display: none"
+        >
+        </span>
+      </div>
+      <!-- === SELECTEURS PARCOURS === -->
+      <div class="field map-field">
+        <label data-i18n="label_course"> Parcours</label>
+        <div id="course-selector-container" style="display: flex; gap: 6px">
+          <select id="select-parcours" style="flex: 1">
+            <option value="" data-i18n="label_course">-- Map --</option>
+          </select>
+          <select id="select-trou" style="flex: 1" disabled>
+            <option value="">-- Hole --</option>
+          </select>
+          <select id="select-pin" style="flex: 1" disabled>
+            <option value="">-- Pin --</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="field">
+        <label data-i18n="label_club">Club</label>
+        <select id="club">
+          <option value="0">1W</option>
+          <option value="1">2W</option>
+          <option value="2">3W</option>
+          <option value="3">2I</option>
+          <option value="4">3I</option>
+          <option value="5">4I</option>
+          <option value="6">5I</option>
+          <option value="7">6I</option>
+          <option value="8">7I</option>
+          <option value="9">8I</option>
+          <option value="10">9I</option>
+          <option value="11">PW</option>
+          <option value="12">SW</option>
+        </select>
+      </div>
+      <div class="field">
+        <label data-i18n="label_shot">Shot</label>
+        <select id="shot">
+          <option value="0" data-i18n="shot_dunk">Dunk</option>
+          <option value="1" data-i18n="shot_tomahawk">Tomahawk</option>
+          <option value="2" data-i18n="shot_spike">Spike</option>
+          <option value="3" data-i18n="shot_cobra">Cobra</option>
+        </select>
+      </div>
+      <div class="field">
+        <label data-i18n="label_power_shot">Power</label>
+        <select id="power_shot">
+          <option value="0" data-i18n="min_ps_none">No</option>
+          <option value="1" data-i18n="min_ps_1">1 PS</option>
+          <option value="2" data-i18n="min_ps_2">2 PS</option>
+          <option value="3" data-i18n="min_ps_15y">15y</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label data-i18n="label_distance">Dist</label>
+        <input
+          id="distance"
+          tabindex="1"
+          autocomplete="off"
+          type="text"
+          maxlength="6"
+          value="200"
+        />
+      </div>
+      <div class="field">
+        <label data-i18n="label_height">Height</label>
+        <input
+          id="height"
+          tabindex="2"
+          autocomplete="off"
+          type="text"
+          maxlength="6"
+          value="0"
+        />
+      </div>
+      <div class="field">
+        <button
+          id="reset-hall"
+          type="button"
+          class="action-btn"
+          data-i18n="btn_reset_hall"
+        >
+          Reset H.
+        </button>
+      </div>
+      <div class="field">
+        <label data-i18n="label_wind">Wind</label>
+        <input
+          id="wind"
+          tabindex="3"
+          autocomplete="off"
+          type="text"
+          maxlength="1"
+          value="1"
+        />
+      </div>
+      <div class="field">
+        <label data-i18n="label_degree">Degree</label>
+        <input
+          id="degree"
+          tabindex="4"
+          autocomplete="off"
+          type="text"
+          maxlength="3"
+          value="45"
+        />
+      </div>
+      <div class="field">
+        <div class="btn-row">
+          <button id="btn-angle-minus" class="mini-btn">-1°</button>
+          <button id="btn-angle-plus" class="mini-btn">+1°</button>
+        </div>
+      </div>
+      <div class="field">
+        <label data-i18n="label_spin">Spin</label>
+        <input
+          id="spin"
+          tabindex="7"
+          autocomplete="off"
+          type="text"
+          maxlength="4"
+          value="0"
+        />
+      </div>
+      <div class="field">
+        <label data-i18n="label_curve">Curve</label>
+        <input
+          id="curve"
+          tabindex="8"
+          autocomplete="off"
+          type="text"
+          maxlength="3"
+          value="0"
+        />
+      </div>
+      <div class="field"></div>
+      <div class="field">
+        <!-- Le bouton qui envoie le signal -->
+        <button id="btn-optimize-dunk" class="spin-btn" data-i18n="ideal_spin">
+          Spin idéal
+        </button>
+      </div>
+      <div class="field">
+        <!-- Le bouton qui envoie le signal -->
+        <button id="btn-click-spin" class="spin-btn" data-i18n="apply_spin">
+          Aplliquer le spin
+        </button>
+      </div>
+      <div class="field"></div>
+
+      <div class="field">
+        <label data-i18n="label_ground">Ground</label>
+        <input
+          id="ground"
+          tabindex="5"
+          autocomplete="off"
+          type="text"
+          maxlength="3"
+          value="100"
+        />
+      </div>
+      <div class="field">
+        <label data-i18n="label_slope_break">Slope</label>
+        <input
+          id="slope_break"
+          tabindex="6"
+          autocomplete="off"
+          type="text"
+          maxlength="6"
+          value="0"
+        />
+      </div>
+      <div class="field">
+        <button
+          id="reset-params"
+          type="button"
+          class="action-btn spin-btn"
+          data-i18n="btn_reset_params"
+        >
+          Reset P.
+        </button>
+      </div>
+
+      <div class="divider"></div>
+      <div class="label_show" data-i18n="show_label_calc">test</div>
+      <div class="field">
+        <label class="toggle" for="toggle-show-ruler-co">
+          <span data-i18n="show_ruler">Afficher la règle :</span>
+          <input
+            type="checkbox"
+            id="toggle-show-ruler-co"
+            class="toggle__input"
+          />
+          <span class="toggle__track"></span>
+        </label>
+      </div>
+      <div class="field">
+        <label class="toggle" for="toggle-show-wind-co">
+          <span data-i18n="show_wind">Afficher le vent :</span>
+          <input
+            type="checkbox"
+            id="toggle-show-wind-co"
+            class="toggle__input"
+          />
+          <span class="toggle__track"></span>
+        </label>
+      </div>
+      <div class="field">
+        <label class="toggle" for="toggle-show-spin-co">
+          <span data-i18n="show_spin">Afficher le repère :</span>
+          <input
+            type="checkbox"
+            id="toggle-show-spin-co"
+            class="toggle__input"
+          />
+          <span class="toggle__track"></span>
+        </label>
+      </div>
+    </div>
+    <script src="../../core/services/TauriService.js"></script>
+    <script src="../../core/services/StorageService.js"></script>
+    <script src="../../core/stores/CoursesSelectorCalcOverlay.js"></script>
+    <script src="../../core/stores/PlayerStoreCalcOverlay.js"></script>
+    <script src="../../core/components/CourseSelector.js"></script>
+    <script src="../../utils/recalc.js"></script>
+    <script src="../../shared/js/i18n.js"></script>
+    <script src="../../utils/WindowDragHelper.js"></script>
+    <script src="calc_overlay.js"></script>
+    <script src="../../core/services/StorageService.js"></script>
+  </body>
+</html>

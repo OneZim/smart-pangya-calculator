@@ -1,0 +1,39 @@
+[
+  {
+    "_note": "0 : 1920x1080 — résolution de référence",
+    "pxParUniteSpin": 2,
+    "ancrageZero": 40,
+    "ancrageZeroX": 0,
+    "cercleSize": 120,
+    "spinDialCenter": { "x": 423, "y": 964 },
+    "trait": { "w": 11, "h": 2, "top": 3 },
+    "cercleRepere": { "size": 20, "top": 10 },
+    "traitBas": { "w": 11, "h": 2, "top": 39 },
+    "traitR": { "w": 2, "h": 13, "top": 22, "offset": 44 },
+    "traitL": { "w": 2, "h": 13, "top": 22, "offset": 44 }
+  },
+  {
+    "_note": "1 : 1200x900 — recopié de la référence en attendant calibration",
+    "_todo": [
+      "ancrageZero",
+      "ancrageZeroX",
+      "cercleSize",
+      "spinDialCenter",
+      "trait",
+      "cercleRepere",
+      "traitBas",
+      "traitR",
+      "traitL"
+    ],
+    "pxParUniteSpin": 2.5,
+    "ancrageZero": 40,
+    "ancrageZeroX": 0,
+    "cercleSize": 120,
+    "spinDialCenter": { "x": 423, "y": 964 },
+    "trait": { "w": 11, "h": 2, "top": 3 },
+    "cercleRepere": { "size": 20, "top": 10 },
+    "traitBas": { "w": 11, "h": 2, "top": 39 },
+    "traitR": { "w": 2, "h": 13, "top": 22, "offset": 44 },
+    "traitL": { "w": 2, "h": 13, "top": 22, "offset": 44 }
+  }
+]

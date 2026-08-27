@@ -1,0 +1,292 @@
+/* ============================================================
+   RESET / GLOBAL
+   ============================================================ */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+/* ============================================================
+   BODY / HTML – Fenêtre transparente pilotée par le JS
+   ============================================================ */
+html,
+body {
+  width: var(--ruler-width, 1920px);
+  height: var(--ruler-height, 600px);
+  background: transparent;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
+  cursor: move;
+  user-select: none;
+
+  /*border: 1px solid red;*/
+}
+
+/* ============================================================
+   RULER CONTAINER – Conteneur principal centré horizontalement
+   ============================================================ */
+#ruler-container {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  top: var(--ruler-container-top, 0);
+  width: var(--ruler-width, 1920px);
+  height: var(--ruler-height, 600px);
+  background: transparent;
+}
+
+/* ============================================================
+   TICK LINE – Bloc commun trait + graduations
+   Positionnable indépendamment, masquable via display:none.
+   ============================================================ */
+#ruler-tick-line {
+  position: absolute;
+  top: -80px;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  pointer-events: none;
+}
+
+#ticks-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 18px;
+}
+
+/* Graduations du surplus : même système que #ticks-container, affichées
+   d'un seul côté du centre selon le signe du surplus, masquées si inactif. */
+#surplus-ticks-container {
+  display: none;
+  position: absolute;
+  top: 20px;
+  left: 0;
+  width: 100%;
+  height: 18px;
+  pointer-events: none;
+}
+
+/* ============================================================
+   TICKS – Graduations majeures
+   ============================================================ */
+.tick-major {
+  position: absolute;
+  top: 32px;
+  width: 1px;
+  height: 18px;
+  background-color: #084c96;
+}
+
+.tick-major.zero {
+  background-color: yellow;
+}
+
+/* ============================================================
+   TICK LABELS – Étiquettes numériques sous les graduations
+   ============================================================ */
+.tick-label {
+  position: absolute;
+  top: 15px;
+  width: 30px;
+  text-align: center;
+  font-size: 10px;
+  color: rgba(59, 28, 6, 0.85);
+  transform: translateX(-50%);
+}
+
+.tick-label.zero {
+  color: yellow;
+  display: none;
+}
+
+/* ============================================================
+   RED INDICATOR – Indicateur vertical de position "REAL"
+   ============================================================ */
+.red-indicator {
+  position: absolute;
+  top: 370px;
+  left: 0;
+  width: 2px;
+  height: 66px;
+  background-color: #fc8b40;
+  z-index: 10;
+  transition: left 0.09s ease-out;
+}
+
+.red-indicator::after {
+  content: "REAL";
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  color: #fc8b40;
+  white-space: nowrap;
+}
+
+.red-dot {
+  position: absolute;
+  top: 15px;
+  left: -4px;
+  width: 10px;
+  height: 10px;
+  color: #fc8b40;
+  border-radius: 50%;
+}
+
+/* ============================================================
+   INDICATOR LINES – Conteneur des traits indicateurs
+   ============================================================ */
+#indicator-lines {
+  position: absolute;
+  top: var(--ruler-indicators-top, 20px);
+  left: 0;
+  width: 100%;
+  height: 120px;
+  pointer-events: none;
+}
+
+/* ============================================================
+   SMART INDICATOR / SURPLUS TRAIT – Traits verticaux indicateurs
+   ============================================================ */
+#smart-indicator,
+#surplus-trait,
+#test-indicator {
+  position: absolute;
+  top: 30px;
+  width: 1px;
+  height: 80px;
+  pointer-events: none;
+  z-index: 10;
+  transition: left 0.09s ease-out;
+}
+
+#smart-indicator {
+  background-color: rgb(224, 9, 142);
+}
+
+#surplus-trait {
+  background-color: #5a82ff;
+}
+
+#test-indicator {
+  background-color: rgb(9, 224, 91);
+}
+/* ============================================================
+   SURPLUS INDICATOR – Bulle d'info (valeur surplus + "clic")
+   ============================================================ */
+#surplus-indicator {
+  display: none;
+  position: absolute;
+  z-index: 9999;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 56px;
+  min-height: 24px;
+  padding: 3px 8px;
+  background-color: rgba(90, 130, 255, 0.92);
+  color: #fff;
+  font-size: 13px;
+  font-weight: bold;
+  font-family: sans-serif;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+#surplus-indicator::after {
+  content: "clic";
+  font-size: 11px;
+  font-weight: normal;
+  color: #ffe08a;
+  line-height: 1;
+  margin-top: 1px;
+}
+
+#surplus-indicator.negative {
+  background-color: rgba(90, 130, 255);
+}
+
+/* ============================================================
+   DISPLAYS – Étiquettes d'information (PB, %, distance)
+   ============================================================ */
+#pbReal-display,
+#percent-display,
+#distance-display {
+  position: absolute;
+  top: 0;
+  background-color: rgba(90, 130, 255, 0.92);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: sans-serif;
+  padding: 3px 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+#pbReal-display {
+  right: 56%;
+}
+
+#percent-display {
+  right: 35%;
+}
+
+#percent-display.percent-low {
+  color: rgb(255, 174, 0);
+}
+
+#distance-display {
+  right: 41%;
+}
+
+/* ============================================================
+  Repere pour centrage de la fenetre
+   ============================================================ */
+#t-repere {
+  position: absolute;
+  top: var(--ruler-trepere-top, 43px);
+  left: 50%;
+  transform: translateX(-50%); /* centré horizontalement dans ruler-container */
+  width: 20px;
+  height: 10px;
+  pointer-events: none;
+}
+
+/* Barre horizontale EN HAUT */
+#t-repere::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 0;
+  width: 20px;
+  height: 2px;
+  background: rgb(255, 243, 69);
+}
+
+/* Tige verticale descendante, centrée */
+#t-repere::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 9px; /* (20-2)/2 = 9 → centrée */
+  width: 2px;
+  height: 10px;
+  background: rgb(255, 243, 69);
+}

@@ -1,0 +1,132 @@
+{
+  "_name": "English",
+  "title": "Smart Pangya Calculator",
+  "lang_label": "Language:",
+
+  "label_course": "Course:",
+  "label_map": "Map",
+  "label_hole": "Hole",
+  "label_pin": "Pin",
+
+  "tab_cal": "Calculations",
+  "tab_overlay": "Overlays",
+  "tab_stats": "Statistics",
+  "tab_config": "Settings",
+  "tab_slope": "Advanced Options",
+
+  "card_shot_config": "Shot Configuration",
+  "label_club": "Club",
+  "label_shot": "Shot Type",
+  "label_power_shot": "Power Shot",
+
+  "shot_dunk": "Dunk",
+  "shot_tomahawk": "Tomahawk",
+  "shot_spike": "Spike",
+  "shot_cobra": "Cobra",
+
+  "min_ps_none": "No PS",
+  "min_ps_1": "1 PS",
+  "min_ps_2": "2 PS",
+  "min_ps_15y": "15y PS",
+
+  "ps_none": "No Power Shot",
+  "ps_1": "1 Power Shot",
+  "ps_2": "2 Power Shots",
+  "ps_15y": "Power Shot 15y",
+
+  "label_distance": "Distance",
+  "label_height": "Elevation",
+  "label_wind": "Wind",
+  "label_degree": "Angle",
+  "label_spin": "Spin",
+  "ideal_spin": "Optimized Spin",
+  "apply-spin": "Apply Spin",
+  "label_curve": "Curve",
+  "label_ground": "Ground",
+  "label_slope_break": "Slope (Break)",
+
+  "btn_reset_params": "Partial Reset",
+  "btn_reset_hall": "Full Reset",
+  "btn_calc_shot": "CALCULATE SHOT",
+
+  "card_wind": "Wind Calculation",
+  "label_arrow_size": "Arrow Size",
+  "label_angle": "Angle: 0°",
+
+  "label_image_params": "Image Settings",
+  "placeholder_folder": "Select capture folder...",
+  "btn_browse": "Browse…",
+  "btn_refresh": "Refresh",
+  "btn_clear_folder": "Clear Folder",
+  "label_adjust_image": "Adjust Image",
+
+  "card_overlays": "Overlay Management",
+  "card_calcul_overlay": "Calculation Window",
+  "label_calcul_overlay": "Show Window",
+
+  "card_ruler": "Offset Ruler",
+  "label_show_ruler": "Show Ruler",
+  "label_lock_ruler": "Lock overlay (non-clickable)",
+  "label_ruler_adjust": "Overlay Adjustment",
+
+  "card_spin": "Spin Marker",
+
+  "card_wind_overlay": "Angle Calculator",
+  "label_show_wind_overlay": "Show Calculator",
+  "label_lock_wind_overlay": "Lock overlay (non-clickable)",
+  "label_wind_overlay_adjust": "Overlay Adjustment",
+  "lock_wind": "Lock Angle Reader",
+
+  "card_stats": "Character Statistics",
+  "label_power": "Power",
+  "label_ring_power": "Ring Power",
+  "label_card_power": "Card Power",
+  "label_mascot_power": "Mascot Power",
+  "label_card_ps_power": "Card PS Power",
+  "label_card_spin": "Max Spin",
+
+  "card_slope": "Advanced Options",
+  "label_myce_degree": "Degree",
+  "label_align_degree": "Align Degree",
+  "btn_calc_slope": "Slope break:",
+
+  "card_param": "Application Settings",
+  "label_theme": "Theme:",
+  "card_screen_config": "Game Client Settings",
+  "label_width": "Width:",
+  "label_height_screen": "Height",
+  "label_smart_dev": "Smart deviation limit",
+  "label_auto_fit": "Auto Fit",
+
+  "modal_title": "⚠️ Warning",
+  "modal_body": "Do you really want to delete ALL images in this folder? This action is irreversible.",
+  "modal_confirm": "Yes, delete",
+  "modal_cancel": "Cancel",
+
+  "card_spin_defaut": "Default Spin Settings",
+  "spin_dunk": "Spin Dunk",
+  "spin_toma": "Spin Tomahawk",
+  "spin_spike": "Spin Spike",
+  "spin_cobra": "Spin Cobra",
+
+  "show_label_calc": "Overlay Display",
+  "show_ruler": "Ruler",
+  "show_spin": "Spin Marker",
+  "show_wind": "Angle Calculator",
+
+  "error_shot_too_short": "The shot could not be calculated; it is too short or too weak.",
+  "error_shot_shot_short": "Calculation impossible",
+
+  "card_offset_config": "Spin Dial Offset Configuration",
+  "label_offset_x": "Spin dial center - X",
+  "label_offset_y": "Spin dial center - Y",
+  "label_capture_spin": "Press Space to capture cursor position",
+  "xy_default_values": "Default values",
+
+  "dunk_out_of_range": "Shot out of club range, regardless of spin tested.",
+  "shot_out_of_range": "Shot out of club range, regardless of spin tested.",
+  "shot_extended_spin_used": "High spin (outside usual range) required to bring the shot under 100% power.",
+  "shot_fallback_spin_used": "No spin in the range meets the constraint, default spin used.",
+
+  "footer": "Developed by Onezim, based on the original calculator by Acrisio SuperSS Dev (MIT license)."
+}

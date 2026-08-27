@@ -1,0 +1,132 @@
+{
+  "_name": "Português",
+  "title": "Smart Pangya Calculator",
+  "lang_label": "Idioma:",
+
+  "label_course": "Percurso:",
+  "label_map": "Mapa",
+  "label_hole": "Buraco",
+  "label_pin": "Bandeira",
+
+  "tab_cal": "Cálculos",
+  "tab_overlay": "Overlays",
+  "tab_stats": "Estatísticas",
+  "tab_config": "Configurações",
+  "tab_slope": "Opções avançadas",
+
+  "card_shot_config": "Configuração do tiro",
+  "label_club": "Clube",
+  "label_shot": "Tipo de tiro",
+  "label_power_shot": "Power Shot",
+
+  "shot_dunk": "Dunk",
+  "shot_tomahawk": "Tomahawk",
+  "shot_spike": "Spike",
+  "shot_cobra": "Cobra",
+
+  "min_ps_none": "Sem PS",
+  "min_ps_1": "1 PS",
+  "min_ps_2": "2 PS",
+  "min_ps_15y": "15y PS",
+
+  "ps_none": "Sem Power Shot",
+  "ps_1": "1 Power Shot",
+  "ps_2": "2 Power Shots",
+  "ps_15y": "Power Shot 15y",
+
+  "label_distance": "Distância",
+  "label_height": "Elevação",
+  "label_wind": "Vento",
+  "label_degree": "Ângulo",
+  "label_spin": "Spin",
+  "ideal_spin": "Spin Otimizado",
+  "apply-spin": "Aplicar o Spin",
+  "label_curve": "Curve",
+  "label_ground": "Ground",
+  "label_slope_break": "Slope (Break)",
+
+  "btn_reset_params": "Reset Parcial",
+  "btn_reset_hall": "Reset Total",
+  "btn_calc_shot": "CALCULAR TIRO",
+
+  "card_wind": "Cálculo do vento",
+  "label_arrow_size": "Tamanho da seta",
+  "label_angle": "Ângulo: 0°",
+
+  "label_image_params": "Parâmetros da imagem",
+  "placeholder_folder": "Selecione a pasta de capturas...",
+  "btn_browse": "Procurar…",
+  "btn_refresh": "Atualizar",
+  "btn_clear_folder": "Limpar pasta",
+  "label_adjust_image": "Ajustar imagem",
+
+  "card_overlays": "Gestão de Overlays",
+  "card_calcul_overlay": "Janela de cálculo",
+  "label_calcul_overlay": "Mostrar janela",
+
+  "card_ruler": "Régua de deslocamento",
+  "label_show_ruler": "Mostrar régua",
+  "label_lock_ruler": "Bloquear overlay (não clicável)",
+  "label_ruler_adjust": "Ajuste do overlay",
+
+  "card_spin": "Marcador de Spin",
+
+  "card_wind_overlay": "Calculadora de ângulos",
+  "label_show_wind_overlay": "Mostrar calculadora",
+  "label_lock_wind_overlay": "Bloquear overlay (não clicável)",
+  "label_wind_overlay_adjust": "Ajuste do overlay",
+  "lock_wind": "Bloquear leitor de ângulo",
+
+  "card_stats": "Estatísticas do personagem",
+  "label_power": "Power",
+  "label_ring_power": "Ring Power",
+  "label_card_power": "Card Power",
+  "label_mascot_power": "Mascot Power",
+  "label_card_ps_power": "Card PS Power",
+  "label_card_spin": "Max Spin",
+
+  "card_slope": "Opções avançadas",
+  "label_myce_degree": "Degree",
+  "label_align_degree": "Align Degree",
+  "btn_calc_slope": "Slope break:",
+
+  "card_param": "Configurações da aplicação",
+  "label_theme": "Tema:",
+  "card_screen_config": "Configurações do cliente de jogo",
+  "label_width": "Width:",
+  "label_height_screen": "Height",
+  "label_smart_dev": "Smart deviation limit",
+  "label_auto_fit": "Ajuste automático",
+
+  "modal_title": "⚠️ Atenção",
+  "modal_body": "Deseja realmente apagar TODAS as imagens desta pasta? Esta ação é irreversível.",
+  "modal_confirm": "Sim, apagar",
+  "modal_cancel": "Cancelar",
+
+  "card_spin_defaut": "Configuração padrão de Spin",
+  "spin_dunk": "Spin Dunk",
+  "spin_toma": "Spin Tomahawk",
+  "spin_spike": "Spin Spike",
+  "spin_cobra": "Spin Cobra",
+
+  "show_label_calc": "Exibição dos Overlays",
+  "show_ruler": "Régua",
+  "show_spin": "Marcador de Spin",
+  "show_wind": "Calculadora de Ângulo",
+
+  "error_shot_too_short": "O tiro não pôde ser calculado; está muito curto ou muito fraco.",
+  "error_shot_shot_short": "Cálculo impossível",
+
+  "card_offset_config": "Configuração Offset do Spin",
+  "label_offset_x": "Centro do mostrador de spin - X",
+  "label_offset_y": "Centro do mostrador de spin - Y",
+  "label_capture_spin": "Pressione Espaço para capturar a posição do cursor",
+  "xy_default_values": "Valores padrão",
+
+  "dunk_out_of_range": "Tiro fora do alcance do taco, independentemente do spin testado.",
+  "shot_out_of_range": "Tiro fora do alcance do taco, independentemente do spin testado.",
+  "shot_extended_spin_used": "Spin alto (fora do intervalo habitual) necessário para trazer o tiro para abaixo de 100% de potência.",
+  "shot_fallback_spin_used": "Nenhum spin no intervalo atende à restrição, spin padrão utilizado.",
+
+  "footer": "Desenvolvido por Onezim, baseado no calculador original de Acrisio SuperSS Dev (licença MIT)."
+}

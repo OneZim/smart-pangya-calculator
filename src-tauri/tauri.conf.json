@@ -1,0 +1,100 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Smart Pangya Calculator",
+  "version": "3.0.0",
+  "identifier": "com.onezim.smart-pangya-calculator",
+  "build": {
+    "frontendDist": "../src"
+  },
+  "app": {
+    "withGlobalTauri": true,
+    "windows": [
+      {
+        "url": "index.html",
+        "label": "main",
+        "title": "Smart Pangya Calculator",
+        "width": 1000,
+        "height": 950,
+        "visible": false,
+        "decorations": false,
+        "transparent": false
+      },
+      {
+        "label": "ruler_overlay",
+        "title": "Overlay Règle",
+        "url": "overlays/ruler_overlay/ruler_overlay.html",
+        "width": 1920,
+        "height": 600,
+        "transparent": true,
+        "decorations": false,
+        "alwaysOnTop": true,
+        "skipTaskbar": true,
+        "visible": false,
+        "resizable": false,
+        "shadow": false
+      },
+      {
+        "label": "input_overlay",
+        "title": "Overlay Saisie",
+        "url": "overlays/calc_overlay/calc_overlay.html",
+        "width": 470,
+        "height": 450,
+        "transparent": true,
+        "decorations": false,
+        "alwaysOnTop": true,
+        "skipTaskbar": true,
+        "visible": false,
+        "resizable": false,
+        "shadow": false
+      },
+      {
+        "label": "wind_overlay",
+        "title": "Wind Angle Overlay",
+        "url": "overlays/wind_overlay/wind_overlay.html",
+        "width": 300,
+        "height": 250,
+        "transparent": true,
+        "decorations": false,
+        "alwaysOnTop": true,
+        "skipTaskbar": true,
+        "visible": false,
+        "resizable": false,
+        "shadow": false,
+        "focus": false
+      },
+      {
+        "label": "spin_overlay",
+        "title": "Spin Overlay",
+        "url": "overlays/spin_overlay/spin_overlay.html",
+        "width": 200,
+        "height": 200,
+        "transparent": true,
+        "decorations": false,
+        "alwaysOnTop": true,
+        "skipTaskbar": true,
+        "visible": false,
+        "resizable": false,
+        "shadow": false,
+        "focus": false
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "resources": ["data/*", "lang/*"]
+  },
+  "plugins": {
+    "dialog": null
+  }
+}

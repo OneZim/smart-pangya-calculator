@@ -1,0 +1,1728 @@
+/* =====================================================================
+   SMART CALCULATOR — PANGYA EDITION
+   PARTIE 1/6
+   ===================================================================== */
+
+/* -----------------------------------------------------------------------
+   GLOBAL
+   ----------------------------------------------------------------------- */
+
+:root {
+  --sky-top: #79cbff;
+  --sky-middle: #bfe8ff;
+  --sky-bottom: #eefbff;
+
+  --panel-top: #ffffff;
+  --panel-bottom: #edf8ff;
+
+  --border: #72c8ff;
+  --border-dark: #2f96e5;
+
+  --title: #2f86d7;
+
+  --text: #2f5879;
+  --text-soft: #6587a5;
+
+  --gold: #ffb200;
+
+  --btn1: #95e7ff;
+  --btn2: #5ec1ff;
+  --btn3: #2997ff;
+
+  --shadow: 0 6px 20px rgba(0, 110, 180, 0.18);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.8), transparent 35%),
+    linear-gradient(
+      var(--sky-top) 0%,
+      var(--sky-middle) 45%,
+      var(--sky-bottom) 100%
+    );
+  background-attachment: fixed;
+}
+
+/* -----------------------------------------------------------------------
+   TITRE
+   ----------------------------------------------------------------------- */
+
+h1 {
+  margin-bottom: 35px;
+  text-align: center;
+  font-size: 34px;
+  color: white;
+  letter-spacing: 1px;
+  text-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.45),
+    0 0 10px rgba(255, 255, 255, 0.45);
+}
+
+/* -----------------------------------------------------------------------
+   ONGLETS
+   ----------------------------------------------------------------------- */
+
+.tabs {
+  width: 100%;
+  margin-bottom: 22px;
+}
+
+.tabs input[type="radio"] {
+  display: none;
+}
+
+.tab-label {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-right: 5px;
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+  border: 2px solid var(--border-dark);
+  border-bottom: none;
+  border-radius: 12px 12px 0 0;
+  background: linear-gradient(var(--btn1), var(--btn2));
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.7);
+  transition: 0.18s;
+}
+
+.tab-label:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(#b0eeff, #79ceff);
+}
+
+.tab-content {
+  display: none;
+  padding: 22px;
+  border: 2px solid var(--border);
+  border-radius: 0 14px 14px 14px;
+  margin-top: -2px;
+  background: linear-gradient(
+    rgba(255, 255, 255, 0.96),
+    rgba(236, 248, 255, 0.95)
+  );
+  box-shadow:
+    var(--shadow),
+    inset 0 2px 0 rgba(255, 255, 255, 0.8);
+}
+
+/* -----------------------------------------------------------------------
+   ONGLET ACTIF
+   ----------------------------------------------------------------------- */
+
+#tab1:checked + .tab-label,
+#tab2:checked + .tab-label,
+#tab3:checked + .tab-label,
+#tab4:checked + .tab-label,
+#tab5:checked + .tab-label {
+  background: linear-gradient(white, #eef9ff);
+
+  color: var(--title);
+
+  text-shadow: none;
+
+  border-color: var(--border);
+}
+
+#tab1:checked ~ #content1,
+#tab2:checked ~ #content2,
+#tab3:checked ~ #content3,
+#tab4:checked ~ #content4,
+#tab5:checked ~ #content5 {
+  display: block;
+}
+
+/* -----------------------------------------------------------------------
+   CARTES
+   ----------------------------------------------------------------------- */
+
+.card {
+  background: linear-gradient(
+    rgba(255, 255, 255, 0.96),
+    rgba(236, 248, 255, 0.94)
+  );
+
+  border: 2px solid var(--border);
+
+  border-radius: 16px;
+
+  padding: 16px;
+
+  box-shadow:
+    var(--shadow),
+    inset 0 2px 0 rgba(255, 255, 255, 0.85);
+}
+
+.card-title {
+  margin-bottom: 18px;
+
+  padding-bottom: 10px;
+
+  color: var(--title);
+
+  font-size: 15px;
+
+  font-weight: bold;
+
+  letter-spacing: 1px;
+
+  text-transform: uppercase;
+
+  border-bottom: 1px solid #bfe7ff;
+
+  text-shadow: 0 1px white;
+}
+
+/* -----------------------------------------------------------------------
+   GRID
+   ----------------------------------------------------------------------- */
+
+.container-grid {
+  display: grid;
+
+  grid-template-columns: 180px 1fr;
+
+  gap: 12px 16px;
+
+  margin-top: 16px;
+}
+
+/* -----------------------------------------------------------------------
+   INPUTS
+   ----------------------------------------------------------------------- */
+
+input,
+select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px 6px;
+  border-radius: 10px;
+
+  border: 2px solid #97d8ff;
+
+  background: linear-gradient(white, #f8fdff);
+
+  color: #28597d;
+
+  font-size: 14px;
+
+  transition: 0.15s;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+
+  border-color: #36abff;
+
+  box-shadow: 0 0 10px rgba(54, 171, 255, 0.35);
+}
+
+/* =====================================================================
+   PARTIE 2/6
+   BOUTONS • RESULTATS • FOOTER • LAYOUTS
+   ===================================================================== */
+
+/* -----------------------------------------------------------------------
+   BOUTON PRINCIPAL
+   ----------------------------------------------------------------------- */
+
+button.calc-btn {
+  width: 100%;
+
+  margin-top: 20px;
+
+  padding: 14px;
+
+  border-radius: 12px;
+
+  border: 1px solid #2a8fe5;
+
+  cursor: pointer;
+
+  font-size: 16px;
+
+  font-weight: bold;
+
+  color: white;
+
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+
+  background: linear-gradient(
+    var(--btn1) 0%,
+
+    var(--btn2) 45%,
+
+    var(--btn3) 100%
+  );
+
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.75),
+    0 5px 12px rgba(0, 120, 220, 0.25);
+
+  transition: 0.15s;
+
+  position: relative;
+
+  overflow: hidden;
+}
+
+button.calc-btn:hover {
+  transform: translateY(-2px);
+
+  background: linear-gradient(#b4f0ff, #76d0ff, #42aeff);
+}
+
+button.calc-btn:active {
+  transform: translateY(1px);
+
+  box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.25);
+}
+
+/* -----------------------------------------------------------------------
+   RESET
+   ----------------------------------------------------------------------- */
+
+#reset-params,
+#reset-hall {
+  background: linear-gradient(#fff4d7, #ffd45f);
+
+  border: 1px solid #d8a216;
+
+  color: #7d5a00;
+
+  font-weight: bold;
+
+  text-shadow: 0 1px white;
+}
+
+#reset-params:hover,
+#reset-hall:hover {
+  background: linear-gradient(#fff8e8, #ffe17f);
+}
+
+/* -----------------------------------------------------------------------
+   RESULTAT
+   ----------------------------------------------------------------------- */
+
+/* themes/pangya-classic.css - #result en bleu */
+
+#result {
+  margin-top: 25px;
+  text-align: center;
+  font-size: 25px;
+  font-weight: 800;
+  color: #4fb9ff; /* ← Bleu ciel */
+  font-family: "Baloo 2", "Comic Sans MS", cursive;
+  text-shadow:
+    0 2px 0 #2a7ab5,
+    0 0 20px rgba(79, 185, 255, 0.3),
+    0 0 40px rgba(79, 185, 255, 0.1);
+  letter-spacing: 0.04em;
+  animation: glowResult 3s ease-in-out infinite;
+}
+#result .percent-low {
+  color: #ff3b3b;
+  text-shadow:
+    0 2px 0 #b30000,
+    0 0 20px rgba(255, 59, 59, 0.4),
+    0 0 40px rgba(255, 59, 59, 0.15);
+}
+
+@keyframes glowResult {
+  0%,
+  100% {
+    text-shadow:
+      0 2px 0 #2a7ab5,
+      0 0 20px rgba(79, 185, 255, 0.3);
+  }
+  50% {
+    text-shadow:
+      0 2px 0 #2a7ab5,
+      0 0 40px rgba(79, 185, 255, 0.5);
+  }
+}
+
+/* -----------------------------------------------------------------------
+   FOOTER
+   ----------------------------------------------------------------------- */
+
+footer {
+  display: block;
+
+  margin-top: 45px;
+
+  text-align: center;
+
+  color: #5f86a7;
+
+  font-size: 13px;
+}
+
+/* -----------------------------------------------------------------------
+   INLINE
+   ----------------------------------------------------------------------- */
+
+.inline-2 {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 12px 18px;
+}
+
+.inline-3 {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 12px 18px;
+}
+
+/* -----------------------------------------------------------------------
+   ROW / COL
+   ----------------------------------------------------------------------- */
+
+.row {
+  display: flex;
+
+  gap: 12px;
+
+  margin-bottom: 12px;
+}
+
+.col {
+  flex: 1;
+
+  display: flex;
+
+  flex-direction: column;
+}
+
+.col label {
+  margin-bottom: 6px;
+
+  color: var(--text);
+
+  font-size: 13px;
+
+  font-weight: bold;
+}
+
+/* -----------------------------------------------------------------------
+   IMAGE VENT
+   ----------------------------------------------------------------------- */
+
+.wind-crop-box {
+  width: 206px;
+
+  height: 206px;
+
+  margin: auto;
+
+  overflow: hidden;
+
+  position: relative;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  background: linear-gradient(#f4fcff, #dff3ff);
+
+  border: 2px solid var(--border);
+
+  border-radius: 16px;
+
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.8),
+    var(--shadow);
+}
+
+#wind-image {
+  min-width: 250px;
+
+  min-height: 250px;
+
+  object-fit: none;
+
+  object-position: 100% 100%;
+}
+
+#angle-canvas {
+  position: absolute;
+
+  left: 0;
+
+  top: 0;
+
+  z-index: 10;
+}
+
+/* -----------------------------------------------------------------------
+   ANGLES
+   ----------------------------------------------------------------------- */
+
+#angle-buttons {
+  display: flex;
+
+  justify-content: center;
+
+  flex-wrap: wrap;
+
+  gap: 6px;
+
+  margin-top: 10px;
+}
+
+#angle-buttons button {
+  padding: 7px 13px;
+
+  border-radius: 10px;
+
+  border: 1px solid #3598eb;
+
+  cursor: pointer;
+
+  font-size: 13px;
+
+  font-weight: bold;
+
+  color: white;
+
+  background: linear-gradient(#9be8ff, #57bcff);
+
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
+
+  transition: 0.15s;
+}
+
+#angle-buttons button:hover {
+  transform: translateY(-2px);
+
+  background: linear-gradient(#b5f2ff, #77cbff);
+}
+
+#angle-display {
+  margin-top: 12px;
+
+  text-align: center;
+
+  font-size: 20px;
+
+  font-weight: bold;
+
+  color: var(--gold);
+
+  text-shadow:
+    0 1px white,
+    0 0 10px rgba(255, 220, 120, 0.6);
+}
+
+/* =====================================================================
+   PARTIE 3/6
+   MINI BOUTONS • PANELS • REGLAGES IMAGE • DOSSIERS
+   ===================================================================== */
+
+/* -----------------------------------------------------------------------
+   MINI BOUTONS
+   ----------------------------------------------------------------------- */
+
+.mini-btn {
+  padding: 6px 12px;
+
+  border-radius: 10px;
+
+  border: 1px solid #3598eb;
+
+  cursor: pointer;
+
+  font-size: 13px;
+
+  font-weight: bold;
+
+  color: white;
+
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
+
+  background: linear-gradient(#99e6ff, #59bcff);
+
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.75);
+
+  transition: 0.15s;
+}
+
+.mini-btn:hover {
+  transform: translateY(-2px);
+
+  background: linear-gradient(#b8f2ff, #77cbff);
+}
+
+.mini-btn:active {
+  transform: translateY(1px);
+}
+
+/* -----------------------------------------------------------------------
+   PANEL REGLAGES IMAGE
+   ----------------------------------------------------------------------- */
+
+.adjust-panel {
+  position: relative;
+
+  margin-top: 30px;
+
+  padding: 18px;
+
+  border-radius: 16px;
+
+  border: 2px solid var(--border);
+
+  background: linear-gradient(
+    rgba(255, 255, 255, 0.96),
+    rgba(236, 248, 255, 0.95)
+  );
+
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.8),
+    var(--shadow);
+}
+
+.adjust-title {
+  position: absolute;
+
+  top: -11px;
+
+  left: 20px;
+
+  padding: 2px 10px;
+
+  background: white;
+
+  color: var(--title);
+
+  font-size: 12px;
+
+  font-weight: bold;
+
+  letter-spacing: 1px;
+
+  text-transform: uppercase;
+
+  border-radius: 10px;
+}
+
+/* -----------------------------------------------------------------------
+   DOSSIERS
+   ----------------------------------------------------------------------- */
+
+.folder-buttons {
+  display: flex;
+
+  gap: 10px;
+
+  margin-top: 12px;
+}
+
+.action-btn {
+  flex: 1;
+
+  padding: 9px 0;
+
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  font-size: 13px;
+
+  font-weight: bold;
+
+  color: white;
+
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
+
+  border: 1px solid #3598eb;
+
+  transition: 0.15s;
+
+  position: relative;
+
+  overflow: hidden;
+}
+
+.action-btn::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+
+  left: -120%;
+
+  width: 45%;
+
+  height: 100%;
+
+  transform: skewX(-20deg);
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.55),
+    transparent
+  );
+}
+
+.action-btn--neutral {
+  color: #2b6fa4;
+
+  text-shadow: none;
+
+  background: linear-gradient(white, #dff4ff);
+}
+
+.action-btn--neutral:hover {
+  background: linear-gradient(white, #c8ecff);
+}
+
+.action-btn--success {
+  background: linear-gradient(#9be8ff, #54b8ff);
+}
+
+.action-btn--success:hover {
+  background: linear-gradient(#b4f0ff, #74cbff);
+}
+
+.action-btn--danger {
+  background: linear-gradient(#ffb9b9, #ff7d7d);
+
+  border-color: #d94d4d;
+}
+
+.action-btn--danger:hover {
+  background: linear-gradient(#ffd0d0, #ff9999);
+}
+
+/* -----------------------------------------------------------------------
+   CROIX DIRECTIONNELLE
+   ----------------------------------------------------------------------- */
+
+.adjust-grid {
+  display: grid;
+
+  grid-template-columns: 1fr;
+
+  grid-template-rows: auto auto auto;
+
+  justify-items: center;
+
+  align-items: center;
+
+  gap: 8px;
+
+  margin-top: 22px;
+}
+
+.adjust-top {
+  grid-row: 1;
+}
+
+.adjust-center {
+  grid-row: 2;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+}
+
+.adjust-bottom {
+  grid-row: 3;
+}
+
+/* -----------------------------------------------------------------------
+   BOUTONS CROP
+   ----------------------------------------------------------------------- */
+
+.crop-btn {
+  padding: 6px 12px;
+
+  border-radius: 10px;
+
+  border: 1px solid #3598eb;
+
+  cursor: pointer;
+
+  font-size: 14px;
+
+  font-weight: bold;
+
+  color: white;
+
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
+
+  background: linear-gradient(#97e6ff, #57bcff);
+
+  transition: 0.15s;
+}
+
+.crop-btn:hover {
+  transform: translateY(-2px);
+
+  background: linear-gradient(#b7f1ff, #79ccff);
+}
+
+/* -----------------------------------------------------------------------
+   LABEL REGLAGES
+   ----------------------------------------------------------------------- */
+
+.adjust-label {
+  color: var(--gold);
+
+  font-size: 15px;
+
+  font-weight: bold;
+
+  text-shadow: 0 1px white;
+}
+
+/* -----------------------------------------------------------------------
+   CONTENEUR VENT
+   ----------------------------------------------------------------------- */
+
+.wind-container {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 12px;
+
+  margin-top: 18px;
+}
+
+.wind-columns {
+  display: grid;
+
+  grid-template-columns: 180px 1fr;
+
+  gap: 20px;
+
+  align-items: center;
+
+  margin-top: 14px;
+}
+
+.wind-controls {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 14px;
+}
+
+.arrow-size,
+.angle-row {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 6px;
+}
+
+.arrow-size-buttons,
+.angle-row-buttons {
+  display: flex;
+
+  gap: 8px;
+}
+
+.btn-row {
+  margin-top: 10px;
+}
+
+.wind-image-container {
+  display: flex;
+
+  justify-content: center;
+}
+
+@media (max-width: 600px) {
+  .wind-columns {
+    grid-template-columns: 1fr;
+
+    gap: 12px;
+  }
+}
+/* =====================================================================
+   PARTIE 4/6
+   RULER • TOGGLES • OVERLAY • PANELS
+   ===================================================================== */
+
+/* -----------------------------------------------------------------------
+   PANNEAU REGLE
+   ----------------------------------------------------------------------- */
+
+.ruler-section-separator {
+  border: none;
+
+  height: 2px;
+
+  background: #b7e6ff;
+
+  margin: 24px 0;
+}
+
+.ruler-panel {
+  margin-top: 18px;
+
+  padding: 18px;
+
+  border-radius: 16px;
+
+  border: 2px solid var(--border);
+
+  background: linear-gradient(
+    rgba(255, 255, 255, 0.97),
+    rgba(235, 248, 255, 0.94)
+  );
+
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.8),
+    var(--shadow);
+}
+
+.ruler-options {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+.ruler-line {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+}
+
+.ruler-line label {
+  color: var(--text);
+
+  font-size: 14px;
+
+  font-weight: bold;
+}
+
+.ruler-checkbox {
+  width: 18px;
+
+  height: 18px;
+
+  accent-color: #4fb9ff;
+}
+
+.ruler-separator {
+  border: none;
+
+  height: 2px;
+
+  margin: 14px 0;
+
+  background: #c8ebff;
+}
+
+.ruler-adjust-title {
+  text-align: center;
+
+  color: var(--gold);
+
+  font-size: 14px;
+
+  font-weight: bold;
+
+  text-shadow: 0 1px white;
+}
+
+.ruler-adjust {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 6px;
+}
+
+.ruler-middle-row {
+  display: flex;
+
+  gap: 18px;
+}
+
+.small-btn {
+  width: 40px !important;
+
+  height: 30px !important;
+
+  min-width: 0 !important;
+
+  margin: 0 !important;
+
+  padding: 0 !important;
+
+  font-size: 16px !important;
+}
+
+/* -----------------------------------------------------------------------
+   TOGGLES
+   ----------------------------------------------------------------------- */
+
+.toggle-group {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 12px;
+}
+
+.toggle {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding: 0 20px;
+
+  color: var(--text);
+
+  font-size: 14px;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  user-select: none;
+}
+
+.toggle__input {
+  display: none;
+}
+
+.toggle__track {
+  position: relative;
+
+  width: 42px;
+
+  height: 22px;
+
+  border-radius: 22px;
+
+  background: #d8f3ff;
+
+  border: 2px solid #8fd8ff;
+
+  transition: 0.2s;
+}
+
+.toggle__track::after {
+  content: "";
+
+  position: absolute;
+
+  left: 3px;
+
+  top: 3px;
+
+  width: 12px;
+
+  height: 12px;
+
+  border-radius: 50%;
+
+  background: white;
+
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+
+  transition: 0.2s;
+}
+
+.toggle:hover .toggle__track {
+  border-color: #4fb9ff;
+}
+
+.toggle__input:checked + .toggle__track {
+  background: linear-gradient(#8de4ff, #4eb8ff);
+
+  border-color: #3aa8ff;
+}
+
+.toggle__input:checked + .toggle__track::after {
+  transform: translateX(18px);
+}
+
+/* -----------------------------------------------------------------------
+   OVERLAY
+   ----------------------------------------------------------------------- */
+
+.card-overlay {
+  display: grid;
+
+  grid-template-columns: 1fr;
+
+  gap: 8px;
+
+  margin-top: 20px;
+}
+
+.card-overlay.ruler-inline {
+  display: flex;
+
+  align-items: center;
+
+  gap: 22px;
+}
+
+.overlay-separator {
+  width: 2px;
+
+  height: 90px;
+
+  background: #9fdcff;
+}
+
+/* -----------------------------------------------------------------------
+   PANEL
+   ----------------------------------------------------------------------- */
+
+.panel {
+  margin: 10px;
+
+  padding: 18px;
+
+  border-radius: 16px;
+
+  border: 2px solid var(--border);
+
+  background: linear-gradient(
+    rgba(255, 255, 255, 0.96),
+    rgba(236, 248, 255, 0.94)
+  );
+
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.85),
+    var(--shadow);
+}
+
+.panel legend {
+  padding: 0 10px;
+
+  color: var(--title);
+
+  font-size: 16px;
+
+  font-weight: bold;
+
+  text-shadow: 0 1px white;
+}
+
+/* -----------------------------------------------------------------------
+   SPIN
+   ----------------------------------------------------------------------- */
+
+.spin-row {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 5px;
+}
+
+.spin-row label {
+  width: 200px;
+
+  color: var(--text);
+
+  font-weight: bold;
+}
+
+.spin-row input {
+  width: 70px;
+}
+/* =====================================================================
+   PARTIE 5/6
+   MODALE • LANGUE • COURSE SELECTOR • FINITIONS
+   ===================================================================== */
+
+/* -----------------------------------------------------------------------
+   MODALE
+   ----------------------------------------------------------------------- */
+
+#custom-confirm-modal {
+  display: none;
+
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 10000;
+
+  justify-content: center;
+
+  align-items: center;
+
+  background: rgba(20, 80, 140, 0.35);
+
+  backdrop-filter: blur(4px);
+}
+
+.modal-box {
+  width: 340px;
+
+  max-width: 90%;
+
+  padding: 24px;
+
+  text-align: center;
+
+  border-radius: 18px;
+
+  border: 2px solid var(--border);
+
+  background: linear-gradient(
+    rgba(255, 255, 255, 0.98),
+    rgba(235, 248, 255, 0.96)
+  );
+
+  box-shadow:
+    0 10px 35px rgba(0, 70, 150, 0.3),
+    inset 0 2px 0 rgba(255, 255, 255, 0.9);
+}
+
+.modal-title {
+  margin-top: 0;
+
+  margin-bottom: 15px;
+
+  font-size: 18px;
+
+  color: #ff8f00;
+
+  font-weight: bold;
+
+  text-shadow: 0 1px white;
+}
+
+.modal-actions {
+  display: flex;
+
+  justify-content: space-around;
+
+  margin-top: 24px;
+}
+
+.modal-btn {
+  min-width: 110px;
+
+  padding: 9px 20px;
+
+  border-radius: 10px;
+
+  border: 1px solid #2f96e5;
+
+  cursor: pointer;
+
+  font-size: 14px;
+
+  font-weight: bold;
+
+  color: white;
+
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
+
+  transition: 0.15s;
+}
+
+.modal-btn--danger {
+  background: linear-gradient(#ffbcbc, #ff7b7b);
+
+  border-color: #d44b4b;
+}
+
+.modal-btn--danger:hover {
+  background: linear-gradient(#ffd6d6, #ff9b9b);
+}
+
+.modal-btn--cancel {
+  background: linear-gradient(#98e7ff, #59bcff);
+}
+
+.modal-btn--cancel:hover {
+  background: linear-gradient(#b6f1ff, #79cdff);
+}
+
+/* -----------------------------------------------------------------------
+   LANGUE
+   ----------------------------------------------------------------------- */
+/* themes/pangya-classic.css - Barre supérieure */
+
+.top-bar {
+  background: rgba(255, 255, 255, 0.7);
+  border: 2px solid #72c8ff;
+  box-shadow: 0 6px 20px rgba(0, 110, 180, 0.15);
+  backdrop-filter: blur(8px);
+}
+
+.top-select {
+  background: #ffffff;
+  color: #2f5879;
+  border: 2px solid #97d8ff;
+  border-radius: 10px;
+}
+
+.top-select:hover {
+  border-color: #2f96e5;
+}
+
+.top-select:focus {
+  border-color: #2f96e5;
+  box-shadow: 0 0 0 3px rgba(47, 150, 229, 0.2);
+}
+
+.lang_select label,
+.theme_select label {
+  color: #34678f;
+  font-weight: 600;
+}
+
+/* -----------------------------------------------------------------------
+   COURSE SELECTOR
+   ----------------------------------------------------------------------- */
+
+.course-selector {
+  display: flex;
+
+  gap: 10px;
+
+  margin-top: 6px;
+}
+
+.course-select {
+  flex: 1;
+
+  padding: 8px;
+}
+
+.course-select:disabled {
+  opacity: 0.45;
+
+  cursor: not-allowed;
+}
+
+/* -----------------------------------------------------------------------
+   SCROLLBAR
+   ----------------------------------------------------------------------- */
+
+::-webkit-scrollbar {
+  width: 10px;
+
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #dff4ff;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+
+  background: linear-gradient(#97e6ff, #4eb8ff);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(#b8f2ff, #71caff);
+}
+
+/* -----------------------------------------------------------------------
+   SELECTION TEXTE
+   ----------------------------------------------------------------------- */
+
+::selection {
+  background: #7fd0ff;
+
+  color: white;
+}
+
+/* -----------------------------------------------------------------------
+   ANIMATION CARTES
+   ----------------------------------------------------------------------- */
+
+.card,
+.panel,
+.adjust-panel,
+.ruler-panel,
+.tab-content {
+  animation: panelAppear 0.35s ease;
+}
+
+@keyframes panelAppear {
+  from {
+    opacity: 0;
+
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: none;
+  }
+}
+
+/* -----------------------------------------------------------------------
+   HOVER GLOBAL
+   ----------------------------------------------------------------------- */
+
+button,
+.action-btn,
+.crop-btn,
+.mini-btn,
+.tab-label {
+  transition:
+    background 0.18s,
+    transform 0.18s,
+    box-shadow 0.18s,
+    border-color 0.18s;
+}
+
+input:hover,
+select:hover {
+  border-color: #61c2ff;
+}
+
+.card:hover,
+.panel:hover,
+.adjust-panel:hover,
+.ruler-panel:hover {
+  box-shadow:
+    0 10px 26px rgba(0, 120, 220, 0.22),
+    inset 0 2px 0 rgba(255, 255, 255, 0.85);
+}
+
+/* -----------------------------------------------------------------------
+   PETITS DETAILS
+   ----------------------------------------------------------------------- */
+
+img {
+  image-rendering: auto;
+}
+
+canvas {
+  border-radius: 12px;
+}
+
+fieldset {
+  border: none;
+
+  padding: 0;
+
+  margin: 0;
+}
+/* =====================================================================
+   PARTIE 6/6
+   FINITIONS PANGYA
+   ===================================================================== */
+
+/* -----------------------------------------------------------------------
+   REFLET SUR LES PANNEAUX
+   ----------------------------------------------------------------------- */
+
+.card,
+.panel,
+.adjust-panel,
+.ruler-panel,
+.tab-content {
+  position: relative;
+
+  overflow: hidden;
+}
+
+.card::before,
+.panel::before,
+.adjust-panel::before,
+.ruler-panel::before,
+.tab-content::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 45px;
+
+  pointer-events: none;
+
+  background: linear-gradient(
+    rgba(255, 255, 255, 0.55),
+    rgba(255, 255, 255, 0)
+  );
+}
+
+/* -----------------------------------------------------------------------
+   REFLET SUR LES INPUTS
+   ----------------------------------------------------------------------- */
+
+input,
+select {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    0 1px 4px rgba(70, 170, 255, 0.08);
+}
+
+input:focus,
+select:focus {
+  background: white;
+}
+
+/* -----------------------------------------------------------------------
+   LABELS
+   ----------------------------------------------------------------------- */
+
+label {
+  color: #34678f;
+
+  font-weight: bold;
+
+  text-shadow: 0 1px rgba(255, 255, 255, 0.75);
+}
+
+/* -----------------------------------------------------------------------
+   TABLEAUX
+   ----------------------------------------------------------------------- */
+
+table {
+  width: 100%;
+
+  border-collapse: collapse;
+}
+
+table tr {
+  transition: 0.15s;
+}
+
+table tr:hover {
+  background: rgba(120, 210, 255, 0.18);
+}
+
+table td,
+table th {
+  padding: 8px;
+}
+
+table th {
+  color: #2d82cf;
+}
+
+/* -----------------------------------------------------------------------
+   ICÔNES
+   ----------------------------------------------------------------------- */
+
+button i,
+.action-btn i,
+.mini-btn i {
+  margin-right: 5px;
+}
+
+/* -----------------------------------------------------------------------
+   IMAGE VENT
+   ----------------------------------------------------------------------- */
+
+.wind-crop-box {
+  transition: 0.2s;
+}
+
+.wind-crop-box:hover {
+  transform: scale(1.02);
+
+  box-shadow:
+    0 10px 25px rgba(0, 120, 220, 0.28),
+    inset 0 2px 0 rgba(255, 255, 255, 0.85);
+}
+
+/* -----------------------------------------------------------------------
+   HOVER GENERAL
+   ----------------------------------------------------------------------- */
+
+.card:hover,
+.panel:hover,
+.adjust-panel:hover,
+.ruler-panel:hover {
+  transform: translateY(-2px);
+}
+
+/* -----------------------------------------------------------------------
+   LIENS
+   ----------------------------------------------------------------------- */
+
+a {
+  color: #2d8cdc;
+
+  text-decoration: none;
+
+  transition: 0.15s;
+}
+
+a:hover {
+  color: #4fb9ff;
+}
+
+/* -----------------------------------------------------------------------
+   PETITES VALEURS
+   ----------------------------------------------------------------------- */
+
+small {
+  color: #6f8fa8;
+}
+
+/* -----------------------------------------------------------------------
+   BADGES
+   ----------------------------------------------------------------------- */
+
+.badge {
+  display: inline-block;
+
+  padding: 3px 8px;
+
+  border-radius: 20px;
+
+  background: linear-gradient(#8ce2ff, #4db6ff);
+
+  color: white;
+
+  font-size: 12px;
+
+  font-weight: bold;
+}
+
+/* -----------------------------------------------------------------------
+   FOCUS ACCESSIBILITE
+   ----------------------------------------------------------------------- */
+
+button:focus,
+input:focus,
+select:focus {
+  outline: none;
+}
+
+/* -----------------------------------------------------------------------
+   OMBRES DOUCES
+   ----------------------------------------------------------------------- */
+
+.card,
+.panel,
+.adjust-panel,
+.ruler-panel,
+.wind-crop-box {
+  box-shadow:
+    0 6px 18px rgba(0, 110, 200, 0.18),
+    inset 0 2px 0 rgba(255, 255, 255, 0.85);
+}
+
+/* -----------------------------------------------------------------------
+   AMBIANCE CIEL
+   ----------------------------------------------------------------------- */
+
+body::before {
+  content: "";
+
+  position: fixed;
+
+  top: -200px;
+  left: -200px;
+
+  width: 600px;
+  height: 600px;
+
+  pointer-events: none;
+
+  background: radial-gradient(rgba(255, 255, 255, 0.45), transparent 70%);
+}
+
+body::after {
+  content: "";
+
+  position: fixed;
+
+  right: -150px;
+  bottom: -150px;
+
+  width: 450px;
+  height: 450px;
+
+  pointer-events: none;
+
+  background: radial-gradient(rgba(120, 210, 255, 0.25), transparent 70%);
+}
+
+/* -----------------------------------------------------------------------
+   TITRES
+   ----------------------------------------------------------------------- */
+
+.card-title,
+.adjust-title,
+.panel legend {
+  position: relative;
+}
+
+.card-title::after,
+.adjust-title::after,
+.panel legend::after {
+  content: "";
+
+  position: absolute;
+
+  bottom: -2px;
+  left: 0;
+
+  width: 80px;
+  height: 2px;
+
+  background: linear-gradient(#7fd5ff, transparent);
+}
+#auto-fit {
+  transform: scale(0.6);
+  transform-origin: center center;
+}
+
+/* -----------------------------------------------------------------------
+   FIN
+   ----------------------------------------------------------------------- */
+
+/*
+    PangYa Theme
+    Version 1.0
+
+    Skin réalisé pour conserver intégralement
+    le HTML et le layout d'origine.
+
+*/

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wind Overlay</title>
+    <link rel="stylesheet" href="wind_overlay.css" />
+  </head>
+  <body>
+    <div class="wind-overlay-wrapper">
+      <div id="wind-drag-handle" class="drag-handle">
+        <span class="handle-icon">✥</span>
+      </div>
+
+      <div class="crosshair-container">
+        <canvas id="angle-canvas" width="206" height="206"></canvas>
+      </div>
+    </div>
+
+    <script src="../../core/services/TauriService.js"></script>
+    <script src="../../core/components/AngleSelector.js"></script>
+    <!-- ← DOIT ÊTRE AVANT wind_overlay.js -->
+    <script src="../../utils/recalc.js"></script>
+    <script src="../../utils/WindowPositionHelper.js"></script>
+    <script src="wind_overlay.js"></script>
+    <script src="../../core/services/StorageService.js"></script>
+  </body>
+</html>

@@ -1,0 +1,296 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* input_bar.css - Drag handle avec ::after */
+
+.horizontal-calculator-bar {
+  position: relative; /* ← ESSENTIEL pour le pseudo-élément */
+  margin: 8px auto;
+  width: 90vw;
+  background: rgba(20, 20, 20, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 10px 12px;
+  padding-top: 28px; /* ← Espace pour la poignée */
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px 10px;
+  align-items: end;
+}
+
+/* === POIGNÉE DE DRAG === */
+.horizontal-calculator-bar::after {
+  content: "✥";
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.7);
+  transform: rotate(90deg) scale(1.1);
+  user-select: none;
+  letter-spacing: 2px;
+  transition: color 0.2s ease;
+  z-index: 5;
+  cursor: move;
+}
+
+/* Placé tout en haut, prend toute la largeur et rétablit la grille */
+.field.map-field {
+  grid-column: 1 / -1;
+  margin-bottom: 2px; /* Un mini espace pour aérer avant les clubs */
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.field.span2 {
+  grid-column: span 2;
+}
+
+.field > label {
+  color: #a0a0a0;
+  font-size: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+input[type="text"],
+select {
+  background: #2a2a2a;
+  color: #ffffff;
+  border: 1px solid #555555;
+  padding: 4px 6px;
+  border-radius: 4px;
+  font-size: 13px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+select {
+  width: 100%;
+}
+.divider {
+  grid-column: span 3;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.15);
+  margin: 5px 0;
+  border: none;
+}
+.label_show {
+  grid-column: span 3;
+  height: 18px;
+  color: #c7c7cf;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.actions-block {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.spin-btn {
+  background: #c45308;
+  border: 1px solid #995700;
+  border-radius: 5px;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+}
+.spin-btn:hover {
+  background: #f76605;
+}
+
+.action-btn {
+  background: #007acc;
+  color: white;
+  border: none;
+  padding: 5px 14px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.action-btn:hover {
+  background: #0098ff;
+}
+.spin-btn:disabled {
+  background-color: #999;
+  color: #ccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+/* -----------------------------------------------------------------------
+   TOGGLE SWITCH
+   ----------------------------------------------------------------------- */
+.toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: normal;
+  text-transform: none;
+  color: #9aa0b4;
+  user-select: none;
+  padding: 0;
+}
+
+.toggle__input {
+  display: none;
+}
+
+.toggle__track {
+  position: relative;
+  width: 32px;
+  height: 17px;
+  background: #1e2128;
+  border: 1px solid #2e323e;
+  border-radius: 20px;
+  flex-shrink: 0;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
+}
+
+.toggle__track::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 11px;
+  height: 11px;
+  background: #4a4e60;
+  border-radius: 50%;
+  transition:
+    transform 0.2s,
+    background 0.2s;
+}
+
+.toggle__input:checked + .toggle__track {
+  background: #2e3a32;
+  border-color: #3d6b50;
+}
+
+.toggle__input:checked + .toggle__track::after {
+  transform: translateX(15px);
+  background: #3d6b50;
+}
+
+.toggle:hover .toggle__track {
+  border-color: #3d6b50;
+}
+.toggle span {
+  pointer-events: none;
+}
+
+/* -----------------------------------------------------------------------
+   MINI BOUTONS
+   ----------------------------------------------------------------------- */
+
+.mini-btn {
+  margin: 0 5px 1px 2px;
+  padding: 3px 8px;
+  background: #2e3a32;
+  border: 1px solid #3d6b50;
+  border-radius: 5px;
+  color: #a0c8ae;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.mini-btn:hover {
+  background: #3d6b50;
+  color: #f0f0f0;
+}
+
+.mini-btn:active {
+  background: #2e5240;
+}
+
+.short-error {
+  display: none; /* caché par défaut */
+  background: rgba(255, 60, 60, 0.75); /* rouge vif semi-transparent */
+  color: #fff; /* texte blanc */
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  pointer-events: none;
+  text-align: center; /* pour ne pas gêner les clics */
+
+  width: 200px;
+  margin: 0 auto;
+}
+.error_calc {
+  cursor: move;
+  width: 420px;
+  height: 20px;
+  margin: 0 auto;
+  position: absolute;
+  top: 7px;
+}
+
+.optimize-tooltip {
+  position: fixed;
+  background: #c0392b;
+  color: #fff;
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  max-width: 220px;
+  text-align: center;
+  z-index: 1000;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  animation: tooltip-fade 3s ease forwards;
+  pointer-events: none;
+}
+
+.optimize-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: #c0392b transparent transparent transparent;
+}
+
+@keyframes tooltip-fade {
+  0% {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

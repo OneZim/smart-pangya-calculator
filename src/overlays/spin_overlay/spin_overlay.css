@@ -1,0 +1,108 @@
+/* ===== RESET ===== */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: transparent;
+  width: 100%;
+  height: 100%;
+  font-family: Arial, sans-serif;
+
+  /* Force le clic à travers TOUTE la fenêtre transparente au niveau du navigateur */
+  pointer-events: none;
+  cursor: move;
+
+  /* Optionnel : empêche la sélection de texte bleue moche pendant qu'on glisse */
+  user-select: none;
+}
+
+:root {
+  /* Valeur par défaut tant que la résolution du jeu n'est pas encore
+     détectée. IMPORTANT : cette variable doit être déclarée sur :root et
+     PAS directement sur .cercle — une variable déclarée localement sur un
+     élément masque toujours la valeur pilotée par JS sur <html>, même si
+     le JS s'exécute après. */
+  --cercle-size: 120px;
+}
+
+/* ===== CERCLE PRINCIPAL ===== */
+.cercle {
+  /* Taille de référence 120px à 1920x1080 (mode Magnified) — --cercle-size
+     est recalculée en JS (spin_overlay.js, applyCercleSize()) dès que la
+     résolution réelle du jeu est connue, pour matcher la taille de la
+     balle en jeu à n'importe quelle résolution. */
+  width: var(--cercle-size);
+  height: var(--cercle-size);
+  border: 2px solid #ff7809;
+  border-radius: 50%;
+  background: transparent;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  overflow: visible;
+}
+
+/* ===== REPÈRE (conteneur plein-fenêtre, ne bouge plus) ===== */
+#repere {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* ===== MARQUEUR (déplacé par JS) ===== */
+/* Origine (0,0) = centre du petit cercle rouge = centre de la balle sur la
+   jauge en jeu. Posé au CENTRE de la fenêtre : le translate appliqué par JS
+   est un pur delta autour de ce point, et ancrageZero/ancrageZeroX ne servent
+   plus que d'ajustement résiduel (~0 si la fenêtre est bien alignée). */
+#marqueur {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+/* ===== CHAMP DE SAISIE EN HAUT (FIXE) ===== */
+#input-area {
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+  pointer-events: auto;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid #0a2a66;
+}
+
+#input-area input {
+  width: 100px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  border: 2px solid #0a2a66;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fc8b40;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+#input-area input:focus {
+  border-color: #fc8b40;
+}
+
+#input-area input::-webkit-inner-spin-button,
+#input-area input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

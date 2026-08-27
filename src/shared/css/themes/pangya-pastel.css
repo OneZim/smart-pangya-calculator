@@ -1,0 +1,1142 @@
+/* =====================================================================
+   SMART CALCULATOR — PANGYA PASTEL EDITION
+   Layout original conservé — Couleurs pastel PangYa
+   ===================================================================== */
+
+/* -----------------------------------------------------------------------
+   VARIABLES
+   ----------------------------------------------------------------------- */
+
+:root {
+  --sky-top: #8fd8f8;
+  --sky-mid: #cdeaff;
+  --sky-bottom: #ffd6ec;
+
+  --panel: #fffaf3;
+  --panel-light: #fffdf8;
+
+  --border: #ffc2e0;
+  --border-dark: #ff8fbb;
+
+  --rose: #ff6fa5;
+  --rose-light: #ff8fbb;
+  --rose-dark: #d94f83;
+
+  --gold: #ffb400;
+  --gold-light: #ffcc44;
+
+  --text: #4a3b52;
+  --text-soft: #9a86a0;
+
+  --input-bg: #fff3f9;
+
+  --shadow: 0 6px 20px rgba(255, 111, 165, 0.18);
+}
+
+/* -----------------------------------------------------------------------
+   GLOBAL
+   ----------------------------------------------------------------------- */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  font-family: "Nunito", "Trebuchet MS", Verdana, sans-serif;
+  color: var(--text);
+  background: linear-gradient(
+    180deg,
+    var(--sky-top) 0%,
+    var(--sky-mid) 45%,
+    var(--sky-bottom) 100%
+  );
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+/* -----------------------------------------------------------------------
+   TITRE
+   ----------------------------------------------------------------------- */
+
+h1 {
+  margin-bottom: 35px;
+  text-align: center;
+  font-size: 34px;
+  font-weight: 800;
+  font-family: "Baloo 2", "Comic Sans MS", cursive;
+  color: #fff;
+  letter-spacing: 1px;
+  text-shadow:
+    0 2px 0 var(--rose),
+    0 4px 12px rgba(255, 111, 165, 0.45);
+  -webkit-text-stroke: 1px var(--rose);
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+h1::after {
+  content: "⛳";
+  position: absolute;
+  right: -40px;
+  top: -5px;
+  font-size: 28px;
+  text-shadow: none;
+  -webkit-text-stroke: 0;
+}
+
+h1::before {
+  content: "🏌️";
+  position: absolute;
+  left: -40px;
+  top: -5px;
+  font-size: 28px;
+  text-shadow: none;
+  -webkit-text-stroke: 0;
+}
+
+/* -----------------------------------------------------------------------
+   ONGLETS
+   ----------------------------------------------------------------------- */
+
+.tabs {
+  width: 100%;
+  margin-bottom: 22px;
+}
+
+.tabs input[type="radio"] {
+  display: none;
+}
+
+.tab-label {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-right: 5px;
+  cursor: pointer;
+  font-family: "Baloo 2", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  border: 2px solid var(--border-dark);
+  border-bottom: none;
+  border-radius: 14px 14px 0 0;
+  background: linear-gradient(var(--rose-light), var(--rose));
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.5);
+  transition: all 0.25s ease;
+}
+
+.tab-label:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(#ffaacc, var(--rose-light));
+}
+
+.tab-content {
+  display: none;
+  padding: 22px;
+  border: 2px solid var(--border);
+  border-radius: 0 14px 14px 14px;
+  margin-top: -2px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+
+/* -----------------------------------------------------------------------
+   ONGLET ACTIF
+   ----------------------------------------------------------------------- */
+
+#tab1:checked + .tab-label,
+#tab2:checked + .tab-label,
+#tab3:checked + .tab-label,
+#tab4:checked + .tab-label,
+#tab5:checked + .tab-label {
+  background: var(--panel);
+  color: var(--rose);
+  text-shadow: none;
+  border-color: var(--border);
+  border-bottom-color: var(--panel);
+}
+
+#tab1:checked ~ #content1,
+#tab2:checked ~ #content2,
+#tab3:checked ~ #content3,
+#tab4:checked ~ #content4,
+#tab5:checked ~ #content5 {
+  display: block;
+}
+
+/* -----------------------------------------------------------------------
+   CARTES
+   ----------------------------------------------------------------------- */
+
+.card {
+  background: var(--panel);
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 8px 28px rgba(255, 111, 165, 0.25);
+}
+
+.card-title {
+  margin-bottom: 18px;
+  padding-bottom: 10px;
+  font-family: "Baloo 2", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--rose);
+  border-bottom: 2px dashed var(--border);
+}
+
+/* -----------------------------------------------------------------------
+   GRID
+   ----------------------------------------------------------------------- */
+
+.container-grid {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 12px 16px;
+  margin-top: 16px;
+}
+
+/* -----------------------------------------------------------------------
+   INPUTS
+   ----------------------------------------------------------------------- */
+
+input,
+select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px 6px;
+  border-radius: 10px;
+  border: 2px solid var(--border);
+  background: var(--input-bg);
+  color: var(--text);
+  font-family: "Nunito", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+input::placeholder {
+  color: #b8a5be;
+  opacity: 0.7;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--rose);
+  box-shadow: 0 0 0 3px rgba(255, 111, 165, 0.2);
+}
+
+input:hover,
+select:hover {
+  border-color: var(--rose-light);
+}
+
+/* =====================================================================
+   BOUTONS • RESULTATS • FOOTER • LAYOUTS
+   ===================================================================== */
+
+/* -----------------------------------------------------------------------
+   BOUTON PRINCIPAL
+   ----------------------------------------------------------------------- */
+
+button.calc-btn {
+  width: 100%;
+  margin-top: 20px;
+  padding: 14px;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  font-family: "Baloo 2", sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: #fff;
+  background: linear-gradient(180deg, var(--rose-light) 0%, var(--rose) 100%);
+  box-shadow:
+    0 2px 0 var(--rose-dark),
+    0 6px 12px rgba(255, 111, 165, 0.35);
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+button.calc-btn:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(180deg, #ffaacc, var(--rose-light));
+  box-shadow:
+    0 3px 0 var(--rose-dark),
+    0 8px 20px rgba(255, 111, 165, 0.4);
+}
+
+button.calc-btn:active {
+  transform: translateY(3px);
+  box-shadow:
+    0 1px 0 var(--rose-dark),
+    0 2px 6px rgba(255, 111, 165, 0.35);
+}
+
+/* -----------------------------------------------------------------------
+   RESET
+   ----------------------------------------------------------------------- */
+
+#reset-params,
+#reset-hall {
+  background: linear-gradient(180deg, #a8e3ff, #5fb8e8);
+  border: 2px solid #5fb8e8;
+  color: #2a5a78;
+  font-family: "Baloo 2", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+#reset-params:hover,
+#reset-hall:hover {
+  background: linear-gradient(180deg, #c0edff, #7ac8f0);
+  border-color: #3d9fd8;
+  color: #1a3f57;
+  transform: translateY(-1px);
+}
+
+/* -----------------------------------------------------------------------
+   RESULTAT
+   ----------------------------------------------------------------------- */
+
+/* themes/pangya-pastel.css - #result en rose */
+
+#result {
+  margin-top: 25px;
+  text-align: center;
+  font-size: 25px;
+  font-weight: 800;
+  color: #ff6fa5; /* Rose PangYa Pastel */
+  font-family: "Baloo 2", "Comic Sans MS", cursive;
+  text-shadow:
+    0 2px 0 #d94f83,
+    0 0 20px rgba(255, 111, 165, 0.3),
+    0 0 40px rgba(255, 111, 165, 0.1);
+  letter-spacing: 0.04em;
+  animation: glowResult 3s ease-in-out infinite;
+}
+
+#result .percent-low {
+  color: #ff3b3b; /* rouge alerte */
+  text-shadow:
+    0 2px 0 #b30000,
+    0 0 20px rgba(255, 59, 59, 0.4),
+    0 0 40px rgba(255, 59, 59, 0.15);
+}
+
+@keyframes glowResult {
+  0%,
+  100% {
+    text-shadow:
+      0 2px 0 #d94f83,
+      0 0 20px rgba(255, 111, 165, 0.3);
+  }
+  50% {
+    text-shadow:
+      0 2px 0 #d94f83,
+      0 0 40px rgba(255, 111, 165, 0.5);
+  }
+}
+
+/* -----------------------------------------------------------------------
+   FOOTER
+   ----------------------------------------------------------------------- */
+footer {
+  display: block;
+  margin-top: 45px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* -----------------------------------------------------------------------
+   INLINE
+   ----------------------------------------------------------------------- */
+
+.inline-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 18px;
+}
+
+.inline-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px 18px;
+}
+
+/* -----------------------------------------------------------------------
+   ROW / COL
+   ----------------------------------------------------------------------- */
+
+.row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.col label {
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-soft);
+}
+
+/* -----------------------------------------------------------------------
+   IMAGE VENT
+   ----------------------------------------------------------------------- */
+
+.wind-crop-box {
+  width: 206px;
+  height: 206px;
+  margin: auto;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--input-bg);
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  transition: all 0.25s ease;
+}
+
+.wind-crop-box:hover {
+  border-color: var(--rose);
+}
+
+#wind-image {
+  min-width: 250px;
+  min-height: 250px;
+  object-fit: none;
+  object-position: 100% 100%;
+}
+
+#angle-canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 10;
+}
+
+/* -----------------------------------------------------------------------
+   ANGLES
+   ----------------------------------------------------------------------- */
+
+#angle-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+#angle-buttons button {
+  padding: 7px 13px;
+  border-radius: 10px;
+  border: 2px solid var(--border);
+  cursor: pointer;
+  font-family: "Baloo 2", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--rose-dark);
+  background: var(--input-bg);
+  transition: all 0.25s ease;
+}
+
+#angle-buttons button:hover {
+  background: var(--border);
+  border-color: var(--rose);
+  color: var(--rose);
+  transform: translateY(-1px);
+}
+
+#angle-display {
+  margin-top: 12px;
+  text-align: center;
+  font-family: "Baloo 2", sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--gold);
+  text-shadow: 0 1px 4px rgba(255, 180, 0, 0.3);
+}
+
+/* =====================================================================
+   MINI BOUTONS • PANELS • REGLAGES IMAGE • DOSSIERS
+   ===================================================================== */
+
+/* -----------------------------------------------------------------------
+   MINI BOUTONS
+   ----------------------------------------------------------------------- */
+
+.mini-btn {
+  padding: 6px 12px;
+  border-radius: 10px;
+  border: 2px solid var(--rose);
+  cursor: pointer;
+  font-family: "Baloo 2", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--rose-dark);
+  background: var(--input-bg);
+  transition: all 0.25s ease;
+}
+
+.mini-btn:hover {
+  background: var(--rose);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.mini-btn:active {
+  transform: translateY(0);
+}
+
+/* -----------------------------------------------------------------------
+   PANEL REGLAGES IMAGE
+   ----------------------------------------------------------------------- */
+
+.adjust-panel {
+  position: relative;
+  margin-top: 30px;
+  padding: 18px;
+  border-radius: 16px;
+  border: 2px solid var(--border);
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+
+.adjust-title {
+  position: absolute;
+  top: -11px;
+  left: 20px;
+  padding: 2px 10px;
+  background: var(--panel);
+  font-family: "Baloo 2", sans-serif;
+  color: var(--rose);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: 10px;
+}
+
+/* -----------------------------------------------------------------------
+   DOSSIERS
+   ----------------------------------------------------------------------- */
+
+.folder-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.action-btn {
+  flex: 1;
+  padding: 9px 0;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: "Nunito", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  border: 2px solid transparent;
+  transition: all 0.25s ease;
+}
+
+.action-btn--neutral {
+  background: var(--input-bg);
+  border-color: var(--border);
+  color: var(--text);
+}
+
+.action-btn--neutral:hover {
+  background: var(--border);
+  border-color: var(--rose);
+  color: var(--rose);
+}
+
+.action-btn--success {
+  background: #d9f5e0;
+  border-color: #4fbf7a;
+  color: #206b3d;
+}
+
+.action-btn--success:hover {
+  background: #4fbf7a;
+  color: #fff;
+}
+
+.action-btn--danger {
+  background: #ffdde0;
+  border-color: #ef5a70;
+  color: #a4283b;
+}
+
+.action-btn--danger:hover {
+  background: #ef5a70;
+  color: #fff;
+}
+
+/* -----------------------------------------------------------------------
+   CROIX DIRECTIONNELLE
+   ----------------------------------------------------------------------- */
+
+.adjust-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto auto;
+  justify-items: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 22px;
+}
+
+.adjust-top {
+  grid-row: 1;
+}
+.adjust-center {
+  grid-row: 2;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.adjust-bottom {
+  grid-row: 3;
+}
+
+.crop-btn {
+  padding: 6px 12px;
+  border-radius: 10px;
+  border: 2px solid var(--rose);
+  cursor: pointer;
+  font-family: "Baloo 2", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--rose-dark);
+  background: var(--input-bg);
+  transition: all 0.25s ease;
+}
+
+.crop-btn:hover {
+  background: var(--rose);
+  color: #fff;
+}
+
+.adjust-label {
+  font-family: "Baloo 2", sans-serif;
+  color: var(--gold);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+/* -----------------------------------------------------------------------
+   CONTENEUR VENT
+   ----------------------------------------------------------------------- */
+
+.wind-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.wind-columns {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 20px;
+  align-items: center;
+  margin-top: 14px;
+}
+
+.wind-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.arrow-size,
+.angle-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-row {
+  margin-top: 10px;
+}
+
+.wind-image-container {
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 600px) {
+  .wind-columns {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+/* =====================================================================
+   RULER • TOGGLES • OVERLAY • PANELS
+   ===================================================================== */
+
+/* -----------------------------------------------------------------------
+   PANNEAU REGLE
+   ----------------------------------------------------------------------- */
+
+.ruler-section-separator {
+  border: none;
+  height: 2px;
+  background: var(--border);
+  margin: 24px 0;
+}
+
+.ruler-panel {
+  margin-top: 18px;
+  padding: 18px;
+  border-radius: 16px;
+  border: 2px solid var(--border);
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+
+.ruler-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ruler-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ruler-line label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-soft);
+}
+
+.ruler-checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--rose);
+}
+
+.ruler-separator {
+  border: none;
+  height: 2px;
+  margin: 14px 0;
+  background: var(--border);
+}
+
+.ruler-adjust-title {
+  text-align: center;
+  font-family: "Baloo 2", sans-serif;
+  color: var(--gold);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.ruler-adjust {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.ruler-middle-row {
+  display: flex;
+  gap: 18px;
+}
+
+.small-btn {
+  width: 40px !important;
+  height: 30px !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 16px !important;
+}
+
+/* -----------------------------------------------------------------------
+   TOGGLES
+   ----------------------------------------------------------------------- */
+
+.toggle-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-soft);
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.2s ease;
+}
+
+.toggle:hover {
+  color: var(--text);
+}
+
+.toggle__input {
+  display: none;
+}
+
+.toggle__track {
+  position: relative;
+  width: 42px;
+  height: 22px;
+  border-radius: 22px;
+  background: var(--input-bg);
+  border: 2px solid var(--border);
+  transition: all 0.3s ease;
+}
+
+.toggle__track::after {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--border);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.toggle:hover .toggle__track {
+  border-color: var(--rose);
+}
+
+.toggle__input:checked + .toggle__track {
+  background: var(--border);
+  border-color: var(--rose);
+}
+
+.toggle__input:checked + .toggle__track::after {
+  transform: translateX(18px);
+  background: var(--rose);
+}
+
+/* -----------------------------------------------------------------------
+   OVERLAY
+   ----------------------------------------------------------------------- */
+
+.card-overlay {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.card-overlay.ruler-inline {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.overlay-separator {
+  width: 2px;
+  height: 90px;
+  background: var(--border);
+}
+
+/* -----------------------------------------------------------------------
+   PANEL
+   ----------------------------------------------------------------------- */
+
+.panel {
+  margin: 10px;
+  padding: 18px;
+  border-radius: 16px;
+  border: 2px solid var(--border);
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+
+.panel legend {
+  padding: 0 10px;
+  font-family: "Baloo 2", sans-serif;
+  color: var(--rose);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* -----------------------------------------------------------------------
+   SPIN
+   ----------------------------------------------------------------------- */
+
+.spin-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 5px;
+}
+
+.spin-row label {
+  width: 200px;
+  font-weight: 600;
+  color: var(--text-soft);
+}
+
+.spin-row input {
+  width: 70px;
+}
+
+/* =====================================================================
+   MODALE • LANGUE • COURSE SELECTOR • FINITIONS
+   ===================================================================== */
+
+/* -----------------------------------------------------------------------
+   MODALE
+   ----------------------------------------------------------------------- */
+
+#custom-confirm-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  justify-content: center;
+  align-items: center;
+  background: rgba(74, 59, 82, 0.4);
+  backdrop-filter: blur(4px);
+}
+
+.modal-box {
+  width: 340px;
+  max-width: 90%;
+  padding: 24px;
+  text-align: center;
+  border-radius: 18px;
+  border: 2px solid #ef5a70;
+  background: var(--panel);
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
+}
+
+.modal-title {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-family: "Baloo 2", sans-serif;
+  font-size: 18px;
+  color: #ef5a70;
+  font-weight: 700;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 24px;
+}
+
+.modal-btn {
+  min-width: 110px;
+  padding: 9px 20px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-family: "Baloo 2", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  transition: all 0.25s ease;
+}
+
+.modal-btn--danger {
+  background: #ef5a70;
+  color: #fff;
+}
+
+.modal-btn--danger:hover {
+  background: #d9435a;
+}
+
+.modal-btn--cancel {
+  background: #d9c9e0;
+  color: var(--text);
+}
+
+.modal-btn--cancel:hover {
+  background: #c9b3d4;
+}
+
+/* -----------------------------------------------------------------------
+   LANGUE et theme
+   ----------------------------------------------------------------------- */
+
+.lang_select label,
+.theme_select label {
+  color: #9a86a0;
+  font-weight: 600;
+}
+
+/* -----------------------------------------------------------------------
+   COURSE SELECTOR
+   ----------------------------------------------------------------------- */
+
+.course-selector {
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.course-select {
+  flex: 1;
+  padding: 8px;
+  border-radius: 10px;
+  border: 2px solid var(--border);
+  background: var(--input-bg);
+  color: var(--text);
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+.course-select:hover:not(:disabled) {
+  border-color: var(--rose);
+}
+
+.course-select:focus {
+  outline: none;
+  border-color: var(--rose);
+  box-shadow: 0 0 0 3px rgba(255, 111, 165, 0.2);
+}
+
+.course-select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* -----------------------------------------------------------------------
+   SCROLLBAR
+   ----------------------------------------------------------------------- */
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--input-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+  background: var(--border);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--rose);
+}
+
+/* -----------------------------------------------------------------------
+   SELECTION TEXTE
+   ----------------------------------------------------------------------- */
+
+::selection {
+  background: var(--rose);
+  color: #fff;
+}
+
+/* -----------------------------------------------------------------------
+   ANIMATION
+   ----------------------------------------------------------------------- */
+
+.card,
+.panel,
+.adjust-panel,
+.ruler-panel,
+.tab-content {
+  animation: panelAppear 0.35s ease;
+}
+
+@keyframes panelAppear {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* -----------------------------------------------------------------------
+   REFLETS
+   ----------------------------------------------------------------------- */
+
+.card,
+.panel,
+.adjust-panel,
+.ruler-panel,
+.tab-content {
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before,
+.panel::before,
+.adjust-panel::before,
+.ruler-panel::before,
+.tab-content::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 45px;
+  pointer-events: none;
+  background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+}
+
+/* -----------------------------------------------------------------------
+   OMBRES DOUCES
+   ----------------------------------------------------------------------- */
+
+.card:hover,
+.panel:hover,
+.adjust-panel:hover,
+.ruler-panel:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(255, 111, 165, 0.22);
+}

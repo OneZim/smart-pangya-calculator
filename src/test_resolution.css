@@ -1,0 +1,85 @@
+/* ============================================
+   PANNEAU DE TEST — DÉTECTION RÉSOLUTION (temporaire)
+   ============================================ */
+.test-resolution-panel {
+  background: rgba(255, 200, 0, 0.08);
+  border: 1px dashed rgba(255, 200, 0, 0.4);
+  border-radius: 10px;
+  padding: 1rem;
+  margin: 1rem 0;
+  font-size: 0.8rem;
+}
+
+.test-resolution-panel h3 {
+  margin-bottom: 0.6rem;
+  color: #ffc800;
+  font-size: 0.95rem;
+}
+
+.test-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.test-label {
+  font-size: 0.75rem;
+  color: rgba(27, 26, 26, 0.7);
+}
+
+.test-expected-input {
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.4);
+  color: rgb(27, 26, 26);
+  font-size: 0.75rem;
+  width: 110px;
+}
+
+.test-current-result {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  margin-bottom: 0.8rem;
+  line-height: 1.5;
+}
+
+.test-current-result.test-error {
+  color: #ff6b6b;
+}
+
+.test-history-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.7rem;
+}
+
+.test-history-table th,
+.test-history-table td {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 4px 6px;
+  text-align: left;
+}
+
+.test-history-table th {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.test-match-ok {
+  color: #4caf50;
+  font-weight: bold;
+}
+
+.test-match-bad {
+  color: #ff6b6b;
+  font-weight: bold;
+}
+
+.test-list-windows-result {
+  margin-top: 0.8rem;
+  max-height: 200px;
+  overflow-y: auto;
+}

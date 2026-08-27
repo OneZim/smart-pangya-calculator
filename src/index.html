@@ -1,0 +1,977 @@
+<!doctype html>
+<!--
+  ============================================================
+  FICHIER : index.html
+  DESCRIPTION : Page principale de l'application Smart Pangya Calculator
+  AUTEUR : Onezim
+  ============================================================
+  Cette page constitue l'interface utilisateur principale de l'application.
+  Elle est organisée en 5 onglets :
+    1. Calculs     - Saisie des paramètres de tir et calcul des résultats
+    2. Overlays    - Gestion des superpositions d'écran (règle, spin, vent)
+    3. Statistiques - Configuration des statistiques du personnage
+    4. Paramètres  - Configuration de l'application (thème, écran, offsets)
+    5. Options avancées - Calculs de pente (Slope/Breaks)
+  ============================================================
+-->
+<html lang="fr_FR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Smart Calculator by Onezim</title>
+
+    <!-- Chargeur de thème - applique le thème sauvegardé avant le rendu -->
+    <script src="shared/js/theme-loader.js"></script>
+
+    <!-- Feuille de style principale de l'application -->
+    <link rel="stylesheet" href="style/main.css" />
+  </head>
+
+  <body>
+    <!-- ================================================================
+         BARRE DE TITRE PERSONNALISÉE (gérée par Tauri)
+         Permet de réduire, agrandir ou fermer la fenêtre de l'application.
+         ================================================================ -->
+    <div id="titlebar">
+      <div class="titlebar-left">
+        <span class="titlebar-icon">🏌️</span>
+        <span class="titlebar-title">Smart Pangya Calculator</span>
+      </div>
+      <div class="titlebar-right">
+        <button id="titlebar-minimize" class="titlebar-btn" title="Réduire">
+          ─
+        </button>
+        <button id="titlebar-maximize" class="titlebar-btn" title="Agrandir">
+          ☐
+        </button>
+        <button
+          id="titlebar-close"
+          class="titlebar-btn titlebar-close"
+          title="Fermer"
+        >
+          ✕
+        </button>
+      </div>
+    </div>
+
+    <!-- ================================================================
+         PAGE PRINCIPALE
+         ================================================================ -->
+    <div class="page">
+      <!-- ============================================================
+           BARRE DE SÉLECTION DE LANGUE
+           ============================================================ -->
+      <div class="top_lang">
+        <div class="lang_select">
+          <label data-i18n="lang_label">Langue</label>
+          <select id="lang-selector"></select>
+        </div>
+      </div>
+
+      <!-- ============================================================
+           SYSTÈME D'ONGLETS (5 onglets)
+           ============================================================ -->
+      <div class="tabs">
+        <!-- Onglet 1 : Calculs -->
+        <input type="radio" name="tab" id="tab1" checked />
+        <label for="tab1" class="tab-label" data-i18n="tab_cal">Calculs</label>
+
+        <!-- Onglet 2 : Overlays -->
+        <input type="radio" name="tab" id="tab2" />
+        <label for="tab2" class="tab-label" data-i18n="tab_overlay"
+          >Overlays</label
+        >
+
+        <!-- Onglet 3 : Statistiques -->
+        <input type="radio" name="tab" id="tab3" />
+        <label for="tab3" class="tab-label" data-i18n="tab_stats"
+          >Statistiques</label
+        >
+
+        <!-- Onglet 4 : Paramètres -->
+        <input type="radio" name="tab" id="tab4" />
+        <label for="tab4" class="tab-label" data-i18n="tab_config"
+          >Paramètres</label
+        >
+
+        <!-- Onglet 5 : Options avancées (Slope) -->
+        <input type="radio" name="tab" id="tab5" />
+        <label for="tab5" class="tab-label" data-i18n="tab_slope"
+          >Options avancées</label
+        >
+
+        <!-- ============================================================
+             CONTENU ONGLET 1 : CALCULS
+             ============================================================ -->
+        <div class="tab-content" id="content1">
+          <!--
+            SECTION : SÉLECTION DU PARCOURS
+            Permet de choisir un parcours, un trou et un emplacement de pin.
+            Les données sont chargées dynamiquement via CourseStore.js.
+          -->
+          <div class="card" style="margin-bottom: 20px">
+            <div
+              class="row"
+              style="display: flex; gap: 15px; align-items: center"
+            >
+              <div class="col" style="flex: 1">
+                <label for="select-parcours" data-i18n="label_course"
+                  >Parcours :</label
+                >
+
+                <!-- Sélecteurs cascade : Map → Hole → Pin -->
+                <div id="course-selector-container">
+                  <div class="course-selector">
+                    <select
+                      id="select-parcours"
+                      class="course-select"
+                      data-placeholder="-- Map --"
+                    >
+                      <option value="">-- Map --</option>
+                    </select>
+                    <select
+                      id="select-trou"
+                      class="course-select"
+                      data-placeholder="-- Hole --"
+                      disabled
+                    >
+                      <option value="">-- Hole --</option>
+                    </select>
+                    <select
+                      id="select-pin"
+                      class="course-select"
+                      data-placeholder="-- Pin --"
+                      disabled
+                    >
+                      <option value="">-- Pin --</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--
+            SECTION : CALCULATEUR DE TIR
+            Zone principale de saisie des paramètres et de calcul.
+          -->
+          <div class="calculator-layout" style="display: flex; gap: 20px">
+            <!--
+              CARTE GAUCHE : Paramètres du tir
+              Regroupe tous les champs de saisie nécessaires au calcul.
+            -->
+            <div class="card" style="flex: 1">
+              <div class="card-title" data-i18n="card_shot_config">
+                Configuration Tir
+              </div>
+
+              <!-- Ligne 1 : Club + Shot + Power Shot -->
+              <div class="row">
+                <div class="col select-club">
+                  <label data-i18n="label_club">Club:</label>
+                  <select id="club">
+                    <option value="0">1W</option>
+                    <option value="1">2W</option>
+                    <option value="2">3W</option>
+                    <option value="3">2I</option>
+                    <option value="4">3I</option>
+                    <option value="5">4I</option>
+                    <option value="6">5I</option>
+                    <option value="7">6I</option>
+                    <option value="8">7I</option>
+                    <option value="9">8I</option>
+                    <option value="10">9I</option>
+                    <option value="11">PW</option>
+                    <option value="12">SW</option>
+                  </select>
+                </div>
+                <div class="col">
+                  <label data-i18n="label_shot">Shot:</label>
+                  <select id="shot">
+                    <option value="0" data-i18n="shot_dunk">Dunk</option>
+                    <option value="1" data-i18n="shot_tomahawk">
+                      Tomahawk
+                    </option>
+                    <option value="2" data-i18n="shot_spike">Spike</option>
+                    <option value="3" data-i18n="shot_cobra">Cobra</option>
+                  </select>
+                </div>
+                <div class="col">
+                  <label data-i18n="label_power_shot">Power Shot:</label>
+                  <select id="power_shot">
+                    <option value="0" data-i18n="ps_none">No Power Shot</option>
+                    <option value="1" data-i18n="ps_1">1 Power Shot</option>
+                    <option value="2" data-i18n="ps_2">2 Power Shot</option>
+                    <option value="3" data-i18n="ps_15y">15y Power Shot</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Ligne 2 : Distance + Height -->
+              <div class="row">
+                <div class="col">
+                  <label data-i18n="label_distance">Distance:</label>
+                  <input
+                    id="distance"
+                    autocomplete="off"
+                    type="text"
+                    maxlength="6"
+                    value="200"
+                  />
+                </div>
+                <div class="col">
+                  <label data-i18n="label_height">Height:</label>
+                  <input
+                    id="height"
+                    autocomplete="off"
+                    type="text"
+                    maxlength="6"
+                    value="0"
+                  />
+                </div>
+              </div>
+
+              <!-- Ligne 3 : Wind + Degree -->
+              <div class="row">
+                <div class="col">
+                  <label data-i18n="label_wind">Wind:</label>
+                  <input
+                    id="wind"
+                    autocomplete="off"
+                    type="text"
+                    maxlength="2"
+                    value="1"
+                  />
+                </div>
+                <div class="col">
+                  <label data-i18n="label_degree">Degree:</label>
+                  <input
+                    id="degree"
+                    autocomplete="off"
+                    type="text"
+                    maxlength="6"
+                    value="45"
+                  />
+                </div>
+              </div>
+
+              <!-- Ligne 4 : Spin + bouton Spin idéal -->
+              <div class="row">
+                <div class="col">
+                  <label data-i18n="label_spin">Spin:</label>
+                  <input
+                    id="spin"
+                    autocomplete="off"
+                    type="text"
+                    maxlength="5"
+                    value="0"
+                  />
+                </div>
+                <div class="col">
+                  <label data-i18n="label_curve">Curve:</label>
+                  <input
+                    id="curve"
+                    autocomplete="off"
+                    type="text"
+                    maxlength="4"
+                    value="0"
+                  />
+                </div>
+              </div>
+
+              <!-- Ligne 5 : Curve -->
+              <div class="row">
+                <div class="col ideal-spin">
+                  <button
+                    class="action-btn action-btn--success"
+                    id="btn-optimize-dunk"
+                    type="button"
+                    data-i18n="ideal_spin"
+                    disabled
+                  >
+                    Spin idéal
+                  </button>
+                </div>
+                <div class="col ideal-spin">
+                  <button
+                    id="btn-click-spin"
+                    class="action-btn action-btn--success"
+                    type="button"
+                    data-i18n="apply-spin"
+                  >
+                    Aplliquer le spin
+                  </button>
+                </div>
+              </div>
+
+              <!-- Ligne 6 : Ground + Slope break -->
+              <div class="row">
+                <div class="col">
+                  <label data-i18n="label_ground">Ground:</label>
+                  <input
+                    id="ground"
+                    autocomplete="off"
+                    type="text"
+                    maxlength="3"
+                    value="100"
+                  />
+                </div>
+                <div class="col">
+                  <label data-i18n="label_slope_break">Slope break:</label>
+                  <input
+                    id="slope_break"
+                    autocomplete="off"
+                    type="text"
+                    maxlength="6"
+                    value="0"
+                  />
+                </div>
+              </div>
+
+              <!-- Boutons de réinitialisation -->
+              <div class="reset-row">
+                <button
+                  id="reset-params"
+                  class="action-btn action-btn--neutral"
+                  data-i18n="btn_reset_params"
+                >
+                  Reset : Cr. / Gr. / Slop
+                </button>
+                <button
+                  id="reset-hall"
+                  class="action-btn action-btn--neutral"
+                  data-i18n="btn_reset_hall"
+                >
+                  Reset Hall
+                </button>
+              </div>
+
+              <!-- Zoom de la règle PB : PB Max (100%) / Smart PB (~80%) -->
+              <label
+                class="toggle"
+                for="toggle-ruler-zoom"
+                style="margin-bottom: 8px"
+              >
+                <span data-i18n="label_ruler_zoom">PB Max (100%)</span>
+                <input
+                  type="checkbox"
+                  id="toggle-ruler-zoom"
+                  class="toggle__input"
+                />
+                <span class="toggle__track"></span>
+              </label>
+
+              <!-- Bouton principal de calcul -->
+              <button
+                class="calc-btn"
+                onclick="calc(this)"
+                data-i18n="btn_calc_shot"
+              >
+                CALCULER LE TIR
+              </button>
+
+              <!-- Zone d'affichage du résultat -->
+              <div style="text-align: center; margin-top: 20px">
+                <div id="result"></div>
+              </div>
+            </div>
+
+            <!--
+              CARTE DROITE : Calcul du vent
+              Permet de visualiser et ajuster la direction du vent.
+            -->
+            <div
+              style="flex: 1; display: flex; flex-direction: column; gap: 20px"
+            >
+              <!-- Carte : Calculateur de vent -->
+              <div class="card">
+                <div class="card-title" data-i18n="card_wind">
+                  Calcul du vent
+                </div>
+
+                <!-- Contrôles de la taille de la flèche et de l'angle -->
+                <div class="wind-columns">
+                  <div class="wind-controls">
+                    <div class="arrow-size">
+                      <span class="angle-value" data-i18n="label_arrow_size"
+                        >Arrow size</span
+                      >
+                      <div class="btn-row">
+                        <button id="btn-length-minus" class="mini-btn">
+                          -1
+                        </button>
+                        <button id="btn-length-plus" class="mini-btn">
+                          +1
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="angle-row">
+                      <span
+                        id="angle-display"
+                        class="angle-value"
+                        data-i18n="label_angle"
+                        >Angle : 0°</span
+                      >
+                      <div class="btn-row">
+                        <button id="btn-angle-minus" class="mini-btn">
+                          -1°
+                        </button>
+                        <button id="btn-angle-plus" class="mini-btn">
+                          +1°
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!--
+                    Zone d'affichage de l'image du vent avec overlay canvas
+                    L'image est chargée depuis le dossier sélectionné par l'utilisateur.
+                  -->
+                  <div class="wind-image-container">
+                    <div class="wind-crop-box" style="position: relative">
+                      <img id="wind-image" />
+                      <div class="angle-wrapper">
+                        <canvas
+                          id="angle-canvas"
+                          width="206"
+                          height="206"
+                        ></canvas>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!--
+                  Panneau de contrôle des paramètres d'image
+                  Permet de sélectionner le dossier contenant les images du vent,
+                  de rafraîchir l'affichage et d'ajuster le recadrage.
+                -->
+                <div class="adjust-panel">
+                  <div class="adjust-title" data-i18n="label_image_params">
+                    Paramètres image
+                  </div>
+
+                  <input
+                    id="folder-path"
+                    type="text"
+                    readonly
+                    data-i18n-placeholder="placeholder_folder"
+                    placeholder="Sélectionne le dossier Pangya..."
+                    class="folder-input"
+                  />
+
+                  <div class="folder-buttons">
+                    <button
+                      id="btn-select-folder"
+                      class="action-btn action-btn--neutral"
+                      data-i18n="btn_browse"
+                    >
+                      Parcourir…
+                    </button>
+                    <button
+                      id="btn-refresh-img"
+                      class="action-btn action-btn--success"
+                      data-i18n="btn_refresh"
+                    >
+                      Refresh
+                    </button>
+                    <button
+                      id="btn-clear-folder"
+                      class="action-btn action-btn--danger"
+                      data-i18n="btn_clear_folder"
+                    >
+                      Vider le dossier
+                    </button>
+                  </div>
+
+                  <!-- Contrôles de recadrage de l'image -->
+                  <div class="adjust-grid">
+                    <div class="adjust-top">
+                      <button id="btn-crop-up" class="crop-btn">▲</button>
+                    </div>
+                    <div class="adjust-center">
+                      <button id="btn-crop-left" class="crop-btn">◀</button>
+                      <span class="adjust-label" data-i18n="label_adjust_image"
+                        >Adjust Image</span
+                      >
+                      <button id="btn-crop-right" class="crop-btn">▶</button>
+                    </div>
+                    <div class="adjust-bottom">
+                      <button id="btn-crop-down" class="crop-btn">▼</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             CONTENU ONGLET 2 : OVERLAYS
+             ============================================================ -->
+        <div class="tab-content" id="content2">
+          <!--
+            SECTION : GESTION DES OVERLAYS
+            Permet d'afficher/masquer et de positionner les superpositions :
+            - Fenêtre de calcul (overlay de saisie)
+            - Règle de décalage (ruler)
+            - Repère de spin
+            - Calculateur d'angles (vent)
+          -->
+          <div class="card" style="flex: 1">
+            <div class="card-title" data-i18n="card_overlays">
+              Gestion des Overlays
+            </div>
+
+            <!-- Overlay : Fenêtre de calcul -->
+            <fieldset class="panel">
+              <legend data-i18n="card_calcul_overlay">Fenêtre de calcul</legend>
+              <div class="card-overlay">
+                <label class="toggle" for="toggle-show-input-bar">
+                  <span data-i18n="label_calcul_overlay"
+                    >Afficher la fenêtre :</span
+                  >
+                  <input
+                    type="checkbox"
+                    id="toggle-show-input-bar"
+                    class="toggle__input"
+                  />
+                  <span class="toggle__track"></span>
+                </label>
+              </div>
+            </fieldset>
+
+            <!-- Overlay : Règle de décalage -->
+            <fieldset class="panel">
+              <legend data-i18n="card_ruler">Règle de décalage</legend>
+              <div class="card-overlay ruler-inline">
+                <div class="ruler-options">
+                  <!-- Affichage et verrouillage de la règle -->
+                  <label class="toggle" for="toggle-show-ruler">
+                    <span data-i18n="label_show_ruler"
+                      >Afficher la règle :</span
+                    >
+                    <input
+                      type="checkbox"
+                      id="toggle-show-ruler"
+                      class="toggle__input"
+                    />
+                    <span class="toggle__track"></span>
+                  </label>
+
+                  <label class="toggle" for="toggle-click-through">
+                    <span data-i18n="label_lock_ruler"
+                      >Bloquer la règle (Jouer) :</span
+                    >
+                    <input
+                      type="checkbox"
+                      id="toggle-click-through"
+                      class="toggle__input"
+                    />
+                    <span class="toggle__track"></span>
+                  </label>
+                </div>
+
+                <div class="overlay-separator"></div>
+
+                <!-- Contrôles de déplacement de la règle -->
+                <div class="ruler-adjust-title" data-i18n="label_ruler_adjust">
+                  Ajustement de la règle :
+                </div>
+                <div class="ruler-adjust">
+                  <button id="btn-move-up" class="calc-btn small-btn">▲</button>
+                  <div class="ruler-middle-row">
+                    <button id="btn-move-left" class="calc-btn small-btn">
+                      ◀
+                    </button>
+                    <button id="btn-move-right" class="calc-btn small-btn">
+                      ▶
+                    </button>
+                  </div>
+                  <button id="btn-move-down" class="calc-btn small-btn">
+                    ▼
+                  </button>
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- Overlay : Repère de Spin -->
+            <fieldset class="panel">
+              <legend data-i18n="card_spin">Repère de Spin</legend>
+              <div class="card-overlay ruler-inline">
+                <div class="ruler-options">
+                  <label class="toggle" for="toggle-show-spin">
+                    <span data-i18n="label_show_spin"
+                      >Afficher le repère :</span
+                    >
+                    <input
+                      type="checkbox"
+                      id="toggle-show-spin"
+                      class="toggle__input"
+                    />
+                    <span class="toggle__track"></span>
+                  </label>
+
+                  <label class="toggle" for="toggle-click-through-spin">
+                    <span data-i18n="label_lock_ruler"
+                      >Bloquer le repere(Jouer) :</span
+                    >
+                    <input
+                      type="checkbox"
+                      id="toggle-click-through-spin"
+                      class="toggle__input"
+                    />
+                    <span class="toggle__track"></span>
+                  </label>
+                </div>
+
+                <div class="overlay-separator"></div>
+
+                <!-- Contrôles de déplacement du repère de spin -->
+                <div class="ruler-adjust-title" data-i18n="label_ruler_adjust">
+                  Ajustement du repère :
+                </div>
+                <div class="ruler-adjust">
+                  <button id="btn-spin-move-up" class="calc-btn small-btn">
+                    ▲
+                  </button>
+                  <div class="ruler-middle-row">
+                    <button id="btn-spin-move-left" class="calc-btn small-btn">
+                      ◀
+                    </button>
+                    <button id="btn-spin-move-right" class="calc-btn small-btn">
+                      ▶
+                    </button>
+                  </div>
+                  <button id="btn-spin-move-down" class="calc-btn small-btn">
+                    ▼
+                  </button>
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- Overlay : Calculateur d'angles (vent) -->
+            <fieldset class="panel">
+              <legend data-i18n="card_wind_overlay">
+                Calculateur d'angles
+              </legend>
+              <div class="card-overlay ruler-inline">
+                <div class="ruler-options">
+                  <label class="toggle" for="toggle-show-wind-overlay">
+                    <span data-i18n="label_show_wind_overlay"
+                      >Afficher l'overlay vent :</span
+                    >
+                    <input
+                      type="checkbox"
+                      id="toggle-show-wind-overlay"
+                      class="toggle__input"
+                    />
+                    <span class="toggle__track"></span>
+                  </label>
+
+                  <label class="toggle" for="toggle-wind-click-through">
+                    <span data-i18n="label_lock_ruler"
+                      >Verrouiller l'overlay (plus clicable) :</span
+                    >
+                    <input
+                      type="checkbox"
+                      id="toggle-wind-click-through"
+                      class="toggle__input"
+                    />
+                    <span class="toggle__track"></span>
+                  </label>
+                </div>
+
+                <div class="overlay-separator"></div>
+
+                <!-- Contrôles de déplacement de l'overlay vent -->
+                <div
+                  class="ruler-adjust-title"
+                  data-i18n="label_wind_overlay_adjust"
+                >
+                  Ajustement de l'overlay :
+                </div>
+                <div class="ruler-adjust">
+                  <button id="btn-wind-move-up" class="calc-btn small-btn">
+                    ▲
+                  </button>
+                  <div class="ruler-middle-row">
+                    <button id="btn-wind-move-left" class="calc-btn small-btn">
+                      ◀
+                    </button>
+                    <button id="btn-wind-move-right" class="calc-btn small-btn">
+                      ▶
+                    </button>
+                  </div>
+                  <button id="btn-wind-move-down" class="calc-btn small-btn">
+                    ▼
+                  </button>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             CONTENU ONGLET 3 : STATISTIQUES
+             ============================================================ -->
+        <div class="tab-content" id="content3">
+          <!--
+            SECTION : STATISTIQUES DU PERSONNAGE
+            Permet de sélectionner un personnage et de configurer ses stats.
+            Les données sont gérées par CharacterStore.js.
+          -->
+          <div class="card">
+            <div class="card-title" data-i18n="card_stats">Statistiques</div>
+
+            <!-- Sélecteur de personnage avec avatar -->
+            <div class="character-selector-row">
+              <div class="character-avatar" id="character-avatar">
+                <img
+                  id="character-image"
+                  src="assets/avatars/kaz.webp"
+                  alt="Kaz"
+                />
+                <span id="character-name-display">Kaz</span>
+              </div>
+
+              <div class="character-selector-wrapper">
+                <select id="character-selector" class="character-select">
+                  <option value="nuri">Nuri</option>
+                  <option value="hana">Hana</option>
+                  <option value="azer">Azer</option>
+                  <option value="cecilia">Cecilia</option>
+                  <option value="max">Max</option>
+                  <option value="kooharin">KoohArin</option>
+                  <option value="kaz" selected>Kaz</option>
+                  <option value="lucia">Lucia</option>
+                  <option value="nell">Nell</option>
+                  <option value="spika">Spika</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Grille des statistiques du personnage -->
+            <div class="container-grid">
+              <label data-i18n="label_power">Power:</label>
+              <input id="power" type="text" />
+              <label data-i18n="label_ring_power">Ring Power:</label>
+              <input id="auxpart_pwr" type="text" />
+              <label data-i18n="label_card_power">Card Power:</label>
+              <input id="card_pwr" type="text" />
+              <label data-i18n="label_mascot_power">Mascot Power:</label>
+              <input id="mascot_pwr" type="text" />
+              <label data-i18n="label_card_ps_power">Card PS Power:</label>
+              <input id="card_ps_pwr" type="text" />
+              <label data-i18n="label_card_spin">Max Spin:</label>
+              <input id="card_max_spin" type="text" />
+              <label data-i18n="label_card_curve">Max Curve:</label>
+              <input id="card_max_curve" type="text" />
+            </div>
+          </div>
+
+          <div class="spacer"></div>
+
+          <!--
+            SECTION : RÉGLAGE DU SPIN PAR DÉFAUT
+            Permet de définir les valeurs de spin pour chaque type de tir.
+          -->
+          <div class="card">
+            <div class="card-title" data-i18n="card_spin_defaut">
+              Réglage du Spin par défaut
+            </div>
+            <div class="adjust-panel">
+              <div class="spin-row">
+                <label data-i18n="spin_dunk">Spin Dunk</label>
+                <input id="spinDunk" autocomplete="off" maxlength="2" />
+              </div>
+              <div class="spin-row">
+                <label data-i18n="spin_toma">Spin Tomahawk</label>
+                <input id="spinToma" autocomplete="off" maxlength="2" />
+              </div>
+              <div class="spin-row">
+                <label data-i18n="spin_spike">Spin Spike</label>
+                <input id="spinSpike" autocomplete="off" maxlength="2" />
+              </div>
+              <div class="spin-row">
+                <label data-i18n="spin_cobra">Spin Cobra</label>
+                <input id="spinCobra" autocomplete="off" maxlength="2" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             CONTENU ONGLET 4 : PARAMÈTRES
+             ============================================================ -->
+        <div class="tab-content" id="content4">
+          <!--
+            SECTION : CONFIGURATION DE L'APPLICATION
+            Permet de changer le thème visuel.
+          -->
+          <div class="card">
+            <div class="card-title" data-i18n="card_param">
+              Configuration de l'application
+            </div>
+            <div class="container-grid container-grid--stacked">
+              <div class="theme_select">
+                <label data-i18n="theme_label">🎨 Thème</label>
+                <select id="theme-selector">
+                  <option value="dark-golf">🌙 Dark Golf</option>
+                  <option value="pangya-pastel">🌸 PangYa Pastel</option>
+                  <option value="pangya-classic" selected>
+                    🌊 PangYa Classic
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="spacer"></div>
+
+          <!--
+            SECTION : CONFIGURATION ÉCRAN
+            Définit les dimensions et limites de l'écran.
+          -->
+          <div class="card">
+            <div class="card-title" data-i18n="card_screen_config">
+              Configuration Écran
+            </div>
+            <div class="container-grid">
+              <label data-i18n="label_width">Width:</label>
+              <input id="rel-width" type="text" />
+              <label data-i18n="label_height_screen">Height:</label>
+              <input id="rel-height" type="text" />
+              <label data-i18n="label_smart_dev">Smart deviation limit:</label>
+              <input id="smart-dev-limit" type="checkbox" checked />
+              <label data-i18n="label_auto_fit">Auto fit:</label>
+              <input id="auto-fit" type="checkbox" checked />
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             CONTENU ONGLET 5 : OPTIONS AVANCÉES (SLOPE/BREAKS)
+             ============================================================ -->
+        <div class="tab-content" id="content5">
+          <!--
+            SECTION : CALCUL DE PENTE
+            Permet de calculer les breaks et les angles de pente.
+            Utilise la fonction calcMycella() définie dans recalc.js.
+          -->
+          <div class="card">
+            <div class="card-title" data-i18n="card_slope">
+              Calcul Slope/Breaks
+            </div>
+
+            <div class="container-grid">
+              <label data-i18n="label_myce_degree">Degree:</label>
+              <input id="shot-degree" type="text" autocomplete="off" />
+              <label data-i18n="label_align_degree">Align degree:</label>
+              <input id="align-degree" type="text" autocomplete="off" />
+              <label data-i18n="label_slope_break">Slope break:</label>
+              <input id="slope-break" type="text" autocomplete="off" />
+            </div>
+
+            <button
+              class="calc-btn"
+              onclick="calcMycella(this)"
+              data-i18n="btn_calc_slope"
+            >
+              Calcule Slope
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================================
+           PIED DE PAGE
+           ============================================================ -->
+      <footer data-i18n="footer">Developped by Onezim</footer>
+    </div>
+
+    <!-- ================================================================
+         MODAL DE CONFIRMATION
+         Utilisé pour les actions destructrices (ex: vider le dossier d'images).
+         ================================================================ -->
+    <div id="custom-confirm-modal">
+      <div class="modal-box">
+        <h3 class="modal-title" data-i18n="modal_title">⚠️ Attention</h3>
+        <p data-i18n="modal_body">
+          Voulez-vous vraiment supprimer TOUTES les images de ce dossier ? Cette
+          action est irréversible.
+        </p>
+        <div class="modal-actions">
+          <button
+            id="modal-confirm-btn"
+            class="modal-btn modal-btn--danger"
+            data-i18n="modal_confirm"
+          >
+            Oui, vider
+          </button>
+          <button
+            id="modal-cancel-btn"
+            class="modal-btn modal-btn--cancel"
+            data-i18n="modal_cancel"
+          >
+            Annuler
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================================
+         CHARGEMENT DES SCRIPTS
+         Ordre d'exécution important pour les dépendances
+         ================================================================ -->
+
+    <!-- 1. Internationnalisation (traductions) -->
+    <script src="shared/js/i18n.js"></script>
+
+    <!-- 2. Gestion des thèmes -->
+    <script src="shared/js/themes.js"></script>
+
+    <!-- 3. Utilitaires de calcul (recalcul des données) -->
+    <script src="utils/recalc.js"></script>
+
+    <!-- 4. Calculateur principal -->
+    <script src="shared/js/smart_calculator.js"></script>
+
+    <!-- 5. Optimiseur de Dunk -->
+    <script src="shared/js/dunk_optimizer.js"></script>
+    <script src="shared/js/dunk_button.js"></script>
+    <script src="shared/js/dunk_request_listener.js"></script>
+
+    <!-- 6. Services (Tauri, Stockage) -->
+    <script src="core/services/TauriService.js"></script>
+    <script src="core/services/StorageService.js"></script>
+    <script src="core/services/ResolutionCalibrationService.js"></script>
+
+    <!-- 7. Stores (données) -->
+    <script src="core/stores/CourseStore.js"></script>
+    <script src="core/stores/PlayerStore.js"></script>
+    <script src="models/Character.js"></script>
+    <script src="core/stores/CharacterStore.js"></script>
+
+    <!-- 8. Composants UI -->
+    <script src="core/components/CourseSelector.js"></script>
+    <script src="core/components/ScreenshotManager.js"></script>
+    <script src="core/components/AngleSelector.js"></script>
+    <script src="core/components/CharacterManager.js"></script>
+
+    <!-- 9. Application principale -->
+    <script src="app.js"></script>
+
+    <!-- 10. Point d'entrée principal (initialise l'app au chargement du DOM) -->
+    <script src="main.js"></script>
+
+    <!-- 11. Initialisation manuelle -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        if (window.App) {
+          window.App.init();
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,132 @@
+{
+  "_name": "Français",
+  "title": "Smart Pangya Calculator",
+  "lang_label": "Langue :",
+
+  "label_course": "Parcours:",
+  "label_map": "Map",
+  "label_hole": "Hole",
+  "label_pin": "Pin",
+
+  "tab_cal": "Calculs",
+  "tab_overlay": "Overlays",
+  "tab_stats": "Statistiques",
+  "tab_config": "Paramètres",
+  "tab_slope": "Options avancées",
+
+  "card_shot_config": "Configuration du tir",
+  "label_club": "Club ",
+  "label_shot": "Type de tir ",
+  "label_power_shot": "Power Shot ",
+
+  "shot_dunk": "Dunk",
+  "shot_tomahawk": "Tomahawk",
+  "shot_spike": "Spike",
+  "shot_cobra": "Cobra",
+
+  "min_ps_none": "Sans PS",
+  "min_ps_1": "1 PS",
+  "min_ps_2": "2 PS",
+  "min_ps_15y": "15y PS",
+
+  "ps_none": "Sans Power Shot",
+  "ps_1": "1 Power Shot",
+  "ps_2": "2 Power Shots",
+  "ps_15y": "Power Shot 15y",
+
+  "label_distance": "Distance",
+  "label_height": "Élévation",
+  "label_wind": "Vent",
+  "label_degree": "Angle ",
+  "label_spin": "Spin ",
+  "ideal_spin": "Spin Optimisé",
+  "apply-spin": "Appliquer le Spin",
+  "label_curve": "Curve ",
+  "label_ground": "Ground ",
+  "label_slope_break": "Slope (Break) ",
+
+  "btn_reset_params": "Reset Partiel",
+  "btn_reset_hall": "Reset Total",
+  "btn_calc_shot": "CALCULER LE TIR",
+
+  "card_wind": "Calcul du vent",
+  "label_arrow_size": "Taille de la flèche",
+  "label_angle": "Angle : 0°",
+
+  "label_image_params": "Paramètres d’image",
+  "placeholder_folder": "Sélectionnez le dossier de capture...",
+  "btn_browse": "Parcourir…",
+  "btn_refresh": "Rafraîchir",
+  "btn_clear_folder": "Vider le dossier",
+  "label_adjust_image": "Ajuster l’image",
+
+  "card_overlays": "Gestion des Overlays",
+  "card_calcul_overlay": "Fenêtre de calcul",
+  "label_calcul_overlay": "Afficher la fenêtre",
+
+  "card_ruler": "Règle de décalage",
+  "label_show_ruler": "Afficher la règle",
+  "label_lock_ruler": "Verrouiller l’overlay (non cliquable)",
+  "label_ruler_adjust": "Ajustement de l’overlay ",
+
+  "card_spin": "Repère de Spin",
+
+  "card_wind_overlay": "Calculateur d’angles",
+  "label_show_wind_overlay": "Afficher le calculateur",
+  "label_lock_wind_overlay": "Verrouiller l’overlay (non cliquable)",
+  "label_wind_overlay_adjust": "Ajustement de l’overlay",
+  "lock_wind": "Verrouiller le lecteur d’angle",
+
+  "card_stats": "Statistiques du personnage",
+  "label_power": "Power",
+  "label_ring_power": "Ring Power",
+  "label_card_power": "Card Power",
+  "label_mascot_power": "Mascot Power",
+  "label_card_ps_power": "Card PS Power",
+  "label_card_spin": "Max Spin",
+
+  "card_slope": "Options avancées",
+  "label_myce_degree": "Degree",
+  "label_align_degree": "Align degree",
+  "btn_calc_slope": "Slope break:",
+
+  "card_param": "Paramètres de l’application",
+  "label_theme": "Thème :",
+  "card_screen_config": "Paramètres du client de jeu",
+  "label_width": "Width: ",
+  "label_height_screen": "Height",
+  "label_smart_dev": "Smart deviation limit",
+  "label_auto_fit": "Ajustement automatique ",
+
+  "modal_title": "⚠️ Attention",
+  "modal_body": "Voulez-vous vraiment supprimer TOUTES les images de ce dossier ? Cette action est irréversible.",
+  "modal_confirm": "Oui, vider",
+  "modal_cancel": "Annuler",
+
+  "card_spin_defaut": "Réglage du Spin par défaut",
+  "spin_dunk": "Spin Dunk",
+  "spin_toma": "Spin Tomahaw",
+  "spin_spike": "Spin Spike",
+  "spin_cobra": "Spin Cobra",
+
+  "show_label_calc": "Affichage des Overlays",
+  "show_ruler": "La règle",
+  "show_spin": "Repère de Spin ",
+  "show_wind": "Calculateur d'angle",
+
+  "error_shot_too_short": "Le tir n’a pas pu être calculé, il est trop court ou trop faible.",
+  "error_shot_shot_short": "Calcul impossible",
+
+  "card_offset_config": "Configuration Offset du Spin",
+  "label_offset_x": "Centre cadran spin - X",
+  "label_offset_y": "Centre cadran spin - Y",
+  "label_capture_spin": "Appuiez sur Espace pour capturer la position du curseur",
+  "xy_default_values": "Valeurs par défaut",
+
+  "dunk_out_of_range": "Tir hors de portée du club, quel que soit le spin testé .",
+  "shot_out_of_range": "Tir hors de portée du club, quel que soit le spin testé.",
+  "shot_extended_spin_used": "Spin élevé (hors plage habituelle) nécessaire pour ramener le tir sous 100% de power.",
+  "shot_fallback_spin_used": "Aucun spin dans la plage, spin par défaut utilisé.",
+
+  "footer": "Développé par Onezim, basé sur le calculateur original d’Acrisio SuperSS Dev (licence MIT)."
+}
