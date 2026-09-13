@@ -1181,7 +1181,11 @@ function calc(el) {
   let distance = checkValidInput(document.getElementById("distance").value);
   let height = checkValidInput(document.getElementById("height").value);
   let wind = checkValidInput(document.getElementById("wind").value);
+  // La champ #degree contient l'angle en convention "jeu" (sens
+  // contraire horaire, miroir de l'interne du sélecteur). L'algorithme
+  // attend la convention historique (sens horaire) → reconnaissance ici.
   let degree = checkValidInput(document.getElementById("degree").value);
+  degree = ((360 - degree) % 360 + 360) % 360;
   let ground = checkValidInput(document.getElementById("ground").value);
   let spin = checkValidInput(document.getElementById("spin").value);
   let curve = checkValidInput(document.getElementById("curve").value);

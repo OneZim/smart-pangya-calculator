@@ -99,10 +99,30 @@
       try {
         const dpiInfo = await window.TauriService.invoke("get_game_dpi_debug");
         console.log("🔬 === DEBUG DPI ===");
-        console.log("   Client brut    :", dpiInfo.client_width, "x", dpiInfo.client_height);
-        console.log("   DPI jeu        :", dpiInfo.game_dpi, dpiInfo.game_is_dpi_aware ? "(aware)" : "(non-aware → Windows agrandit la fenêtre)");
-        console.log("   DPI moniteur   :", dpiInfo.app_dpi, "→ facteur x" + dpiInfo.scale_factor.toFixed(2));
-        console.log("   Résolution corrigée :", Math.round(dpiInfo.corrected_width), "x", Math.round(dpiInfo.corrected_height));
+        console.log(
+          "   Client brut    :",
+          dpiInfo.client_width,
+          "x",
+          dpiInfo.client_height,
+        );
+        console.log(
+          "   DPI jeu        :",
+          dpiInfo.game_dpi,
+          dpiInfo.game_is_dpi_aware
+            ? "(aware)"
+            : "(non-aware → Windows agrandit la fenêtre)",
+        );
+        console.log(
+          "   DPI moniteur   :",
+          dpiInfo.app_dpi,
+          "→ facteur x" + dpiInfo.scale_factor.toFixed(2),
+        );
+        console.log(
+          "   Résolution corrigée :",
+          Math.round(dpiInfo.corrected_width),
+          "x",
+          Math.round(dpiInfo.corrected_height),
+        );
       } catch (dpiErr) {
         console.warn("⚠️ Debug DPI impossible :", dpiErr);
       }
@@ -263,12 +283,18 @@
         // ============================================================
         // 12. GESTIONNAIRE DE CAPTURE D'ÉCRAN
         // ============================================================
-        window.ScreenshotManager(tauri, storage);
+        const screenshotManager = window.ScreenshotManager(tauri, storage);
+
+        // ============================================================
+        // 12b. CALIBRATION VENT — TAILLE RÉELLE DE L'IMAGE
+        // ============================================================
+        // Déléguée à ScreenshotManager : à chaque chargement d'image, on lit
+        // naturalWidth/naturalHeight et on applique la calibration adéquate.
 
         // ============================================================
         // 13. SÉLECTEUR D'ANGLE (vent)
         // ============================================================
-        const angleSelector = window.AngleSelector({ storage });
+        const angleSelector = window.WindAngleSelector({ storage });
         if (angleSelector) {
           window.updateWindCanvas = angleSelector.setAngle;
         }
@@ -373,6 +399,7 @@
         "sync-ruler-visibility": "toggle-show-ruler",
         "sync-wind-visibility": "toggle-show-wind-overlay",
         "sync-spin-visibility": "toggle-show-spin",
+        "sync-infos-shot-visibility": "toggle-show-infos-shot",
       };
 
       Object.entries(visibilitySyncMap).forEach(([eventName, checkboxId]) => {
@@ -407,17 +434,17 @@
       }
 
       // ============================================================
-      // MOUVEMENT DU REPÈRE DE SPIN
+      // MOUVEMENT DE L'OVERLAY SPIN
       // ============================================================
       const spinButtons = {
-        "btn-spin-move-up": { x: 0, y: -1 },
-        "btn-spin-move-down": { x: 0, y: 1 },
-        "btn-spin-move-left": { x: -1, y: 0 },
-        "btn-spin-move-right": { x: 1, y: 0 },
+        "btn-spin-move-up": { dx: 0, dy: -1 },
+        "btn-spin-move-down": { dx: 0, dy: 1 },
+        "btn-spin-move-left": { dx: -1, dy: 0 },
+        "btn-spin-move-right": { dx: 1, dy: 0 },
       };
       for (const [id, delta] of Object.entries(spinButtons)) {
         document.getElementById(id)?.addEventListener("click", () => {
-          tauri.emit("spin-move", delta);
+          tauri.invoke("move_spin_overlay", delta);
         });
       }
 
@@ -441,6 +468,41 @@
         toggleClickThrough.onclick = function () {
           tauri.setOverlayClickThrough("ruler_overlay", this.checked);
         };
+      }
+
+      // ============================================================
+      // COULEUR DU REPÈRE (smart-indicator de la règle)
+      // ============================================================
+      const rulerSmartColor = document.getElementById("ruler-smart-color");
+      if (rulerSmartColor) {
+        rulerSmartColor.value = storage.get("ruler_smart_color", "#E0098E");
+        rulerSmartColor.addEventListener("input", function () {
+          const color = this.value;
+          storage.set("ruler_smart_color", color);
+          if (tauri.isAvailable) {
+            tauri.emit("update-ruler-smart-color", { color });
+          }
+        });
+      }
+
+      // ============================================================
+      // AFFICHAGE DU REPÈRE T (visible par défaut)
+      // ============================================================
+      const toggleShowTRepere = document.getElementById(
+        "toggle-show-t-repere",
+      );
+      if (toggleShowTRepere) {
+        toggleShowTRepere.checked = storage.get(
+          "ruler_show_t_repere",
+          true,
+        );
+        toggleShowTRepere.addEventListener("change", function () {
+          const visible = this.checked;
+          storage.set("ruler_show_t_repere", visible);
+          if (tauri.isAvailable) {
+            tauri.emit("update-ruler-t-repere", { visible });
+          }
+        });
       }
 
       // ============================================================
@@ -473,6 +535,45 @@
       for (const [id, delta] of Object.entries(windButtons)) {
         document.getElementById(id)?.addEventListener("click", () => {
           tauri.invoke("move_wind_overlay", delta);
+        });
+      }
+
+      // ============================================================
+      // TOGGLE : INFOS SHOT (PB, distance, %)
+      // ============================================================
+      const toggleShowInfosShot = document.getElementById(
+        "toggle-show-infos-shot",
+      );
+      if (toggleShowInfosShot) {
+        toggleShowInfosShot.onclick = function () {
+          tauri.invoke("set_infos_shot_visibility", { show: this.checked });
+        };
+      }
+
+      // ============================================================
+      // TOGGLE : INFOS SHOT CLICK-THROUGH
+      // ============================================================
+      const toggleClickThroughInfosShot = document.getElementById(
+        "toggle-click-through-infos-shot",
+      );
+      if (toggleClickThroughInfosShot) {
+        toggleClickThroughInfosShot.onclick = function () {
+          tauri.setOverlayClickThrough("infos_shot", this.checked);
+        };
+      }
+
+      // ============================================================
+      // MOUVEMENT DE L'OVERLAY INFOS SHOT
+      // ============================================================
+      const infosShotButtons = {
+        "btn-infos-shot-move-up": { dx: 0, dy: -1 },
+        "btn-infos-shot-move-down": { dx: 0, dy: 1 },
+        "btn-infos-shot-move-left": { dx: -1, dy: 0 },
+        "btn-infos-shot-move-right": { dx: 1, dy: 0 },
+      };
+      for (const [id, delta] of Object.entries(infosShotButtons)) {
+        document.getElementById(id)?.addEventListener("click", () => {
+          tauri.invoke("move_infos_shot", delta);
         });
       }
 
@@ -582,7 +683,7 @@
               id === "degree" &&
               typeof window.updateWindCanvas === "function"
             ) {
-              const angle = parseInt(e.target.value) || 0;
+              const angle = parseFloat(e.target.value) || 0;
               window.updateWindCanvas(angle);
             }
 
@@ -862,7 +963,7 @@
 
           // Mise à jour du canvas d'angle si c'est le champ degree
           if (id === "degree") {
-            const angle = parseInt(value) || 0;
+            const angle = parseFloat(value) || 0;
             if (typeof window.updateWindCanvas === "function") {
               window.updateWindCanvas(angle);
             }
@@ -950,12 +1051,12 @@
         window.TauriService.listen("click-optimize-dunk", function () {
           console.log("📩 Clic reçu de l'overlay");
 
-          const btn = document.getElementById("btn-optimize-dunk");
+          const btn = document.getElementById("btn-optimize-spin");
           if (btn) {
             btn.click(); // Simule un clic sur le bouton
           } else {
             console.warn(
-              "⚠️ Bouton btn-optimize-dunk non trouvé dans la page principale",
+              "⚠️ Bouton btn-optimize-spin non trouvé dans la page principale",
             );
           }
         });

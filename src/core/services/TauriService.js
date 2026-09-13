@@ -41,13 +41,5 @@
         locked,
       });
     },
-    // core/services/TauriService.js
-
-    async setOverlayClickThrough(windowLabel, locked) {
-      return await this.invoke("set_overlay_click_through", {
-        windowLabel,
-        locked,
-      });
-    },
   };
 })();

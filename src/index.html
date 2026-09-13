@@ -108,12 +108,9 @@
             Permet de choisir un parcours, un trou et un emplacement de pin.
             Les données sont chargées dynamiquement via CourseStore.js.
           -->
-          <div class="card" style="margin-bottom: 20px">
-            <div
-              class="row"
-              style="display: flex; gap: 15px; align-items: center"
-            >
-              <div class="col" style="flex: 1">
+          <div class="card mb-20">
+            <div class="flex items-center gap-12">
+              <div class="field grow">
                 <label for="select-parcours" data-i18n="label_course"
                   >Parcours :</label
                 >
@@ -154,19 +151,19 @@
             SECTION : CALCULATEUR DE TIR
             Zone principale de saisie des paramètres et de calcul.
           -->
-          <div class="calculator-layout" style="display: flex; gap: 20px">
+          <div class="calculator-layout">
             <!--
               CARTE GAUCHE : Paramètres du tir
               Regroupe tous les champs de saisie nécessaires au calcul.
             -->
-            <div class="card" style="flex: 1">
+            <div class="card grow">
               <div class="card-title" data-i18n="card_shot_config">
                 Configuration Tir
               </div>
 
               <!-- Ligne 1 : Club + Shot + Power Shot -->
-              <div class="row">
-                <div class="col select-club">
+              <div class="form-grid">
+                <div class="field select-club">
                   <label data-i18n="label_club">Club:</label>
                   <select id="club">
                     <option value="0">1W</option>
@@ -184,7 +181,7 @@
                     <option value="12">SW</option>
                   </select>
                 </div>
-                <div class="col">
+                <div class="field">
                   <label data-i18n="label_shot">Shot:</label>
                   <select id="shot">
                     <option value="0" data-i18n="shot_dunk">Dunk</option>
@@ -195,7 +192,7 @@
                     <option value="3" data-i18n="shot_cobra">Cobra</option>
                   </select>
                 </div>
-                <div class="col">
+                <div class="field">
                   <label data-i18n="label_power_shot">Power Shot:</label>
                   <select id="power_shot">
                     <option value="0" data-i18n="ps_none">No Power Shot</option>
@@ -207,8 +204,8 @@
               </div>
 
               <!-- Ligne 2 : Distance + Height -->
-              <div class="row">
-                <div class="col">
+              <div class="form-grid">
+                <div class="field">
                   <label data-i18n="label_distance">Distance:</label>
                   <input
                     id="distance"
@@ -218,7 +215,7 @@
                     value="200"
                   />
                 </div>
-                <div class="col">
+                <div class="field">
                   <label data-i18n="label_height">Height:</label>
                   <input
                     id="height"
@@ -231,8 +228,8 @@
               </div>
 
               <!-- Ligne 3 : Wind + Degree -->
-              <div class="row">
-                <div class="col">
+              <div class="form-grid">
+                <div class="field">
                   <label data-i18n="label_wind">Wind:</label>
                   <input
                     id="wind"
@@ -242,7 +239,7 @@
                     value="1"
                   />
                 </div>
-                <div class="col">
+                <div class="field">
                   <label data-i18n="label_degree">Degree:</label>
                   <input
                     id="degree"
@@ -255,8 +252,8 @@
               </div>
 
               <!-- Ligne 4 : Spin + bouton Spin idéal -->
-              <div class="row">
-                <div class="col">
+              <div class="form-grid">
+                <div class="field">
                   <label data-i18n="label_spin">Spin:</label>
                   <input
                     id="spin"
@@ -266,7 +263,7 @@
                     value="0"
                   />
                 </div>
-                <div class="col">
+                <div class="field">
                   <label data-i18n="label_curve">Curve:</label>
                   <input
                     id="curve"
@@ -278,34 +275,61 @@
                 </div>
               </div>
 
-              <!-- Ligne 5 : Curve -->
-              <div class="row">
-                <div class="col ideal-spin">
+              <!-- Options et filtres de spin & courbe -->
+              <div class="form-grid">
+                <!-- Toggle Spin Positif Uniquement -->
+                <label class="toggle" for="chk-spin-positive">
+                  <span
+                    ><span data-i18n="spin_positive_only">Forcer</span> ▼</span
+                  >
+                  <input
+                    type="checkbox"
+                    id="chk-spin-positive"
+                    class="toggle__input"
+                  />
+                  <span class="toggle__track"></span>
+                </label>
+
+                <!-- Toggle Forcer Spin Négatif (Flèche vers le bas) -->
+                <label class="toggle" for="chk-spin-negative">
+                  <span
+                    ><span data-i18n="spin_negative_only">Forcer</span> ▲</span
+                  >
+                  <input
+                    type="checkbox"
+                    id="chk-spin-negative"
+                    class="toggle__input"
+                  />
+                  <span class="toggle__track"></span>
+                </label>
+              </div>
+              <!-- Ligne 5 : Boutons optimiseurs -->
+              <div class="form-grid">
+                <div class="field ideal-spin">
                   <button
                     class="action-btn action-btn--success"
-                    id="btn-optimize-dunk"
+                    id="btn-optimize-spin"
                     type="button"
                     data-i18n="ideal_spin"
-                    disabled
                   >
                     Spin idéal
                   </button>
                 </div>
-                <div class="col ideal-spin">
+                <div class="field ideal-spin">
                   <button
                     id="btn-click-spin"
                     class="action-btn action-btn--success"
                     type="button"
                     data-i18n="apply-spin"
                   >
-                    Aplliquer le spin
+                    Appliquer le spin
                   </button>
                 </div>
               </div>
 
               <!-- Ligne 6 : Ground + Slope break -->
-              <div class="row">
-                <div class="col">
+              <div class="form-grid">
+                <div class="field">
                   <label data-i18n="label_ground">Ground:</label>
                   <input
                     id="ground"
@@ -315,7 +339,7 @@
                     value="100"
                   />
                 </div>
-                <div class="col">
+                <div class="field">
                   <label data-i18n="label_slope_break">Slope break:</label>
                   <input
                     id="slope_break"
@@ -346,11 +370,7 @@
               </div>
 
               <!-- Zoom de la règle PB : PB Max (100%) / Smart PB (~80%) -->
-              <label
-                class="toggle"
-                for="toggle-ruler-zoom"
-                style="margin-bottom: 8px"
-              >
+              <label class="toggle mb-8" for="toggle-ruler-zoom">
                 <span data-i18n="label_ruler_zoom">PB Max (100%)</span>
                 <input
                   type="checkbox"
@@ -370,7 +390,7 @@
               </button>
 
               <!-- Zone d'affichage du résultat -->
-              <div style="text-align: center; margin-top: 20px">
+              <div class="text-center mt-8">
                 <div id="result"></div>
               </div>
             </div>
@@ -379,108 +399,55 @@
               CARTE DROITE : Calcul du vent
               Permet de visualiser et ajuster la direction du vent.
             -->
-            <div
-              style="flex: 1; display: flex; flex-direction: column; gap: 20px"
-            >
+            <div class="flex flex-col gap-20 grow">
               <!-- Carte : Calculateur de vent -->
               <div class="card">
                 <div class="card-title" data-i18n="card_wind">
                   Calcul du vent
                 </div>
 
-                <!-- Contrôles de la taille de la flèche et de l'angle -->
-                <div class="wind-columns">
-                  <div class="wind-controls">
-                    <div class="arrow-size">
-                      <span class="angle-value" data-i18n="label_arrow_size"
-                        >Arrow size</span
-                      >
-                      <div class="btn-row">
-                        <button id="btn-length-minus" class="mini-btn">
-                          -1
-                        </button>
-                        <button id="btn-length-plus" class="mini-btn">
-                          +1
-                        </button>
-                      </div>
+                <!-- Image du vent : capture zoomée sur la flèche du jeu -->
+                <div class="flex justify-center">
+                  <div class="wind-crop-box relative">
+                    <img id="wind-image" />
+                    <div class="angle-wrapper">
+                      <canvas
+                        id="angle-canvas"
+                        width="360"
+                        height="360"
+                      ></canvas>
                     </div>
-
-                    <div class="angle-row">
-                      <span
-                        id="angle-display"
-                        class="angle-value"
-                        data-i18n="label_angle"
-                        >Angle : 0°</span
-                      >
-                      <div class="btn-row">
-                        <button id="btn-angle-minus" class="mini-btn">
-                          -1°
-                        </button>
-                        <button id="btn-angle-plus" class="mini-btn">
-                          +1°
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!--
-                    Zone d'affichage de l'image du vent avec overlay canvas
-                    L'image est chargée depuis le dossier sélectionné par l'utilisateur.
-                  -->
-                  <div class="wind-image-container">
-                    <div class="wind-crop-box" style="position: relative">
-                      <img id="wind-image" />
-                      <div class="angle-wrapper">
-                        <canvas
-                          id="angle-canvas"
-                          width="206"
-                          height="206"
-                        ></canvas>
-                      </div>
-                    </div>
+                    <div class="wind-crosshair"></div>
                   </div>
                 </div>
 
-                <!--
-                  Panneau de contrôle des paramètres d'image
-                  Permet de sélectionner le dossier contenant les images du vent,
-                  de rafraîchir l'affichage et d'ajuster le recadrage.
-                -->
-                <div class="adjust-panel">
-                  <div class="adjust-title" data-i18n="label_image_params">
-                    Paramètres image
-                  </div>
-
-                  <input
-                    id="folder-path"
-                    type="text"
-                    readonly
-                    data-i18n-placeholder="placeholder_folder"
-                    placeholder="Sélectionne le dossier Pangya..."
-                    class="folder-input"
-                  />
-
-                  <div class="folder-buttons">
-                    <button
-                      id="btn-select-folder"
-                      class="action-btn action-btn--neutral"
-                      data-i18n="btn_browse"
+                <!-- Contrôles : angle -->
+                <div class="flex flex-wrap gap-20 items-center justify-center mt-8">
+                  <div class="flex flex-col items-center gap-6">
+                    <span
+                      id="angle-display"
+                      class="angle-value"
+                      data-i18n="label_angle"
+                      >Angle : 0°</span
                     >
-                      Parcourir…
-                    </button>
+                    <div class="flex gap-6">
+                      <button id="btn-angle-minus" class="mini-btn">
+                        -1°
+                      </button>
+                      <button id="btn-angle-plus" class="mini-btn">
+                        +1°
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="adjust-panel">
+                  <div class="flex gap-8 flex-wrap mt-8">
                     <button
                       id="btn-refresh-img"
                       class="action-btn action-btn--success"
                       data-i18n="btn_refresh"
                     >
                       Refresh
-                    </button>
-                    <button
-                      id="btn-clear-folder"
-                      class="action-btn action-btn--danger"
-                      data-i18n="btn_clear_folder"
-                    >
-                      Vider le dossier
                     </button>
                   </div>
 
@@ -518,7 +485,7 @@
             - Repère de spin
             - Calculateur d'angles (vent)
           -->
-          <div class="card" style="flex: 1">
+          <div class="card grow">
             <div class="card-title" data-i18n="card_overlays">
               Gestion des Overlays
             </div>
@@ -526,7 +493,7 @@
             <!-- Overlay : Fenêtre de calcul -->
             <fieldset class="panel">
               <legend data-i18n="card_calcul_overlay">Fenêtre de calcul</legend>
-              <div class="card-overlay">
+              <div class="flex flex-col gap-12">
                 <label class="toggle" for="toggle-show-input-bar">
                   <span data-i18n="label_calcul_overlay"
                     >Afficher la fenêtre :</span
@@ -544,8 +511,8 @@
             <!-- Overlay : Règle de décalage -->
             <fieldset class="panel">
               <legend data-i18n="card_ruler">Règle de décalage</legend>
-              <div class="card-overlay ruler-inline">
-                <div class="ruler-options">
+              <div class="flex flex-row flex-wrap gap-12 items-center">
+                <div class="flex flex-col gap-10">
                   <!-- Affichage et verrouillage de la règle -->
                   <label class="toggle" for="toggle-show-ruler">
                     <span data-i18n="label_show_ruler"
@@ -570,17 +537,45 @@
                     />
                     <span class="toggle__track"></span>
                   </label>
+
+                  <label class="toggle" for="ruler-smart-color">
+                    <span data-i18n="label_ruler_color"
+                      >Couleur du repère :</span
+                    >
+                    <input
+                      type="color"
+                      id="ruler-smart-color"
+                      value="#E0098E"
+                      class="ruler-color-input"
+                    />
+                  </label>
+
+                  <label class="toggle" for="toggle-show-t-repere">
+                    <span data-i18n="label_show_t_repere"
+                      >Afficher le repère T :</span
+                    >
+                    <input
+                      type="checkbox"
+                      id="toggle-show-t-repere"
+                      class="toggle__input"
+                      checked
+                    />
+                    <span class="toggle__track"></span>
+                  </label>
                 </div>
 
                 <div class="overlay-separator"></div>
 
                 <!-- Contrôles de déplacement de la règle -->
-                <div class="ruler-adjust-title" data-i18n="label_ruler_adjust">
+                <div
+                  class="adjust-title text-center"
+                  data-i18n="label_ruler_adjust"
+                >
                   Ajustement de la règle :
                 </div>
-                <div class="ruler-adjust">
+                <div class="flex flex-col items-center gap-6">
                   <button id="btn-move-up" class="calc-btn small-btn">▲</button>
-                  <div class="ruler-middle-row">
+                  <div class="flex gap-18">
                     <button id="btn-move-left" class="calc-btn small-btn">
                       ◀
                     </button>
@@ -598,8 +593,8 @@
             <!-- Overlay : Repère de Spin -->
             <fieldset class="panel">
               <legend data-i18n="card_spin">Repère de Spin</legend>
-              <div class="card-overlay ruler-inline">
-                <div class="ruler-options">
+              <div class="flex flex-row flex-wrap gap-12 items-center">
+                <div class="flex flex-col gap-10">
                   <label class="toggle" for="toggle-show-spin">
                     <span data-i18n="label_show_spin"
                       >Afficher le repère :</span
@@ -628,14 +623,17 @@
                 <div class="overlay-separator"></div>
 
                 <!-- Contrôles de déplacement du repère de spin -->
-                <div class="ruler-adjust-title" data-i18n="label_ruler_adjust">
+                <div
+                  class="adjust-title text-center"
+                  data-i18n="label_ruler_adjust"
+                >
                   Ajustement du repère :
                 </div>
-                <div class="ruler-adjust">
+                <div class="flex flex-col items-center gap-6">
                   <button id="btn-spin-move-up" class="calc-btn small-btn">
                     ▲
                   </button>
-                  <div class="ruler-middle-row">
+                  <div class="flex gap-18">
                     <button id="btn-spin-move-left" class="calc-btn small-btn">
                       ◀
                     </button>
@@ -655,8 +653,8 @@
               <legend data-i18n="card_wind_overlay">
                 Calculateur d'angles
               </legend>
-              <div class="card-overlay ruler-inline">
-                <div class="ruler-options">
+              <div class="flex flex-row flex-wrap gap-12 items-center">
+                <div class="flex flex-col gap-10">
                   <label class="toggle" for="toggle-show-wind-overlay">
                     <span data-i18n="label_show_wind_overlay"
                       >Afficher l'overlay vent :</span
@@ -686,16 +684,16 @@
 
                 <!-- Contrôles de déplacement de l'overlay vent -->
                 <div
-                  class="ruler-adjust-title"
+                  class="adjust-title text-center"
                   data-i18n="label_wind_overlay_adjust"
                 >
                   Ajustement de l'overlay :
                 </div>
-                <div class="ruler-adjust">
+                <div class="flex flex-col items-center gap-6">
                   <button id="btn-wind-move-up" class="calc-btn small-btn">
                     ▲
                   </button>
-                  <div class="ruler-middle-row">
+                  <div class="flex gap-18">
                     <button id="btn-wind-move-left" class="calc-btn small-btn">
                       ◀
                     </button>
@@ -704,6 +702,71 @@
                     </button>
                   </div>
                   <button id="btn-wind-move-down" class="calc-btn small-btn">
+                    ▼
+                  </button>
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- Overlay : Infos Tir (PB, distance, %) -->
+            <fieldset class="panel">
+              <legend>Infos Tir</legend>
+              <div class="flex flex-row flex-wrap gap-12 items-center">
+                <div class="flex flex-col gap-10">
+                  <label class="toggle" for="toggle-show-infos-shot">
+                    <span>Afficher les infos :</span>
+                    <input
+                      type="checkbox"
+                      id="toggle-show-infos-shot"
+                      class="toggle__input"
+                    />
+                    <span class="toggle__track"></span>
+                  </label>
+
+                  <label class="toggle" for="toggle-click-through-infos-shot">
+                    <span data-i18n="label_lock_ruler"
+                      >Bloquer la fenêtre (Jouer) :</span
+                    >
+                    <input
+                      type="checkbox"
+                      id="toggle-click-through-infos-shot"
+                      class="toggle__input"
+                    />
+                    <span class="toggle__track"></span>
+                  </label>
+                </div>
+
+                <div class="overlay-separator"></div>
+
+                <!-- Contrôles de déplacement -->
+                <div class="adjust-title text-center">
+                  Ajustement de la fenêtre :
+                </div>
+                <div class="flex flex-col items-center gap-6">
+                  <button
+                    id="btn-infos-shot-move-up"
+                    class="calc-btn small-btn"
+                  >
+                    ▲
+                  </button>
+                  <div class="flex gap-18">
+                    <button
+                      id="btn-infos-shot-move-left"
+                      class="calc-btn small-btn"
+                    >
+                      ◀
+                    </button>
+                    <button
+                      id="btn-infos-shot-move-right"
+                      class="calc-btn small-btn"
+                    >
+                      ▶
+                    </button>
+                  </div>
+                  <button
+                    id="btn-infos-shot-move-down"
+                    class="calc-btn small-btn"
+                  >
                     ▼
                   </button>
                 </div>
@@ -752,21 +815,35 @@
             </div>
 
             <!-- Grille des statistiques du personnage -->
-            <div class="container-grid">
-              <label data-i18n="label_power">Power:</label>
-              <input id="power" type="text" />
-              <label data-i18n="label_ring_power">Ring Power:</label>
-              <input id="auxpart_pwr" type="text" />
-              <label data-i18n="label_card_power">Card Power:</label>
-              <input id="card_pwr" type="text" />
-              <label data-i18n="label_mascot_power">Mascot Power:</label>
-              <input id="mascot_pwr" type="text" />
-              <label data-i18n="label_card_ps_power">Card PS Power:</label>
-              <input id="card_ps_pwr" type="text" />
-              <label data-i18n="label_card_spin">Max Spin:</label>
-              <input id="card_max_spin" type="text" />
-              <label data-i18n="label_card_curve">Max Curve:</label>
-              <input id="card_max_curve" type="text" />
+            <div class="form-grid">
+              <div class="field">
+                <label data-i18n="label_power">Power:</label>
+                <input id="power" type="text" />
+              </div>
+              <div class="field">
+                <label data-i18n="label_ring_power">Ring Power:</label>
+                <input id="auxpart_pwr" type="text" />
+              </div>
+              <div class="field">
+                <label data-i18n="label_card_power">Card Power:</label>
+                <input id="card_pwr" type="text" />
+              </div>
+              <div class="field">
+                <label data-i18n="label_mascot_power">Mascot Power:</label>
+                <input id="mascot_pwr" type="text" />
+              </div>
+              <div class="field">
+                <label data-i18n="label_card_ps_power">Card PS Power:</label>
+                <input id="card_ps_pwr" type="text" />
+              </div>
+              <div class="field">
+                <label data-i18n="label_card_spin">Max Spin:</label>
+                <input id="card_max_spin" type="text" />
+              </div>
+              <div class="field">
+                <label data-i18n="label_card_curve">Max Curve:</label>
+                <input id="card_max_curve" type="text" />
+              </div>
             </div>
           </div>
 
@@ -781,21 +858,41 @@
               Réglage du Spin par défaut
             </div>
             <div class="adjust-panel">
-              <div class="spin-row">
+              <div class="field-row">
                 <label data-i18n="spin_dunk">Spin Dunk</label>
-                <input id="spinDunk" autocomplete="off" maxlength="2" />
+                <input
+                  id="spinDunk"
+                  autocomplete="off"
+                  maxlength="2"
+                  class="w-70"
+                />
               </div>
-              <div class="spin-row">
+              <div class="field-row">
                 <label data-i18n="spin_toma">Spin Tomahawk</label>
-                <input id="spinToma" autocomplete="off" maxlength="2" />
+                <input
+                  id="spinToma"
+                  autocomplete="off"
+                  maxlength="2"
+                  class="w-70"
+                />
               </div>
-              <div class="spin-row">
+              <div class="field-row">
                 <label data-i18n="spin_spike">Spin Spike</label>
-                <input id="spinSpike" autocomplete="off" maxlength="2" />
+                <input
+                  id="spinSpike"
+                  autocomplete="off"
+                  maxlength="2"
+                  class="w-70"
+                />
               </div>
-              <div class="spin-row">
+              <div class="field-row">
                 <label data-i18n="spin_cobra">Spin Cobra</label>
-                <input id="spinCobra" autocomplete="off" maxlength="2" />
+                <input
+                  id="spinCobra"
+                  autocomplete="off"
+                  maxlength="2"
+                  class="w-70"
+                />
               </div>
             </div>
           </div>
@@ -813,17 +910,16 @@
             <div class="card-title" data-i18n="card_param">
               Configuration de l'application
             </div>
-            <div class="container-grid container-grid--stacked">
-              <div class="theme_select">
-                <label data-i18n="theme_label">🎨 Thème</label>
-                <select id="theme-selector">
-                  <option value="dark-golf">🌙 Dark Golf</option>
-                  <option value="pangya-pastel">🌸 PangYa Pastel</option>
-                  <option value="pangya-classic" selected>
-                    🌊 PangYa Classic
-                  </option>
-                </select>
-              </div>
+            <div class="theme_select mt-4">
+              <label data-i18n="theme_label">🎨 Thème</label>
+              <select id="theme-selector">
+                <option value="dark-golf">🌙 Dark Golf</option>
+                <option value="pangya-pastel">🌸 PangYa Pastel</option>
+                <option value="win11">💠 Windows 11</option>
+                <option value="pangya-classic" selected>
+                  🌊 PangYa Classic
+                </option>
+              </select>
             </div>
           </div>
 
@@ -837,15 +933,69 @@
             <div class="card-title" data-i18n="card_screen_config">
               Configuration Écran
             </div>
-            <div class="container-grid">
-              <label data-i18n="label_width">Width:</label>
-              <input id="rel-width" type="text" />
-              <label data-i18n="label_height_screen">Height:</label>
-              <input id="rel-height" type="text" />
-              <label data-i18n="label_smart_dev">Smart deviation limit:</label>
-              <input id="smart-dev-limit" type="checkbox" checked />
-              <label data-i18n="label_auto_fit">Auto fit:</label>
-              <input id="auto-fit" type="checkbox" checked />
+            <div class="form-grid">
+              <div class="field">
+                <label data-i18n="label_width">Width:</label>
+                <input id="rel-width" type="text" />
+              </div>
+              <div class="field">
+                <label data-i18n="label_height_screen">Height:</label>
+                <input id="rel-height" type="text" />
+              </div>
+              <label class="toggle mb-4" for="smart-dev-limit">
+                <span data-i18n="label_smart_dev">Smart deviation limit:</span>
+                <input
+                  type="checkbox"
+                  id="smart-dev-limit"
+                  class="toggle__input"
+                  checked
+                />
+                <span class="toggle__track"></span>
+              </label>
+              <label class="toggle mb-4" for="auto-fit">
+                <span data-i18n="label_auto_fit">Auto fit:</span>
+                <input
+                  type="checkbox"
+                  id="auto-fit"
+                  class="toggle__input"
+                  checked
+                />
+                <span class="toggle__track"></span>
+              </label>
+            </div>
+          </div>
+          <div class="spacer"></div>
+
+          <div class="card">
+            <div class="card-title" data-i18n="card_image_folder">
+              Dossier d'Images
+            </div>
+            <div class="form-grid">
+              <input
+                id="folder-path"
+                type="text"
+                readonly
+                data-i18n-placeholder="placeholder_folder"
+                placeholder="Sélectionne le dossier Pangya..."
+                class="folder-input"
+              />
+
+              <div class="flex gap-8 flex-wrap mt-8">
+                <button
+                  id="btn-select-folder"
+                  class="action-btn action-btn--neutral"
+                  data-i18n="btn_browse"
+                >
+                  Parcourir…
+                </button>
+                <button
+                  id="btn-clear-folder"
+                  class="action-btn action-btn--danger"
+                  data-i18n="btn_clear_folder"
+                >
+                  Vider le dossier
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -864,13 +1014,19 @@
               Calcul Slope/Breaks
             </div>
 
-            <div class="container-grid">
-              <label data-i18n="label_myce_degree">Degree:</label>
-              <input id="shot-degree" type="text" autocomplete="off" />
-              <label data-i18n="label_align_degree">Align degree:</label>
-              <input id="align-degree" type="text" autocomplete="off" />
-              <label data-i18n="label_slope_break">Slope break:</label>
-              <input id="slope-break" type="text" autocomplete="off" />
+            <div class="form-grid">
+              <div class="field">
+                <label data-i18n="label_myce_degree">Degree:</label>
+                <input id="shot-degree" type="text" autocomplete="off" />
+              </div>
+              <div class="field">
+                <label data-i18n="label_align_degree">Align degree:</label>
+                <input id="align-degree" type="text" autocomplete="off" />
+              </div>
+              <div class="field">
+                <label data-i18n="label_slope_break">Slope break:</label>
+                <input id="slope-break" type="text" autocomplete="off" />
+              </div>
             </div>
 
             <button
@@ -933,6 +1089,8 @@
 
     <!-- 3. Utilitaires de calcul (recalcul des données) -->
     <script src="utils/recalc.js"></script>
+    <!--Utitaires de mise en formes -->
+    <script src="utils/dunk_otions_boutons.js"></script>
 
     <!-- 4. Calculateur principal -->
     <script src="shared/js/smart_calculator.js"></script>
@@ -956,7 +1114,7 @@
     <!-- 8. Composants UI -->
     <script src="core/components/CourseSelector.js"></script>
     <script src="core/components/ScreenshotManager.js"></script>
-    <script src="core/components/AngleSelector.js"></script>
+    <script src="core/components/WindAngleSelector.js"></script>
     <script src="core/components/CharacterManager.js"></script>
 
     <!-- 9. Application principale -->

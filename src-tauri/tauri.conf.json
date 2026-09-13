@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "Smart Pangya Calculator",
+  "productName": "Smart Pangya Calculator_beta",
   "version": "3.0.0",
   "identifier": "com.onezim.smart-pangya-calculator",
   "build": {
@@ -12,7 +12,7 @@
       {
         "url": "index.html",
         "label": "main",
-        "title": "Smart Pangya Calculator",
+        "title": "Smart Pangya Calculator_beta",
         "width": 1000,
         "height": 950,
         "visible": false,
@@ -24,7 +24,7 @@
         "title": "Overlay Règle",
         "url": "overlays/ruler_overlay/ruler_overlay.html",
         "width": 1920,
-        "height": 600,
+        "height": 150,
         "transparent": true,
         "decorations": false,
         "alwaysOnTop": true,
@@ -59,8 +59,7 @@
         "skipTaskbar": true,
         "visible": false,
         "resizable": false,
-        "shadow": false,
-        "focus": false
+        "shadow": false
       },
       {
         "label": "spin_overlay",
@@ -74,8 +73,21 @@
         "skipTaskbar": true,
         "visible": false,
         "resizable": false,
-        "shadow": false,
-        "focus": false
+        "shadow": false
+      },
+      {
+        "label": "infos_shot",
+        "title": "Infos Tir",
+        "url": "overlays/infos_shot/infos_shot.html",
+        "width": 500,
+        "height": 150,
+        "transparent": true,
+        "decorations": false,
+        "alwaysOnTop": true,
+        "skipTaskbar": true,
+        "visible": false,
+        "resizable": false,
+        "shadow": false
       }
     ],
     "security": {

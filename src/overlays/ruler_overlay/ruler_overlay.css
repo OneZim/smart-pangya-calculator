@@ -14,7 +14,7 @@
 html,
 body {
   width: var(--ruler-width, 1920px);
-  height: var(--ruler-height, 600px);
+  height: var(--ruler-height, 150px);
   background: transparent;
   overflow: hidden;
   margin: 0;
@@ -33,35 +33,17 @@ body {
   position: fixed;
   left: 50%;
   transform: translateX(-50%);
-  top: var(--ruler-container-top, 0);
+  bottom: var(--ruler-container-bottom, 0);
   width: var(--ruler-width, 1920px);
-  height: var(--ruler-height, 600px);
+  height: var(--ruler-height, 150px);
   background: transparent;
+  /*border: 1px solid rgb(60, 25, 143);*/
 }
 
 /* ============================================================
-   TICK LINE – Bloc commun trait + graduations
-   Positionnable indépendamment, masquable via display:none.
+   SURPLUS TICKS – Graduations du surplus, affichées d'un seul
+   côté du centre selon le signe du surplus, masquées si inactif.
    ============================================================ */
-#ruler-tick-line {
-  position: absolute;
-  top: -80px;
-  left: 0;
-  width: 100%;
-  height: 60px;
-  pointer-events: none;
-}
-
-#ticks-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 18px;
-}
-
-/* Graduations du surplus : même système que #ticks-container, affichées
-   d'un seul côté du centre selon le signe du surplus, masquées si inactif. */
 #surplus-ticks-container {
   display: none;
   position: absolute;
@@ -83,10 +65,6 @@ body {
   background-color: #084c96;
 }
 
-.tick-major.zero {
-  background-color: yellow;
-}
-
 /* ============================================================
    TICK LABELS – Étiquettes numériques sous les graduations
    ============================================================ */
@@ -98,46 +76,6 @@ body {
   font-size: 10px;
   color: rgba(59, 28, 6, 0.85);
   transform: translateX(-50%);
-}
-
-.tick-label.zero {
-  color: yellow;
-  display: none;
-}
-
-/* ============================================================
-   RED INDICATOR – Indicateur vertical de position "REAL"
-   ============================================================ */
-.red-indicator {
-  position: absolute;
-  top: 370px;
-  left: 0;
-  width: 2px;
-  height: 66px;
-  background-color: #fc8b40;
-  z-index: 10;
-  transition: left 0.09s ease-out;
-}
-
-.red-indicator::after {
-  content: "REAL";
-  position: absolute;
-  top: -20px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 10px;
-  color: #fc8b40;
-  white-space: nowrap;
-}
-
-.red-dot {
-  position: absolute;
-  top: 15px;
-  left: -4px;
-  width: 10px;
-  height: 10px;
-  color: #fc8b40;
-  border-radius: 50%;
 }
 
 /* ============================================================
@@ -156,10 +94,9 @@ body {
    SMART INDICATOR / SURPLUS TRAIT – Traits verticaux indicateurs
    ============================================================ */
 #smart-indicator,
-#surplus-trait,
-#test-indicator {
+#surplus-trait {
   position: absolute;
-  top: 30px;
+  top: 0;
   width: 1px;
   height: 80px;
   pointer-events: none;
@@ -174,10 +111,6 @@ body {
 #surplus-trait {
   background-color: #5a82ff;
 }
-
-#test-indicator {
-  background-color: rgb(9, 224, 91);
-}
 /* ============================================================
    SURPLUS INDICATOR – Bulle d'info (valeur surplus + "clic")
    ============================================================ */
@@ -185,7 +118,7 @@ body {
   display: none;
   position: absolute;
   z-index: 9999;
-  top: 10px;
+  top: -5px;
   left: 50%;
   transform: translateX(-50%);
   flex-direction: column;
@@ -220,48 +153,11 @@ body {
 }
 
 /* ============================================================
-   DISPLAYS – Étiquettes d'information (PB, %, distance)
-   ============================================================ */
-#pbReal-display,
-#percent-display,
-#distance-display {
-  position: absolute;
-  top: 0;
-  background-color: rgba(90, 130, 255, 0.92);
-  color: #ffffff;
-  font-size: 12px;
-  font-weight: bold;
-  font-family: sans-serif;
-  padding: 3px 8px;
-  border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-  pointer-events: none;
-  white-space: nowrap;
-}
-
-#pbReal-display {
-  right: 56%;
-}
-
-#percent-display {
-  right: 35%;
-}
-
-#percent-display.percent-low {
-  color: rgb(255, 174, 0);
-}
-
-#distance-display {
-  right: 41%;
-}
-
-/* ============================================================
-  Repere pour centrage de la fenetre
+   Repere pour centrage de la fenetre
    ============================================================ */
 #t-repere {
   position: absolute;
-  top: var(--ruler-trepere-top, 43px);
+  top: 50px;
   left: 50%;
   transform: translateX(-50%); /* centré horizontalement dans ruler-container */
   width: 20px;

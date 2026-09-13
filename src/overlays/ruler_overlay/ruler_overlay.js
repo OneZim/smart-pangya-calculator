@@ -1,9 +1,9 @@
 // ================================================================
 // ruler_overlay.js - Règle de visée pour Tarkov
 // ================================================================
-// Description : Affiche une règle de visée avec indicateurs de PB,
-// de distance et de pourcentage. Gère le surplus de PB au-delà du
-// seuil de 40 PB. Fenêtre indépendante avec persistance de position.
+// Description : Affiche une règle de visée avec indicateurs de PB.
+// Gère le surplus de PB au-delà du seuil de 40 PB. Fenêtre indépendante
+// avec persistance de position.
 // ================================================================
 
 (function () {
@@ -16,18 +16,16 @@
   // Configuration de la règle principale (repère rouge)
   const CONFIG = {
     // Seuil au-delà duquel le surplus est délégué au second repère
-    SURPLUS_THRESHOLD: 40,
+    SURPLUS_THRESHOLD: 47,
     // Position de blocage du repère principal quand le surplus est actif
-    MAIN_CLAMP: 38,
+    MAIN_CLAMP: 45,
     // Facteur d'échelle par défaut (px par PB)
-    DEFAULT_PX_PER_PB: 36,
+    DEFAULT_PX_PER_PB: 81,
+    // Hauteur fixe de la fenêtre de la règle
+    WINDOW_HEIGHT: 150,
     // Clé de stockage pour la position de la fenêtre
     STORAGE_KEY: "ruler_overlay_position",
   };
-
-  // Plage de la règle principale (toujours fixe)
-  const MIN_PB = -CONFIG.SURPLUS_THRESHOLD;
-  const MAX_PB = CONFIG.SURPLUS_THRESHOLD;
 
   // ================================================================
   // 2. ÉTAT DE L'APPLICATION
@@ -46,6 +44,10 @@
     lastData: {},
     lastSurplus: 0,
     surplusMaxPb: 10, // Portée dynamique du surplus (paliers de 10)
+
+    // Style de la règle
+    smartColor: "#E0098E", // Couleur du repère smart-indicator
+    showTRepere: true, // Visibilité du repère T (visible par défaut)
 
     // Services
     tauriService: null,
@@ -104,63 +106,37 @@
    */
   function getElements() {
     return {
-      container: document.getElementById("ruler-container"),
-      redIndicator: document.getElementById("red-indicator"),
       smartIndicator: document.getElementById("smart-indicator"),
-      ticksContainer: document.getElementById("ticks-container"),
-      distanceDisplay: document.getElementById("distance-display"),
       surplusIndicator: document.getElementById("surplus-indicator"),
       surplusTrait: document.getElementById("surplus-trait"),
       surplusTicksContainer: document.getElementById("surplus-ticks-container"),
-      percentDisplay: document.getElementById("percent-display"),
-      pbRealDisplay: document.getElementById("pbReal-display"),
+      tRepere: document.getElementById("t-repere"),
     };
   }
 
   /**
-   * Dessine la règle principale (graduations de -40 à +40)
+   * Applique le style de la règle : couleur du smart-indicator et
+   * visibilité du repère T.
    */
-  function drawRuler() {
-    const container = elements.ticksContainer;
-    if (!container) return;
-
-    const fragment = document.createDocumentFragment();
-
-    for (let i = MIN_PB; i <= MAX_PB; i++) {
-      const leftPosition = state.rulerCenterPx + i * state.pxPerPb;
-
-      // Trait de graduation
-      const tick = document.createElement("div");
-      tick.className = `tick-major ${i === 0 ? "zero" : ""}`;
-      tick.style.left = `${leftPosition}px`;
-      fragment.appendChild(tick);
-
-      // Label de graduation
-      const label = document.createElement("div");
-      label.className = `tick-label ${i === 0 ? "zero" : ""}`;
-      label.style.left = `${leftPosition}px`;
-      label.innerText = Math.abs(i);
-      fragment.appendChild(label);
+  function applyRulerStyle() {
+    if (elements.smartIndicator) {
+      elements.smartIndicator.style.backgroundColor = state.smartColor;
     }
-
-    container.innerHTML = "";
-    container.appendChild(fragment);
+    if (elements.tRepere) {
+      elements.tRepere.style.display = state.showTRepere ? "block" : "none";
+    }
   }
 
   /**
    * Met à jour la position des indicateurs de la règle
    */
-  function updateRulerPosition(rulerPos, distVal, fullPbVal) {
-    const { redIndicator, smartIndicator, distanceDisplay } =
-      elements;
+  function updateRulerPosition(rulerPos) {
+    const { smartIndicator } = elements;
 
     const pos = rulerPos || 0;
     const leftPosition = state.rulerCenterPx + pos * state.pxPerPb;
 
-    if (redIndicator) redIndicator.style.left = `${leftPosition}px`;
     if (smartIndicator) smartIndicator.style.left = `${leftPosition}px`;
-    if (distanceDisplay)
-      distanceDisplay.innerText = `${distVal.toFixed(2)} yds`;
   }
 
   /**
@@ -238,34 +214,11 @@
   function updateUI(data) {
     state.lastData = data || {};
     const actualPb = data.pb !== undefined ? data.pb : 0;
-    const actualDist = data.distance !== undefined ? data.distance : 0;
-    const actualPercent = data.percent !== undefined ? data.percent : 0;
 
     const { surplus, valueForRuler } = splitPbValue(actualPb);
 
     updateSurplus(surplus);
-    updateRulerPosition(valueForRuler, actualDist, actualPb);
-
-    // Pourcentage
-    if (elements.percentDisplay) {
-      elements.percentDisplay.innerText = `${actualPercent.toFixed(1)}%`;
-      elements.percentDisplay.classList.toggle(
-        "percent-low",
-        actualPercent < 80,
-      );
-    }
-
-    // PB réel (calibré)
-    if (elements.pbRealDisplay) {
-      const calib = window.ResolutionCalibrationService?.getCalibration(
-        state.currentWidth,
-        state.currentHeight,
-      );
-      const realPxPerPb = calib?.realPxPerPb || 81;
-      const pixelOffset = actualPb * state.pxPerPb;
-      const pbReal = pixelOffset / realPxPerPb;
-      elements.pbRealDisplay.innerText = `${pbReal.toFixed(2)} PB`;
-    }
+    updateRulerPosition(valueForRuler);
   }
 
   /**
@@ -273,7 +226,6 @@
    */
   function refreshScale() {
     state.pxPerPb = getPxPerPb();
-    drawRuler();
     updateUI(state.lastData || {});
   }
 
@@ -300,21 +252,16 @@
       ) || {};
 
     document.documentElement.style.setProperty(
-      "--ruler-container-top",
-      (calib.rulerContainerTop ?? 0) + "px",
+      "--ruler-container-bottom",
+      (calib.rulerContainerBottom ?? 0) + "px",
     );
     document.documentElement.style.setProperty(
       "--ruler-indicators-top",
       (calib.rulerIndicatorTop ?? 20) + "px",
     );
-    document.documentElement.style.setProperty(
-      "--ruler-trepere-top",
-      (calib.rulerTRepereTop ?? 43) + "px",
-    );
 
-    // Hauteur proportionnelle
-    const scaleH = (state.currentHeight || 1080) / 1080;
-    const rulerHeight = Math.round(600 * scaleH);
+    // Hauteur fixe de la fenêtre
+    const rulerHeight = CONFIG.WINDOW_HEIGHT;
     document.documentElement.style.setProperty(
       "--ruler-height",
       rulerHeight + "px",
@@ -404,6 +351,24 @@
       refreshScale();
     });
 
+    // Couleur du repère (smart-indicator)
+    state.tauriService.listen("update-ruler-smart-color", (event) => {
+      const color = event.payload?.color;
+      if (typeof color === "string" && /^#[0-9a-fA-F]{6}$/.test(color)) {
+        state.smartColor = color;
+        if (state.storage) state.storage.set("ruler_smart_color", color);
+        applyRulerStyle();
+      }
+    });
+
+    // Visibilité du repère T
+    state.tauriService.listen("update-ruler-t-repere", (event) => {
+      const visible = Boolean(event.payload?.visible);
+      state.showTRepere = visible;
+      if (state.storage) state.storage.set("ruler_show_t_repere", visible);
+      applyRulerStyle();
+    });
+
     // Changement de résolution
     state.tauriService.listen("update-game-resolution", (event) => {
       const width = Number(event.payload?.width) || 0;
@@ -476,6 +441,13 @@
     if (state.storage) {
       state.currentZoom = state.storage.get("ruler_zoom", false) ? "100" : "80";
     }
+
+    // --- Style de la règle (couleur repère + visibilité repère T) ---
+    if (state.storage) {
+      state.smartColor = state.storage.get("ruler_smart_color", "#E0098E");
+      state.showTRepere = state.storage.get("ruler_show_t_repere", true);
+    }
+    applyRulerStyle();
 
     // --- Récupération de la résolution ---
     try {

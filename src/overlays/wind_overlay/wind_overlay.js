@@ -164,7 +164,6 @@
   // ================================================================
 
   document.addEventListener("DOMContentLoaded", async () => {
-
     // === STORAGE ===
     // Cette fenêtre (overlay) est un contexte JS séparé de la fenêtre
     // principale : StorageService doit être chargé (balise <script> dans
@@ -199,7 +198,7 @@
       const core = getTauriCore();
       if (core) {
         const res = await core.invoke("get_game_resolution");
-        if (res && res.width && res.width < 1920) compact = true;
+        if (res && res.width && res.width < 1920) compact = false;
       }
     } catch (err) {
       console.warn("⚠️ Résolution non détectée — cadran non compact.", err);

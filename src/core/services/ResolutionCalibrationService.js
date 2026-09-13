@@ -35,15 +35,14 @@
       spinDialCenter: { x: 436, y: 964 },
       pxParUniteSpin: 2,
       // Règle PB : px par unité, selon zoom (80 = Smart PB ~80%, 100 = PB Max).
-      pxPerPb: { 80: 20.3, 100: 81 },
+      pxPerPb: { 80: 20.3, 100: 72 },
       // Px par PB sur la jauge réelle du joueur (calibré à l'œil).
       realPxPerPb: 72,
-      // Positions verticales de la règle (ruler-container porte l'offset,
+      // Px par PB sur la vraie jauge (A      // Positions verticales de la règle (ruler-container porte l'offset,
       // indicator-lines les traits). Référence 1920x1080 — héritées par les
       // autres résolutions tant qu'elles n'ont pas leur propre valeur.
-      rulerContainerTop: 525,
+      rulerContainerBottom: 0,
       rulerIndicatorTop: 20,
-      rulerTRepereTop: -48,
 
       // Depuis la recentration du marqueur (origine = centre fenêtre), ces
       // offsets ne servent plus qu'au réglage résiduel : ~0 attendu.
@@ -55,6 +54,11 @@
       traitBas: { w: 10, h: 2, top: 37 },
       traitR: { w: 2, h: 12, top: 9, offset: 20 },
       traitL: { w: 2, h: 12, top: 9, offset: 20 },
+
+      // Image du vent : ancre (px dans la capture) = point de la flèche du jeu
+      // à centrer dans le canvas, et zoom (Z = taille_canvas / taille_région).
+      windAnchor: { x: 1823, y: 969 },
+      windZoom: 360 / 180, // = 2 → région 180×180 affichée en 360×360
     },
     "1600x900": {
       _note: "Calibrée à l'œil le même jour que 1280x720 (Auto Fit désactivé)",
@@ -62,14 +66,13 @@
       spinDialCenter: { x: 538, y: 842 },
       pxParUniteSpin: 1,
       // Règle PB : px par unité, selon zoom (80 = Smart PB ~80%, 100 = PB Max).
-      pxPerPb: { 80: 16.9, 100: 67.9 },
+      pxPerPb: { 80: 16.86, 100: 67.9 }, // 80:16.86 validé
       // Px par PB sur la jauge réelle du joueur (calibré à l'œil).
       realPxPerPb: 36,
       // Depuis la recentration du marqueur (origine = centre fenêtre), ces
       // offsets ne servent plus qu'au réglage résiduel : ~0 attendu.
-      rulerContainerTop: 430,
-      rulerIndicatorTop: 20,
-      rulerTRepereTop: 43,
+      rulerContainerBottom: 0,
+      rulerIndicatorTop: 10,
 
       ancrageZero: 0,
       ancrageZeroX: 0,
@@ -79,6 +82,11 @@
       traitBas: { w: 7, h: 1, top: 26 },
       traitR: { w: 1, h: 8, top: 10, offset: 10 },
       traitL: { w: 1, h: 8, top: 10, offset: 10 },
+
+      // Image du vent : ancre (px dans la capture) = point de la flèche du jeu
+      // à centrer dans le canvas, et zoom (Z = taille_canvas / taille_région).
+      windAnchor: { x: 1551, y: 844 },
+      windZoom: 360 / 88, // = 2 → région 180×180 affichée en 360×360
     },
     "1440x900": {
       _note:
@@ -87,14 +95,13 @@
       spinDialCenter: { x: 458, y: 842 },
       pxParUniteSpin: 0.99,
       // Règle PB : px par unité, selon zoom (80 = Smart PB ~80%, 100 = PB Max).
-      pxPerPb: { 80: null, 100: 36 },
+      pxPerPb: { 80: 16.9, 100: 36 },
       // Px par PB sur la jauge réelle du joueur (calibré à l'œil).
       realPxPerPb: 36,
       // Depuis la recentration du marqueur (origine = centre fenêtre), ces
       // offsets ne servent plus qu'au réglage résiduel : ~0 attendu.
-      rulerContainerTop: 430,
-      rulerIndicatorTop: 30,
-      rulerTRepereTop: 43,
+      rulerContainerBottom: 0,
+      rulerIndicatorTop: 10,
 
       ancrageZero: 0,
       ancrageZeroX: 0,
@@ -104,6 +111,11 @@
       traitBas: { w: 7, h: 1, top: 26 },
       traitR: { w: 1, h: 9, top: 9.5, offset: 10 },
       traitL: { w: 1, h: 9, top: 9.5, offset: 10 },
+
+      // Image du vent : ancre (px dans la capture) = point de la flèche du jeu
+      // à centrer dans le canvas, et zoom (Z = taille_canvas / taille_région).
+      windAnchor: { x: 1391, y: 844 },
+      windZoom: 360 / 88, // = 2 → région 180×180 affichée en 360×360
     },
 
     "1400x900": {
@@ -113,38 +125,13 @@
       spinDialCenter: { x: 438, y: 842 },
       pxParUniteSpin: 0.99,
       // Règle PB : px par unité, selon zoom (80 = Smart PB ~80%, 100 = PB Max).
-      pxPerPb: { 80: 17, 100: 50 },
+      pxPerPb: { 80: 16.9, 100: 50 },
       // Px par PB sur la jauge réelle du joueur (calibré à l'œil).
       realPxPerPb: 36,
       // Depuis la recentration du marqueur (origine = centre fenêtre), ces
       // offsets ne servent plus qu'au réglage résiduel : ~0 attendu.
-      rulerContainerTop: 430,
-      rulerIndicatorTop: 40,
-      rulerTRepereTop: 43,
-      ancrageZero: 0,
-      ancrageZeroX: 0,
-      cercleSize: 62,
-      trait: { w: 7, h: 1, top: 8 },
-      cercleRepere: { size: 15, top: 10 },
-      traitBas: { w: 7, h: 1, top: 26 },
-      traitR: { w: 1, h: 9, top: 9.5, offset: 10 },
-      traitL: { w: 1, h: 9, top: 9.5, offset: 10 },
-    },
-    "1280x720": {
-      _note:
-        "Calibrée à l'œil le même jour que 1600x900 (Auto Fit désactivé) — correction rendu intégrée",
-      autoFitHitBar: false,
-      spinDialCenter: { x: 378, y: 662 },
-      pxParUniteSpin: 0.99,
-      // Règle PB : px par unité, selon zoom (80 = Smart PB ~80%, 100 = PB Max).
-      pxPerPb: { 80: 13.69, 100: 54.26 },
-      // Px par PB sur la jauge réelle du joueur (calibré à l'œil).
-      realPxPerPb: 36,
-      // Depuis la recentration du marqueur (origine = centre fenêtre), ces
-      // offsets ne servent plus qu'au réglage résiduel : ~0 attendu.
-      rulerContainerTop: 325,
-      rulerIndicatorTop: 20,
-      rulerTRepereTop: 43,
+      rulerContainerBottom: 0,
+      rulerIndicatorTop: 10,
 
       ancrageZero: 0,
       ancrageZeroX: 0,
@@ -154,6 +141,34 @@
       traitBas: { w: 7, h: 1, top: 26 },
       traitR: { w: 1, h: 9, top: 9.5, offset: 10 },
       traitL: { w: 1, h: 9, top: 9.5, offset: 10 },
+      // Image du vent : ancre (px dans la capture) = point de la flèche du jeu
+      // à centrer dans le canvas, et zoom (Z = taille_canvas / taille_région).
+      windAnchor: { x: 1351, y: 844 },
+      windZoom: 360 / 88, // = 2 → région 180×180 affichée en 360×360
+    },
+    "1280x720": {
+      _note:
+        "Calibrée à l'œil le même jour que 1600x900 (Auto Fit désactivé) — correction rendu intégrée",
+      autoFitHitBar: false,
+      spinDialCenter: { x: 378, y: 662 },
+      pxParUniteSpin: 0.99,
+      // Règle PB : px par unité, selon zoom (80 = Smart PB ~80%, 100 = PB Max).
+      pxPerPb: { 80: 13.5, 100: 54.26 },
+      // Px par PB sur la jauge réelle du joueur (calibré à l'œil).
+      realPxPerPb: 36,
+
+      rulerContainerBottom: 0,
+      rulerIndicatorTop: 10,
+
+      cercleSize: 62,
+      trait: { w: 7, h: 1, top: 8 },
+      cercleRepere: { size: 15, top: 10 },
+      traitBas: { w: 7, h: 1, top: 26 },
+      traitR: { w: 1, h: 9, top: 9.5, offset: 10 },
+      traitL: { w: 1, h: 9, top: 9.5, offset: 10 },
+
+      windAnchor: { x: 1231, y: 664 },
+      windZoom: 360 / 86, // = 2 → région 180×180 affichée en 360×360
     },
   };
 

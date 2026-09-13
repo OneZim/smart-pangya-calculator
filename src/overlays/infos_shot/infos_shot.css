@@ -1,0 +1,83 @@
+/* ============================================================
+   RESET / GLOBAL
+   ============================================================ */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+/* ============================================================
+   BODY / HTML – Fenêtre transparente
+   ============================================================ */
+html,
+body {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
+  cursor: move;
+  user-select: none;
+}
+
+/* ============================================================
+   CONTENEUR PRINCIPAL
+   ============================================================ */
+#infos-shot-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+/* ============================================================
+   INFOS SHOT – Badges d'information (PB, %, distance)
+   ============================================================ */
+#ruler-infos-shot {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  top: var(--ruler-infos-shot, 0px);
+  pointer-events: none;
+}
+
+#pbReal-display,
+#percent-display,
+#distance-display {
+  position: absolute;
+  top: 0;
+  background-color: rgba(90, 130, 255, 0.92);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: sans-serif;
+  padding: 3px 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+#pbReal-display {
+  right: 55%;
+}
+#distance-display {
+  right: 30%;
+}
+#percent-display {
+  right: 15%;
+}
+
+#percent-display.percent-low {
+  color: rgb(255, 174, 0);
+}

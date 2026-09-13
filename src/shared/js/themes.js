@@ -16,6 +16,10 @@
       name: "🌊 PangYa Classic",
       css: "shared/css/themes/pangya-classic.css",
     },
+    win11: {
+      name: "💠 Windows 11",
+      css: "shared/css/themes/win11.css",
+    },
   };
 
   // Storage (Tauri Store) — assigné dans initThemesSystem(). Fallback
@@ -134,6 +138,29 @@
         "--modal-border": "#2f96e5",
         "--scrollbar": "#97e6ff",
         "--scrollbar-hover": "#4eb8ff",
+      },
+      win11: {
+        "--bg-body": "linear-gradient(180deg, #f7f7f5 0%, #efefef 100%)",
+        "--bg-card": "#ffffff",
+        "--bg-input": "#fbfbfb",
+        "--border": "#e3e3e3",
+        "--border-input": "#c9c9c9",
+        "--text": "#1b1b1b",
+        "--text-soft": "#5f5f5f",
+        "--text-label": "#5a5a5a",
+        "--accent": "#0067c0",
+        "--accent-hover": "#005fb8",
+        "--accent-dark": "#004e8c",
+        "--gold": "#b57d00",
+        "--shadow": "0 1px 3px rgba(0, 0, 0, 0.08)",
+        "--shadow-hover": "0 4px 12px rgba(0, 0, 0, 0.14)",
+        "--panel-bg": "#fafafa",
+        "--toggle-bg": "#cccccc",
+        "--toggle-checked": "#0067c0",
+        "--modal-bg": "#ffffff",
+        "--modal-border": "#0067c0",
+        "--scrollbar": "#c5c5c5",
+        "--scrollbar-hover": "#9a9a9a",
       },
     };
 

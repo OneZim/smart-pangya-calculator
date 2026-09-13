@@ -37,27 +37,7 @@
   // VARIABLES GLOBALES (scope de l'IIFE)
   // ================================================================
 
-  let greetInputEl; // Champ de saisie pour le nom (fonctionnalité de démonstration)
-  let greetMsgEl; // Élément d'affichage du message de salutation
   let win = null; // Instance de la fenêtre Tauri (initialisée dans setupTitlebar)
-
-  // ================================================================
-  // FONCTION : greet()
-  // DESCRIPTION : Appelle le backend Tauri pour afficher un message de salutation
-  // USAGE : Utilisée par le formulaire #greet-form (fonctionnalité de démo)
-  // ================================================================
-
-  /**
-   * Appelle la fonction Rust "greet" via Tauri invoke
-   * Envoie le nom saisi et affiche la réponse dans greetMsgEl
-   * @async
-   * @returns {Promise<void>}
-   */
-  async function greet() {
-    greetMsgEl.textContent = await invoke("greet", {
-      name: greetInputEl.value,
-    });
-  }
 
   // ================================================================
   // FONCTION : setupTitlebar()
@@ -178,21 +158,6 @@
    * S'exécute lorsque le DOM est complètement chargé
    */
   document.addEventListener("DOMContentLoaded", () => {
-    // ============================================================
-    // 1. CONFIGURATION DU FORMULAIRE DE SALUTATION (DÉMO)
-    // ============================================================
-    // Note : Cette section est une fonctionnalité de démonstration
-    // Elle peut être supprimée ou désactivée dans la version finale
-    // ============================================================
-
-    greetInputEl = document.querySelector("#greet-input");
-    greetMsgEl = document.querySelector("#greet-msg");
-
-    // Écoute la soumission du formulaire de salutation
-    document.querySelector("#greet-form")?.addEventListener("submit", (e) => {
-      e.preventDefault(); // Empêche le rechargement de la page
-      greet(); // Appelle le backend pour afficher le message
-    });
 
     // ============================================================
     // 2. CONFIGURATION DE LA BARRE DE TITRE

@@ -35,12 +35,41 @@
         });
         if (windImage) {
           windImage.src = base64Image;
+          windImage.onload = applyImageCalibration;
           windImage.style.display = "block";
           if (msgAttente) msgAttente.style.display = "none";
         }
       } catch (error) {
         console.error("❌ Erreur récupération image:", error);
       }
+    }
+
+    // ================================================================
+    // CALIBRATION AUTO SELON LA TAILLE RÉELLE DE L'IMAGE
+    // ================================================================
+
+    function applyImageCalibration() {
+      if (!windImage || !window.ResolutionCalibrationService) return;
+      const w = windImage.naturalWidth;
+      const h = windImage.naturalHeight;
+      if (!w || !h) return;
+      const calib = window.ResolutionCalibrationService.getCalibration(w, h);
+      setCalibration(calib);
+      console.log(
+        "🖼️ Calibration vent: image " +
+          w +
+          "x" +
+          h +
+          " -> source \"" +
+          calib._source +
+          "\" (ancre " +
+          calib.windAnchor?.x +
+          "," +
+          calib.windAnchor?.y +
+          ", zoom " +
+          calib.windZoom +
+          ")",
+      );
     }
 
     // ================================================================
@@ -129,34 +158,50 @@
     // CROP DE L'IMAGE
     // ================================================================
 
-    let windImgOffsetX = Number(store.get("imgOffsetX", 0));
-    let windImgOffsetY = Number(store.get("imgOffsetY", 0));
+    // Offsets de finition (relatifs à l'ancrage). Repartis à 0 :
+    // les valeurs persistées datent de l'ancien repère (flex centré).
+    let windImgOffsetX = 0;
+    let windImgOffsetY = 0;
+    let calibration = {};
+
+    function setCalibration(calib) {
+      calibration = calib || {};
+      updateWindImagePosition();
+    }
 
     function updateWindImagePosition() {
-      if (windImage) {
-        windImage.style.transform = `translate(${windImgOffsetX}px, ${windImgOffsetY}px)`;
-      }
+      if (!windImage) return;
+      const Z = calibration.windZoom || 1;
+      const ax = (calibration.windAnchor && calibration.windAnchor.x) || 0;
+      const ay = (calibration.windAnchor && calibration.windAnchor.y) || 0;
+      const box = windImage.parentElement;
+      const cx = box ? box.clientWidth / 2 : 150;
+      const cy = box ? box.clientHeight / 2 : 150;
+      const tx = cx - ax * Z + windImgOffsetX;
+      const ty = cy - ay * Z + windImgOffsetY;
+      windImage.style.transform =
+        "translate(" + tx + "px, " + ty + "px) scale(" + Z + ")";
       store.set("imgOffsetX", windImgOffsetX);
       store.set("imgOffsetY", windImgOffsetY);
     }
 
     document.getElementById("btn-crop-up")?.addEventListener("click", () => {
-      windImgOffsetY -= 1;
+      windImgOffsetY -= 0.5;
       updateWindImagePosition();
     });
 
     document.getElementById("btn-crop-down")?.addEventListener("click", () => {
-      windImgOffsetY += 1;
+      windImgOffsetY += 0.5;
       updateWindImagePosition();
     });
 
     document.getElementById("btn-crop-left")?.addEventListener("click", () => {
-      windImgOffsetX -= 1;
+      windImgOffsetX -= 0.5;
       updateWindImagePosition();
     });
 
     document.getElementById("btn-crop-right")?.addEventListener("click", () => {
-      windImgOffsetX += 1;
+      windImgOffsetX += 0.5;
       updateWindImagePosition();
     });
 
@@ -170,6 +215,7 @@
     return {
       chargerDerniereImage,
       updateWindImagePosition,
+      setCalibration,
       selectedFolderPath,
     };
   };

@@ -3,16 +3,6 @@
 (function () {
   "use strict";
 
-  // ================================================================
-  // CALIBRATION PAR RÉSOLUTION (via ResolutionCalibrationService)
-  // ================================================================
-  //
-  // La table vit dans core/services/ResolutionCalibrationService.js et la
-  // sélection se fait sur la résolution RÉELLE du jeu détectée côté Rust
-  // (corrigée DPI + alignée sur les résolutions officielles). Si le jeu n'est
-  // pas détectable au démarrage, on retombe sur la référence (1920x1080).
-  // Le listener "update-game-resolution" recharge la calibration à la volée.
-
   let CONFIG = null;
   let REPERE_BASE = null;
   let activeResolutionKey = null;
@@ -22,7 +12,7 @@
       pxParUniteSpin: calib.pxParUniteSpin,
       ancrageZero: calib.ancrageZero,
       ancrageZeroX: calib.ancrageZeroX,
-      valeurMin: 0,
+      valeurMin: -30, // Corrigé à -30 pour accepter les spins négatifs du Dunk
       valeurMax: 30,
       curveMin: -30,
       curveMax: 30,
@@ -57,19 +47,15 @@
       }
     } catch (err) {
       console.warn(
-        "⚠️ Jeu non détecté au démarrage — calibration de référence appliquée.",
+        "⚠️ Jeu non détecté au démarrage — référence appliquée.",
         err,
       );
     }
 
-    applyCalibration(window.ResolutionCalibrationService.getCalibration(width, height));
+    applyCalibration(
+      window.ResolutionCalibrationService.getCalibration(width, height),
+    );
     activeResolutionKey = `${width}x${height}`;
-    console.log(`🎛️ Calibration ${activeResolutionKey} (${source}) :`, {
-      spinDialCenter: window.ResolutionCalibrationService.getCalibration(width, height)
-        .spinDialCenter,
-      pxParUniteSpin: CONFIG.pxParUniteSpin,
-      ancrageZero: CONFIG.ancrageZero,
-    });
   }
 
   function reloadCalibration(width, height) {
@@ -83,33 +69,17 @@
     applyCercleSize();
     buildRepere();
     setValue(lastSpin, lastCurve);
-
-    console.log(
-      `🎛️ Résolution changée → ${key} (calibration ${
-        service.hasCalibration(width, height) ? "calibrée" : "estimée"
-      })`,
-    );
   }
 
   const POSITION_KEY = "spin_overlay_position";
-
-  // ================================================================
-  // VARIABLES
-  // ================================================================
 
   let tauriService = null;
   let storage = null;
   let savePosition = null;
   let marqueur = null;
 
-  // Dernières valeurs spin/curve reçues, pour pouvoir redessiner le
-  // repère après un buildRepere() sans attendre le prochain "update-spin".
   let lastSpin = 0;
   let lastCurve = 0;
-
-  // ================================================================
-  // CRÉER TAURI SERVICE
-  // ================================================================
 
   function createTauriService() {
     return {
@@ -140,10 +110,6 @@
     };
   }
 
-  // ================================================================
-  // APPLIQUER LA CALIBRATION ACTIVE (RESOLUTION_INDEX)
-  // ================================================================
-
   function applyCercleSize() {
     document.documentElement.style.setProperty(
       "--cercle-size",
@@ -151,25 +117,12 @@
     );
   }
 
-  // ================================================================
-  // CRÉATION / RECONSTRUCTION DU REPÈRE
-  // ================================================================
-  //
-  // Reconstruit intégralement les 5 éléments du repère à partir du preset
-  // actif chargé depuis spin_overlay_presets.json (voir loadActivePreset).
-
   function buildRepere() {
     const container = document.getElementById("repere");
     if (!container || !REPERE_BASE) return;
 
     container.innerHTML = "";
-
     const b = REPERE_BASE;
-
-    // Origine du marqueur = CENTRE du petit cercle rouge (centre de la balle
-    // sur la jauge). Les tops des presets étant mesurés depuis le haut du
-    // repère d'origine, on les re-exprime par rapport à ce centre ici —
-    // les presets restent donc inchangés.
     const centerY = b.cercleRepere.top + b.cercleRepere.size / 2;
     const relativeTop = (element) => element.top + element.h / 2 - centerY;
 
@@ -214,8 +167,6 @@
       pointer-events: none;
     `;
 
-    // traitR / traitL : ancrés à l'origine, décalage signé = leur `offset`
-    // calibré. Symétriques par construction (même |offset|, signe opposé).
     const traitR = document.createElement("div");
     traitR.id = "traitR";
     traitR.style.cssText = `
@@ -250,10 +201,6 @@
     marqueur = el;
   }
 
-  // ================================================================
-  // METTRE À JOUR LA POSITION DU REPÈRE
-  // ================================================================
-
   function setValue(valeurTapee, curveTapee) {
     valeurTapee = Math.round(Number(valeurTapee) * 2) / 2;
     valeurTapee = Math.min(
@@ -267,9 +214,6 @@
       CONFIG.curveMax,
     );
 
-    // On mémorise pour pouvoir rejouer le positionnement après un
-    // buildRepere() (ex: changement de RESOLUTION_INDEX) sans attendre
-    // un nouvel event "update-spin".
     lastSpin = valeurTapee;
     lastCurve = curveTapee;
 
@@ -284,44 +228,22 @@
     }
   }
 
-  // ================================================================
-  // DRAG (drag natif via startDragging, comme ruler_overlay)
-  // ================================================================
-
   function setupDrag() {
     document.addEventListener("mousedown", async (e) => {
       if (e.button === 0 && tauriService?.isAvailable) {
         const win = await tauriService.getCurrentWindow();
-        if (win) {
-          win.startDragging();
-        }
+        if (win) win.startDragging();
       }
     });
   }
 
-  // ================================================================
-  // POSITION DE LA FENÊTRE (sauvegarde/restauration)
-  // ================================================================
-
   async function setupPositionPersistence() {
-    if (!window.WindowPositionHelper) {
-      console.warn(
-        "⚠️ WindowPositionHelper non chargé — vérifie la balise <script> dans le HTML de cette fenêtre.",
-      );
-      return;
-    }
-    if (!storage) {
-      console.warn(
-        "⚠️ Pas de storage disponible — la position ne sera pas sauvegardée.",
-      );
-      return;
-    }
+    if (!window.WindowPositionHelper || !storage) return;
 
     savePosition = window.WindowPositionHelper.createDebouncedPositionSaver(
       storage,
       POSITION_KEY,
     );
-
     await window.WindowPositionHelper.restoreWindowPosition(
       storage,
       POSITION_KEY,
@@ -332,18 +254,12 @@
       await win.onMoved(() => {
         savePosition();
       });
-    } else {
-      console.warn("⚠️ win.onMoved indisponible sur cette version/plateforme");
     }
 
     document.addEventListener("mouseup", () => {
       savePosition?.();
     });
   }
-
-  // ================================================================
-  // LISTENERS TAURI
-  // ================================================================
 
   function setupTauriListeners() {
     if (!tauriService?.isAvailable) return;
@@ -356,66 +272,33 @@
           : Number(payload) || 0;
       const curve =
         typeof payload === "object" ? Number(payload.curve) || 0 : 0;
-
       setValue(spin, curve);
     });
 
-    // Rechargement automatique de la calibration quand la résolution du jeu
-    // change (l'événement est émis par refresh_game_resolution côté Rust,
-    // avec la résolution corrigée DPI).
     tauriService.listen("update-game-resolution", (event) => {
       const payload = event.payload || {};
       const width = Number(payload.width) || 0;
       const height = Number(payload.height) || 0;
-      if (width > 0 && height > 0) {
-        reloadCalibration(width, height);
-      }
+      if (width > 0 && height > 0) reloadCalibration(width, height);
     });
 
     tauriService.listen("spin-visibility", async (event) => {
       const win = await tauriService.getCurrentWindow();
-      if (win) {
-        event.payload ? await win.show() : await win.hide();
-      }
-    });
-
-    tauriService.listen("spin-move", async (event) => {
-      const win = await tauriService.getCurrentWindow();
-      if (!win) return;
-
-      const currentPos = await win.outerPosition();
-      await win.setPosition(
-        new window.__TAURI__.window.PhysicalPosition(
-          currentPos.x + (event.payload.x || 0),
-          currentPos.y + (event.payload.y || 0),
-        ),
-      );
+      if (win) event.payload ? await win.show() : await win.hide();
     });
   }
 
-  // ================================================================
-  // INITIALISATION
-  // ================================================================
-
   document.addEventListener("DOMContentLoaded", async () => {
     tauriService = createTauriService();
-
-    await loadCalibrationForCurrentGame(); // remplit CONFIG/REPERE_BASE avant tout usage
+    await loadCalibrationForCurrentGame();
 
     applyCercleSize();
     buildRepere();
 
-    // === STORAGE ===
     storage = window.StorageService || null;
-    if (storage) {
-      await storage.init();
-    } else {
-      console.warn(
-        "⚠️ StorageService non chargé dans cette fenêtre — la position ne persistera pas.",
-      );
-    }
+    if (storage) await storage.init();
 
-    setValue(0, 0); // valeur par défaut au démarrage
+    setValue(0, 0);
 
     setupDrag();
     setupTauriListeners();

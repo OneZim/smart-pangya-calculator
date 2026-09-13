@@ -7,7 +7,8 @@
     "ruler_overlay",
     "input_overlay",
     "wind_overlay",
-    "spin_overlay"
+    "spin_overlay",
+    "infos_shot"
   ],
   "permissions": [
     "core:default",
@@ -38,7 +39,8 @@
         { "window": "main" },
         { "window": "ruler_overlay" },
         { "window": "input_overlay" },
-        { "window": "spin_overlay" }
+        { "window": "spin_overlay" },
+        { "window": "infos_shot" }
       ]
     },
     {
@@ -48,7 +50,8 @@
         { "window": "ruler_overlay" },
         { "window": "input_overlay" },
         { "window": "wind_overlay" },
-        { "window": "spin_overlay" }
+        { "window": "spin_overlay" },
+        { "window": "infos_shot" }
       ]
     }
   ]

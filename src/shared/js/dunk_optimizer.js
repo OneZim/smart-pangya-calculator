@@ -1,37 +1,33 @@
 // dunk_optimizer.js
-//
-// Cherche le meilleur couple (spin, capler) pour réussir un dunk, en
-// recalculant la vraie distance via le moteur physique du jeu (find_power)
-// pour chaque spin candidat, plutôt que d'approximer avec une table de
-// référence. Ce fichier réutilise find_power(), déjà défini dans
-// smart_calculator.js — il doit donc être chargé APRÈS smart_calculator.js
-// (via <script>, dans le même scope global classique, sans type="module").
-//
-// Nécessite en entrée le même "input_values" que calc() construit déjà
-// (power_player, club_info, shot, power_shot, distance, height, wind,
-// degree, ground, curva, slope) — seul le spin varie d'un appel à l'autre.
+// Optimiseur de spin, courbe et capler pour le Smart Calculator Pangya
 
-const DUNK_TOTAL_CRANS = 360; // nombre de crans fixes sur toute la jauge (0 à 100%)
+const DUNK_TOTAL_CRANS = 360; // Nombre de crans fixes sur la jauge (0 à 100%)
+const DUNK_TOLERANCE = 0.1; // Tolérance de dunk en jeu (+/- 0.10)
+const MAX_EFFECT_RADIUS = 30; // Rayon maximal du cercle d'effet (jauge de Pangya)
+
 // Génère une liste de spins de `start` à `end` inclus, par pas de 0.5.
+
 function generateSpinRange(start, end) {
   const list = [];
   for (let s = start; s <= end + 1e-9; s += 0.5) {
-    list.push(Math.round(s * 2) / 2);
+    const val = Math.round(s * 2) / 2;
+
+    // On ignore 0.5 et -0.5 s'ils posent problème en jeu
+    if (val === 0.5 || val === -0.5) {
+      continue;
+    }
+
+    list.push(val);
   }
   return list;
 }
-
-const DUNK_EASY_SPINS = generateSpinRange(0, 1).concat(
-  generateSpinRange(3, 15),
-); // 0,0.5,1,6,6.5,...,11
-const DUNK_HARD_SPINS = generateSpinRange(0, 2); // 2,2.5,3,3.5,4,4.5,5
-const DUNK_EXTENDED_SPINS = generateSpinRange(15, 30); // fallback si 0-11 ne suffit pas (power > 100%)
-const DUNK_TOLERANCE = 0.1; // tolérance de dunk en jeu (+/- 0.10)
-
-// Recalcule distanceYards pour un spin donné, en relançant la même boucle
-// de convergence que calc() (find_power + do-while sur le désvio), mais
-// avec un spin différent des autres paramètres identiques.
-function computeDistanceForSpin(input_values, spin) {
+/**
+ * Recalcule la distance pour un spin et une courbe donnés avec mise en cache.
+ */
+/**
+ * Recalcule la distance pour un spin et une courbe donnés (sans cache).
+ */
+function computeDistanceForSpinAndCurve(input_values, spin, curva) {
   const found = find_power(
     input_values.power_player,
     input_values.club_info,
@@ -43,7 +39,7 @@ function computeDistanceForSpin(input_values, spin) {
     input_values.degree,
     input_values.ground,
     spin,
-    input_values.curva,
+    curva,
     input_values.slope,
   );
 
@@ -51,8 +47,14 @@ function computeDistanceForSpin(input_values, spin) {
   let index_f = 0;
 
   if (found.power != -1) {
+    let safetyCounter = 0; // Sécurité anti-freeze
     do {
       index_f++;
+      safetyCounter++;
+      if (safetyCounter > 50) {
+        // Stoppe net après 50 iterations pour éviter le freeze
+        break;
+      }
       f.push(
         find_power(
           input_values.power_player,
@@ -65,7 +67,7 @@ function computeDistanceForSpin(input_values, spin) {
           input_values.degree,
           input_values.ground,
           spin,
-          input_values.curva,
+          curva,
           input_values.slope,
           Math.atan2(f[index_f - 1].desvio * 1.5, input_values.distance),
           f[index_f - 1].power,
@@ -78,7 +80,9 @@ function computeDistanceForSpin(input_values, spin) {
     );
   }
 
-  if (f[index_f].power == -1) return null;
+  if (f[index_f].power == -1) {
+    return null;
+  }
 
   const distanceYards =
     parseFloat((f[index_f].power_range * f[index_f].power).toFixed(1)) || 0.0;
@@ -90,258 +94,122 @@ function computeDistanceForSpin(input_values, spin) {
   };
 }
 
-// Fonction générique : cherche, parmi une liste de spins candidats, celui
-// dont le capler atteignable (arrondi au cran réel) respecte une plage
-// d'écart [minDelta, maxDelta] (en yards) par rapport à la distance
-// nécessaire pour ce spin. Si aucun spin ne rentre dans la plage, on
-// retombe sur un spin par défaut (fallbackSpin), avec un avertissement.
-//
-// - Dunk : plage symétrique [-0.20, +0.20] (voir findBestDunkSpin)
-// - Tomahawk/Spike : la balle ne doit jamais tomber "trop court" ; plage
-//   [0, +0.30] (ne peut être qu'à l'exact ou légèrement au-delà)
-function findBestShotSpin(input_values, options) {
-  options = options || {};
-  const spins = options.spins || [];
-  const extendedSpins = options.extendedSpins || [];
-  const minDelta =
-    options.minDelta != null ? options.minDelta : -DUNK_TOLERANCE;
-  const maxDelta = options.maxDelta != null ? options.maxDelta : DUNK_TOLERANCE;
-  const fallbackSpin = options.fallbackSpin;
-
-  function evalSpin(spin) {
-    const res = computeDistanceForSpin(input_values, spin);
-    if (!res) return null;
-
-    // power > 1.0 (100%) : la distance nécessaire pour ce spin dépasse ce
-    // que le club peut atteindre à fond — ce spin ne peut pas réaliser ce
-    // tir, quel que soit le cran visé. On l'exclut des candidats.
-    if (res.power > 1.0) return null;
-
-    const step = res.powerRange / DUNK_TOTAL_CRANS;
-    const nCrans = Math.round(res.distanceYards / step);
-    const achievableCapler = Math.round(nCrans * step * 10) / 10;
-    const ecart =
-      Math.round((achievableCapler - res.distanceYards) * 100) / 100;
-
-    return {
-      spin: spin,
-      capler: achievableCapler,
-      distanceYards: res.distanceYards,
-      ecart: ecart,
-    };
+/**
+ * Vérifie si le couple (spin, curva) respecte le cercle d'effet et les filtres de spin.
+ */
+function isEffectValid(spin, curva, spinOptions) {
+  const effectDistance = Math.sqrt(spin * spin + curva * curva);
+  if (effectDistance > MAX_EFFECT_RADIUS) {
+    return false;
   }
 
-  let results = spins.map(evalSpin).filter(function (r) {
-    return r !== null;
-  });
+  if (spinOptions && spinOptions.positiveOnly && spin < 0) return false;
+  if (spinOptions && spinOptions.negativeOnly && spin > 0) return false;
 
-  let withinRange = results.filter(function (r) {
-    return r.ecart >= minDelta && r.ecart <= maxDelta;
-  });
+  return true;
+}
 
-  let usedExtendedSpin = false;
+/**
+ * Évaluation d'un candidat (spin, curva).
+ */
+function evalCandidate(input_values, spin, curva, spinOptions) {
+  if (!isEffectValid(spin, curva, spinOptions)) return null;
 
-  // Rien dans la plage principale : on étend la recherche (typiquement un
-  // tir qui dépasse 100% de power avec les spins habituels).
-  if (withinRange.length === 0 && extendedSpins.length > 0) {
-    const extResults = extendedSpins.map(evalSpin).filter(function (r) {
-      return r !== null;
-    });
-    results = results.concat(extResults);
-    withinRange = results.filter(function (r) {
-      return r.ecart >= minDelta && r.ecart <= maxDelta;
-    });
-    if (withinRange.length > 0) usedExtendedSpin = true;
-  }
+  const res = computeDistanceForSpinAndCurve(input_values, spin, curva);
+  if (!res || res.power > 1.0) return null; // Exclu si hors de portée (> 100%)
 
-  let best;
-  let usedFallback = false;
-
-  if (withinRange.length > 0) {
-    best = withinRange.reduce(function (a, b) {
-      return Math.abs(a.ecart) < Math.abs(b.ecart) ? a : b;
-    });
-  } else {
-    const fallbackResult = fallbackSpin != null ? evalSpin(fallbackSpin) : null;
-
-    if (fallbackResult) {
-      // Le spin par défaut donne au moins un résultat exploitable, même
-      // hors tolérance (ex: distance vraiment hors de portée du club).
-      best = fallbackResult;
-      usedFallback = true;
-    } else if (results.length > 0) {
-      // Le spin par défaut lui-même échoue (find_power impossible pour ce
-      // spin précis), mais d'autres spins testés donnent un résultat :
-      // on prend le meilleur disponible plutôt que d'abandonner.
-      best = results.reduce(function (a, b) {
-        return Math.abs(a.ecart) < Math.abs(b.ecart) ? a : b;
-      });
-      usedFallback = true;
-    } else {
-      // Vraiment aucun spin testé ne permet de calculer une distance :
-      // le tir est hors de portée du club quel que soit le spin.
-      return {
-        success: false,
-        reason: "Tir hors de portée du club, quel que soit le spin testé.",
-      };
-    }
-  }
-
-  const withinConstraint = best.ecart >= minDelta && best.ecart <= maxDelta;
+  const step = res.powerRange / DUNK_TOTAL_CRANS;
+  const nCrans = Math.round(res.distanceYards / step);
+  const achievableCapler = Math.round(nCrans * step * 10) / 10;
+  const ecart = Math.round((achievableCapler - res.distanceYards) * 100) / 100;
 
   return {
-    success: withinConstraint,
-    spin: best.spin,
-    capler: best.capler,
-    distanceYards: best.distanceYards,
-    ecart: best.ecart,
-    usedFallback: usedFallback,
-    usedExtendedSpin: usedExtendedSpin,
-    warningKey: usedExtendedSpin
-      ? "shot_extended_spin_used"
-      : usedFallback
-        ? "shot_fallback_spin_used"
-        : null,
-    warningParams: usedExtendedSpin
-      ? {}
-      : usedFallback
-        ? { minDelta: minDelta, maxDelta: maxDelta, fallbackSpin: fallbackSpin }
-        : {},
+    spin: spin,
+    curva: curva,
+    capler: achievableCapler,
+    distanceYards: res.distanceYards,
+    ecart: ecart,
   };
 }
 
-// Wrapper Tomahawk/Spike : spins de 1 à 9 (par pas de 0.5), écart
-// obligatoirement entre 0 et +0.30 (jamais trop court), fallback sur
-// spin=7 sinon.
-function findBestTomahawkSpikeSpin(input_values) {
-  const spins = generateSpinRange(2, 8);
-  const extendedSpins = generateSpinRange(8.5, 30);
-  return findBestShotSpin(input_values, {
-    spins: spins,
-    extendedSpins: extendedSpins,
-    minDelta: 0,
-    maxDelta: 0.2,
-    fallbackSpin: 7,
-  });
-}
-
-// vent/etc déjà fixés), cherche le spin qui permet au capler réellement
-// atteignable (cran de powerRange/360) de tomber le plus près possible de
-// la distance nécessaire pour ce spin, avec une préférence pour les spins
-// "faciles" à caler.
-//
-// options.tolerance      : tolérance de dunk (défaut 0.20)
-// options.allowHardSpins : autoriser 2-5 si rien de "facile" ne rentre
-//                          dans la tolérance (défaut true)
-function findBestDunkSpin(input_values, options) {
-  options = options || {};
+/**
+ * BOUTON 1 : Optimisation du Spin (avec courbe fixe entrée ou à 0).
+ */
+/**
+ * BOUTON 1 : Optimisation du Spin (avec courbe fixe entrée ou à 0).
+ */
+function findBestDunkSpin(input_values, options = {}) {
   const tolerance =
     options.tolerance != null ? options.tolerance : DUNK_TOLERANCE;
-  const allowHardSpins =
-    options.allowHardSpins != null ? options.allowHardSpins : true;
+  const spinOptions = options.spinOptions || {
+    positiveOnly: false,
+    negativeOnly: false,
+  };
+  const fixedCurve = input_values.curva || 0;
 
-  function evalSpin(spin) {
-    const res = computeDistanceForSpin(input_values, spin);
-    if (!res) return null;
+  const easySpins = generateSpinRange(-15, 15);
+  const hardSpins = generateSpinRange(-30, -15.5).concat(
+    generateSpinRange(15.5, 30),
+  );
 
-    // power > 1.0 (100%) : distance hors de portée pour ce spin, quel que
-    // soit le cran visé. On l'exclut des candidats.
-    if (res.power > 1.0) return null;
-
-    const step = res.powerRange / DUNK_TOTAL_CRANS;
-    const nCrans = Math.round(res.distanceYards / step);
-    const achievableCapler = Math.round(nCrans * step * 10) / 10;
-    const ecart =
-      Math.round((achievableCapler - res.distanceYards) * 100) / 100;
-
-    return {
-      spin: spin,
-      capler: achievableCapler,
-      distanceYards: res.distanceYards,
-      ecart: ecart,
-    };
+  function testSpins(spinList) {
+    return spinList
+      .map((s) => evalCandidate(input_values, s, fixedCurve, spinOptions))
+      .filter(Boolean);
   }
 
-  const easyResults = DUNK_EASY_SPINS.map(evalSpin).filter(function (r) {
-    return r !== null;
-  });
-  const easyWithinTolerance = easyResults.filter(function (r) {
-    return Math.abs(r.ecart) <= tolerance;
-  });
-
-  let pool = easyWithinTolerance;
+  let easyResults = testSpins(easySpins);
+  let pool = easyResults.filter((r) => Math.abs(r.ecart) <= tolerance);
   let usedHardSpin = false;
-  let usedExtendedSpin = false;
-  let allResults = easyResults;
+  let allResults = [...easyResults];
 
-  if (pool.length === 0 && allowHardSpins) {
-    const hardResults = DUNK_HARD_SPINS.map(evalSpin).filter(function (r) {
-      return r !== null;
-    });
-    allResults = allResults.concat(hardResults);
-    const hardWithinTolerance = hardResults.filter(function (r) {
-      return Math.abs(r.ecart) <= tolerance;
-    });
+  if (pool.length === 0) {
+    let hardResults = testSpins(hardSpins);
+    allResults.push(...hardResults);
+    let hardWithinTolerance = hardResults.filter(
+      (r) => Math.abs(r.ecart) <= tolerance,
+    );
     if (hardWithinTolerance.length > 0) {
       pool = hardWithinTolerance;
       usedHardSpin = true;
     }
   }
 
-  // 3e palier : si rien dans 0-11 ne fonctionne (typiquement un tir qui
-  // dépasse 100% de power avec un spin faible), on étend jusqu'à 30 — un
-  // spin élevé peut suffire à ramener le power sous 100%.
-  if (pool.length === 0) {
-    const extendedResults = DUNK_EXTENDED_SPINS.map(evalSpin).filter(
-      function (r) {
-        return r !== null;
-      },
-    );
-    allResults = allResults.concat(extendedResults);
-    const extendedWithinTolerance = extendedResults.filter(function (r) {
-      return Math.abs(r.ecart) <= tolerance;
-    });
-    if (extendedWithinTolerance.length > 0) {
-      pool = extendedWithinTolerance;
-      usedExtendedSpin = true;
-    }
-  }
-
-  // Rien dans la tolérance à aucun palier : on prend le meilleur résultat
-  // valide (power <= 100%) trouvé toutes plages confondues, plutôt que
-  // d'abandonner.
   if (pool.length === 0) pool = allResults;
 
+  // Ici, "pool" (et donc "allResults") est vide UNIQUEMENT si, pour
+  // TOUS les spins testés (easy + hard), aucun n'a de puissance <= 100%.
+  // C'est le seul vrai cas "impossible".
   if (pool.length === 0) {
     return {
       success: false,
-      reasonKey: "dunk_out_of_range",
-      reasonParams: { maxSpin: 30 },
+      error: "HORS DE PORTÉE",
+      message:
+        "La distance cible dépasse les 100% de puissance possible avec ce club et cette courbe. Tir impossible.",
     };
   }
-  const best = pool.reduce(function (a, b) {
-    return Math.abs(a.ecart) < Math.abs(b.ecart) ? a : b;
-  });
 
+  const best = pool.reduce((a, b) =>
+    Math.abs(a.ecart) < Math.abs(b.ecart) ? a : b,
+  );
   const withinTolerance = Math.abs(best.ecart) <= tolerance;
 
+  // On a bien trouvé un capler jouable (<=100%) : success reste true,
+  // même si ce n'est pas dans la tolérance stricte. La précision est
+  // indiquée séparément via withinTolerance / warning.
   return {
-    success: withinTolerance,
+    success: true,
     spin: best.spin,
+    curva: best.curva,
     capler: best.capler,
     distanceYards: best.distanceYards,
     ecart: best.ecart,
-    withinTolerance: withinTolerance,
-    usedHardSpin: usedHardSpin,
-    usedExtendedSpin: usedExtendedSpin,
-    warning: usedExtendedSpin
-      ? "Spin élevé (>11) nécessaire pour ramener le tir sous 100% de power."
-      : usedHardSpin
-        ? "Spin intermédiaire (2-5) utilisé car aucune solution avec spin habituel ne rentrait dans la tolérance."
-        : !withinTolerance
-          ? "Aucune combinaison ne rentre dans la tolérance +/- " +
-            tolerance +
-            ", résultat le plus proche affiché."
-          : null,
+    withinTolerance,
+    usedHardSpin,
+    warning: usedHardSpin
+      ? "Spin hard utilisé pour respecter la tolérance et le cercle d'effet."
+      : !withinTolerance
+        ? `Aucune combinaison ne rentre dans la tolérance +/- ${tolerance}.`
+        : null,
   };
 }
