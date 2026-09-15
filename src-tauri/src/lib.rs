@@ -726,6 +726,13 @@ fn set_infos_shot_visibility(app: AppHandle, show: bool) {
 }
 
 #[tauri::command]
+fn get_settings_visibility(app: AppHandle) -> bool {
+    app.get_webview_window("settings_screen")
+        .map(|win| win.is_visible().unwrap_or(false))
+        .unwrap_or(false)
+}
+
+#[tauri::command]
 fn move_infos_shot(app_handle: tauri::AppHandle, dx: i32, dy: i32) -> Result<(), String> {
     if let Some(window) = app_handle.get_webview_window("infos_shot") {
         let mut pos = window.outer_position().map_err(|e| e.to_string())?;
@@ -954,6 +961,7 @@ pub fn run() {
             move_wind_overlay,
             move_spin_overlay,
             set_infos_shot_visibility,
+            get_settings_visibility,
             move_infos_shot,
             move_ruler,
             select_folder,
@@ -1010,9 +1018,12 @@ pub fn run() {
             Ok(())
         })
         .on_window_event(|window, event| {
-            if let tauri::WindowEvent::CloseRequested { .. } = event {
+            if let tauri::WindowEvent::CloseRequested { api, .. } = event {
                 if window.label() == "main" {
                     std::process::exit(0);
+                } else if window.label() == "settings_screen" {
+                    api.prevent_close(); // Annule la destruction de la fenêtre
+                    let _ = window.hide(); // La garde vivante mais masquée
                 }
             }
         })

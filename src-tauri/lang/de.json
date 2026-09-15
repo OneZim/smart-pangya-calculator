@@ -111,6 +111,9 @@
   "show_label_calc": "Overlay-Anzeige",
   "show_ruler": "Lineal",
   "show_spin": "Spin-Markierung",
+  "show_infos_shot": "Schussinfo",
+  "spin_positive_only": "Erzwingen",
+  "spin_negative_only": "Erzwingen",
   "show_wind": "Winkelrechner",
 
   "error_shot_too_short": "Der Schuss konnte nicht berechnet werden; er ist zu kurz oder zu schwach.",

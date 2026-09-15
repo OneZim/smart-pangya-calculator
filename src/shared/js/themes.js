@@ -176,7 +176,7 @@
   // CHARGER UN THÈME COMPLET
   // ================================================================
 
-  function loadTheme(themeKey) {
+  function loadTheme(themeKey, { broadcast = false } = {}) {
     const theme = THEMES[themeKey];
     if (!theme) {
       console.warn(`⚠️ Thème "${themeKey}" inconnu`);
@@ -204,33 +204,35 @@
     if (selector) {
       selector.value = themeKey;
     }
+
+    // 4. Diffuser aux autres fenêtres
+    if (broadcast) {
+      try {
+        const tauriEvent = getTauriEvent();
+        if (tauriEvent) {
+          tauriEvent.emit("app-theme-changed", { theme: themeKey });
+        }
+      } catch (e) {
+        console.warn("Impossible de diffuser le changement de thème", e);
+      }
+    }
   }
 
   // ================================================================
-  // GESTION DE LA LANGUE
+  // ÉCOUTER LES CHANGEMENTS VENANT D'AUTRES FENÊTRES
   // ================================================================
 
-  function initLanguageSelector() {
-    const selector = document.getElementById("lang-selector");
-    if (!selector) return;
+  async function setupCrossWindowThemeSync() {
+    const tauriEvent = getTauriEvent();
+    if (!tauriEvent) {
+      setTimeout(setupCrossWindowThemeSync, 50);
+      return;
+    }
 
-    const savedLang = storage
-      ? storage.get("app_lang", "fr")
-      : localStorage.getItem("app_lang") || "fr";
-    selector.value = savedLang;
-
-    selector.addEventListener("change", () => {
-      const lang = selector.value;
-      if (storage) {
-        storage.set("app_lang", lang);
-      } else {
-        localStorage.setItem("app_lang", lang);
-      }
-      if (typeof applyTranslations === "function") {
-        applyTranslations(lang);
-      } else {
-        location.reload();
-      }
+    await tauriEvent.listen("app-theme-changed", (event) => {
+      const { theme } = event.payload;
+      if (theme === currentTheme) return;
+      loadTheme(theme, { broadcast: false });
     });
   }
 
@@ -255,14 +257,22 @@
     selector.addEventListener("change", () => {
       const themeKey = selector.value;
       if (themeKey && themeKey !== currentTheme) {
-        loadTheme(themeKey);
+        loadTheme(themeKey, { broadcast: true });
       }
     });
   }
 
   // ================================================================
-  // POINT D'ENTRÉE (storage d'abord, puis sélecteurs)
+  // POINT D'ENTRÉE (storage d'abord, puis sélecteur de thème)
   // ================================================================
+  //
+  // ⚠️ NE PAS ajouter de gestion de la langue ici.
+  // La langue est gérée exclusivement par shared/js/i18n.js, qui
+  // expose window.changeLanguage(lang) et gère la synchronisation
+  // inter-fenêtres via l'événement "app-lang-changed".
+  // Ajouter un second listener "change" sur #lang-selector casserait
+  // la propagation (c'est ce qui arrivait avant).
+  //
 
   async function initThemesSystem() {
     // Fenêtre séparée : StorageService doit être chargé (balise <script>
@@ -273,13 +283,13 @@
       currentTheme = storage.get("theme", "pangya-classic");
     } else {
       console.warn(
-        "⚠️ StorageService non chargé dans cette fenêtre — fallback localStorage pour thème/langue.",
+        "⚠️ StorageService non chargé dans cette fenêtre — fallback localStorage pour le thème.",
       );
       currentTheme = localStorage.getItem("pangya_theme") || "pangya-classic";
     }
 
     initThemeSelector();
-    initLanguageSelector();
+    setupCrossWindowThemeSync();
   }
 
   // Attendre que le DOM soit chargé

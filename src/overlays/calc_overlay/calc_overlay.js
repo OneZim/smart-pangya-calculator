@@ -29,8 +29,6 @@
       slope_break: document.getElementById("slope_break"),
       resetParams: document.getElementById("reset-params"),
       resetHall: document.getElementById("reset-hall"),
-      btnAngleMinus: document.getElementById("btn-angle-minus"),
-      btnAnglePlus: document.getElementById("btn-angle-plus"),
       shortError: document.getElementById("short-error"),
     };
   }
@@ -117,19 +115,6 @@
   // ANGLE
   // ================================================================
 
-  function updateDegree(delta) {
-    let angle = parseInt(elements.degree?.value) || 0;
-    angle = (angle + delta + 360) % 360;
-    if (elements.degree) {
-      elements.degree.value = angle;
-      emitSync("degree", String(angle));
-      if (typeof window.updateWindCanvas === "function") {
-        window.updateWindCanvas(angle);
-      }
-      triggerCalc();
-    }
-  }
-
   function showOptimizeTooltip(btn, message) {
     if (!btn) return;
 
@@ -209,9 +194,13 @@
       updateOptimizeDunkBtnState();
     });
 
-    // === ANGLE ===
-    elements.btnAngleMinus?.addEventListener("click", () => updateDegree(-1));
-    elements.btnAnglePlus?.addEventListener("click", () => updateDegree(+1));
+    // === DEGREE (suit le canvas du sélecteur d'angle du panneau vent) ===
+    elements.degree?.addEventListener("input", () => {
+      if (typeof window.angleSelector?.setAngle === "function") {
+        const v = parseFloat(elements.degree.value);
+        if (!isNaN(v)) window.angleSelector.setAngle(v);
+      }
+    });
 
     // === RESET ===
     // input_bar.js - setupEvents()
@@ -315,11 +304,177 @@
     }
   }
 
+  // ================================================================
+  // TOGGLES "FORCER LE SPIN" (▼ positif / ▲ négatif)
+  // State synchronisé avec la page principale (clé "spin_force").
+  // ================================================================
+
+  function setupSpinForceToggles() {
+    const chkPos = document.getElementById("chk-spin-positive-co");
+    const chkNeg = document.getElementById("chk-spin-negative-co");
+    const { TauriService } = window;
+    if (!chkPos && !chkNeg) return;
+
+    function applyState(positive, negative) {
+      if (chkPos) chkPos.checked = !!positive;
+      if (chkNeg) chkNeg.checked = !!negative;
+    }
+
+    function saveAndSync(positive, negative) {
+      const value = positive ? "positive" : negative ? "negative" : "";
+      if (storage) storage.set("spin_force", value);
+      TauriService?.emit("sync-spin-force", { positive, negative });
+    }
+
+    const saved = storage ? storage.get("spin_force", "") : "";
+    applyState(saved === "positive", saved === "negative");
+
+    if (chkPos) {
+      chkPos.addEventListener("change", function () {
+        if (this.checked && chkNeg) chkNeg.checked = false;
+        saveAndSync(this.checked, false);
+      });
+    }
+    if (chkNeg) {
+      chkNeg.addEventListener("change", function () {
+        if (this.checked && chkPos) chkPos.checked = false;
+        saveAndSync(false, this.checked);
+      });
+    }
+
+    TauriService?.listen("sync-spin-force", (event) => {
+      const payload = event.payload || {};
+      applyState(payload.positive, payload.negative);
+    });
+  }
+
   // Initialiser
   document.addEventListener("DOMContentLoaded", setupDunkButton);
   // ================================================================
   // LISTENERS TAURI
   // ================================================================
+
+  async function initResizeGrip() {
+    const grip = document.getElementById("resize-grip");
+    if (!grip || !window.TauriService?.isAvailable) return;
+
+    const appWindow = await window.TauriService.getCurrentWindow();
+    if (!appWindow) return;
+
+    // Référence fenêtre (ratio verrouillé 350/420) : échelle uniforme
+    const REF_W = 350;
+    const REF_H = 420;
+    const DIR = "SouthEast";
+    let drag = null;
+
+    grip.addEventListener("pointerdown", (e) => {
+      if (e.button !== 0) return;
+      e.preventDefault();
+      e.stopPropagation();
+
+      Promise.all([appWindow.outerPosition(), appWindow.outerSize()]).then(
+        ([pos, size]) => {
+          const scale = window.devicePixelRatio || 1;
+          drag = {
+            dir: DIR,
+            startX: e.screenX * scale,
+            startY: e.screenY * scale,
+            pos: { x: pos.x, y: pos.y },
+            size: { w: size.width, h: size.height },
+          };
+        },
+      );
+      grip.setPointerCapture(e.pointerId);
+    });
+
+    document.addEventListener("pointermove", (e) => {
+      if (!drag) return;
+      const d = drag;
+      const scale = window.devicePixelRatio || 1;
+      const dx = e.screenX * scale - d.startX;
+      const dy = e.screenY * scale - d.startY;
+      const west = d.dir.includes("West");
+      const east = d.dir.includes("East");
+      const north = d.dir.includes("North");
+      const south = d.dir.includes("South");
+
+      // Échelle unique : ratio dominant issu du bord/coing saisi
+      const ratios = [];
+      if (west) ratios.push((d.size.w - dx) / (REF_W * scale));
+      else if (east) ratios.push((d.size.w + dx) / (REF_W * scale));
+      if (north) ratios.push((d.size.h - dy) / (REF_H * scale));
+      else if (south) ratios.push((d.size.h + dy) / (REF_H * scale));
+      let s = ratios.length ? Math.max(...ratios) : 1;
+      s = Math.max(1, Math.min(2.5, s));
+
+      const w = REF_W * scale * s;
+      const h = REF_H * scale * s;
+      const anchors = {
+        left: d.pos.x,
+        right: d.pos.x + d.size.w,
+        top: d.pos.y,
+        bottom: d.pos.y + d.size.h,
+      };
+      const x = west ? anchors.right - w : anchors.left;
+      const y = north ? anchors.bottom - h : anchors.top;
+
+      const P = window.TauriService.window.PhysicalPosition;
+      const S = window.TauriService.window.PhysicalSize;
+      if (west || north)
+        appWindow
+          .setPosition(new P(Math.round(x), Math.round(y)))
+          .catch(() => {});
+      appWindow.setSize(new S(Math.round(w), Math.round(h))).catch(() => {});
+    });
+
+    const onPointerUp = async () => {
+      if (drag && storage) {
+        try {
+          const size = await appWindow.outerSize();
+          storage.set("calc_overlay_size", { w: size.width, h: size.height });
+        } catch (err) {
+          console.error("❌ Sauvegarde taille fenêtre:", err);
+        }
+      }
+      drag = null;
+    };
+    document.addEventListener("pointerup", onPointerUp);
+    document.addEventListener("pointercancel", onPointerUp);
+  }
+
+  function initContentZoom() {
+    const bar = document.querySelector(".horizontal-calculator-bar");
+    if (!bar) return;
+    const apply = () => {
+      const z = Math.min(window.innerWidth / 350, window.innerHeight / 420);
+      bar.style.zoom = String(Math.max(1, Math.min(2.5, z)));
+    };
+    apply();
+    window.addEventListener("resize", apply);
+  }
+
+  async function restoreCalcWindowSize() {
+    if (!storage || !window.TauriService?.isAvailable) return;
+    const saved = storage.get("calc_overlay_size", null);
+    if (
+      !saved ||
+      typeof saved.w !== "number" ||
+      typeof saved.h !== "number"
+    ) {
+      return;
+    }
+    try {
+      const appWindow = await window.TauriService.getCurrentWindow();
+      if (!appWindow) return;
+      const scale = window.devicePixelRatio || 1;
+      const S = window.TauriService.window.PhysicalSize;
+      const w = Math.max(Math.round(350 * scale), Math.round(saved.w));
+      const h = Math.max(Math.round(420 * scale), Math.round(saved.h));
+      await appWindow.setSize(new S(w, h));
+    } catch (err) {
+      console.error("❌ Restauration taille fenêtre:", err);
+    }
+  }
 
   function setupTauriListeners() {
     if (!window.TauriService?.isAvailable) return;
@@ -352,6 +507,14 @@
 
         if (id === "shot") {
           updateOptimizeDunkBtnState();
+        }
+
+        if (
+          id === "degree" &&
+          typeof window.angleSelector?.setAngle === "function"
+        ) {
+          const v = parseFloat(value);
+          if (!isNaN(v)) window.angleSelector.setAngle(v);
         }
       }
     });
@@ -413,19 +576,12 @@
     });
   }
 
-  const toggleShowWind = document.getElementById("toggle-show-wind-co");
-  if (toggleShowWind) {
-    toggleShowWind.addEventListener("change", function () {
-      window.TauriService?.invoke("set_wind_visibility", {
-        show: this.checked,
-      });
-    });
-  }
-
-  const toggleShowSpin = document.getElementById("toggle-show-spin-co");
-  if (toggleShowSpin) {
-    toggleShowSpin.addEventListener("change", function () {
-      window.TauriService?.invoke("set_spin_visibility", {
+  const toggleShowInfosShot = document.getElementById(
+    "toggle-show-infos-shot-co"
+  );
+  if (toggleShowInfosShot) {
+    toggleShowInfosShot.addEventListener("change", function () {
+      window.TauriService?.invoke("set_infos_shot_visibility", {
         show: this.checked,
       });
     });
@@ -436,13 +592,8 @@
     if (cb) cb.checked = event.payload;
   });
 
-  window.TauriService?.listen("sync-wind-visibility", (event) => {
-    const cb = document.getElementById("toggle-show-wind-co");
-    if (cb) cb.checked = event.payload;
-  });
-
-  window.TauriService?.listen("sync-spin-visibility", (event) => {
-    const cb = document.getElementById("toggle-show-spin-co");
+  window.TauriService?.listen("sync-infos-shot-visibility", (event) => {
+    const cb = document.getElementById("toggle-show-infos-shot-co");
     if (cb) cb.checked = event.payload;
   });
   // ================================================================
@@ -544,9 +695,39 @@
     }
 
     setupEvents();
+    setupSpinForceToggles();
     setupTauriListeners();
-    window.setupWindowDrag?.(window.TauriService);
+    initResizeGrip();
+    await restoreCalcWindowSize();
+    initContentZoom();
+    window.setupWindowDrag?.(window.TauriService, {
+      selectors: [".wind-panel", ".resize-grip"],
+    });
     setupTextSelection();
     updateOptimizeDunkBtnState();
+
+    // === PANNEAU VENT (SLIDE-IN) ===
+    const toggleWindPanel = document.getElementById("btn-toggle-wind-panel");
+    const windPanel = document.getElementById("wind-panel");
+    if (toggleWindPanel && windPanel) {
+      toggleWindPanel.addEventListener("click", () => {
+        windPanel.classList.toggle("open");
+      });
+    }
+
+    // === SÉLECTEUR D'ANGLE (canvas du panneau vent) ===
+    window.angleSelector = window.WindAngleSelector?.({
+      storage,
+      canvasId: "angle-canvas",
+      displayId: "angle-display",
+      degreeId: "degree",
+      syncEnabled: true,
+      storageKey: "wind_angle",
+    });
+
+    // === IMAGE VENT (chargement + calibration + recadrage) ===
+    // Même dossier (StorageService partagé) et mêmes événements
+    // `nouvelle-capture-detectee` que la page principale.
+    window.ScreenshotManager?.(window.TauriService, storage);
   });
 })();

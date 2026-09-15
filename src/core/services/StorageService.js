@@ -9,27 +9,43 @@
     _cache: new Map(), // copie en mémoire pour un accès synchrone
     _ready: false,
     _saveTimeout: null,
+    _initPromise: null, // promesse partagée pour rendre init() idempotent
 
     // ================================================================
     // INITIALISATION — à appeler et await AVANT tout le reste de l'app
-    // (avant CourseStore/PlayerStore/CharacterStore/setupInputFields...)
+    // Idempotent : plusieurs appels concurrents partagent la même promesse
+    // et une seule instance Tauri Store est créée.
     // ================================================================
     async init() {
-      try {
-        const { load } = window.__TAURI__.store;
-        // Un seul fichier pour toute l'app, ex: storage.json dans appDataDir()
-        this._tauriStore = await load("storage.json", { autoSave: false });
+      if (this._initPromise) return this._initPromise;
 
-        const entries = await this._tauriStore.entries();
-        for (const [key, value] of entries) {
-          this._cache.set(key, value);
+      this._initPromise = (async () => {
+        try {
+          const { load } = window.__TAURI__.store;
+          // Un seul fichier pour toute l'app, ex: storage.json dans appDataDir()
+          this._tauriStore = await load("storage.json", { autoSave: false });
+
+          const entries = await this._tauriStore.entries();
+          for (const [key, value] of entries) {
+            // Ne pas écraser une valeur déjà en cache (cas où un set()
+            // aurait eu lieu pendant le chargement asynchrone)
+            if (!this._cache.has(key)) {
+              this._cache.set(key, value);
+            }
+          }
+
+          this._ready = true;
+        } catch (error) {
+          console.error("❌ Erreur chargement Tauri Store:", error);
+          this._ready = true; // évite de bloquer l'app même si ça échoue
         }
+      })();
 
-        this._ready = true;
-      } catch (error) {
-        console.error("❌ Erreur chargement Tauri Store:", error);
-        this._ready = true; // évite de bloquer l'app même si ça échoue
-      }
+      return this._initPromise;
+    },
+
+    isInitialized() {
+      return this._ready;
     },
 
     // ================================================================
@@ -48,13 +64,9 @@
     // ================================================================
     // ÉCRITURE — met à jour le cache immédiatement (synchrone),
     // persiste sur disque en arrière-plan avec un debounce de 300ms
-    // (pour ne pas écrire à chaque frappe clavier)
     // ================================================================
     set(key, value) {
       const fullKey = this.prefix + key;
-
-      // Contrairement à localStorage, pas besoin de JSON.stringify :
-      // le plugin Store sérialise déjà nativement objets/nombres/strings.
       this._cache.set(fullKey, value);
 
       if (this._tauriStore) {

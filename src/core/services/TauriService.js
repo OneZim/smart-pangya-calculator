@@ -3,26 +3,41 @@
   "use strict";
 
   window.TauriService = {
-    core: window.__TAURI__?.core || null,
-    event: window.__TAURI__?.event || null,
-    window: window.__TAURI__?.window || null,
-    isAvailable: !!(window.__TAURI__?.core && window.__TAURI__?.event),
+    // Accès "lazy" — on relit __TAURI__ à chaque fois
+    get core() {
+      return window.__TAURI__?.core || null;
+    },
+    get event() {
+      return window.__TAURI__?.event || null;
+    },
+    get window() {
+      return window.__TAURI__?.window || null;
+    },
+    get isAvailable() {
+      return !!(window.__TAURI__?.core && window.__TAURI__?.event);
+    },
 
     async invoke(command, args = {}) {
       if (!this.isAvailable) {
-        console.warn("⚠️ Tauri non disponible");
+        console.warn(`⚠️ Tauri non disponible pour invoke("${command}")`);
         return null;
       }
       return await this.core.invoke(command, args);
     },
 
     async listen(eventName, callback) {
-      if (!this.isAvailable) return;
+      if (!this.isAvailable) {
+        console.warn(`⚠️ Tauri non disponible pour listen("${eventName}")`);
+        return;
+      }
       await this.event.listen(eventName, callback);
     },
 
     async emit(eventName, payload) {
-      if (!this.isAvailable) return;
+      if (!this.isAvailable) {
+        console.warn(`⚠️ Tauri non disponible pour emit("${eventName}")`);
+        return;
+      }
       await this.event.emit(eventName, payload);
     },
 

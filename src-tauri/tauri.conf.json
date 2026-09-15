@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "Smart Pangya Calculator_beta",
+  "productName": "Smart Pangya Calculator",
   "version": "3.0.0",
   "identifier": "com.onezim.smart-pangya-calculator",
   "build": {
@@ -12,11 +12,21 @@
       {
         "url": "index.html",
         "label": "main",
-        "title": "Smart Pangya Calculator_beta",
+        "title": "Smart Pangya Calculator",
         "width": 1000,
         "height": 950,
         "visible": false,
         "decorations": false,
+        "transparent": false
+      },
+      {
+        "label": "settings_screen",
+        "title": "Settings",
+        "url": "screens/settings/settings_screen.html",
+        "width": 800,
+        "height": 600,
+        "visible": false,
+        "decorations": true,
         "transparent": false
       },
       {
@@ -37,14 +47,16 @@
         "label": "input_overlay",
         "title": "Overlay Saisie",
         "url": "overlays/calc_overlay/calc_overlay.html",
-        "width": 470,
-        "height": 450,
+        "width": 350,
+        "height": 420,
         "transparent": true,
         "decorations": false,
         "alwaysOnTop": true,
         "skipTaskbar": true,
         "visible": false,
         "resizable": false,
+        "minWidth": 350,
+        "minHeight": 420,
         "shadow": false
       },
       {

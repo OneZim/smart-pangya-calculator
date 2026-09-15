@@ -1,0 +1,409 @@
+/* =====================================================================
+   FICHIER : settings_screen.css
+   DESCRIPTION : Styles de la fenêtre Paramètres dédiée
+   =====================================================================
+   Squelette autonome reprenant la structure visuelle de main.css.
+   Les couleurs/polices proviennent des fichiers de thème (variables CSS).
+   ===================================================================== */
+
+/* ---------- RESET ---------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ---------- BODY ---------- */
+body {
+  background: var(--bg-body);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  font-family: "Segoe UI", "Arial", sans-serif;
+}
+
+/* ---------- BARRE DE TITRE ---------- */
+#titlebar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 38px;
+  padding: 0 14px;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
+  flex-shrink: 0;
+}
+
+.titlebar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.titlebar-icon {
+  font-size: 18px;
+}
+
+.titlebar-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.02em;
+}
+
+.titlebar-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  -webkit-app-region: no-drag;
+}
+
+.titlebar-btn {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-soft);
+  font-size: 15px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-app-region: no-drag;
+  font-family: "Segoe UI", "Arial", sans-serif;
+}
+
+.titlebar-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+}
+
+.titlebar-close:hover {
+  background: #e74c3c;
+  color: white;
+}
+
+.titlebar-btn:active {
+  transform: scale(0.92);
+}
+
+/* ---------- PAGE ---------- */
+.page {
+  width: 100%;
+  max-width: 800px;
+  padding: 24px 20px 20px 20px;
+  flex: 1;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  position: relative;
+}
+
+.page::-webkit-scrollbar {
+  display: none;
+}
+
+/* ---------- ANIMATION ---------- */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- CARTES ---------- */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+  margin-bottom: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-hover);
+}
+
+.card-title {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 18px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ---------- ESPACEMENT ---------- */
+.spacer {
+  height: 10px;
+}
+
+/* ---------- SÉLECTEURS LANGUE / THÈME ---------- */
+.lang_select,
+.theme_select {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  max-width: 360px;
+}
+
+.lang_select select,
+.theme_select select {
+  width: 100%;
+  min-width: 0;
+  max-width: 240px;
+}
+
+.lang_select label,
+.theme_select label {
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: color 0.3s ease;
+}
+
+.label-fixed {
+  display: inline-block;
+  width: 120px;
+}
+
+/* ---------- GRILLE DE FORMULAIRE ---------- */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+  margin-top: 10px;
+}
+
+/* ---------- CHAMPS ---------- */
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+.field > label {
+  margin-bottom: 4px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* ---------- INPUTS / SELECTS ---------- */
+input,
+select {
+  width: 100%;
+  padding: 8px 6px;
+  border-radius: 5px;
+  border: 1px solid var(--border-input);
+  background: var(--bg-input);
+  color: var(--text);
+  font-size: 13px;
+  transition: all 0.25s ease;
+  box-sizing: border-box;
+}
+
+input::placeholder {
+  color: var(--text-soft);
+  opacity: 0.7;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(61, 107, 80, 0.15);
+}
+
+input:hover,
+select:hover {
+  border-color: var(--accent);
+}
+
+.folder-input {
+  cursor: default;
+}
+
+/* ---------- TOGGLES (géométrie) ---------- */
+.toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 20px;
+}
+
+.toggle > span:first-child {
+  flex: 1;
+}
+
+.toggle__input {
+  display: none;
+}
+
+.toggle__track {
+  position: relative;
+  width: 42px;
+  height: 22px;
+}
+
+.toggle__track::after {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  width: 12px;
+  height: 12px;
+}
+
+.toggle__input:checked + .toggle__track::after {
+  transform: translateX(18px);
+}
+
+/* ---------- UTILITAIRES FLEX ---------- */
+.flex {
+  display: flex;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.gap-8 {
+  gap: 8px;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.mt-4 {
+  margin-top: 4px;
+}
+
+.mt-8 {
+  margin-top: 8px;
+}
+
+.mb-4 {
+  margin-bottom: 4px;
+}
+
+/* ---------- BOUTONS D'ACTION ---------- */
+.action-btn {
+  flex: 1;
+  padding: 9px 0;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  transition: background 0.15s ease, filter 0.15s ease;
+}
+
+.action-btn--neutral {
+  background: var(--bg-card, #ffffff);
+  border-color: var(--border-input, #c9c9c9);
+  color: var(--text, #1b1b1b);
+}
+
+.action-btn--neutral:hover {
+  background: var(--bg-hover, #f0f0f0);
+}
+
+.action-btn--danger {
+  background: #d13438;
+  color: #ffffff;
+}
+
+.action-btn--danger:hover {
+  background: #c42b1c;
+}
+
+/* ---------- MODALE ---------- */
+#custom-confirm-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-box {
+  width: 340px;
+  max-width: 90%;
+  padding: 24px;
+  text-align: center;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 24px;
+}
+
+.modal-btn {
+  min-width: 110px;
+  padding: 9px 20px;
+  border: 1px solid var(--border-input, #c9c9c9);
+  border-radius: 4px;
+  background: var(--bg-card, #ffffff);
+  color: var(--text, #1b1b1b);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+}
+
+.modal-btn:hover {
+  background: var(--bg-hover, #f0f0f0);
+}
+
+.modal-btn--danger {
+  background: #d13438;
+  border-color: #d13438;
+  color: #ffffff;
+}
+
+.modal-btn--danger:hover {
+  background: #c42b1c;
+}
+
+.modal-btn--cancel {
+  background: var(--accent, #0067c0);
+  border-color: var(--accent, #0067c0);
+  color: #ffffff;
+}
+
+.modal-btn--cancel:hover {
+  background: var(--accent-hover, #005fb8);
+}
+
+/* ---------- SCROLLBAR ---------- */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}

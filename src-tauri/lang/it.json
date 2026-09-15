@@ -111,6 +111,9 @@
   "show_label_calc": "Visualizzazione degli Overlays",
   "show_ruler": "Righello",
   "show_spin": "Indicatore di Spin",
+  "show_infos_shot": "Info del tiro",
+  "spin_positive_only": "Forza",
+  "spin_negative_only": "Forza",
   "show_wind": "Calcolatore dell’Angolo",
 
   "error_shot_too_short": "Il tiro non può essere calcolato; è troppo corto o troppo debole.",

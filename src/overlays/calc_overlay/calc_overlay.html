@@ -34,175 +34,218 @@
 
       <div class="divider"></div>
 
-      <div class="field">
-        <label data-i18n="label_club">Club</label>
-        <select id="club">
-          <option value="0">1W</option>
-          <option value="1">2W</option>
-          <option value="2">3W</option>
-          <option value="3">2I</option>
-          <option value="4">3I</option>
-          <option value="5">4I</option>
-          <option value="6">5I</option>
-          <option value="7">6I</option>
-          <option value="8">7I</option>
-          <option value="9">8I</option>
-          <option value="10">9I</option>
-          <option value="11">PW</option>
-          <option value="12">SW</option>
-        </select>
-      </div>
-      <div class="field">
-        <label data-i18n="label_shot">Shot</label>
-        <select id="shot">
-          <option value="0" data-i18n="shot_dunk">Dunk</option>
-          <option value="1" data-i18n="shot_tomahawk">Tomahawk</option>
-          <option value="2" data-i18n="shot_spike">Spike</option>
-          <option value="3" data-i18n="shot_cobra">Cobra</option>
-        </select>
-      </div>
-      <div class="field">
-        <label data-i18n="label_power_shot">Power</label>
-        <select id="power_shot">
-          <option value="0" data-i18n="min_ps_none">No</option>
-          <option value="1" data-i18n="min_ps_1">1 PS</option>
-          <option value="2" data-i18n="min_ps_2">2 PS</option>
-          <option value="3" data-i18n="min_ps_15y">15y</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label data-i18n="label_distance">Dist</label>
-        <input
-          id="distance"
-          tabindex="1"
-          autocomplete="off"
-          type="text"
-          maxlength="6"
-          value="200"
-        />
-      </div>
-      <div class="field">
-        <label data-i18n="label_height">Height</label>
-        <input
-          id="height"
-          tabindex="2"
-          autocomplete="off"
-          type="text"
-          maxlength="6"
-          value="0"
-        />
-      </div>
-      <div class="field">
-        <button
-          id="reset-hall"
-          type="button"
-          class="action-btn"
-          data-i18n="btn_reset_hall"
-        >
-          Reset H.
-        </button>
-      </div>
-      <div class="field">
-        <label data-i18n="label_wind">Wind</label>
-        <input
-          id="wind"
-          tabindex="3"
-          autocomplete="off"
-          type="text"
-          maxlength="1"
-          value="1"
-        />
-      </div>
-      <div class="field">
-        <label data-i18n="label_degree">Degree</label>
-        <input
-          id="degree"
-          tabindex="4"
-          autocomplete="off"
-          type="text"
-          maxlength="3"
-          value="45"
-        />
-      </div>
-      <div class="field">
-        <div class="btn-row">
-          <button id="btn-angle-minus" class="mini-btn">-1°</button>
-          <button id="btn-angle-plus" class="mini-btn">+1°</button>
+      <!-- ===== Rangée 1 : Club / Shot / Power ===== -->
+      <div class="form-grid">
+        <div class="field">
+          <label data-i18n="label_club">Club</label>
+          <select id="club">
+            <option value="0">1W</option>
+            <option value="1">2W</option>
+            <option value="2">3W</option>
+            <option value="3">2I</option>
+            <option value="4">3I</option>
+            <option value="5">4I</option>
+            <option value="6">5I</option>
+            <option value="7">6I</option>
+            <option value="8">7I</option>
+            <option value="9">8I</option>
+            <option value="10">9I</option>
+            <option value="11">PW</option>
+            <option value="12">SW</option>
+          </select>
+        </div>
+        <div class="field">
+          <label data-i18n="label_shot">Shot</label>
+          <select id="shot">
+            <option value="0" data-i18n="shot_dunk">Dunk</option>
+            <option value="1" data-i18n="shot_tomahawk">Tomahawk</option>
+            <option value="2" data-i18n="shot_spike">Spike</option>
+            <option value="3" data-i18n="shot_cobra">Cobra</option>
+          </select>
+        </div>
+        <div class="field">
+          <label data-i18n="label_power_shot">Power</label>
+          <select id="power_shot">
+            <option value="0" data-i18n="min_ps_none">No</option>
+            <option value="1" data-i18n="min_ps_1">1 PS</option>
+            <option value="2" data-i18n="min_ps_2">2 PS</option>
+            <option value="3" data-i18n="min_ps_15y">15y</option>
+          </select>
         </div>
       </div>
-      <div class="field">
-        <label data-i18n="label_spin">Spin</label>
-        <input
-          id="spin"
-          tabindex="7"
-          autocomplete="off"
-          type="text"
-          maxlength="4"
-          value="0"
-        />
-      </div>
-      <div class="field">
-        <label data-i18n="label_curve">Curve</label>
-        <input
-          id="curve"
-          tabindex="8"
-          autocomplete="off"
-          type="text"
-          maxlength="3"
-          value="0"
-        />
-      </div>
-      <div class="field"></div>
-      <div class="field">
-        <!-- Le bouton qui envoie le signal -->
-        <button id="btn-optimize-dunk" class="spin-btn" data-i18n="ideal_spin">
-          Spin idéal
-        </button>
-      </div>
-      <div class="field">
-        <!-- Le bouton qui envoie le signal -->
-        <button id="btn-click-spin" class="spin-btn" data-i18n="apply_spin">
-          Aplliquer le spin
-        </button>
-      </div>
-      <div class="field"></div>
 
-      <div class="field">
-        <label data-i18n="label_ground">Ground</label>
-        <input
-          id="ground"
-          tabindex="5"
-          autocomplete="off"
-          type="text"
-          maxlength="3"
-          value="100"
-        />
+      <!-- ===== Rangée 2 : Dist / Height / Ground ===== -->
+      <div class="form-grid">
+        <div class="field">
+          <label data-i18n="label_distance">Dist</label>
+          <input
+            id="distance"
+            tabindex="1"
+            autocomplete="off"
+            type="text"
+            maxlength="6"
+            value="200"
+          />
+        </div>
+        <div class="field">
+          <label data-i18n="label_height">Height</label>
+          <input
+            id="height"
+            tabindex="2"
+            autocomplete="off"
+            type="text"
+            maxlength="6"
+            value="0"
+          />
+        </div>
+        <div class="field">
+          <label data-i18n="label_ground">Ground</label>
+          <input
+            id="ground"
+            tabindex="5"
+            autocomplete="off"
+            type="text"
+            maxlength="3"
+            value="100"
+          />
+        </div>
       </div>
-      <div class="field">
-        <label data-i18n="label_slope_break">Slope</label>
-        <input
-          id="slope_break"
-          tabindex="6"
-          autocomplete="off"
-          type="text"
-          maxlength="6"
-          value="0"
-        />
+
+      <!-- ===== Rangée 3 : Wind / Degree / Reset H. ===== -->
+      <div class="form-grid">
+        <div class="field">
+          <label data-i18n="label_wind">Wind</label>
+          <input
+            id="wind"
+            tabindex="3"
+            autocomplete="off"
+            type="text"
+            maxlength="1"
+            value="1"
+          />
+        </div>
+        <div class="field">
+          <label data-i18n="label_degree">Degree</label>
+          <input
+            id="degree"
+            tabindex="4"
+            autocomplete="off"
+            type="text"
+            maxlength="3"
+            value="45"
+          />
+        </div>
+        <div class="field">
+          <label data-i18n="label_slope_break">Slope</label>
+          <input
+            id="slope_break"
+            tabindex="6"
+            autocomplete="off"
+            type="text"
+            maxlength="6"
+            value="0"
+          />
+        </div>
       </div>
-      <div class="field">
-        <button
-          id="reset-params"
-          type="button"
-          class="action-btn spin-btn"
-          data-i18n="btn_reset_params"
-        >
-          Reset P.
-        </button>
+
+      <!-- ===== Rangée 4 : Spin / Curve / Slope ===== -->
+      <div class="form-grid">
+        <div class="field">
+          <label data-i18n="label_spin">Spin</label>
+          <input
+            id="spin"
+            tabindex="7"
+            autocomplete="off"
+            type="text"
+            maxlength="4"
+            value="0"
+          />
+        </div>
+        <div class="field spin-force">
+          <label class="toggle" for="chk-spin-positive-co">
+            <span><span data-i18n="spin_positive_only">Forcer</span> ▼</span>
+            <input
+              type="checkbox"
+              id="chk-spin-positive-co"
+              class="toggle__input"
+            />
+            <span class="toggle__track"></span>
+          </label>
+        </div>
+        <div class="field spin-force">
+          <label class="toggle" for="chk-spin-negative-co">
+            <span><span data-i18n="spin_negative_only">Forcer</span> ▲</span>
+            <input
+              type="checkbox"
+              id="chk-spin-negative-co"
+              class="toggle__input"
+            />
+            <span class="toggle__track"></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- ===== Rangée 5 : Forcer le spin (▼ positif / ▲ négatif) ===== -->
+      <div class="form-grid">
+        <div class="field">
+          <label data-i18n="label_curve">Curve</label>
+          <input
+            id="curve"
+            tabindex="8"
+            autocomplete="off"
+            type="text"
+            maxlength="3"
+            value="0"
+          />
+        </div>
+        <div class="field">
+          <!-- Le bouton qui envoie le signal -->
+          <button
+            id="btn-optimize-dunk"
+            class="spin-btn"
+            data-i18n="ideal_spin"
+          >
+            Spin idéal
+          </button>
+        </div>
+        <div class="field">
+          <!-- Le bouton qui envoie le signal -->
+          <button id="btn-click-spin" class="spin-btn" data-i18n="apply_spin">
+            Aplliquer le spin
+          </button>
+        </div>
+      </div>
+
+      <!-- ===== Rangée 6 : Actions ===== -->
+      <div class="form-grid">
+        <div class="field"></div>
+        <div class="field">
+          <button
+            id="reset-hall"
+            type="button"
+            class="action-btn"
+            data-i18n="btn_reset_hall"
+          >
+            Reset H.
+          </button>
+        </div>
+
+        <div class="field">
+          <button
+            id="reset-params"
+            type="button"
+            class="action-btn spin-btn"
+            data-i18n="btn_reset_params"
+          >
+            Reset P.
+          </button>
+        </div>
       </div>
 
       <div class="divider"></div>
-      <div class="label_show" data-i18n="show_label_calc">test</div>
+      <div class="label_show" data-i18n="show_label_calc">
+        Affichage des Overlays
+      </div>
       <div class="field">
         <label class="toggle" for="toggle-show-ruler-co">
           <span data-i18n="show_ruler">Afficher la règle :</span>
@@ -215,33 +258,68 @@
         </label>
       </div>
       <div class="field">
-        <label class="toggle" for="toggle-show-wind-co">
-          <span data-i18n="show_wind">Afficher le vent :</span>
+        <label class="toggle" for="toggle-show-infos-shot-co">
+          <span data-i18n="show_infos_shot">Infos du tir :</span>
           <input
             type="checkbox"
-            id="toggle-show-wind-co"
+            id="toggle-show-infos-shot-co"
             class="toggle__input"
           />
           <span class="toggle__track"></span>
         </label>
       </div>
-      <div class="field">
-        <label class="toggle" for="toggle-show-spin-co">
-          <span data-i18n="show_spin">Afficher le repère :</span>
-          <input
-            type="checkbox"
-            id="toggle-show-spin-co"
-            class="toggle__input"
-          />
-          <span class="toggle__track"></span>
-        </label>
+
+      <!-- === PANNEAU VENT (SLIDE-IN : depuis la droite) === -->
+      <button
+        id="btn-toggle-wind-panel"
+        class="wind-toggle-btn"
+        type="button"
+        title="Calcul du vent"
+      ></button>
+      <div id="wind-panel" class="wind-panel">
+        <!-- Image du vent : capture zoomée sur la flèche du jeu -->
+        <div class="wind-crop-box">
+          <img id="wind-image" />
+          <div class="angle-wrapper">
+            <canvas id="angle-canvas" width="360" height="360"></canvas>
+          </div>
+          <div class="wind-crosshair"></div>
+          <span id="angle-display" class="angle-badge">Angle : 0°</span>
+          <!-- Réglage fin des ° (coin bas gauche, taille réduite) -->
+          <div class="wind-corner-controls">
+            <button id="btn-angle-minus" class="mini-btn">-0.5°</button>
+            <button id="btn-angle-plus" class="mini-btn">+0.5°</button>
+          </div>
+        </div>
+
+        <!-- Recadrage + rafraîchissement -->
+        <div class="adjust-panel">
+          <div class="adjust-row">
+            <button
+              id="btn-refresh-img"
+              class="action-btn action-btn--success"
+              data-i18n="btn_refresh"
+            >
+              Refresh
+            </button>
+            <button id="btn-crop-up" class="crop-btn">▲</button>
+            <button id="btn-crop-left" class="crop-btn">◀</button>
+            <button id="btn-crop-right" class="crop-btn">▶</button>
+            <button id="btn-crop-down" class="crop-btn">▼</button>
+          </div>
+        </div>
       </div>
+      <!-- === GRIP DE REDIMENSIONNEMENT (bas droite, toujours visible) === -->
+      <div id="resize-grip" class="resize-grip" title="Redimensionner">⤡</div>
     </div>
     <script src="../../core/services/TauriService.js"></script>
     <script src="../../core/services/StorageService.js"></script>
+    <script src="../../core/services/ResolutionCalibrationService.js"></script>
     <script src="../../core/stores/CoursesSelectorCalcOverlay.js"></script>
     <script src="../../core/stores/PlayerStoreCalcOverlay.js"></script>
     <script src="../../core/components/CourseSelector.js"></script>
+    <script src="../../core/components/WindAngleSelector.js"></script>
+    <script src="../../core/components/ScreenshotManager.js"></script>
     <script src="../../utils/recalc.js"></script>
     <script src="../../shared/js/i18n.js"></script>
     <script src="../../utils/WindowDragHelper.js"></script>

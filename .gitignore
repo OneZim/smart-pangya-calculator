@@ -22,3 +22,15 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# --- TAURI & RUST SPECIFIC ---
+# Dossier de compilation Rust (très lourd !)
+target/
+src-tauri/target/
+
+# Fichiers de verrouillage de dépendances (optionnel, mais évite la lecture inutile)
+Cargo.lock
+
+# Fichiers temporaires générés par Tauri v2
+.tauri/
+src-tauri/.tauri/

@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Smart Pangya Calculator - Paramètres</title>
+
+    <script src="../../shared/js/theme-loader.js"></script>
+    <link rel="stylesheet" href="settings_screen.css" />
+  </head>
+
+  <body>
+    <div class="page">
+
+      <div class="card">
+        <div class="card-title" data-i18n="card_param">
+          Configuration de l'application
+        </div>
+
+        <div class="lang_select mt-4">
+          <label class="label-fixed" data-i18n="lang_label">Langue :</label>
+          <select id="lang-selector"></select>
+        </div>
+
+        <div class="theme_select mt-8">
+          <label class="label-fixed" data-i18n="label_theme">Thème :</label>
+          <select id="theme-selector">
+            <option value="dark-golf">Dark Golf</option>
+            <option value="pangya-pastel">PangYa Pastel</option>
+            <option value="win11">Windows 11</option>
+            <option value="pangya-classic" selected>
+              PangYa Classic
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="spacer"></div>
+
+      <div class="card">
+        <div class="card-title" data-i18n="card_screen_config">
+          Paramètres du client de jeu
+        </div>
+        <div class="form-grid">
+          <div class="field">
+            <label data-i18n="label_width">Width:</label>
+            <input id="rel-width" type="text" />
+          </div>
+          <div class="field">
+            <label data-i18n="label_height_screen">Height</label>
+            <input id="rel-height" type="text" />
+          </div>
+          <label class="toggle mb-4" for="smart-dev-limit">
+            <span data-i18n="label_smart_dev">Smart deviation limit</span>
+            <input
+              type="checkbox"
+              id="smart-dev-limit"
+              class="toggle__input"
+              checked
+            />
+            <span class="toggle__track"></span>
+          </label>
+          <label class="toggle mb-4" for="auto-fit">
+            <span data-i18n="label_auto_fit">Ajustement automatique</span>
+            <input
+              type="checkbox"
+              id="auto-fit"
+              class="toggle__input"
+              checked
+            />
+            <span class="toggle__track"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="spacer"></div>
+
+      <div class="card">
+        <div class="card-title" data-i18n="card_image_folder">
+          Dossier d'Images
+        </div>
+        <div class="form-grid">
+          <input
+            id="folder-path"
+            type="text"
+            readonly
+            data-i18n-placeholder="placeholder_folder"
+            placeholder="Sélectionne le dossier Pangya..."
+            class="folder-input"
+          />
+
+          <div class="flex gap-8 flex-wrap mt-8">
+            <button
+              id="btn-select-folder"
+              class="action-btn action-btn--neutral"
+              data-i18n="btn_browse"
+            >
+              Parcourir…
+            </button>
+            <button
+              id="btn-clear-folder"
+              class="action-btn action-btn--danger"
+              data-i18n="btn_clear_folder"
+            >
+              Vider le dossier
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="custom-confirm-modal">
+        <div class="modal-box card">
+          <h3 class="card-title" data-i18n="modal_title">⚠️ Attention</h3>
+          <p data-i18n="modal_body">
+            Voulez-vous vraiment supprimer TOUTES les images de ce dossier ?
+          </p>
+          <div class="modal-actions">
+            <button
+              id="modal-confirm-btn"
+              class="modal-btn modal-btn--danger"
+              data-i18n="modal_confirm"
+            >
+              Oui, vider
+            </button>
+            <button
+              id="modal-cancel-btn"
+              class="modal-btn modal-btn--cancel"
+              data-i18n="modal_cancel"
+            >
+              Annuler
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../../core/services/TauriService.js"></script>
+    <script src="../../core/services/StorageService.js"></script>
+    <script src="../../shared/js/themes.js"></script>
+    <script src="../../shared/js/i18n.js"></script>
+    <script src="../../core/components/ScreenshotManager.js"></script>
+    <script src="settings_screen.js"></script>
+  </body>
+</html>

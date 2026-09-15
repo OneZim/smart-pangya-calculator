@@ -111,6 +111,9 @@
   "show_label_calc": "Exibição dos Overlays",
   "show_ruler": "Régua",
   "show_spin": "Marcador de Spin",
+  "show_infos_shot": "Info do tiro",
+  "spin_positive_only": "Forçar",
+  "spin_negative_only": "Forçar",
   "show_wind": "Calculadora de Ângulo",
 
   "error_shot_too_short": "O tiro não pôde ser calculado; está muito curto ou muito fraco.",

@@ -1,15 +1,20 @@
 // =====================================================================
-// LE SYSTÈME D'INTERNATIONALISATION
+// PRÉREQUIS POUR QU'UNE FENÊTRE BÉNÉFICIE DE LA TRADUCTION/SYNC LANGUE :
+//   1. Inclure <script src=".../shared/js/i18n.js"></script> dans son HTML
+//   2. Ajouter la fenêtre dans src-tauri/capabilities/default.json :
+//      - tableau "windows"
+//      - core:event:allow-emit
+//      - core:event:allow-listen
+//   3. Utiliser data-i18n="clé" sur les éléments HTML à traduire
 // =====================================================================
 
-let currentLang = "fr"; // valeur par défaut, corrigée dans initLanguageSystem() une fois storage.init() terminé
+let currentLang = "fr"; // corrigée dans initLanguageSystem() après storage.init()
 let currentTranslations = {};
 window.i18nReady = false;
 let availableLanguages = [];
 
 // Storage (Tauri Store) — assigné dans initLanguageSystem(). Fallback
-// silencieux sur localStorage si StorageService n'est pas chargé dans
-// cette fenêtre, pour ne rien casser dans les fenêtres d'overlay.
+// silencieux sur localStorage si StorageService n'est pas chargé.
 let storage = null;
 
 window.t = function (key) {
@@ -26,6 +31,14 @@ function getTauriEvent() {
   return null;
 }
 
+function getCurrentWindowLabel() {
+  try {
+    return window.__TAURI__?.window?.getCurrentWindow?.()?.label || "?";
+  } catch {
+    return "?";
+  }
+}
+
 // ================================================================
 // APPLIQUER UNE LANGUE (cœur commun)
 // ================================================================
@@ -33,7 +46,6 @@ function getTauriEvent() {
 // broadcast: true  -> diffuse le changement aux autres fenêtres (choix utilisateur)
 // broadcast: false -> n'applique que localement (chargement initial, ou
 //                      réception d'un changement venant d'une autre fenêtre)
-//                      pour éviter les boucles de diffusion infinies.
 
 async function applyLanguage(lang, { broadcast = false } = {}) {
   try {
@@ -74,21 +86,15 @@ async function applyLanguage(lang, { broadcast = false } = {}) {
       langSelector.value = lang;
     }
 
-    // === FORCER LA MISE À JOUR DE short-error ===
-    const shortError = document.getElementById("short-error");
-    if (shortError) {
-      const key = shortError.getAttribute("data-i18n");
-      if (key && currentTranslations[key]) {
-        shortError.textContent = currentTranslations[key];
-      }
-    }
-
     // === DIFFUSER AUX AUTRES FENÊTRES (uniquement sur choix explicite) ===
     if (broadcast) {
       try {
         const tauriEvent = getTauriEvent();
         if (tauriEvent) {
-          await tauriEvent.emit("app-lang-changed", { lang: lang });
+          console.log(`[i18n] ▶ ÉMISSION app-lang-changed : ${lang}`);
+          await tauriEvent.emit("app-lang-changed", { lang });
+        } else {
+          console.warn("[i18n] ⚠️ getTauriEvent() null → émission ignorée");
         }
       } catch (e) {
         console.warn("Impossible de diffuser le changement de langue", e);
@@ -119,16 +125,33 @@ async function changeLanguage(lang) {
 // ÉCOUTER LES CHANGEMENTS VENANT D'AUTRES FENÊTRES
 // ================================================================
 
-async function setupCrossWindowLangSync() {
+async function setupCrossWindowLangSync(retry = 0) {
   const tauriEvent = getTauriEvent();
   if (!tauriEvent) {
-    setTimeout(setupCrossWindowLangSync, 50);
+    if (retry >= 50) {
+      console.error(
+        "[i18n] ❌ __TAURI__.event indisponible après 5s — sync inter-fenêtres désactivée",
+      );
+      return;
+    }
+    setTimeout(() => setupCrossWindowLangSync(retry + 1), 100);
     return;
   }
 
+  if (window.__langSyncRegistered) return;
+  window.__langSyncRegistered = true;
+
+  console.log(
+    "[i18n] 🔌 LISTENER app-lang-changed ENREGISTRÉ dans :",
+    getCurrentWindowLabel(),
+  );
+
   await tauriEvent.listen("app-lang-changed", (event) => {
     const { lang } = event.payload;
-    if (lang === currentLang) return; // déjà à jour, rien à faire
+    if (!lang) return;
+    if (lang === currentLang && window.i18nReady) return;
+
+    console.log(`[i18n] 📥 REÇU app-lang-changed : ${lang}`);
     applyLanguage(lang, { broadcast: false });
   });
 }
@@ -159,40 +182,54 @@ async function getLanguageName(lang) {
 
 async function populateLangSelector() {
   const selector = document.getElementById("lang-selector");
-  if (!selector) {
-    console.warn("⚠️ Sélecteur de langue non trouvé");
-    return;
-  }
+  if (!selector) return;
 
-  try {
-    const tauriCore = getTauriCore();
-    if (!tauriCore) return;
+  const tauriCore = getTauriCore();
+  if (!tauriCore) return;
 
-    availableLanguages = await tauriCore.invoke("get_available_languages");
-
-    selector.innerHTML = "";
-
-    for (const lang of availableLanguages) {
-      const option = document.createElement("option");
-      option.value = lang;
-      const langName = await getLanguageName(lang);
-      option.textContent = langName;
-
-      if (lang === currentLang) {
-        option.selected = true;
-      }
-      selector.appendChild(option);
+  // Charger la liste des langues (une fois)
+  if (availableLanguages.length === 0) {
+    try {
+      availableLanguages = await tauriCore.invoke("get_available_languages");
+    } catch (err) {
+      console.error("[i18n] ❌ get_available_languages :", err);
+      return;
     }
-
-    selector.addEventListener("change", () => {
-      const newLang = selector.value;
-      if (newLang !== currentLang) {
-        changeLanguage(newLang);
-      }
-    });
-  } catch (err) {
-    console.error("Erreur lors du chargement des langues :", err);
   }
+
+  // Remplir les options si pas déjà fait
+  if (selector.options.length === 0) {
+    try {
+      for (const lang of availableLanguages) {
+        const option = document.createElement("option");
+        option.value = lang;
+        option.textContent = await getLanguageName(lang);
+        selector.appendChild(option);
+      }
+    } catch (err) {
+      console.error("[i18n] ❌ Remplissage options :", err);
+    }
+  }
+
+  // Sélectionne la langue actuelle
+  selector.value = currentLang;
+
+  // Pose le listener UNE SEULE FOIS, en utilisant un flag sur un objet JS
+  // (pas sur le DOM, pour éviter les conflits)
+  if (populateLangSelector._listenerBound) return;
+  populateLangSelector._listenerBound = true;
+
+  selector.onchange = () => {
+    const newLang = selector.value;
+    console.log(
+      "[i18n] 🔄 Select → " + newLang + " (actuel : " + currentLang + ")",
+    );
+    if (newLang !== currentLang) {
+      changeLanguage(newLang);
+    }
+  };
+
+  console.log("[i18n] ✅ Listener posé sur le select");
 }
 
 // ================================================================
@@ -206,8 +243,7 @@ async function initLanguageSystem() {
     return;
   }
 
-  // Storage : chargé et initialisé ici (fallback silencieux sur
-  // localStorage si StorageService n'est pas présent dans cette fenêtre).
+  // Storage : idempotent, donc safe même si settings_screen.js l'appelle aussi
   storage = window.StorageService || null;
   if (storage) {
     await storage.init();
@@ -217,9 +253,6 @@ async function initLanguageSystem() {
   }
 
   await populateLangSelector();
-  // Chargement initial : pas de diffusion, chaque fenêtre s'initialise
-  // avec la langue déjà stockée, pas besoin de le crier aux autres
-  // fenêtres qui font la même chose de leur côté.
   await applyLanguage(currentLang, { broadcast: false });
   await setupCrossWindowLangSync();
 }
@@ -229,3 +262,16 @@ if (document.readyState === "loading") {
 } else {
   initLanguageSystem();
 }
+
+// ================================================================
+// EXPOSITION GLOBALE
+// ================================================================
+
+window.applyLanguage = applyLanguage;
+window.changeLanguage = changeLanguage;
+window.getCurrentLang = function () {
+  return currentLang;
+};
+window.getCurrentTranslations = function () {
+  return currentTranslations;
+};

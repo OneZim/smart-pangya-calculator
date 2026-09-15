@@ -111,6 +111,9 @@
   "show_label_calc": "Overlay Display",
   "show_ruler": "Ruler",
   "show_spin": "Spin Marker",
+  "show_infos_shot": "Shot Info",
+  "spin_positive_only": "Force",
+  "spin_negative_only": "Force",
   "show_wind": "Angle Calculator",
 
   "error_shot_too_short": "The shot could not be calculated; it is too short or too weak.",

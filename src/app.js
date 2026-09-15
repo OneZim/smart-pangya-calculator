@@ -12,7 +12,6 @@
  *   5. Écoute des événements Tauri pour la communication inter-fenêtres
  *   6. Configuration du sélecteur de parcours et des personnages
  *   7. Capture de la position du curseur pour le calibrage du spin
- *   8. Test de détection de la fenêtre Pangya (NOUVEAU)
  * =====================================================================
  */
 
@@ -42,10 +41,10 @@
   /**
    * Teste la détection de la fenêtre Pangya
    * Appelle la commande Tauri get_game_resolution et affiche le résultat
-   * @async
-   */
-  /**
-   * Teste la détection de la fenêtre Pangya et liste toutes les fenêtres visibles
+   *
+   * ⚠️ Plus appelée automatiquement au démarrage.
+   * Pour tester manuellement : window.testPangyaDetection() dans la console F12.
+   *
    * @async
    */
   async function testPangyaDetection() {
@@ -160,26 +159,22 @@
     async init() {
       try {
         // ============================================================
-        // 0. TEST DE DÉTECTION PANGYA (NOUVEAU)
+        // 0. INITIALISATION
         // ============================================================
         console.log("🚀 Initialisation de l'application...");
 
-        // Test de détection après un court délai pour laisser le temps à l'UI de charger
-        setTimeout(() => {
-          testPangyaDetection();
-        }, 2000);
+        // Détection Pangya : plus d'appel automatique au démarrage.
+        // Pour tester manuellement : window.testPangyaDetection() en console.
 
         // ============================================================
         // 1. RÉCUPÉRATION DES SERVICES
         // ============================================================
         const tauri = window.TauriService;
         const storage = window.StorageService;
-        const dunkCalc = window.DunkCalculator;
 
         console.log("📦 Services récupérés :", {
           tauri: !!tauri,
           storage: !!storage,
-          dunkCalc: !!dunkCalc,
         });
 
         // Initialisation du stockage
@@ -261,6 +256,11 @@
         this.setupOverlayToggles(tauri, storage);
 
         // ============================================================
+        // 7b. CONFIGURATION DU BOUTON PARAMÈTRES
+        // ============================================================
+        this.setupSettingsToggle(tauri);
+
+        // ============================================================
         // 8. CONFIGURATION DES CHAMPS DE SAISIE
         // ============================================================
         this.setupInputFields(storage, playerStore);
@@ -283,7 +283,7 @@
         // ============================================================
         // 12. GESTIONNAIRE DE CAPTURE D'ÉCRAN
         // ============================================================
-        const screenshotManager = window.ScreenshotManager(tauri, storage);
+        window.ScreenshotManager(tauri, storage);
 
         // ============================================================
         // 12b. CALIBRATION VENT — TAILLE RÉELLE DE L'IMAGE
@@ -412,6 +412,50 @@
       });
 
       // ============================================================
+      // TOGGLES : FORCER LE SPIN (▼ positif / ▲ négatif)
+      // Synchronisés avec calc_overlay via "sync-spin-force"
+      // (clé de stockage partagée "spin_force")
+      // ============================================================
+      const chkSpinPos = document.getElementById("chk-spin-positive");
+      const chkSpinNeg = document.getElementById("chk-spin-negative");
+
+      if (chkSpinPos) {
+        chkSpinPos.addEventListener("change", function () {
+          if (this.checked && chkSpinNeg) chkSpinNeg.checked = false;
+          tauri.emit("sync-spin-force", {
+            positive: this.checked,
+            negative: false,
+          });
+          storage.set("spin_force", this.checked ? "positive" : "");
+        });
+      }
+      if (chkSpinNeg) {
+        chkSpinNeg.addEventListener("change", function () {
+          if (this.checked && chkSpinPos) chkSpinPos.checked = false;
+          tauri.emit("sync-spin-force", {
+            positive: false,
+            negative: this.checked,
+          });
+          storage.set("spin_force", this.checked ? "negative" : "");
+        });
+      }
+
+      tauri.listen("sync-spin-force", (event) => {
+        const payload = event.payload || {};
+        if (chkSpinPos && chkSpinPos.checked !== !!payload.positive) {
+          chkSpinPos.checked = !!payload.positive;
+        }
+        if (chkSpinNeg && chkSpinNeg.checked !== !!payload.negative) {
+          chkSpinNeg.checked = !!payload.negative;
+        }
+      });
+
+      // Restauration depuis le stockage partagé (démarrage)
+      const savedSpinForce = storage.get("spin_force", "");
+      if (chkSpinPos) chkSpinPos.checked = savedSpinForce === "positive";
+      if (chkSpinNeg) chkSpinNeg.checked = savedSpinForce === "negative";
+
+      // ============================================================
       // TOGGLE : SPIN OVERLAY (repère de spin)
       // ============================================================
       const toggleShowSpin = document.getElementById("toggle-show-spin");
@@ -488,14 +532,9 @@
       // ============================================================
       // AFFICHAGE DU REPÈRE T (visible par défaut)
       // ============================================================
-      const toggleShowTRepere = document.getElementById(
-        "toggle-show-t-repere",
-      );
+      const toggleShowTRepere = document.getElementById("toggle-show-t-repere");
       if (toggleShowTRepere) {
-        toggleShowTRepere.checked = storage.get(
-          "ruler_show_t_repere",
-          true,
-        );
+        toggleShowTRepere.checked = storage.get("ruler_show_t_repere", true);
         toggleShowTRepere.addEventListener("change", function () {
           const visible = this.checked;
           storage.set("ruler_show_t_repere", visible);
@@ -578,6 +617,27 @@
       }
 
       console.log("✅ Overlays configurés");
+    },
+
+    // ================================================================
+    // MÉTHODE : setupSettingsToggle()
+    // DESCRIPTION : Configure le bouton pour afficher/masquer les paramètres
+    // ================================================================
+
+    /**
+     * Configure le bouton "Paramètres" pour ouvrir/fermer la fenêtre settings
+     * @param {Object} tauri - Service Tauri
+     */
+    setupSettingsToggle: function (tauri) {
+      const btnSettings = document.getElementById("btn-settings-toggle");
+      if (!btnSettings) return;
+
+      btnSettings.addEventListener("click", async () => {
+        if (!tauri.isAvailable) return;
+
+        const isVisible = await tauri.invoke("get_settings_visibility");
+        tauri.emit("toggle-settings-visibility", { show: !isVisible });
+      });
     },
 
     // ================================================================
