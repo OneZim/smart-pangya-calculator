@@ -3,6 +3,9 @@
   "title": "Smart Pangya Calculator",
   "lang_label": "Langue :",
 
+  "btn_settings": "Paramètres",
+  "btn_overlays": "Overlays",
+
   "label_course": "Parcours:",
   "label_map": "Map",
   "label_hole": "Hole",

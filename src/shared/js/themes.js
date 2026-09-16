@@ -242,16 +242,13 @@
 
   function initThemeSelector() {
     const selector = document.getElementById("theme-selector");
-    if (!selector) {
-      console.warn("⚠️ Sélecteur de thème non trouvé");
-      return;
-    }
-
-    // Charger le thème sauvegardé
-    selector.value = currentTheme;
-
     // === CHARGER LE THÈME AU DÉMARRAGE ===
     loadTheme(currentTheme);
+
+    if (!selector) return;
+
+    // Charger le thème sauvegardé dans le sélecteur quand cette fenêtre en possède un
+    selector.value = currentTheme;
 
     // Écouter les changements
     selector.addEventListener("change", () => {

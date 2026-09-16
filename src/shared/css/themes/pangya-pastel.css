@@ -62,7 +62,6 @@
   --shadow: 0 6px 20px rgba(255, 111, 165, 0.18);
 }
 
-
 body {
   font-family: "Nunito", "Trebuchet MS", Verdana, sans-serif;
 
@@ -77,7 +76,6 @@ body {
 
   background-attachment: fixed;
 }
-
 
 .tab-label {
   cursor: pointer;
@@ -105,13 +103,11 @@ body {
   transition: all 0.25s ease;
 }
 
-
 .tab-label:hover {
   transform: translateY(-2px);
 
   background: linear-gradient(#ffaacc, var(--rose-light));
 }
-
 
 .tab-content {
   border: 2px solid var(--border);
@@ -123,12 +119,14 @@ body {
   box-shadow: var(--shadow);
 }
 
-
 /* -----------------------------------------------------------------------
    ONGLET ACTIF
    ----------------------------------------------------------------------- */
 
-#tab1:checked + .tab-label, #tab2:checked + .tab-label, #tab3:checked + .tab-label, #tab4:checked + .tab-label, #tab5:checked + .tab-label {
+#tab1:checked + .tab-label,
+#tab2:checked + .tab-label,
+#tab3:checked + .tab-label,
+#tab4:checked + .tab-label {
   background: var(--panel);
 
   color: var(--rose);
@@ -139,7 +137,6 @@ body {
 
   border-bottom-color: var(--panel);
 }
-
 
 /* -----------------------------------------------------------------------
    CARTES
@@ -157,11 +154,9 @@ body {
   transition: all 0.3s ease;
 }
 
-
 .card:hover {
   box-shadow: 0 8px 28px rgba(255, 111, 165, 0.25);
 }
-
 
 .card-title {
   font-family: "Baloo 2", sans-serif;
@@ -179,12 +174,12 @@ body {
   border-bottom: 2px dashed var(--border);
 }
 
-
 /* -----------------------------------------------------------------------
    INPUTS
    ----------------------------------------------------------------------- */
 
-input, select {
+input,
+select {
   border-radius: 10px;
 
   border: 2px solid var(--border);
@@ -202,15 +197,14 @@ input, select {
   transition: all 0.25s ease;
 }
 
-
 input::placeholder {
   color: #b8a5be;
 
   opacity: 0.7;
 }
 
-
-input:focus, select:focus {
+input:focus,
+select:focus {
   outline: none;
 
   border-color: var(--rose);
@@ -218,11 +212,10 @@ input:focus, select:focus {
   box-shadow: 0 0 0 3px rgba(255, 111, 165, 0.2);
 }
 
-
-input:hover, select:hover {
+input:hover,
+select:hover {
   border-color: var(--rose-light);
 }
-
 
 /* -----------------------------------------------------------------------
    RESULTAT
@@ -249,7 +242,6 @@ input:hover, select:hover {
   animation: glowResult 3s ease-in-out infinite;
 }
 
-
 #result .percent-low {
   color: #ff3b3b;
 
@@ -261,9 +253,8 @@ input:hover, select:hover {
     0 0 40px rgba(255, 59, 59, 0.15);
 }
 
-
 @keyframes glowResult {
-0%,
+  0%,
   100% {
     text-shadow:
       0 2px 0 #d94f83,
@@ -276,7 +267,6 @@ input:hover, select:hover {
   }
 }
 
-
 /* -----------------------------------------------------------------------
    FOOTER
    ----------------------------------------------------------------------- */
@@ -288,7 +278,6 @@ footer {
 
   font-weight: 600;
 }
-
 
 /* -----------------------------------------------------------------------
    IMAGE VENT
@@ -306,11 +295,9 @@ footer {
   transition: all 0.25s ease;
 }
 
-
 .wind-crop-box:hover {
   border-color: var(--rose);
 }
-
 
 #angle-display {
   font-family: "Baloo 2", sans-serif;
@@ -323,7 +310,6 @@ footer {
 
   text-shadow: 0 1px 4px rgba(255, 180, 0, 0.3);
 }
-
 
 /* -----------------------------------------------------------------------
    PANEL REGLAGES IMAGE
@@ -338,7 +324,6 @@ footer {
 
   box-shadow: var(--shadow);
 }
-
 
 .adjust-title {
   background: var(--panel);
@@ -358,7 +343,6 @@ footer {
   border-radius: 10px;
 }
 
-
 .adjust-label {
   font-family: "Baloo 2", sans-serif;
 
@@ -368,7 +352,6 @@ footer {
 
   font-weight: 700;
 }
-
 
 .toggle {
   font-size: 14px;
@@ -384,11 +367,9 @@ footer {
   transition: color 0.2s ease;
 }
 
-
 .toggle:hover {
   color: var(--text);
 }
-
 
 .toggle__track {
   border-radius: 22px;
@@ -400,7 +381,6 @@ footer {
   transition: all 0.3s ease;
 }
 
-
 .toggle__track::after {
   border-radius: 50%;
 
@@ -411,11 +391,9 @@ footer {
   transition: all 0.3s ease;
 }
 
-
 .toggle:hover .toggle__track {
   border-color: var(--rose);
 }
-
 
 .toggle__input:checked + .toggle__track {
   background: var(--border);
@@ -423,16 +401,13 @@ footer {
   border-color: var(--rose);
 }
 
-
 .toggle__input:checked + .toggle__track::after {
   background: var(--rose);
 }
 
-
 .overlay-separator {
   background: var(--border);
 }
-
 
 /* -----------------------------------------------------------------------
    PANEL
@@ -448,7 +423,6 @@ footer {
   box-shadow: var(--shadow);
 }
 
-
 .panel legend {
   font-family: "Baloo 2", sans-serif;
 
@@ -458,7 +432,6 @@ footer {
 
   font-weight: 700;
 }
-
 
 /* =====================================================================
    MODALE • LANGUE • COURSE SELECTOR • FINITIONS
@@ -470,7 +443,6 @@ footer {
   backdrop-filter: blur(4px);
 }
 
-
 .modal-box {
   border-radius: 18px;
 
@@ -480,7 +452,6 @@ footer {
 
   box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
 }
-
 
 .modal-title {
   font-family: "Baloo 2", sans-serif;
@@ -492,17 +463,16 @@ footer {
   font-weight: 700;
 }
 
-
 /* -----------------------------------------------------------------------
    LANGUE et theme
    ----------------------------------------------------------------------- */
 
-.lang_select label, .theme_select label {
+.lang_select label,
+.theme_select label {
   color: #9a86a0;
 
   font-weight: 600;
 }
-
 
 .course-select {
   border-radius: 10px;
@@ -518,11 +488,9 @@ footer {
   transition: all 0.25s ease;
 }
 
-
 .course-select:hover:not(:disabled) {
   border-color: var(--rose);
 }
-
 
 .course-select:focus {
   outline: none;
@@ -532,18 +500,15 @@ footer {
   box-shadow: 0 0 0 3px rgba(255, 111, 165, 0.2);
 }
 
-
 .course-select:disabled {
   opacity: 0.5;
 
   cursor: not-allowed;
 }
 
-
 ::-webkit-scrollbar-track {
   background: var(--input-bg);
 }
-
 
 ::-webkit-scrollbar-thumb {
   border-radius: 20px;
@@ -551,11 +516,9 @@ footer {
   background: var(--border);
 }
 
-
 ::-webkit-scrollbar-thumb:hover {
   background: var(--rose);
 }
-
 
 /* -----------------------------------------------------------------------
    SELECTION TEXTE
@@ -567,18 +530,19 @@ footer {
   color: #fff;
 }
 
-
 /* -----------------------------------------------------------------------
    ANIMATION
    ----------------------------------------------------------------------- */
 
-.card, .panel, .adjust-panel, .tab-content {
+.card,
+.panel,
+.adjust-panel,
+.tab-content {
   animation: panelAppear 0.35s ease;
 }
 
-
 @keyframes panelAppear {
-from {
+  from {
     opacity: 0;
     transform: translateY(8px);
   }
@@ -588,21 +552,25 @@ from {
   }
 }
 
-
-.card::before, .panel::before, .adjust-panel::before, .ruler-panel::before, .tab-content::before {
+.card::before,
+.panel::before,
+.adjust-panel::before,
+.ruler-panel::before,
+.tab-content::before {
   pointer-events: none;
 
   background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
 }
 
-
 /* -----------------------------------------------------------------------
    OMBRES DOUCES
    ----------------------------------------------------------------------- */
 
-.card:hover, .panel:hover, .adjust-panel:hover, .ruler-panel:hover {
+.card:hover,
+.panel:hover,
+.adjust-panel:hover,
+.ruler-panel:hover {
   transform: translateY(-2px);
 
   box-shadow: 0 10px 26px rgba(255, 111, 165, 0.22);
 }
-

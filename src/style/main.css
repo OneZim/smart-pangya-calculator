@@ -224,19 +224,22 @@ body {
 }
 
 /* Sélecteur de langue - positionné en haut à droite */
-.top_lang {
+.top_menu {
   position: absolute;
-  top: 10px;
-  right: 8px;
+  top: 15px;
+  right: 20px;
   z-index: 2;
 }
 
-.top_lang .lang_select {
-  max-width: 220px;
-  width: auto;
-  min-width: 180px;
+.top_menu button {
+  margin-left: 6px;
+  background: transparent;
+  border: none;
+  color: var(--text-soft);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 20px;
 }
-
 /* Cache les inputs radio (ils servent uniquement de contrôle) */
 .tabs input[type="radio"] {
   display: none;
@@ -278,8 +281,7 @@ body {
 #tab1:checked + .tab-label,
 #tab2:checked + .tab-label,
 #tab3:checked + .tab-label,
-#tab4:checked + .tab-label,
-#tab5:checked + .tab-label {
+#tab4:checked + .tab-label {
   background: var(--bg-card);
   color: var(--text);
   border-color: var(--border);
@@ -290,8 +292,7 @@ body {
 #tab1:checked ~ #content1,
 #tab2:checked ~ #content2,
 #tab3:checked ~ #content3,
-#tab4:checked ~ #content4,
-#tab5:checked ~ #content5 {
+#tab4:checked ~ #content4 {
   display: block;
 }
 
@@ -378,7 +379,7 @@ body {
 
 .field > label {
   margin-bottom: 4px;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
 }
 
@@ -497,12 +498,12 @@ body {
 input,
 select {
   width: 100%;
-  padding: 8px 6px;
-  border-radius: 5px;
+  padding: 4px 4px;
+  border-radius: 3px;
   border: 1px solid var(--border-input);
   background: var(--bg-input);
   color: var(--text);
-  font-size: 13px;
+  font-size: 11px;
   transition: all 0.25s ease;
   box-sizing: border-box;
 }
@@ -557,7 +558,7 @@ footer {
 button.calc-btn {
   width: 100%;
   margin-top: 20px;
-  padding: 12px;
+  padding: 10px;
   position: relative;
   overflow: hidden;
 }
@@ -577,7 +578,7 @@ button.calc-btn {
 
 .action-btn {
   flex: 1;
-  padding: 9px 0;
+  padding: 7px 0;
   position: relative;
   overflow: hidden;
 }
@@ -597,7 +598,7 @@ button.calc-btn {
 /* Bouton principal "Calculer" */
 button.calc-btn {
   border: none;
-  border-radius: 6px;
+  border-radius: 4px;
   background: var(--accent, #0067c0);
   color: #ffffff;
   font-family: inherit;
@@ -653,7 +654,7 @@ button.calc-btn:active {
 /* Boutons d'action (Refresh, Screenshot, Réinitialiser...) */
 .action-btn {
   border: 1px solid transparent;
-  border-radius: 4px;
+  border-radius: 3px;
   cursor: pointer;
   font-family: inherit;
   font-size: 13px;
@@ -922,12 +923,12 @@ button.calc-btn:active {
 .course-selector {
   display: flex;
   gap: 10px;
-  margin-top: 6px;
+  margin-top: 2px;
 }
 
 .course-select {
   flex: 1;
-  padding: 8px;
+  padding: 4px;
 }
 
 /* ---------- Scrollbar ---------- */

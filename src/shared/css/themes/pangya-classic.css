@@ -60,7 +60,6 @@
   --shadow: 0 6px 20px rgba(0, 110, 180, 0.18);
 }
 
-
 body {
   font-family: "Trebuchet MS", Verdana, sans-serif;
 
@@ -76,7 +75,6 @@ body {
 
   background-attachment: fixed;
 }
-
 
 .tab-label {
   cursor: pointer;
@@ -102,13 +100,11 @@ body {
   transition: 0.18s;
 }
 
-
 .tab-label:hover {
   transform: translateY(-2px);
 
   background: linear-gradient(#b0eeff, #79ceff);
 }
-
 
 .tab-content {
   border: 2px solid var(--border);
@@ -125,12 +121,14 @@ body {
     inset 0 2px 0 rgba(255, 255, 255, 0.8);
 }
 
-
 /* -----------------------------------------------------------------------
    ONGLET ACTIF
    ----------------------------------------------------------------------- */
 
-#tab1:checked + .tab-label, #tab2:checked + .tab-label, #tab3:checked + .tab-label, #tab4:checked + .tab-label, #tab5:checked + .tab-label {
+#tab1:checked + .tab-label,
+#tab2:checked + .tab-label,
+#tab3:checked + .tab-label,
+#tab4:checked + .tab-label {
   background: linear-gradient(white, #eef9ff);
 
   color: var(--title);
@@ -139,7 +137,6 @@ body {
 
   border-color: var(--border);
 }
-
 
 /* -----------------------------------------------------------------------
    CARTES
@@ -160,7 +157,6 @@ body {
     inset 0 2px 0 rgba(255, 255, 255, 0.85);
 }
 
-
 .card-title {
   color: var(--title);
 
@@ -177,12 +173,12 @@ body {
   text-shadow: 0 1px white;
 }
 
-
 /* -----------------------------------------------------------------------
    INPUTS
    ----------------------------------------------------------------------- */
 
-input, select {
+input,
+select {
   border-radius: 10px;
 
   border: 2px solid #97d8ff;
@@ -196,15 +192,14 @@ input, select {
   transition: 0.15s;
 }
 
-
-input:focus, select:focus {
+input:focus,
+select:focus {
   outline: none;
 
   border-color: #36abff;
 
   box-shadow: 0 0 10px rgba(54, 171, 255, 0.35);
 }
-
 
 /* -----------------------------------------------------------------------
    RESULTAT
@@ -231,7 +226,6 @@ input:focus, select:focus {
   animation: glowResult 3s ease-in-out infinite;
 }
 
-
 #result .percent-low {
   color: #ff3b3b;
 
@@ -241,9 +235,8 @@ input:focus, select:focus {
     0 0 40px rgba(255, 59, 59, 0.15);
 }
 
-
 @keyframes glowResult {
-0%,
+  0%,
   100% {
     text-shadow:
       0 2px 0 #2a7ab5,
@@ -256,7 +249,6 @@ input:focus, select:focus {
   }
 }
 
-
 /* -----------------------------------------------------------------------
    FOOTER
    ----------------------------------------------------------------------- */
@@ -266,7 +258,6 @@ footer {
 
   font-size: 13px;
 }
-
 
 /* -----------------------------------------------------------------------
    IMAGE VENT
@@ -284,7 +275,6 @@ footer {
     var(--shadow);
 }
 
-
 #angle-display {
   font-size: 20px;
 
@@ -296,7 +286,6 @@ footer {
     0 1px white,
     0 0 10px rgba(255, 220, 120, 0.6);
 }
-
 
 /* -----------------------------------------------------------------------
    PANEL REGLAGES IMAGE
@@ -317,7 +306,6 @@ footer {
     var(--shadow);
 }
 
-
 .adjust-title {
   background: white;
 
@@ -334,7 +322,6 @@ footer {
   border-radius: 10px;
 }
 
-
 /* -----------------------------------------------------------------------
    LABEL REGLAGES
    ----------------------------------------------------------------------- */
@@ -349,7 +336,6 @@ footer {
   text-shadow: 0 1px white;
 }
 
-
 .toggle {
   color: var(--text);
 
@@ -362,7 +348,6 @@ footer {
   user-select: none;
 }
 
-
 .toggle__track {
   border-radius: 22px;
 
@@ -372,7 +357,6 @@ footer {
 
   transition: 0.2s;
 }
-
 
 .toggle__track::after {
   border-radius: 50%;
@@ -384,11 +368,9 @@ footer {
   transition: 0.2s;
 }
 
-
 .toggle:hover .toggle__track {
   border-color: #4fb9ff;
 }
-
 
 .toggle__input:checked + .toggle__track {
   background: linear-gradient(#8de4ff, #4eb8ff);
@@ -396,11 +378,9 @@ footer {
   border-color: #3aa8ff;
 }
 
-
 .overlay-separator {
   background: #9fdcff;
 }
-
 
 /* -----------------------------------------------------------------------
    PANEL
@@ -421,7 +401,6 @@ footer {
     var(--shadow);
 }
 
-
 .panel legend {
   color: var(--title);
 
@@ -431,7 +410,6 @@ footer {
 
   text-shadow: 0 1px white;
 }
-
 
 /* =====================================================================
    PARTIE 5/6
@@ -443,7 +421,6 @@ footer {
 
   backdrop-filter: blur(4px);
 }
-
 
 .modal-box {
   border-radius: 18px;
@@ -460,7 +437,6 @@ footer {
     inset 0 2px 0 rgba(255, 255, 255, 0.9);
 }
 
-
 .modal-title {
   font-size: 18px;
 
@@ -471,13 +447,12 @@ footer {
   text-shadow: 0 1px white;
 }
 
-
-.lang_select label, .theme_select label {
+.lang_select label,
+.theme_select label {
   color: #34678f;
 
   font-weight: 600;
 }
-
 
 .course-select:disabled {
   opacity: 0.45;
@@ -485,11 +460,9 @@ footer {
   cursor: not-allowed;
 }
 
-
 ::-webkit-scrollbar-track {
   background: #dff4ff;
 }
-
 
 ::-webkit-scrollbar-thumb {
   border-radius: 20px;
@@ -497,11 +470,9 @@ footer {
   background: linear-gradient(#97e6ff, #4eb8ff);
 }
 
-
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(#b8f2ff, #71caff);
 }
-
 
 /* -----------------------------------------------------------------------
    SELECTION TEXTE
@@ -513,18 +484,19 @@ footer {
   color: white;
 }
 
-
 /* -----------------------------------------------------------------------
    ANIMATION CARTES
    ----------------------------------------------------------------------- */
 
-.card, .panel, .adjust-panel, .tab-content {
+.card,
+.panel,
+.adjust-panel,
+.tab-content {
   animation: panelAppear 0.35s ease;
 }
 
-
 @keyframes panelAppear {
-from {
+  from {
     opacity: 0;
 
     transform: translateY(8px);
@@ -537,12 +509,12 @@ from {
   }
 }
 
-
 /* -----------------------------------------------------------------------
    HOVER GLOBAL
    ----------------------------------------------------------------------- */
 
-button, .tab-label {
+button,
+.tab-label {
   transition:
     background 0.18s,
     transform 0.18s,
@@ -550,18 +522,19 @@ button, .tab-label {
     border-color 0.18s;
 }
 
-
-input:hover, select:hover {
+input:hover,
+select:hover {
   border-color: #61c2ff;
 }
 
-
-.card:hover, .panel:hover, .adjust-panel:hover, .ruler-panel:hover {
+.card:hover,
+.panel:hover,
+.adjust-panel:hover,
+.ruler-panel:hover {
   box-shadow:
     0 10px 26px rgba(0, 120, 220, 0.22),
     inset 0 2px 0 rgba(255, 255, 255, 0.85);
 }
-
 
 /* -----------------------------------------------------------------------
    PETITS DETAILS
@@ -571,18 +544,19 @@ img {
   image-rendering: auto;
 }
 
-
 canvas {
   border-radius: 12px;
 }
-
 
 fieldset {
   border: none;
 }
 
-
-.card::before, .panel::before, .adjust-panel::before, .ruler-panel::before, .tab-content::before {
+.card::before,
+.panel::before,
+.adjust-panel::before,
+.ruler-panel::before,
+.tab-content::before {
   pointer-events: none;
 
   background: linear-gradient(
@@ -591,22 +565,21 @@ fieldset {
   );
 }
 
-
 /* -----------------------------------------------------------------------
    REFLET SUR LES INPUTS
    ----------------------------------------------------------------------- */
 
-input, select {
+input,
+select {
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.95),
     0 1px 4px rgba(70, 170, 255, 0.08);
 }
 
-
-input:focus, select:focus {
+input:focus,
+select:focus {
   background: white;
 }
-
 
 /* -----------------------------------------------------------------------
    LABELS
@@ -620,15 +593,15 @@ label {
   text-shadow: 0 1px rgba(255, 255, 255, 0.75);
 }
 
-
 /* -----------------------------------------------------------------------
    ICÔNES
    ----------------------------------------------------------------------- */
 
-button i, .action-btn i, .mini-btn i {
-margin-right: 5px;
+button i,
+.action-btn i,
+.mini-btn i {
+  margin-right: 5px;
 }
-
 
 /* -----------------------------------------------------------------------
    IMAGE VENT
@@ -638,7 +611,6 @@ margin-right: 5px;
   transition: 0.2s;
 }
 
-
 .wind-crop-box:hover {
   transform: scale(1.02);
 
@@ -647,15 +619,16 @@ margin-right: 5px;
     inset 0 2px 0 rgba(255, 255, 255, 0.85);
 }
 
-
 /* -----------------------------------------------------------------------
    HOVER GENERAL
    ----------------------------------------------------------------------- */
 
-.card:hover, .panel:hover, .adjust-panel:hover, .ruler-panel:hover {
+.card:hover,
+.panel:hover,
+.adjust-panel:hover,
+.ruler-panel:hover {
   transform: translateY(-2px);
 }
-
 
 /* -----------------------------------------------------------------------
    LIENS
@@ -669,11 +642,9 @@ a {
   transition: 0.15s;
 }
 
-
 a:hover {
   color: #4fb9ff;
 }
-
 
 /* -----------------------------------------------------------------------
    PETITES VALEURS
@@ -683,33 +654,35 @@ small {
   color: #6f8fa8;
 }
 
-
 /* -----------------------------------------------------------------------
    FOCUS ACCESSIBILITE
    ----------------------------------------------------------------------- */
 
-button:focus, input:focus, select:focus {
+button:focus,
+input:focus,
+select:focus {
   outline: none;
 }
-
 
 /* -----------------------------------------------------------------------
    OMBRES DOUCES
    ----------------------------------------------------------------------- */
 
-.card, .panel, .adjust-panel, .wind-crop-box {
+.card,
+.panel,
+.adjust-panel,
+.wind-crop-box {
   box-shadow:
     0 6px 18px rgba(0, 110, 200, 0.18),
     inset 0 2px 0 rgba(255, 255, 255, 0.85);
 }
-
 
 /* -----------------------------------------------------------------------
    AMBIANCE CIEL
    ----------------------------------------------------------------------- */
 
 body::before {
-content: "";
+  content: "";
 
   position: fixed;
 
@@ -724,9 +697,8 @@ content: "";
   background: radial-gradient(rgba(255, 255, 255, 0.45), transparent 70%);
 }
 
-
 body::after {
-content: "";
+  content: "";
 
   position: fixed;
 
@@ -741,9 +713,10 @@ content: "";
   background: radial-gradient(rgba(120, 210, 255, 0.25), transparent 70%);
 }
 
-
-.card-title::after, .adjust-title::after, .panel legend::after {
-content: "";
+.card-title::after,
+.adjust-title::after,
+.panel legend::after {
+  content: "";
 
   position: absolute;
 
@@ -755,4 +728,3 @@ content: "";
 
   background: linear-gradient(#7fd5ff, transparent);
 }
-

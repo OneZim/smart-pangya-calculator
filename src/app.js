@@ -668,15 +668,7 @@
        * Les laisser ici les ferait écraser par une ancienne valeur globale
        * à chaque changement de personnage.
        */
-      const fields = [
-        "spinDunk",
-        "spinToma",
-        "spinSpike",
-        "spinCobra",
-        "rel-width",
-        "rel-height",
-        "smart-dev-limit",
-      ];
+      const fields = ["spinDunk", "spinToma", "spinSpike", "spinCobra"];
 
       // Chargement et sauvegarde des champs
       fields.forEach((id) => {

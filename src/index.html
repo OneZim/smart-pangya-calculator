@@ -6,12 +6,11 @@
   AUTEUR : Onezim
   ============================================================
   Cette page constitue l'interface utilisateur principale de l'application.
-  Elle est organisée en 5 onglets :
+  Elle est organisée en 4 onglets :
     1. Calculs     - Saisie des paramètres de tir et calcul des résultats
     2. Overlays    - Gestion des superpositions d'écran (règle, spin, vent)
     3. Statistiques - Configuration des statistiques du personnage
-    4. Paramètres  - Configuration de l'application (thème, écran, offsets)
-    5. Options avancées - Calculs de pente (Slope/Breaks)
+    4. Options avancées - Calculs de pente (Slope/Breaks)
   ============================================================
 -->
 <html lang="fr_FR">
@@ -60,18 +59,17 @@
       <!-- ============================================================
            BOUTON PARAMÈTRES
            ============================================================ -->
-      <div class="top_lang">
-        <button
-          id="btn-settings-toggle"
-          class="action-btn action-btn--neutral"
-          data-i18n="btn_settings"
-        >
-          ⚙️ Paramètres
+      <div class="top_menu">
+        <button id="btn-settings-toggle" data-i18n-title="btn_settings">
+          ⚙️
+        </button>
+
+        <button id="btn-overlays-toggle" data-i18n-title="btn_overlays">
+          🎛️
         </button>
       </div>
-
       <!-- ============================================================
-           SYSTÈME D'ONGLETS (5 onglets)
+           SYSTÈME D'ONGLETS (4 onglets)
            ============================================================ -->
       <div class="tabs">
         <!-- Onglet 1 : Calculs -->
@@ -90,15 +88,9 @@
           >Statistiques</label
         >
 
-        <!-- Onglet 4 : Paramètres -->
+        <!-- Onglet 4 : Options avancées (Slope) -->
         <input type="radio" name="tab" id="tab4" />
-        <label for="tab4" class="tab-label" data-i18n="tab_config"
-          >Paramètres</label
-        >
-
-        <!-- Onglet 5 : Options avancées (Slope) -->
-        <input type="radio" name="tab" id="tab5" />
-        <label for="tab5" class="tab-label" data-i18n="tab_slope"
+        <label for="tab4" class="tab-label" data-i18n="tab_slope"
           >Options avancées</label
         >
 
@@ -900,111 +892,9 @@
         </div>
 
         <!-- ============================================================
-             CONTENU ONGLET 4 : PARAMÈTRES
+             CONTENU ONGLET 4 : OPTIONS AVANCÉES (SLOPE/BREAKS)
              ============================================================ -->
         <div class="tab-content" id="content4">
-          <!--
-            SECTION : CONFIGURATION DE L'APPLICATION
-            Permet de changer le thème visuel.
-          -->
-          <div class="card">
-            <div class="card-title" data-i18n="card_param">
-              Configuration de l'application
-            </div>
-            <div class="theme_select mt-4">
-              <label data-i18n="theme_label">🎨 Thème</label>
-              <select id="theme-selector">
-                <option value="dark-golf">🌙 Dark Golf</option>
-                <option value="pangya-pastel">🌸 PangYa Pastel</option>
-                <option value="win11">💠 Windows 11</option>
-                <option value="pangya-classic" selected>
-                  🌊 PangYa Classic
-                </option>
-              </select>
-            </div>
-          </div>
-
-          <div class="spacer"></div>
-
-          <!--
-            SECTION : CONFIGURATION ÉCRAN
-            Définit les dimensions et limites de l'écran.
-          -->
-          <div class="card">
-            <div class="card-title" data-i18n="card_screen_config">
-              Configuration Écran
-            </div>
-            <div class="form-grid">
-              <div class="field">
-                <label data-i18n="label_width">Width:</label>
-                <input id="rel-width" type="text" />
-              </div>
-              <div class="field">
-                <label data-i18n="label_height_screen">Height:</label>
-                <input id="rel-height" type="text" />
-              </div>
-              <label class="toggle mb-4" for="smart-dev-limit">
-                <span data-i18n="label_smart_dev">Smart deviation limit:</span>
-                <input
-                  type="checkbox"
-                  id="smart-dev-limit"
-                  class="toggle__input"
-                  checked
-                />
-                <span class="toggle__track"></span>
-              </label>
-              <label class="toggle mb-4" for="auto-fit">
-                <span data-i18n="label_auto_fit">Auto fit:</span>
-                <input
-                  type="checkbox"
-                  id="auto-fit"
-                  class="toggle__input"
-                  checked
-                />
-                <span class="toggle__track"></span>
-              </label>
-            </div>
-          </div>
-          <div class="spacer"></div>
-
-          <div class="card">
-            <div class="card-title" data-i18n="card_image_folder">
-              Dossier d'Images
-            </div>
-            <div class="form-grid">
-              <input
-                id="folder-path"
-                type="text"
-                readonly
-                data-i18n-placeholder="placeholder_folder"
-                placeholder="Sélectionne le dossier Pangya..."
-                class="folder-input"
-              />
-
-              <div class="flex gap-8 flex-wrap mt-8">
-                <button
-                  id="btn-select-folder"
-                  class="action-btn action-btn--neutral"
-                  data-i18n="btn_browse"
-                >
-                  Parcourir…
-                </button>
-                <button
-                  id="btn-clear-folder"
-                  class="action-btn action-btn--danger"
-                  data-i18n="btn_clear_folder"
-                >
-                  Vider le dossier
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- ============================================================
-             CONTENU ONGLET 5 : OPTIONS AVANCÉES (SLOPE/BREAKS)
-             ============================================================ -->
-        <div class="tab-content" id="content5">
           <!--
             SECTION : CALCUL DE PENTE
             Permet de calculer les breaks et les angles de pente.
@@ -1110,10 +1000,10 @@
 
     <!-- 8. Composants UI -->
     <script src="core/components/CourseSelector.js"></script>
+    <script src="core/services/ResolutionCalibrationService.js"></script>
     <script src="core/components/ScreenshotManager.js"></script>
     <script src="core/components/WindAngleSelector.js"></script>
     <script src="core/components/CharacterManager.js"></script>
-
     <!-- 9. Application principale -->
     <script src="app.js"></script>
 

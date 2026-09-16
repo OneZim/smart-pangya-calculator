@@ -99,7 +99,6 @@
   --btn3: #0067c0;
 }
 
-
 /* -----------------------------------------------------------------------
    GLOBAL
    ----------------------------------------------------------------------- */
@@ -115,7 +114,6 @@ body {
 
   font-size: 14px;
 }
-
 
 .tab-label {
   cursor: pointer;
@@ -134,16 +132,16 @@ body {
 
   background: transparent;
 
-  transition: background 0.15s ease, color 0.15s ease;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
 }
-
 
 .tab-label:hover {
   background: rgba(0, 0, 0, 0.04);
 
   color: var(--text);
 }
-
 
 .tab-content {
   background: var(--bg-card);
@@ -157,10 +155,12 @@ body {
   animation: fadeIn 0.25s ease;
 }
 
-
 /* Onglet actif */
 
-#tab1:checked + .tab-label, #tab2:checked + .tab-label, #tab3:checked + .tab-label, #tab4:checked + .tab-label, #tab5:checked + .tab-label {
+#tab1:checked + .tab-label,
+#tab2:checked + .tab-label,
+#tab3:checked + .tab-label,
+#tab4:checked + .tab-label {
   background: var(--bg-card);
 
   color: var(--accent);
@@ -169,7 +169,6 @@ body {
 
   border-bottom-color: var(--bg-card);
 }
-
 
 /* -----------------------------------------------------------------------
    CARTES
@@ -184,16 +183,16 @@ body {
 
   box-shadow: var(--shadow);
 
-  transition: box-shadow 0.15s ease, border-color 0.15s ease;
+  transition:
+    box-shadow 0.15s ease,
+    border-color 0.15s ease;
 }
-
 
 .card:hover {
   border-color: var(--accent);
 
   box-shadow: var(--shadow-hover);
 }
-
 
 .card-title {
   font-size: 13px;
@@ -207,13 +206,13 @@ body {
   border-bottom: 1px solid var(--border);
 }
 
-
 /* -----------------------------------------------------------------------
    INPUTS & SELECTS
    ----------------------------------------------------------------------- */
 
-input, select {
-  border-radius: 4px;
+input,
+select {
+  border-radius: 3px;
 
   border: 1px solid var(--border-input);
 
@@ -221,13 +220,14 @@ input, select {
 
   color: var(--text);
 
-  font-size: 13px;
+  font-size: 11px;
 
   font-family: inherit;
 
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
 }
-
 
 input::placeholder {
   color: var(--text-soft);
@@ -235,20 +235,19 @@ input::placeholder {
   opacity: 0.8;
 }
 
-
-input:hover, select:hover {
+input:hover,
+select:hover {
   border-color: var(--accent-hover);
 }
 
-
-input:focus, select:focus {
+input:focus,
+select:focus {
   outline: none;
 
   border-color: var(--accent);
 
   box-shadow: 0 0 0 1px var(--accent);
 }
-
 
 /* -----------------------------------------------------------------------
    RÉSULTAT
@@ -262,11 +261,9 @@ input:focus, select:focus {
   font-weight: 600;
 }
 
-
 #result .percent-low {
   color: #c42b1c;
 }
-
 
 /* -----------------------------------------------------------------------
    IMAGE VENT (canvas + crop)
@@ -281,9 +278,10 @@ input:focus, select:focus {
 
   box-shadow: var(--shadow);
 
-  transition: box-shadow 0.15s ease, border-color 0.15s ease;
+  transition:
+    box-shadow 0.15s ease,
+    border-color 0.15s ease;
 }
-
 
 .wind-crop-box:hover {
   border-color: var(--accent);
@@ -291,13 +289,11 @@ input:focus, select:focus {
   box-shadow: var(--shadow-hover);
 }
 
-
 #angle-display {
   color: var(--accent);
 
   font-weight: 600;
 }
-
 
 /* -----------------------------------------------------------------------
    PANEL RÉGLAGES IMAGE
@@ -311,7 +307,6 @@ input:focus, select:focus {
   border-radius: 8px;
 }
 
-
 .adjust-title {
   font-size: 13px;
 
@@ -320,7 +315,6 @@ input:focus, select:focus {
   color: var(--text);
 }
 
-
 .adjust-label {
   color: var(--text-label);
 
@@ -328,7 +322,6 @@ input:focus, select:focus {
 
   font-weight: 600;
 }
-
 
 /* -----------------------------------------------------------------------
    TOGGLE SWITCH
@@ -346,11 +339,9 @@ input:focus, select:focus {
   user-select: none;
 }
 
-
 .toggle:hover .toggle__track {
   opacity: 0.9;
 }
-
 
 .toggle__track {
   border-radius: 20px;
@@ -362,7 +353,6 @@ input:focus, select:focus {
   transition: background 0.15s ease;
 }
 
-
 .toggle__track::after {
   border-radius: 50%;
 
@@ -373,11 +363,9 @@ input:focus, select:focus {
   transition: transform 0.15s ease;
 }
 
-
 .toggle__input:checked + .toggle__track {
   background: var(--toggle-checked);
 }
-
 
 .panel {
   background: var(--bg-card);
@@ -386,14 +374,14 @@ input:focus, select:focus {
 
   border-radius: 8px;
 
-  transition: box-shadow 0.15s ease, border-color 0.15s ease;
+  transition:
+    box-shadow 0.15s ease,
+    border-color 0.15s ease;
 }
-
 
 .panel:hover {
   border-color: var(--accent-hover);
 }
-
 
 .panel legend {
   font-size: 13px;
@@ -403,13 +391,11 @@ input:focus, select:focus {
   color: var(--accent);
 }
 
-
 .overlay-separator {
   border: none;
 
   border-top: 1px solid var(--border);
 }
-
 
 /* -----------------------------------------------------------------------
    MODALE DE CONFIRMATION
@@ -418,7 +404,6 @@ input:focus, select:focus {
 #custom-confirm-modal {
   background: rgba(0, 0, 0, 0.4);
 }
-
 
 .modal-box {
   background: var(--modal-bg);
@@ -430,7 +415,6 @@ input:focus, select:focus {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
-
 .modal-title {
   font-size: 16px;
 
@@ -439,8 +423,8 @@ input:focus, select:focus {
   color: var(--text);
 }
 
-
-.lang_select label, .theme_select label {
+.lang_select label,
+.theme_select label {
   color: var(--text-label);
 
   font-size: 13px;
@@ -448,11 +432,10 @@ input:focus, select:focus {
   font-weight: 600;
 }
 
-
 .course-select {
   border: 1px solid var(--border-input);
 
-  border-radius: 4px;
+  border-radius: 3px;
 
   background: var(--bg-input);
 
@@ -460,16 +443,14 @@ input:focus, select:focus {
 
   font-family: inherit;
 
-  font-size: 13px;
+  font-size: 12px;
 }
-
 
 .course-select:disabled {
   opacity: 0.5;
 
   cursor: not-allowed;
 }
-
 
 /* -----------------------------------------------------------------------
    BARRE DE TITRE
@@ -479,11 +460,9 @@ input:focus, select:focus {
   background: rgba(255, 255, 255, 0.7);
 }
 
-
 ::-webkit-scrollbar-track {
   background: transparent;
 }
-
 
 ::-webkit-scrollbar-thumb {
   background: var(--scrollbar);
@@ -491,8 +470,6 @@ input:focus, select:focus {
   border-radius: 5px;
 }
 
-
 ::-webkit-scrollbar-thumb:hover {
   background: var(--scrollbar-hover);
 }
-

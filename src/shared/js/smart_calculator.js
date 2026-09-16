@@ -1185,7 +1185,7 @@ function calc(el) {
   // contraire horaire, miroir de l'interne du sélecteur). L'algorithme
   // attend la convention historique (sens horaire) → reconnaissance ici.
   let degree = checkValidInput(document.getElementById("degree").value);
-  degree = ((360 - degree) % 360 + 360) % 360;
+  degree = (((360 - degree) % 360) + 360) % 360;
   let ground = checkValidInput(document.getElementById("ground").value);
   let spin = checkValidInput(document.getElementById("spin").value);
   let curve = checkValidInput(document.getElementById("curve").value);
@@ -1398,13 +1398,33 @@ function fix(value) {
   return value;
 }
 
+function getClientSetting(id, fallback, type) {
+  const element = document.getElementById(id);
+  let value = element
+    ? type === "checkbox"
+      ? element.checked
+      : element.value
+    : null;
+
+  if (value === null && window.StorageService) {
+    value = window.StorageService.get(id, fallback);
+  }
+
+  if (type === "checkbox") {
+    return value === true || value === "true";
+  }
+
+  const numericValue = Number(value);
+  return Number.isFinite(numericValue) ? numericValue : fallback;
+}
+
 function getSlopeByResolution() {
   const resolution = {
-    width: checkValidInput(document.getElementById("rel-width").value),
-    height: checkValidInput(document.getElementById("rel-height").value),
+    width: getClientSetting("rel-width", 1920, "number"),
+    height: getClientSetting("rel-height", 1080, "number"),
   };
 
-  const auto_fit = document.getElementById("auto-fit").checked;
+  const auto_fit = getClientSetting("auto-fit", true, "checkbox");
 
   if (resolution.height < 480) return 1.0;
 
@@ -1419,8 +1439,8 @@ function getSlopeByResolution() {
 
 function getResolutionPBLimit() {
   const resolution = {
-    width: checkValidInput(document.getElementById("rel-width").value),
-    height: checkValidInput(document.getElementById("rel-height").value),
+    width: getClientSetting("rel-width", 1920, "number"),
+    height: getClientSetting("rel-height", 1080, "number"),
   };
 
   let value =
@@ -1432,9 +1452,7 @@ function getResolutionPBLimit() {
 }
 
 function smartDesvio(smartData) {
-  let MAX_PB = checkValidInput(
-    document.getElementById("smart-dev-limit").checked,
-  );
+  let MAX_PB = getClientSetting("smart-dev-limit", true, "checkbox") ? 1 : 0;
 
   if (MAX_PB <= 0)
     // no limit

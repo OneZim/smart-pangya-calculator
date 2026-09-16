@@ -80,6 +80,12 @@ async function applyLanguage(lang, { broadcast = false } = {}) {
       }
     });
 
+    document.querySelectorAll("[data-i18n-title]").forEach((element) => {
+      const key = element.getAttribute("data-i18n-title");
+      if (currentTranslations[key]) {
+        element.title = currentTranslations[key];
+      }
+    });
     // === METTRE À JOUR LE SÉLECTEUR ===
     const langSelector = document.getElementById("lang-selector");
     if (langSelector) {
