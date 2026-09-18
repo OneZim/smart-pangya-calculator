@@ -72,13 +72,11 @@ body {
   color: var(--text);
   background: var(--bg-body);
   background-attachment: fixed;
-  font-size: 14px;
 }
 .tab-label {
   cursor: pointer;
   color: var(--text-soft);
   font-weight: 600;
-  font-size: 13px;
   border: 1px solid transparent;
   border-bottom: none;
   border-radius: 8px 8px 0 0;
@@ -125,7 +123,6 @@ body {
   box-shadow: var(--shadow-hover);
 }
 .card-title {
-  font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.3px;
   color: var(--text);
@@ -140,7 +137,6 @@ select {
   border: 1px solid var(--border-input);
   background: var(--bg-input);
   color: var(--text);
-  font-size: 11px;
   font-family: inherit;
   transition:
     border-color 0.15s ease,
@@ -165,7 +161,6 @@ select:focus {
    ----------------------------------------------------------------------- */
 #result {
   color: var(--text);
-  font-size: 15px;
   font-weight: 600;
 }
 #result .percent-low {
@@ -200,13 +195,11 @@ select:focus {
   border-radius: 8px;
 }
 .adjust-title {
-  font-size: 13px;
   font-weight: 600;
   color: var(--text);
 }
 .adjust-label {
   color: var(--text-label);
-  font-size: 13px;
   font-weight: 600;
 }
 /* -----------------------------------------------------------------------
@@ -214,7 +207,6 @@ select:focus {
    ----------------------------------------------------------------------- */
 .toggle {
   color: var(--text);
-  font-size: 13px;
   font-weight: 600;
   cursor: pointer;
   user-select: none;
@@ -249,7 +241,6 @@ select:focus {
   border-color: var(--accent-hover);
 }
 .panel legend {
-  font-size: 13px;
   font-weight: 600;
   color: var(--accent);
 }
@@ -270,14 +261,12 @@ select:focus {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 .modal-title {
-  font-size: 16px;
   font-weight: 600;
   color: var(--text);
 }
 .lang_select label,
 .theme_select label {
   color: var(--text-label);
-  font-size: 13px;
   font-weight: 600;
 }
 .course-select {
@@ -286,7 +275,6 @@ select:focus {
   background: var(--bg-input);
   color: var(--text);
   font-family: inherit;
-  font-size: 12px;
 }
 .course-select:disabled {
   opacity: 0.5;

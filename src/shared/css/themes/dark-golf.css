@@ -68,7 +68,6 @@ body {
   color: #7a7e90;
   cursor: pointer;
   border-radius: 4px 4px 0 0;
-  font-size: 14px;
   font-weight: 500;
   border: 1px solid #252830;
   border-bottom: none;
@@ -109,7 +108,6 @@ body {
   box-shadow: 0 8px 32px rgba(61, 107, 80, 0.12);
 }
 .card-title {
-  font-size: 15px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -125,7 +123,6 @@ select {
   border: 1px solid #2e323e;
   background: #0d0f14;
   color: #dde0ea;
-  font-size: 14px;
   transition: all 0.25s ease;
 }
 input::placeholder {
@@ -146,7 +143,6 @@ select:hover {
    RÉSULTAT
    ----------------------------------------------------------------------- */
 #result {
-  font-size: 25px;
   color: #c9a84c;
   font-weight: 700;
   text-shadow: 0 0 30px rgba(201, 168, 76, 0.15);
@@ -162,7 +158,6 @@ select:hover {
    ----------------------------------------------------------------------- */
 footer {
   color: #4a4e60;
-  font-size: 13px;
   letter-spacing: 0.02em;
   opacity: 0.7;
   transition: opacity 0.3s ease;
@@ -190,7 +185,6 @@ footer:hover {
    AFFICHAGE DE L'ANGLE
    ----------------------------------------------------------------------- */
 #angle-display {
-  font-size: 18px;
   font-weight: 600;
   color: #c9a84c;
 }
@@ -207,21 +201,18 @@ footer:hover {
   background: #14171e;
   color: #3d6b50;
   font-weight: 700;
-  font-size: 12px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 .adjust-label {
   color: #c9a84c;
   font-weight: 700;
-  font-size: 14px;
 }
 /* -----------------------------------------------------------------------
    TOGGLE SWITCH
    ----------------------------------------------------------------------- */
 .toggle {
   cursor: pointer;
-  font-size: 14px;
   color: #9aa0b4;
   user-select: none;
   transition: color 0.2s ease;
@@ -260,7 +251,6 @@ footer:hover {
   border-color: #3d6b50;
 }
 .panel legend {
-  font-size: 16px;
   color: #3d6b50;
   font-weight: bold;
 }
@@ -281,7 +271,6 @@ footer:hover {
 }
 .modal-title {
   color: #c0414e;
-  font-size: 16px;
 }
 .lang_select label,
 .theme_select label {
