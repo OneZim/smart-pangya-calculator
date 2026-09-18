@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Smart Pangya Calculator - Overlays</title>
+
+    <script src="../../shared/js/theme-loader.js"></script>
+    <link rel="stylesheet" href="overlays_screen.css" />
+  </head>
+
+  <body data-i18n-window-title="window_title_overlays">
+    <div class="page">
+      <div class="card">
+        <div class="card-title" data-i18n="card_overlays">
+          Gestion des Overlays
+        </div>
+
+        <div class="overlays-grid">
+          <!-- Colonne 1 : Input Bar + Spin + Infos Tir -->
+          <div class="overlays-col">
+            <!-- Overlay : Fenêtre de calcul -->
+            <fieldset class="panel">
+              <legend data-i18n="card_calcul_overlay">Fenêtre de calcul</legend>
+              <div class="flex flex-col gap-12">
+                <label class="toggle" for="toggle-show-input-bar">
+                  <span data-i18n="label_calcul_overlay"
+                    >Afficher la fenêtre :</span
+                  >
+                  <input
+                    type="checkbox"
+                    id="toggle-show-input-bar"
+                    class="toggle__input"
+                  />
+                  <span class="toggle__track"></span>
+                </label>
+              </div>
+            </fieldset>
+            <!-- Overlay : Infos Tir (PB, distance, %) -->
+            <fieldset class="panel">
+              <legend data-i18n="card_infos_shot">Infos de Tir</legend>
+              <div class="flex flex-col gap-12 items-center">
+                <div class="flex flex-col gap-10">
+                  <label class="toggle" for="toggle-show-infos-shot">
+                    <span data-i18n="label_show_infos_shot"
+                      >Afficher les infos :</span
+                    >
+                    <input
+                      type="checkbox"
+                      id="toggle-show-infos-shot"
+                      class="toggle__input"
+                    />
+                    <span class="toggle__track"></span>
+                  </label>
+
+                  <label class="toggle" for="toggle-click-through-infos-shot">
+                    <span data-i18n="label_lock_ruler"
+                      >Bloquer la fenêtre (Jouer) :</span
+                    >
+                    <input
+                      type="checkbox"
+                      id="toggle-click-through-infos-shot"
+                      class="toggle__input"
+                    />
+                    <span class="toggle__track"></span>
+                  </label>
+                </div>
+
+                <div class="flex flex-row items-center gap-12">
+                  <div
+                    class="adjust-title text-center"
+                    data-i18n="label_ruler_adjust"
+                  >
+                    Ajustement de l'overlay :
+                  </div>
+                  <div class="flex flex-row items-center gap-6">
+                    <button
+                      id="btn-infos-shot-move-left"
+                      class="calc-btn small-btn"
+                    >
+                      ◀
+                    </button>
+                    <button
+                      id="btn-infos-shot-move-up"
+                      class="calc-btn small-btn"
+                    >
+                      ▲
+                    </button>
+                    <button
+                      id="btn-infos-shot-move-down"
+                      class="calc-btn small-btn"
+                    >
+                      ▼
+                    </button>
+                    <button
+                      id="btn-infos-shot-move-right"
+                      class="calc-btn small-btn"
+                    >
+                      ▶
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+            <!-- Overlay : Repère de Spin -->
+            <fieldset class="panel">
+              <legend data-i18n="card_spin">Repère de Spin</legend>
+              <div class="flex flex-col gap-12 items-center">
+                <div class="flex flex-col gap-10">
+                  <label class="toggle" for="toggle-show-spin">
+                    <span data-i18n="label_show_spin"
+                      >Afficher le repère :</span
+                    >
+                    <input
+                      type="checkbox"
+                      id="toggle-show-spin"
+                      class="toggle__input"
+                    />
+                    <span class="toggle__track"></span>
+                  </label>
+
+                  <label class="toggle" for="toggle-click-through-spin">
+                    <span data-i18n="label_lock_ruler"
+                      >Bloquer le repere(Jouer) :</span
+                    >
+                    <input
+                      type="checkbox"
+                      id="toggle-click-through-spin"
+                      class="toggle__input"
+                    />
+                    <span class="toggle__track"></span>
+                  </label>
+                </div>
+
+                <div class="flex flex-row items-center gap-12">
+                  <div
+                    class="adjust-title text-center"
+                    data-i18n="label_ruler_adjust"
+                  >
+                    Ajustement du repère :
+                  </div>
+
+                  <div class="flex gap-6">
+                    <button id="btn-spin-move-left" class="calc-btn small-btn">
+                      ◀
+                    </button>
+                    <button id="btn-spin-move-up" class="calc-btn small-btn">
+                      ▲
+                    </button>
+                    <button id="btn-spin-move-down" class="calc-btn small-btn">
+                      ▼
+                    </button>
+                    <button id="btn-spin-move-right" class="calc-btn small-btn">
+                      ▶
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+
+          <!-- Colonne 2 : Règle + Vent -->
+          <div class="overlays-col">
+            <!-- Overlay : Règle de décalage -->
+            <fieldset class="panel">
+              <legend data-i18n="card_ruler">Règle de décalage</legend>
+              <div class="flex flex-col gap-12 items-center">
+                <div class="flex flex-col gap-10">
+                  <label class="toggle" for="toggle-show-ruler">
+                    <span data-i18n="label_show_ruler"
+                      >Afficher la règle :</span
+                    >
+                    <input
+                      type="checkbox"
+                      id="toggle-show-ruler"
+                      class="toggle__input"
+                    />
+                    <span class="toggle__track"></span>
+                  </label>
+
+                  <label class="toggle" for="toggle-click-through">
+                    <span data-i18n="label_lock_ruler"
+                      >Bloquer la règle (Jouer) :</span
+                    >
+                    <input
+                      type="checkbox"
+                      id="toggle-click-through"
+                      class="toggle__input"
+                    />
+                    <span class="toggle__track"></span>
+                  </label>
+
+                  <label class="toggle" for="ruler-smart-color">
+                    <span data-i18n="label_ruler_color"
+                      >Couleur du repère :</span
+                    >
+                    <input
+                      type="color"
+                      id="ruler-smart-color"
+                      value="#E0098E"
+                      class="ruler-color-input"
+                    />
+                  </label>
+
+                  <label class="toggle" for="toggle-show-t-repere">
+                    <span data-i18n="label_show_t_repere"
+                      >Afficher le repère T :</span
+                    >
+                    <input
+                      type="checkbox"
+                      id="toggle-show-t-repere"
+                      class="toggle__input"
+                      checked
+                    />
+                    <span class="toggle__track"></span>
+                  </label>
+                </div>
+
+                <div class="flex flex-row items-center gap-12">
+                  <div
+                    class="adjust-title text-center"
+                    data-i18n="label_ruler_adjust"
+                  >
+                    Ajustement de la règle :
+                  </div>
+                  <div class="flex flex-row items-center gap-6">
+                    <button id="btn-move-left" class="calc-btn small-btn">
+                      ◀
+                    </button>
+                    <button id="btn-move-up" class="calc-btn small-btn">
+                      ▲
+                    </button>
+                    <button id="btn-move-down" class="calc-btn small-btn">
+                      ▼
+                    </button>
+                    <button id="btn-move-right" class="calc-btn small-btn">
+                      ▶
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div style="height: 20px"></div>
+            </fieldset>
+
+            <!-- Overlay : Calculateur d'angles (vent) -->
+            <fieldset class="panel">
+              <legend data-i18n="card_wind_overlay">
+                Calculateur d'angles
+              </legend>
+              <div class="flex flex-col gap-12 items-center">
+                <div class="flex flex-col gap-10">
+                  <label class="toggle" for="toggle-show-wind-overlay">
+                    <span data-i18n="label_show_wind_overlay"
+                      >Afficher l'overlay vent :</span
+                    >
+                    <input
+                      type="checkbox"
+                      id="toggle-show-wind-overlay"
+                      class="toggle__input"
+                    />
+                    <span class="toggle__track"></span>
+                  </label>
+
+                  <label class="toggle" for="toggle-wind-click-through">
+                    <span data-i18n="label_lock_ruler"
+                      >Verrouiller l'overlay (plus clicable) :</span
+                    >
+                    <input
+                      type="checkbox"
+                      id="toggle-wind-click-through"
+                      class="toggle__input"
+                    />
+                    <span class="toggle__track"></span>
+                  </label>
+                </div>
+
+                <div class="flex flex-row items-center gap-12">
+                  <div
+                    class="adjust-title text-center"
+                    data-i18n="label_wind_overlay_adjust"
+                  >
+                    Ajustement de l'overlay :
+                  </div>
+                  <div class="flex flex-row items-center gap-6">
+                    <button id="btn-wind-move-left" class="calc-btn small-btn">
+                      ◀
+                    </button>
+                    <button id="btn-wind-move-up" class="calc-btn small-btn">
+                      ▲
+                    </button>
+
+                    <button id="btn-wind-move-down" class="calc-btn small-btn">
+                      ▼
+                    </button>
+                    <button id="btn-wind-move-right" class="calc-btn small-btn">
+                      ▶
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../../core/services/TauriService.js"></script>
+    <script src="../../core/services/StorageService.js"></script>
+    <script src="../../shared/js/i18n.js"></script>
+    <script src="../../shared/js/themes.js"></script>
+    <script src="overlays_screen.js"></script>
+  </body>
+</html>

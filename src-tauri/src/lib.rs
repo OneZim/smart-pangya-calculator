@@ -728,7 +728,14 @@ fn set_infos_shot_visibility(app: AppHandle, show: bool) {
 #[tauri::command]
 fn get_settings_visibility(app: AppHandle) -> bool {
     app.get_webview_window("settings_screen")
-        .map(|win| win.is_visible().unwrap_or(false))
+        .map(|w| w.is_visible().unwrap_or(false))
+        .unwrap_or(false)
+}
+
+#[tauri::command]
+fn get_overlays_screen_visibility(app: AppHandle) -> bool {
+    app.get_webview_window("overlays_screen")
+        .map(|w| w.is_visible().unwrap_or(false))
         .unwrap_or(false)
 }
 
@@ -962,6 +969,7 @@ pub fn run() {
             move_spin_overlay,
             set_infos_shot_visibility,
             get_settings_visibility,
+            get_overlays_screen_visibility,
             move_infos_shot,
             move_ruler,
             select_folder,
@@ -1024,6 +1032,9 @@ pub fn run() {
                 } else if window.label() == "settings_screen" {
                     api.prevent_close(); // Annule la destruction de la fenêtre
                     let _ = window.hide(); // La garde vivante mais masquée
+                } else if window.label() == "overlays_screen" {
+                    api.prevent_close();
+                    let _ = window.hide();
                 }
             }
         })

@@ -1,8 +1,6 @@
 // themes.js
-
 (function () {
   "use strict";
-
   const THEMES = {
     "dark-golf": {
       name: "🌙 Dark Golf",
@@ -21,52 +19,58 @@
       css: "shared/css/themes/win11.css",
     },
   };
-
   // Storage (Tauri Store) — assigné dans initThemesSystem(). Fallback
   // silencieux sur localStorage si StorageService n'est pas chargé dans
   // cette fenêtre.
   let storage = null;
-
   // Valeur par défaut ; corrigée dans initThemesSystem() une fois
   // storage.init() terminé (lecture async, donc pas dispo à ce stade).
   let currentTheme = "pangya-classic";
-
+  // URL absolue (normalisée par le navigateur) de ce script, capturée PENDANT
+  // l'exécution du IIFE : document.currentScript n'est plus disponible plus
+  // tard (retourne null hors évaluation synchrone). Sert à résoudre le chemin
+  // du CSS du thème quel que soit l'enfoncement de la page.
+  const scriptSrc =
+    (document.currentScript && document.currentScript.src) || "";
   // ================================================================
   // CHARGER LE CSS DU THÈME
   // ================================================================
-
+  // Résout le chemin du CSS du thème depuis l'URL absolue du script chargé
+  // plutôt que depuis le document : les pages des overlay screens
+  // (screens/overlays, screens/settings) étant imbriquées, le chemin relatif
+  // "shared/css/..." ne résoudrait pas correctement s'il était relatif au doc.
+  function resolveThemeCSS(cssPath) {
+    if (scriptSrc) {
+      const idx = scriptSrc.indexOf("/shared/js/");
+      if (idx !== -1) return scriptSrc.slice(0, idx) + "/" + cssPath;
+    }
+    return cssPath;
+  }
   function loadThemeCSS(themeKey) {
     const theme = THEMES[themeKey];
     if (!theme) return;
-
     // Supprimer l'ancien fichier CSS
     const oldLink = document.getElementById("theme-stylesheet");
     if (oldLink) {
       oldLink.remove();
     }
-
     // Créer un nouveau lien
     const link = document.createElement("link");
     link.id = "theme-stylesheet";
     link.rel = "stylesheet";
-    link.href = theme.css;
-
+    link.href = resolveThemeCSS(theme.css);
     link.onload = function () {};
     link.onerror = function () {
       // Fallback : utiliser les variables CSS
       applyThemeVariables(themeKey);
     };
-
     document.head.appendChild(link);
   }
-
   // ================================================================
   // APPLIQUER LES VARIABLES CSS (fallback)
   // ================================================================
-
   function applyThemeVariables(themeKey) {
     const root = document.documentElement;
-
     const variables = {
       "dark-golf": {
         "--bg-body": "#111318",
@@ -99,7 +103,7 @@
         "--border": "#ffc2e0",
         "--border-input": "#ffd3e8",
         "--text": "#4a3b52",
-        "--text-soft": "#9a86a0",
+        "--text-soft": "#9363a1",
         "--text-label": "#9a86a0",
         "--accent": "#ff6fa5",
         "--accent-hover": "#ff8fbb",
@@ -163,32 +167,25 @@
         "--scrollbar-hover": "#9a9a9a",
       },
     };
-
     const themeVars = variables[themeKey];
     if (!themeVars) return;
-
     for (const [key, value] of Object.entries(themeVars)) {
       root.style.setProperty(key, value);
     }
   }
-
   // ================================================================
   // CHARGER UN THÈME COMPLET
   // ================================================================
-
   function loadTheme(themeKey, { broadcast = false } = {}) {
     const theme = THEMES[themeKey];
     if (!theme) {
       console.warn(`⚠️ Thème "${themeKey}" inconnu`);
       return;
     }
-
     // 1. Charger le CSS du thème
     loadThemeCSS(themeKey);
-
     // 2. Appliquer les variables CSS (fallback)
     applyThemeVariables(themeKey);
-
     currentTheme = themeKey;
     if (storage) {
       storage.set("theme", themeKey);
@@ -198,13 +195,11 @@
     // ne peut pas attendre une lecture async du plugin Store. On garde
     // donc localStorage à jour en parallèle, uniquement pour cet usage.
     localStorage.setItem("pangya_theme", themeKey);
-
     // 3. Mettre à jour le sélecteur
     const selector = document.getElementById("theme-selector");
     if (selector) {
       selector.value = themeKey;
     }
-
     // 4. Diffuser aux autres fenêtres
     if (broadcast) {
       try {
@@ -217,39 +212,31 @@
       }
     }
   }
-
   // ================================================================
   // ÉCOUTER LES CHANGEMENTS VENANT D'AUTRES FENÊTRES
   // ================================================================
-
   async function setupCrossWindowThemeSync() {
     const tauriEvent = getTauriEvent();
     if (!tauriEvent) {
       setTimeout(setupCrossWindowThemeSync, 50);
       return;
     }
-
     await tauriEvent.listen("app-theme-changed", (event) => {
       const { theme } = event.payload;
       if (theme === currentTheme) return;
       loadTheme(theme, { broadcast: false });
     });
   }
-
   // ================================================================
   // INITIALISATION
   // ================================================================
-
   function initThemeSelector() {
     const selector = document.getElementById("theme-selector");
     // === CHARGER LE THÈME AU DÉMARRAGE ===
     loadTheme(currentTheme);
-
     if (!selector) return;
-
     // Charger le thème sauvegardé dans le sélecteur quand cette fenêtre en possède un
     selector.value = currentTheme;
-
     // Écouter les changements
     selector.addEventListener("change", () => {
       const themeKey = selector.value;
@@ -258,7 +245,6 @@
       }
     });
   }
-
   // ================================================================
   // POINT D'ENTRÉE (storage d'abord, puis sélecteur de thème)
   // ================================================================
@@ -270,7 +256,6 @@
   // Ajouter un second listener "change" sur #lang-selector casserait
   // la propagation (c'est ce qui arrivait avant).
   //
-
   async function initThemesSystem() {
     // Fenêtre séparée : StorageService doit être chargé (balise <script>
     // dans le HTML de cette fenêtre) et initialisé ici indépendamment.
@@ -284,11 +269,9 @@
       );
       currentTheme = localStorage.getItem("pangya_theme") || "pangya-classic";
     }
-
     initThemeSelector();
     setupCrossWindowThemeSync();
   }
-
   // Attendre que le DOM soit chargé
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", initThemesSystem);

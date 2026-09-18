@@ -1,0 +1,262 @@
+/* =====================================================================
+   FICHIER : overlays_screen.css
+   DESCRIPTION : Styles de la fenêtre Overlays dédiée
+   =====================================================================
+   Squelette autonome reprenant la structure visuelle de main.css.
+   Les couleurs/polices proviennent des fichiers de thème (variables CSS)
+   chargés par shared/js/theme-loader.js.
+   ===================================================================== */
+
+/* ---------- RESET ---------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ---------- BODY ---------- */
+body {
+  background: var(--bg-body);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  font-family: "Segoe UI", "Arial", sans-serif;
+  font-size: 13px;
+}
+
+/* ---------- PAGE ---------- */
+.page {
+  width: 100%;
+  max-width: 820px;
+  padding: 24px 20px 20px 20px;
+  flex: 1;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  position: relative;
+}
+
+.page::-webkit-scrollbar {
+  display: none;
+}
+
+/* ---------- ANIMATION ---------- */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- CARTES ---------- */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+  margin-bottom: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-hover);
+}
+
+.card-title {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 18px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ---------- GRILLE 2 COLONNES ---------- */
+.overlays-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  align-items: start;
+}
+
+.overlays-col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+/* ---------- UTILITAIRES FLEX ---------- */
+.flex {
+  display: flex;
+}
+.flex-col {
+  flex-direction: column;
+}
+.flex-row {
+  flex-direction: row;
+}
+.flex-wrap {
+  flex-wrap: wrap;
+}
+.items-center {
+  align-items: center;
+}
+.justify-center {
+  justify-content: center;
+}
+.grow {
+  flex: 1;
+}
+.text-center {
+  text-align: center;
+}
+
+.gap-6 {
+  gap: 6px;
+}
+.gap-8 {
+  gap: 8px;
+}
+.gap-10 {
+  gap: 10px;
+}
+.gap-12 {
+  gap: 12px;
+}
+.gap-18 {
+  gap: 18px;
+}
+
+/* ---------- TOGGLES ---------- */
+.toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 20px;
+}
+
+.toggle > span:first-child {
+  flex: 1;
+}
+
+.toggle__input {
+  display: none;
+}
+
+.toggle__track {
+  position: relative;
+  width: 42px;
+  height: 22px;
+}
+
+.toggle__track::after {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  width: 12px;
+  height: 12px;
+}
+
+.toggle__input:checked + .toggle__track::after {
+  transform: translateX(18px);
+}
+
+/* ---------- PANNEAUX (overlays) ---------- */
+.panel {
+  margin: 0;
+  padding: 18px;
+}
+
+.panel legend {
+  padding: 0 10px;
+}
+
+.adjust-title {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text);
+  text-transform: none;
+  letter-spacing: normal;
+  background: none;
+  border-radius: 0;
+}
+
+.adjust-title::after {
+  content: none;
+}
+
+.panel .adjust-title {
+  position: static;
+  top: auto;
+  left: auto;
+}
+
+/* ---------- BOUTONS ---------- */
+button.calc-btn {
+  border: none;
+  border-radius: 4px;
+  background: var(--accent, #0067c0);
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: var(--shadow, 0 1px 3px rgba(0, 0, 0, 0.08));
+  transition:
+    background 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+button.calc-btn:hover {
+  background: var(--accent-hover, #005fb8);
+  box-shadow: var(--shadow-hover, 0 4px 12px rgba(0, 0, 0, 0.14));
+}
+
+button.calc-btn:active {
+  background: var(--accent-dark, #004e8c);
+}
+
+.small-btn {
+  width: 30px !important;
+  height: 20px !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 1px solid var(--border-input, #c9c9c9);
+  border-radius: 4px;
+  background: var(--bg-card, #ffffff);
+  color: var(--text, #1b1b1b);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 12px;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+/* ---------- CARRÉ DE COULEUR ---------- */
+.ruler-color-input {
+  width: 35px;
+  height: 25px;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  background: none;
+  cursor: pointer;
+}

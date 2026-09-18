@@ -213,7 +213,7 @@ body {
 /* =====================================================================
    SECTION 6 : SYSTÈME D'ONGLETS
    =====================================================================
-   5 onglets : Calculs, Overlays, Statistiques, Paramètres, Options avancées
+   3 onglets : Calculs, Statistiques, Options avancées
    Utilisation de radio buttons cachés pour gérer l'affichage.
    ===================================================================== */
 
@@ -280,8 +280,7 @@ body {
 /* Onglet actif (sélectionné via le radio button) */
 #tab1:checked + .tab-label,
 #tab2:checked + .tab-label,
-#tab3:checked + .tab-label,
-#tab4:checked + .tab-label {
+#tab3:checked + .tab-label {
   background: var(--bg-card);
   color: var(--text);
   border-color: var(--border);
@@ -291,8 +290,7 @@ body {
 /* Affiche le contenu de l'onglet sélectionné */
 #tab1:checked ~ #content1,
 #tab2:checked ~ #content2,
-#tab3:checked ~ #content3,
-#tab4:checked ~ #content4 {
+#tab3:checked ~ #content3 {
   display: block;
 }
 
@@ -549,8 +547,10 @@ select:hover {
 
 /* ---------- Pied de page ---------- */
 footer {
+  position: absolute;
+  width: 100%;
+  bottom: 10px;
   display: block;
-  margin-top: 45px;
   text-align: center;
 }
 
@@ -561,14 +561,6 @@ button.calc-btn {
   padding: 10px;
   position: relative;
   overflow: hidden;
-}
-
-.small-btn {
-  width: 30px !important;
-  height: 20px !important;
-  min-width: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
 }
 
 /* ---------- Boutons secondaires ---------- */
@@ -620,10 +612,9 @@ button.calc-btn:active {
   background: var(--accent-dark, #004e8c);
 }
 
-/* Flèches du pavé (mini / crop / small) */
+/* Flèches du pavé (mini / crop) */
 .mini-btn,
-.crop-btn,
-.small-btn {
+.crop-btn {
   border: 1px solid var(--border-input, #c9c9c9);
   border-radius: 4px;
   background: var(--bg-card, #ffffff);
@@ -636,13 +627,8 @@ button.calc-btn:active {
     border-color 0.15s ease;
 }
 
-.small-btn {
-  font-size: 12px;
-}
-
 .mini-btn:hover,
-.crop-btn:hover,
-.small-btn:hover {
+.crop-btn:hover {
   background: var(--bg-hover, #f0f0f0);
   border-color: var(--accent-hover, #005fb8);
 }
@@ -732,21 +718,6 @@ button.calc-btn:active {
   position: relative;
   margin-top: 30px;
   padding: 18px;
-}
-
-.adjust-title {
-  position: absolute;
-  top: -11px;
-  left: 20px;
-  padding: 2px 10px;
-}
-
-/* Dans les panneaux (gestion des overlays) : titre intégré au flux,
-   sinon il flotte au-dessus du legend et le rogne */
-.panel .adjust-title {
-  position: static;
-  top: auto;
-  left: auto;
 }
 
 /* ---------- Croix directionnelle de recadrage ---------- */
@@ -871,21 +842,6 @@ button.calc-btn:active {
   transform: translateX(18px);
 }
 
-/* ---------- Panneaux (overlays) ---------- */
-.panel {
-  margin: 10px;
-  padding: 18px;
-}
-
-.panel legend {
-  padding: 0 10px;
-}
-
-.overlay-separator {
-  width: 2px;
-  height: 90px;
-}
-
 /* ---------- Modale de confirmation ---------- */
 #custom-confirm-modal {
   display: none;
@@ -939,7 +895,6 @@ button.calc-btn:active {
 
 /* ---------- Ancrage et clipping des panneaux ---------- */
 .card,
-.panel,
 .adjust-panel,
 .tab-content {
   position: relative;
@@ -1157,17 +1112,4 @@ button.calc-btn:active {
   .character-select {
     max-width: 100%;
   }
-}
-
-/* =====================================================================
-   CARRÉ DE COULEUR (repère de la règle)
-   ===================================================================== */
-.ruler-color-input {
-  width: 35px;
-  height: 25px;
-  padding: 0;
-  border: none;
-  border-radius: 4px;
-  background: none;
-  cursor: pointer;
 }

@@ -102,7 +102,7 @@
   }
 
   function updateOptimizeDunkBtnState() {
-    const optimizeBtn = document.getElementById("btn-optimize-dunk");
+    const optimizeBtn = document.getElementById("btn-optimize-spin");
     const clickBtn = document.getElementById("btn-click-spin");
     if (!elements.shot) return;
     const shotValue = parseInt(elements.shot.value);
@@ -283,7 +283,7 @@
   // ================================================================
 
   function setupDunkButton() {
-    const btn = document.getElementById("btn-optimize-dunk");
+    const btn = document.getElementById("btn-optimize-spin");
     updateOptimizeDunkBtnState(); // état initial
 
     if (btn) {
@@ -561,7 +561,7 @@
 
     window.TauriService.listen("dunk-optimize-result", (event) => {
       if (event.payload.success) return; // rien à afficher si succès
-      const btn = document.getElementById("btn-optimize-dunk");
+      const btn = document.getElementById("btn-optimize-spin");
       showOptimizeTooltip(btn, event.payload.message);
     });
   }

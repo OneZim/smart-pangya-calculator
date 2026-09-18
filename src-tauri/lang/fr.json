@@ -3,8 +3,8 @@
   "title": "Smart Pangya Calculator",
   "lang_label": "Langue :",
 
-  "btn_settings": "Paramètres",
-  "btn_overlays": "Overlays",
+  "window_title_settings": "Paramètres",
+  "window_title_overlays": "Overlays",
 
   "label_course": "Parcours:",
   "label_map": "Map",
@@ -79,6 +79,9 @@
   "label_wind_overlay_adjust": "Ajustement de l’overlay",
   "lock_wind": "Verrouiller le lecteur d’angle",
 
+  "card_infos_shot": "Informations de Tir",
+  "label_show_infos_shot": "Afficher les informations",
+
   "card_stats": "Statistiques du personnage",
   "label_power": "Power",
   "label_ring_power": "Ring Power",
@@ -128,7 +131,6 @@
   "label_capture_spin": "Appuiez sur Espace pour capturer la position du curseur",
   "xy_default_values": "Valeurs par défaut",
 
-  "dunk_out_of_range": "Tir hors de portée du club, quel que soit le spin testé .",
   "shot_out_of_range": "Tir hors de portée du club, quel que soit le spin testé.",
   "shot_extended_spin_used": "Spin élevé (hors plage habituelle) nécessaire pour ramener le tir sous 100% de power.",
   "shot_fallback_spin_used": "Aucun spin dans la plage, spin par défaut utilisé.",

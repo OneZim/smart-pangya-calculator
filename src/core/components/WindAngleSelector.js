@@ -252,7 +252,17 @@
 
       isUpdatingFromSync = true;
 
-      markers = [];
+      // Fin-ajustage (décalage dans les ±0.5° voire 1°) : on fait pivoter
+      // les marqueurs de base avec la flèche au lieu de les effacer, pour
+      // préserver la visée lors des allers-retours inter-fenêtres.
+      const delta = (((newAngle - currentDisplay) % 360) + 360) % 360;
+      const normalizedDelta = delta > 180 ? delta - 360 : delta;
+
+      if (markers.length === 2 && Math.abs(normalizedDelta) <= 1) {
+        markers = markers.map((m) => rotatePointAroundCenter(m, -normalizedDelta));
+      } else {
+        markers = [];
+      }
       // Conversion affiché → interne (miroir), pour piloter le dessin.
       angle = (360 - newAngle + 360) % 360;
       updatePosition();
@@ -299,6 +309,11 @@
         } else {
           draw();
         }
+      });
+
+      canvas.addEventListener("contextmenu", () => {
+        markers = [];
+        draw();
       });
 
       const btnMinus = document.getElementById("btn-angle-minus");

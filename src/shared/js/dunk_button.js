@@ -116,7 +116,7 @@
     // Convention "jeu" (sens contraire horaire) → reconversion vers la
     // convention historique attendue par l'algorithme de simulation.
     let degree = checkValidInput(document.getElementById("degree").value);
-    degree = ((360 - degree) % 360 + 360) % 360;
+    degree = (((360 - degree) % 360) + 360) % 360;
     let ground = checkValidInput(document.getElementById("ground").value);
     let curve = checkValidInput(document.getElementById("curve").value);
     let slope_break = checkValidInputSlope(
@@ -227,12 +227,29 @@
     const input_values = buildInputValuesFromForm();
     const spinOptions = getSpinOptions();
 
-    const result = findBestDunkSpin(input_values, { spinOptions });
+    const isTomahawkSpike =
+      input_values.shot === SHOT_TYPE.TOMAHAWK ||
+      input_values.shot === SHOT_TYPE.SPIKE;
+
+    let result;
+    if (isTomahawkSpike) {
+      result = findBestTomahawkSpikeSpin(input_values, {
+        curva: input_values.curva,
+      });
+    } else {
+      result = findBestDunkSpin(input_values, { spinOptions });
+    }
 
     if (!result.success) {
       const message = resolveOptimizeErrorMessage(result);
       console.warn("❌ Non idéal :", message);
       showOptimizeTooltip(btn, message);
+      if (window.TauriService?.isAvailable) {
+        window.TauriService.emit("dunk-optimize-result", {
+          success: false,
+          message,
+        });
+      }
       return;
     }
 

@@ -3,6 +3,9 @@
   "title": "Smart Pangya Calculator",
   "lang_label": "Language:",
 
+  "window_title_settings": "Settings",
+  "window_title_overlays": "Overlays",
+
   "label_course": "Course:",
   "label_map": "Map",
   "label_hole": "Hole",
@@ -76,6 +79,9 @@
   "label_wind_overlay_adjust": "Overlay Adjustment",
   "lock_wind": "Lock Angle Reader",
 
+  "card_infos_shot": "Shot Info",
+  "label_show_infos_shot": "Show Info",
+
   "card_stats": "Character Statistics",
   "label_power": "Power",
   "label_ring_power": "Ring Power",
@@ -125,7 +131,6 @@
   "label_capture_spin": "Press Space to capture cursor position",
   "xy_default_values": "Default values",
 
-  "dunk_out_of_range": "Shot out of club range, regardless of spin tested.",
   "shot_out_of_range": "Shot out of club range, regardless of spin tested.",
   "shot_extended_spin_used": "High spin (outside usual range) required to bring the shot under 100% power.",
   "shot_fallback_spin_used": "No spin in the range meets the constraint, default spin used.",

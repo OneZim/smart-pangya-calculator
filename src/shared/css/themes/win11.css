@@ -22,7 +22,6 @@
    Toute la GÉOMÉTRIE (taille, position, alignement, texte) vit dans
    src/style/main.css — SECTION 10 (géométrie canonique).
    ===================================================================== */
-
 /* =====================================================================
    GÉNÉRÉ PAR strip_themes.js
    Ce fichier ne contient que la PEAU : couleurs, dégradés, polices,
@@ -30,446 +29,282 @@
    Toute la GÉOMÉTRIE (taille, position, alignement, texte) vit dans
    src/style/main.css — SECTION 10 (géométrie canonique).
    ===================================================================== */
-
 :root {
   --bg-body: linear-gradient(180deg, #f7f7f5 0%, #efefef 100%);
-
   --bg-card: #ffffff;
-
   --bg-input: #fbfbfb;
-
   --bg-hover: #f0f0f0;
-
   --border: #e3e3e3;
-
   --border-input: #c9c9c9;
-
   --text: #1b1b1b;
-
   --text-soft: #5f5f5f;
-
   --text-label: #5a5a5a;
-
   --accent: #0067c0;
-
   --accent-hover: #005fb8;
-
   --accent-dark: #004e8c;
-
   --gold: #b57d00;
-
   --shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-
   --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.14);
-
   --panel-bg: #fafafa;
-
   --toggle-bg: #cccccc;
-
   --toggle-checked: #0067c0;
-
   --modal-bg: #ffffff;
-
   --modal-border: #0067c0;
-
   --scrollbar: #c5c5c5;
-
   --scrollbar-hover: #9a9a9a;
-
   /* Alias pangya-classic conservés pour compatibilité */
-
   --sky-top: #f7f7f5;
-
   --sky-middle: #f0f0f0;
-
   --sky-bottom: #ececea;
-
   --panel-top: #ffffff;
-
   --panel-bottom: #f4f4f4;
-
   --border-dark: #d0d0d0;
-
   --title: #0067c0;
-
   --btn1: #e8e8e8;
-
   --btn2: #dcdcdc;
-
   --btn3: #0067c0;
 }
-
 /* -----------------------------------------------------------------------
    GLOBAL
    ----------------------------------------------------------------------- */
-
 body {
   font-family: "Segoe UI Variable", "Segoe UI", system-ui, sans-serif;
-
   color: var(--text);
-
   background: var(--bg-body);
-
   background-attachment: fixed;
-
   font-size: 14px;
 }
-
 .tab-label {
   cursor: pointer;
-
   color: var(--text-soft);
-
   font-weight: 600;
-
   font-size: 13px;
-
   border: 1px solid transparent;
-
   border-bottom: none;
-
   border-radius: 8px 8px 0 0;
-
   background: transparent;
-
   transition:
     background 0.15s ease,
     color 0.15s ease;
 }
-
 .tab-label:hover {
   background: rgba(0, 0, 0, 0.04);
-
   color: var(--text);
 }
-
 .tab-content {
   background: var(--bg-card);
-
   border: 1px solid var(--border);
-
   border-radius: 0 8px 8px 8px;
-
   box-shadow: var(--shadow);
-
   animation: fadeIn 0.25s ease;
 }
-
 /* Onglet actif */
-
 #tab1:checked + .tab-label,
 #tab2:checked + .tab-label,
 #tab3:checked + .tab-label,
 #tab4:checked + .tab-label {
   background: var(--bg-card);
-
   color: var(--accent);
-
   border-color: var(--border);
-
   border-bottom-color: var(--bg-card);
 }
-
 /* -----------------------------------------------------------------------
    CARTES
    ----------------------------------------------------------------------- */
-
 .card {
   background: var(--bg-card);
-
   border: 1px solid var(--border);
-
-  border-radius: 8px;
-
+  border-radius: 6px;
   box-shadow: var(--shadow);
-
   transition:
     box-shadow 0.15s ease,
     border-color 0.15s ease;
 }
-
 .card:hover {
   border-color: var(--accent);
-
   box-shadow: var(--shadow-hover);
 }
-
 .card-title {
   font-size: 13px;
-
   font-weight: 600;
-
   letter-spacing: 0.3px;
-
   color: var(--text);
-
   border-bottom: 1px solid var(--border);
 }
-
 /* -----------------------------------------------------------------------
    INPUTS & SELECTS
    ----------------------------------------------------------------------- */
-
 input,
 select {
   border-radius: 3px;
-
   border: 1px solid var(--border-input);
-
   background: var(--bg-input);
-
   color: var(--text);
-
   font-size: 11px;
-
   font-family: inherit;
-
   transition:
     border-color 0.15s ease,
     box-shadow 0.15s ease;
 }
-
 input::placeholder {
   color: var(--text-soft);
-
   opacity: 0.8;
 }
-
 input:hover,
 select:hover {
   border-color: var(--accent-hover);
 }
-
 input:focus,
 select:focus {
   outline: none;
-
   border-color: var(--accent);
-
   box-shadow: 0 0 0 1px var(--accent);
 }
-
 /* -----------------------------------------------------------------------
    RÉSULTAT
    ----------------------------------------------------------------------- */
-
 #result {
   color: var(--text);
-
   font-size: 15px;
-
   font-weight: 600;
 }
-
 #result .percent-low {
   color: #c42b1c;
 }
-
 /* -----------------------------------------------------------------------
    IMAGE VENT (canvas + crop)
    ----------------------------------------------------------------------- */
-
 .wind-crop-box {
   border: 1px solid var(--border);
-
   border-radius: 8px;
-
   background: var(--panel-bg);
-
   box-shadow: var(--shadow);
-
   transition:
     box-shadow 0.15s ease,
     border-color 0.15s ease;
 }
-
 .wind-crop-box:hover {
   border-color: var(--accent);
-
   box-shadow: var(--shadow-hover);
 }
-
 #angle-display {
   color: var(--accent);
-
   font-weight: 600;
 }
-
 /* -----------------------------------------------------------------------
    PANEL RÉGLAGES IMAGE
    ----------------------------------------------------------------------- */
-
 .adjust-panel {
   background: var(--panel-bg);
-
   border: 1px solid var(--border);
-
   border-radius: 8px;
 }
-
 .adjust-title {
   font-size: 13px;
-
   font-weight: 600;
-
   color: var(--text);
 }
-
 .adjust-label {
   color: var(--text-label);
-
   font-size: 13px;
-
   font-weight: 600;
 }
-
 /* -----------------------------------------------------------------------
    TOGGLE SWITCH
    ----------------------------------------------------------------------- */
-
 .toggle {
   color: var(--text);
-
   font-size: 13px;
-
   font-weight: 600;
-
   cursor: pointer;
-
   user-select: none;
 }
-
 .toggle:hover .toggle__track {
   opacity: 0.9;
 }
-
 .toggle__track {
   border-radius: 20px;
-
   background: var(--toggle-bg);
-
   border: none;
-
   transition: background 0.15s ease;
 }
-
 .toggle__track::after {
   border-radius: 50%;
-
   background: #ffffff;
-
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-
   transition: transform 0.15s ease;
 }
-
 .toggle__input:checked + .toggle__track {
   background: var(--toggle-checked);
 }
-
 .panel {
   background: var(--bg-card);
-
   border: 1px solid var(--border);
-
   border-radius: 8px;
-
   transition:
     box-shadow 0.15s ease,
     border-color 0.15s ease;
 }
-
 .panel:hover {
   border-color: var(--accent-hover);
 }
-
 .panel legend {
   font-size: 13px;
-
   font-weight: 600;
-
   color: var(--accent);
 }
-
 .overlay-separator {
   border: none;
-
   border-top: 1px solid var(--border);
 }
-
 /* -----------------------------------------------------------------------
    MODALE DE CONFIRMATION
    ----------------------------------------------------------------------- */
-
 #custom-confirm-modal {
   background: rgba(0, 0, 0, 0.4);
 }
-
 .modal-box {
   background: var(--modal-bg);
-
   border: 1px solid var(--border);
-
   border-radius: 8px;
-
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
-
 .modal-title {
   font-size: 16px;
-
   font-weight: 600;
-
   color: var(--text);
 }
-
 .lang_select label,
 .theme_select label {
   color: var(--text-label);
-
   font-size: 13px;
-
   font-weight: 600;
 }
-
 .course-select {
   border: 1px solid var(--border-input);
-
   border-radius: 3px;
-
   background: var(--bg-input);
-
   color: var(--text);
-
   font-family: inherit;
-
   font-size: 12px;
 }
-
 .course-select:disabled {
   opacity: 0.5;
-
   cursor: not-allowed;
 }
-
 /* -----------------------------------------------------------------------
    BARRE DE TITRE
    ----------------------------------------------------------------------- */
-
 #titlebar {
   background: rgba(255, 255, 255, 0.7);
 }
-
 ::-webkit-scrollbar-track {
   background: transparent;
 }
-
 ::-webkit-scrollbar-thumb {
   background: var(--scrollbar);
-
   border-radius: 5px;
 }
-
 ::-webkit-scrollbar-thumb:hover {
   background: var(--scrollbar-hover);
 }

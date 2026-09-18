@@ -3,6 +3,9 @@
   "title": "Smart Pangya Calculator",
   "lang_label": "Idioma:",
 
+  "window_title_settings": "Configurações",
+  "window_title_overlays": "Overlays",
+
   "label_course": "Percurso:",
   "label_map": "Mapa",
   "label_hole": "Buraco",
@@ -76,6 +79,9 @@
   "label_wind_overlay_adjust": "Ajuste do overlay",
   "lock_wind": "Bloquear leitor de ângulo",
 
+  "card_infos_shot": "Info do tiro",
+  "label_show_infos_shot": "Mostrar info",
+
   "card_stats": "Estatísticas do personagem",
   "label_power": "Power",
   "label_ring_power": "Ring Power",
@@ -125,7 +131,6 @@
   "label_capture_spin": "Pressione Espaço para capturar a posição do cursor",
   "xy_default_values": "Valores padrão",
 
-  "dunk_out_of_range": "Tiro fora do alcance do taco, independentemente do spin testado.",
   "shot_out_of_range": "Tiro fora do alcance do taco, independentemente do spin testado.",
   "shot_extended_spin_used": "Spin alto (fora do intervalo habitual) necessário para trazer o tiro para abaixo de 100% de potência.",
   "shot_fallback_spin_used": "Nenhum spin no intervalo atende à restrição, spin padrão utilizado.",

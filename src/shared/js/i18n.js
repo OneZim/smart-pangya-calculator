@@ -86,6 +86,21 @@ async function applyLanguage(lang, { broadcast = false } = {}) {
         element.title = currentTranslations[key];
       }
     });
+
+    // === METTRE À JOUR LE TITRE DE LA FENÊTRE TAURI ===
+    try {
+      const body = document.body;
+      const titleKey = body && body.getAttribute("data-i18n-window-title");
+      if (titleKey && currentTranslations[titleKey]) {
+        const win = window.__TAURI__?.window?.getCurrentWindow?.();
+        if (win && typeof win.setTitle === "function") {
+          await win.setTitle(currentTranslations[titleKey]);
+        }
+      }
+    } catch (e) {
+      console.warn("[i18n] Impossible de mettre à jour le titre de la fenêtre :", e);
+    }
+
     // === METTRE À JOUR LE SÉLECTEUR ===
     const langSelector = document.getElementById("lang-selector");
     if (langSelector) {

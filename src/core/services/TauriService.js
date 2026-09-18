@@ -2,6 +2,8 @@
 (function () {
   "use strict";
 
+  document.addEventListener("contextmenu", (e) => e.preventDefault());
+
   window.TauriService = {
     // Accès "lazy" — on relit __TAURI__ à chaque fois
     get core() {

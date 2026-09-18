@@ -12,59 +12,26 @@
    Toute la GÉOMÉTRIE (taille, position, alignement, texte) vit dans
    src/style/main.css — SECTION 10 (géométrie canonique).
    ===================================================================== */
-/* =====================================================================
-   GÉNÉRÉ PAR strip_themes.js
-   Ce fichier ne contient que la PEAU : couleurs, dégradés, polices,
-   bordures, ombres, états au survol.
-   Toute la GÉOMÉTRIE (taille, position, alignement, texte) vit dans
-   src/style/main.css — SECTION 10 (géométrie canonique).
-   ===================================================================== */
-
-/* =====================================================================
-   GÉNÉRÉ PAR strip_themes.js
-   Ce fichier ne contient que la PEAU : couleurs, dégradés, polices,
-   bordures, ombres, états au survol.
-   Toute la GÉOMÉTRIE (taille, position, alignement, texte) vit dans
-   src/style/main.css — SECTION 10 (géométrie canonique).
-   ===================================================================== */
-
 :root {
   --sky-top: #79cbff;
-
   --sky-middle: #bfe8ff;
-
   --sky-bottom: #eefbff;
-
   --panel-top: #ffffff;
-
   --panel-bottom: #edf8ff;
-
   --border: #72c8ff;
-
   --border-dark: #2f96e5;
-
   --title: #2f86d7;
-
   --text: #2f5879;
-
   --text-soft: #6587a5;
-
   --gold: #ffb200;
-
   --btn1: #95e7ff;
-
   --btn2: #5ec1ff;
-
   --btn3: #2997ff;
-
   --shadow: 0 6px 20px rgba(0, 110, 180, 0.18);
 }
-
 body {
   font-family: "Trebuchet MS", Verdana, sans-serif;
-
   color: var(--text);
-
   background:
     radial-gradient(circle at top, rgba(255, 255, 255, 0.8), transparent 35%),
     linear-gradient(
@@ -72,169 +39,112 @@ body {
       var(--sky-middle) 45%,
       var(--sky-bottom) 100%
     );
-
   background-attachment: fixed;
 }
-
 .tab-label {
   cursor: pointer;
-
   color: white;
-
   font-weight: bold;
-
   font-size: 14px;
-
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
-
   border: 2px solid var(--border-dark);
-
   border-bottom: none;
-
-  border-radius: 12px 12px 0 0;
-
+  border-radius: 4px 4px 0 0;
   background: linear-gradient(var(--btn1), var(--btn2));
-
   box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.7);
-
   transition: 0.18s;
 }
-
 .tab-label:hover {
   transform: translateY(-2px);
-
   background: linear-gradient(#b0eeff, #79ceff);
 }
-
 .tab-content {
   border: 2px solid var(--border);
-
-  border-radius: 0 14px 14px 14px;
-
+  border-radius: 0 6px 6px 6px;
   background: linear-gradient(
     rgba(255, 255, 255, 0.96),
     rgba(236, 248, 255, 0.95)
   );
-
   box-shadow:
     var(--shadow),
     inset 0 2px 0 rgba(255, 255, 255, 0.8);
 }
-
 /* -----------------------------------------------------------------------
    ONGLET ACTIF
    ----------------------------------------------------------------------- */
-
 #tab1:checked + .tab-label,
 #tab2:checked + .tab-label,
 #tab3:checked + .tab-label,
 #tab4:checked + .tab-label {
   background: linear-gradient(white, #eef9ff);
-
   color: var(--title);
-
   text-shadow: none;
-
   border-color: var(--border);
 }
-
 /* -----------------------------------------------------------------------
    CARTES
    ----------------------------------------------------------------------- */
-
 .card {
   background: linear-gradient(
     rgba(255, 255, 255, 0.96),
     rgba(236, 248, 255, 0.94)
   );
-
   border: 2px solid var(--border);
-
-  border-radius: 16px;
-
+  border-radius: 6px;
   box-shadow:
     var(--shadow),
     inset 0 2px 0 rgba(255, 255, 255, 0.85);
 }
-
 .card-title {
   color: var(--title);
-
   font-size: 15px;
-
   font-weight: bold;
-
   letter-spacing: 1px;
-
   text-transform: uppercase;
-
   border-bottom: 1px solid #bfe7ff;
-
   text-shadow: 0 1px white;
 }
-
 /* -----------------------------------------------------------------------
    INPUTS
    ----------------------------------------------------------------------- */
-
 input,
 select {
-  border-radius: 10px;
-
+  border-radius: 3px;
   border: 2px solid #97d8ff;
-
   background: linear-gradient(white, #f8fdff);
-
   color: #28597d;
-
   font-size: 14px;
-
   transition: 0.15s;
 }
-
 input:focus,
 select:focus {
   outline: none;
-
   border-color: #36abff;
-
   box-shadow: 0 0 10px rgba(54, 171, 255, 0.35);
 }
-
 /* -----------------------------------------------------------------------
    RESULTAT
    ----------------------------------------------------------------------- */
-
 #result {
   font-size: 25px;
-
   font-weight: 800;
-
   color: #4fb9ff;
-
   /* ← Bleu ciel */
-
   font-family: "Baloo 2", "Comic Sans MS", cursive;
-
   text-shadow:
     0 2px 0 #2a7ab5,
     0 0 20px rgba(79, 185, 255, 0.3),
     0 0 40px rgba(79, 185, 255, 0.1);
-
   letter-spacing: 0.04em;
-
   animation: glowResult 3s ease-in-out infinite;
 }
-
 #result .percent-low {
   color: #ff3b3b;
-
   text-shadow:
     0 2px 0 #b30000,
     0 0 20px rgba(255, 59, 59, 0.4),
     0 0 40px rgba(255, 59, 59, 0.15);
 }
-
 @keyframes glowResult {
   0%,
   100% {
@@ -248,271 +158,186 @@ select:focus {
       0 0 40px rgba(79, 185, 255, 0.5);
   }
 }
-
 /* -----------------------------------------------------------------------
    FOOTER
    ----------------------------------------------------------------------- */
-
 footer {
   color: #5f86a7;
-
   font-size: 13px;
 }
-
 /* -----------------------------------------------------------------------
    IMAGE VENT
    ----------------------------------------------------------------------- */
-
 .wind-crop-box {
   background: linear-gradient(#f4fcff, #dff3ff);
-
   border: 2px solid var(--border);
-
-  border-radius: 16px;
-
+  border-radius: 6px;
   box-shadow:
     inset 0 2px 0 rgba(255, 255, 255, 0.8),
     var(--shadow);
 }
-
 #angle-display {
   font-size: 20px;
-
   font-weight: bold;
-
   color: var(--gold);
-
   text-shadow:
     0 1px white,
     0 0 10px rgba(255, 220, 120, 0.6);
 }
-
 /* -----------------------------------------------------------------------
    PANEL REGLAGES IMAGE
    ----------------------------------------------------------------------- */
-
 .adjust-panel {
-  border-radius: 16px;
-
+  border-radius: 6px;
   border: 2px solid var(--border);
-
   background: linear-gradient(
     rgba(255, 255, 255, 0.96),
     rgba(236, 248, 255, 0.95)
   );
-
   box-shadow:
     inset 0 2px 0 rgba(255, 255, 255, 0.8),
     var(--shadow);
 }
-
 .adjust-title {
   background: white;
-
   color: var(--title);
-
   font-size: 12px;
-
   font-weight: bold;
-
   letter-spacing: 1px;
-
   text-transform: uppercase;
-
-  border-radius: 10px;
+  border-radius: 3px;
 }
-
 /* -----------------------------------------------------------------------
    LABEL REGLAGES
    ----------------------------------------------------------------------- */
-
 .adjust-label {
   color: var(--gold);
-
   font-size: 15px;
-
   font-weight: bold;
-
   text-shadow: 0 1px white;
 }
-
 .toggle {
   color: var(--text);
-
   font-size: 14px;
-
   font-weight: bold;
-
   cursor: pointer;
-
   user-select: none;
 }
-
 .toggle__track {
   border-radius: 22px;
-
   background: #d8f3ff;
-
   border: 2px solid #8fd8ff;
-
   transition: 0.2s;
 }
-
 .toggle__track::after {
   border-radius: 50%;
-
   background: white;
-
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
-
   transition: 0.2s;
 }
-
 .toggle:hover .toggle__track {
   border-color: #4fb9ff;
 }
-
 .toggle__input:checked + .toggle__track {
   background: linear-gradient(#8de4ff, #4eb8ff);
-
   border-color: #3aa8ff;
 }
-
 .overlay-separator {
   background: #9fdcff;
 }
-
 /* -----------------------------------------------------------------------
    PANEL
    ----------------------------------------------------------------------- */
-
 .panel {
-  border-radius: 16px;
-
+  border-radius: 6px;
   border: 2px solid var(--border);
-
   background: linear-gradient(
     rgba(255, 255, 255, 0.96),
     rgba(236, 248, 255, 0.94)
   );
-
   box-shadow:
     inset 0 2px 0 rgba(255, 255, 255, 0.85),
     var(--shadow);
 }
-
 .panel legend {
   color: var(--title);
-
   font-size: 16px;
-
   font-weight: bold;
-
   text-shadow: 0 1px white;
 }
-
 /* =====================================================================
    PARTIE 5/6
    MODALE • LANGUE • COURSE SELECTOR • FINITIONS
    ===================================================================== */
-
 #custom-confirm-modal {
   background: rgba(20, 80, 140, 0.35);
-
   backdrop-filter: blur(4px);
 }
-
 .modal-box {
-  border-radius: 18px;
-
+  border-radius: 6px;
   border: 2px solid var(--border);
-
   background: linear-gradient(
     rgba(255, 255, 255, 0.98),
     rgba(235, 248, 255, 0.96)
   );
-
   box-shadow:
     0 10px 35px rgba(0, 70, 150, 0.3),
     inset 0 2px 0 rgba(255, 255, 255, 0.9);
 }
-
 .modal-title {
   font-size: 18px;
-
   color: #ff8f00;
-
   font-weight: bold;
-
   text-shadow: 0 1px white;
 }
-
 .lang_select label,
 .theme_select label {
   color: #34678f;
-
   font-weight: 600;
 }
-
 .course-select:disabled {
   opacity: 0.45;
-
   cursor: not-allowed;
 }
-
 ::-webkit-scrollbar-track {
   background: #dff4ff;
 }
-
 ::-webkit-scrollbar-thumb {
   border-radius: 20px;
-
   background: linear-gradient(#97e6ff, #4eb8ff);
 }
-
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(#b8f2ff, #71caff);
 }
-
 /* -----------------------------------------------------------------------
    SELECTION TEXTE
    ----------------------------------------------------------------------- */
-
 ::selection {
   background: #7fd0ff;
-
   color: white;
 }
-
 /* -----------------------------------------------------------------------
    ANIMATION CARTES
    ----------------------------------------------------------------------- */
-
 .card,
 .panel,
 .adjust-panel,
 .tab-content {
   animation: panelAppear 0.35s ease;
 }
-
 @keyframes panelAppear {
   from {
     opacity: 0;
-
     transform: translateY(8px);
   }
-
   to {
     opacity: 1;
-
     transform: none;
   }
 }
-
 /* -----------------------------------------------------------------------
    HOVER GLOBAL
    ----------------------------------------------------------------------- */
-
 button,
 .tab-label {
   transition:
@@ -521,12 +346,10 @@ button,
     box-shadow 0.18s,
     border-color 0.18s;
 }
-
 input:hover,
 select:hover {
   border-color: #61c2ff;
 }
-
 .card:hover,
 .panel:hover,
 .adjust-panel:hover,
@@ -535,139 +358,96 @@ select:hover {
     0 10px 26px rgba(0, 120, 220, 0.22),
     inset 0 2px 0 rgba(255, 255, 255, 0.85);
 }
-
 /* -----------------------------------------------------------------------
    PETITS DETAILS
    ----------------------------------------------------------------------- */
-
 img {
   image-rendering: auto;
 }
-
 canvas {
-  border-radius: 12px;
+  border-radius: 6px;
 }
-
 fieldset {
   border: none;
 }
-
 .card::before,
 .panel::before,
 .adjust-panel::before,
 .ruler-panel::before,
 .tab-content::before {
   pointer-events: none;
-
   background: linear-gradient(
     rgba(255, 255, 255, 0.55),
     rgba(255, 255, 255, 0)
   );
 }
-
 /* -----------------------------------------------------------------------
    REFLET SUR LES INPUTS
    ----------------------------------------------------------------------- */
-
 input,
 select {
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.95),
     0 1px 4px rgba(70, 170, 255, 0.08);
 }
-
 input:focus,
 select:focus {
   background: white;
 }
-
 /* -----------------------------------------------------------------------
    LABELS
    ----------------------------------------------------------------------- */
-
 label {
   color: #34678f;
-
   font-weight: bold;
-
   text-shadow: 0 1px rgba(255, 255, 255, 0.75);
 }
-
 /* -----------------------------------------------------------------------
    ICÔNES
    ----------------------------------------------------------------------- */
-
 button i,
 .action-btn i,
 .mini-btn i {
   margin-right: 5px;
 }
-
 /* -----------------------------------------------------------------------
    IMAGE VENT
    ----------------------------------------------------------------------- */
-
 .wind-crop-box {
   transition: 0.2s;
 }
-
 .wind-crop-box:hover {
-  transform: scale(1.02);
-
-  box-shadow:
-    0 10px 25px rgba(0, 120, 220, 0.28),
-    inset 0 2px 0 rgba(255, 255, 255, 0.85);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-hover);
 }
-
-/* -----------------------------------------------------------------------
-   HOVER GENERAL
-   ----------------------------------------------------------------------- */
-
-.card:hover,
-.panel:hover,
-.adjust-panel:hover,
-.ruler-panel:hover {
-  transform: translateY(-2px);
-}
-
 /* -----------------------------------------------------------------------
    LIENS
    ----------------------------------------------------------------------- */
-
 a {
   color: #2d8cdc;
-
   text-decoration: none;
-
   transition: 0.15s;
 }
-
 a:hover {
   color: #4fb9ff;
 }
-
 /* -----------------------------------------------------------------------
    PETITES VALEURS
    ----------------------------------------------------------------------- */
-
 small {
   color: #6f8fa8;
 }
-
 /* -----------------------------------------------------------------------
    FOCUS ACCESSIBILITE
    ----------------------------------------------------------------------- */
-
 button:focus,
 input:focus,
 select:focus {
   outline: none;
 }
-
 /* -----------------------------------------------------------------------
    OMBRES DOUCES
    ----------------------------------------------------------------------- */
-
 .card,
 .panel,
 .adjust-panel,
@@ -676,55 +456,37 @@ select:focus {
     0 6px 18px rgba(0, 110, 200, 0.18),
     inset 0 2px 0 rgba(255, 255, 255, 0.85);
 }
-
 /* -----------------------------------------------------------------------
    AMBIANCE CIEL
    ----------------------------------------------------------------------- */
-
 body::before {
   content: "";
-
   position: fixed;
-
   top: -200px;
   left: -200px;
-
   width: 600px;
   height: 600px;
-
   pointer-events: none;
-
   background: radial-gradient(rgba(255, 255, 255, 0.45), transparent 70%);
 }
-
 body::after {
   content: "";
-
   position: fixed;
-
   right: -150px;
   bottom: -150px;
-
   width: 450px;
   height: 450px;
-
   pointer-events: none;
-
   background: radial-gradient(rgba(120, 210, 255, 0.25), transparent 70%);
 }
-
 .card-title::after,
 .adjust-title::after,
 .panel legend::after {
   content: "";
-
   position: absolute;
-
   bottom: -2px;
   left: 0;
-
   width: 80px;
   height: 2px;
-
   background: linear-gradient(#7fd5ff, transparent);
 }

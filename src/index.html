@@ -60,12 +60,17 @@
            BOUTON PARAMÈTRES
            ============================================================ -->
       <div class="top_menu">
-        <button id="btn-settings-toggle" data-i18n-title="btn_settings">
-          ⚙️
-        </button>
-
-        <button id="btn-overlays-toggle" data-i18n-title="btn_overlays">
+        <button
+          id="btn-overlays-toggle"
+          data-i18n-title="window_title_overlays"
+        >
           🎛️
+        </button>
+        <button
+          id="btn-settings-toggle"
+          data-i18n-title="window_title_settings"
+        >
+          ⚙️
         </button>
       </div>
       <!-- ============================================================
@@ -76,21 +81,15 @@
         <input type="radio" name="tab" id="tab1" checked />
         <label for="tab1" class="tab-label" data-i18n="tab_cal">Calculs</label>
 
-        <!-- Onglet 2 : Overlays -->
+        <!-- Onglet 2 : Statistiques -->
         <input type="radio" name="tab" id="tab2" />
-        <label for="tab2" class="tab-label" data-i18n="tab_overlay"
-          >Overlays</label
-        >
-
-        <!-- Onglet 3 : Statistiques -->
-        <input type="radio" name="tab" id="tab3" />
-        <label for="tab3" class="tab-label" data-i18n="tab_stats"
+        <label for="tab2" class="tab-label" data-i18n="tab_stats"
           >Statistiques</label
         >
 
-        <!-- Onglet 4 : Options avancées (Slope) -->
-        <input type="radio" name="tab" id="tab4" />
-        <label for="tab4" class="tab-label" data-i18n="tab_slope"
+        <!-- Onglet 3 : Options avancées (Slope) -->
+        <input type="radio" name="tab" id="tab3" />
+        <label for="tab3" class="tab-label" data-i18n="tab_slope"
           >Options avancées</label
         >
 
@@ -428,8 +427,12 @@
                       >Angle : 0°</span
                     >
                     <div class="flex gap-6">
-                      <button id="btn-angle-minus" class="mini-btn">-1°</button>
-                      <button id="btn-angle-plus" class="mini-btn">+1°</button>
+                      <button id="btn-angle-minus" class="mini-btn">
+                        - 0.5°
+                      </button>
+                      <button id="btn-angle-plus" class="mini-btn">
+                        + 0.5°
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -467,311 +470,9 @@
         </div>
 
         <!-- ============================================================
-             CONTENU ONGLET 2 : OVERLAYS
+             CONTENU ONGLET 2 : STATISTIQUES
              ============================================================ -->
         <div class="tab-content" id="content2">
-          <!--
-            SECTION : GESTION DES OVERLAYS
-            Permet d'afficher/masquer et de positionner les superpositions :
-            - Fenêtre de calcul (overlay de saisie)
-            - Règle de décalage (ruler)
-            - Repère de spin
-            - Calculateur d'angles (vent)
-          -->
-          <div class="card grow">
-            <div class="card-title" data-i18n="card_overlays">
-              Gestion des Overlays
-            </div>
-
-            <!-- Overlay : Fenêtre de calcul -->
-            <fieldset class="panel">
-              <legend data-i18n="card_calcul_overlay">Fenêtre de calcul</legend>
-              <div class="flex flex-col gap-12">
-                <label class="toggle" for="toggle-show-input-bar">
-                  <span data-i18n="label_calcul_overlay"
-                    >Afficher la fenêtre :</span
-                  >
-                  <input
-                    type="checkbox"
-                    id="toggle-show-input-bar"
-                    class="toggle__input"
-                  />
-                  <span class="toggle__track"></span>
-                </label>
-              </div>
-            </fieldset>
-
-            <!-- Overlay : Règle de décalage -->
-            <fieldset class="panel">
-              <legend data-i18n="card_ruler">Règle de décalage</legend>
-              <div class="flex flex-row flex-wrap gap-12 items-center">
-                <div class="flex flex-col gap-10">
-                  <!-- Affichage et verrouillage de la règle -->
-                  <label class="toggle" for="toggle-show-ruler">
-                    <span data-i18n="label_show_ruler"
-                      >Afficher la règle :</span
-                    >
-                    <input
-                      type="checkbox"
-                      id="toggle-show-ruler"
-                      class="toggle__input"
-                    />
-                    <span class="toggle__track"></span>
-                  </label>
-
-                  <label class="toggle" for="toggle-click-through">
-                    <span data-i18n="label_lock_ruler"
-                      >Bloquer la règle (Jouer) :</span
-                    >
-                    <input
-                      type="checkbox"
-                      id="toggle-click-through"
-                      class="toggle__input"
-                    />
-                    <span class="toggle__track"></span>
-                  </label>
-
-                  <label class="toggle" for="ruler-smart-color">
-                    <span data-i18n="label_ruler_color"
-                      >Couleur du repère :</span
-                    >
-                    <input
-                      type="color"
-                      id="ruler-smart-color"
-                      value="#E0098E"
-                      class="ruler-color-input"
-                    />
-                  </label>
-
-                  <label class="toggle" for="toggle-show-t-repere">
-                    <span data-i18n="label_show_t_repere"
-                      >Afficher le repère T :</span
-                    >
-                    <input
-                      type="checkbox"
-                      id="toggle-show-t-repere"
-                      class="toggle__input"
-                      checked
-                    />
-                    <span class="toggle__track"></span>
-                  </label>
-                </div>
-
-                <div class="overlay-separator"></div>
-
-                <!-- Contrôles de déplacement de la règle -->
-                <div
-                  class="adjust-title text-center"
-                  data-i18n="label_ruler_adjust"
-                >
-                  Ajustement de la règle :
-                </div>
-                <div class="flex flex-col items-center gap-6">
-                  <button id="btn-move-up" class="calc-btn small-btn">▲</button>
-                  <div class="flex gap-18">
-                    <button id="btn-move-left" class="calc-btn small-btn">
-                      ◀
-                    </button>
-                    <button id="btn-move-right" class="calc-btn small-btn">
-                      ▶
-                    </button>
-                  </div>
-                  <button id="btn-move-down" class="calc-btn small-btn">
-                    ▼
-                  </button>
-                </div>
-              </div>
-            </fieldset>
-
-            <!-- Overlay : Repère de Spin -->
-            <fieldset class="panel">
-              <legend data-i18n="card_spin">Repère de Spin</legend>
-              <div class="flex flex-row flex-wrap gap-12 items-center">
-                <div class="flex flex-col gap-10">
-                  <label class="toggle" for="toggle-show-spin">
-                    <span data-i18n="label_show_spin"
-                      >Afficher le repère :</span
-                    >
-                    <input
-                      type="checkbox"
-                      id="toggle-show-spin"
-                      class="toggle__input"
-                    />
-                    <span class="toggle__track"></span>
-                  </label>
-
-                  <label class="toggle" for="toggle-click-through-spin">
-                    <span data-i18n="label_lock_ruler"
-                      >Bloquer le repere(Jouer) :</span
-                    >
-                    <input
-                      type="checkbox"
-                      id="toggle-click-through-spin"
-                      class="toggle__input"
-                    />
-                    <span class="toggle__track"></span>
-                  </label>
-                </div>
-
-                <div class="overlay-separator"></div>
-
-                <!-- Contrôles de déplacement du repère de spin -->
-                <div
-                  class="adjust-title text-center"
-                  data-i18n="label_ruler_adjust"
-                >
-                  Ajustement du repère :
-                </div>
-                <div class="flex flex-col items-center gap-6">
-                  <button id="btn-spin-move-up" class="calc-btn small-btn">
-                    ▲
-                  </button>
-                  <div class="flex gap-18">
-                    <button id="btn-spin-move-left" class="calc-btn small-btn">
-                      ◀
-                    </button>
-                    <button id="btn-spin-move-right" class="calc-btn small-btn">
-                      ▶
-                    </button>
-                  </div>
-                  <button id="btn-spin-move-down" class="calc-btn small-btn">
-                    ▼
-                  </button>
-                </div>
-              </div>
-            </fieldset>
-
-            <!-- Overlay : Calculateur d'angles (vent) -->
-            <fieldset class="panel">
-              <legend data-i18n="card_wind_overlay">
-                Calculateur d'angles
-              </legend>
-              <div class="flex flex-row flex-wrap gap-12 items-center">
-                <div class="flex flex-col gap-10">
-                  <label class="toggle" for="toggle-show-wind-overlay">
-                    <span data-i18n="label_show_wind_overlay"
-                      >Afficher l'overlay vent :</span
-                    >
-                    <input
-                      type="checkbox"
-                      id="toggle-show-wind-overlay"
-                      class="toggle__input"
-                    />
-                    <span class="toggle__track"></span>
-                  </label>
-
-                  <label class="toggle" for="toggle-wind-click-through">
-                    <span data-i18n="label_lock_ruler"
-                      >Verrouiller l'overlay (plus clicable) :</span
-                    >
-                    <input
-                      type="checkbox"
-                      id="toggle-wind-click-through"
-                      class="toggle__input"
-                    />
-                    <span class="toggle__track"></span>
-                  </label>
-                </div>
-
-                <div class="overlay-separator"></div>
-
-                <!-- Contrôles de déplacement de l'overlay vent -->
-                <div
-                  class="adjust-title text-center"
-                  data-i18n="label_wind_overlay_adjust"
-                >
-                  Ajustement de l'overlay :
-                </div>
-                <div class="flex flex-col items-center gap-6">
-                  <button id="btn-wind-move-up" class="calc-btn small-btn">
-                    ▲
-                  </button>
-                  <div class="flex gap-18">
-                    <button id="btn-wind-move-left" class="calc-btn small-btn">
-                      ◀
-                    </button>
-                    <button id="btn-wind-move-right" class="calc-btn small-btn">
-                      ▶
-                    </button>
-                  </div>
-                  <button id="btn-wind-move-down" class="calc-btn small-btn">
-                    ▼
-                  </button>
-                </div>
-              </div>
-            </fieldset>
-
-            <!-- Overlay : Infos Tir (PB, distance, %) -->
-            <fieldset class="panel">
-              <legend>Infos Tir</legend>
-              <div class="flex flex-row flex-wrap gap-12 items-center">
-                <div class="flex flex-col gap-10">
-                  <label class="toggle" for="toggle-show-infos-shot">
-                    <span>Afficher les infos :</span>
-                    <input
-                      type="checkbox"
-                      id="toggle-show-infos-shot"
-                      class="toggle__input"
-                    />
-                    <span class="toggle__track"></span>
-                  </label>
-
-                  <label class="toggle" for="toggle-click-through-infos-shot">
-                    <span data-i18n="label_lock_ruler"
-                      >Bloquer la fenêtre (Jouer) :</span
-                    >
-                    <input
-                      type="checkbox"
-                      id="toggle-click-through-infos-shot"
-                      class="toggle__input"
-                    />
-                    <span class="toggle__track"></span>
-                  </label>
-                </div>
-
-                <div class="overlay-separator"></div>
-
-                <!-- Contrôles de déplacement -->
-                <div class="adjust-title text-center">
-                  Ajustement de la fenêtre :
-                </div>
-                <div class="flex flex-col items-center gap-6">
-                  <button
-                    id="btn-infos-shot-move-up"
-                    class="calc-btn small-btn"
-                  >
-                    ▲
-                  </button>
-                  <div class="flex gap-18">
-                    <button
-                      id="btn-infos-shot-move-left"
-                      class="calc-btn small-btn"
-                    >
-                      ◀
-                    </button>
-                    <button
-                      id="btn-infos-shot-move-right"
-                      class="calc-btn small-btn"
-                    >
-                      ▶
-                    </button>
-                  </div>
-                  <button
-                    id="btn-infos-shot-move-down"
-                    class="calc-btn small-btn"
-                  >
-                    ▼
-                  </button>
-                </div>
-              </div>
-            </fieldset>
-          </div>
-        </div>
-
-        <!-- ============================================================
-             CONTENU ONGLET 3 : STATISTIQUES
-             ============================================================ -->
-        <div class="tab-content" id="content3">
           <!--
             SECTION : STATISTIQUES DU PERSONNAGE
             Permet de sélectionner un personnage et de configurer ses stats.
@@ -892,9 +593,9 @@
         </div>
 
         <!-- ============================================================
-             CONTENU ONGLET 4 : OPTIONS AVANCÉES (SLOPE/BREAKS)
+             CONTENU ONGLET 3 : OPTIONS AVANCÉES (SLOPE/BREAKS)
              ============================================================ -->
-        <div class="tab-content" id="content4">
+        <div class="tab-content" id="content3">
           <!--
             SECTION : CALCUL DE PENTE
             Permet de calculer les breaks et les angles de pente.
@@ -978,7 +679,7 @@
     <!-- 3. Utilitaires de calcul (recalcul des données) -->
     <script src="utils/recalc.js"></script>
     <!--Utitaires de mise en formes -->
-    <script src="utils/dunk_otions_boutons.js"></script>
+    <script src="utils/dunk_options_boutons.js"></script>
 
     <!-- 4. Calculateur principal -->
     <script src="shared/js/smart_calculator.js"></script>

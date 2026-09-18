@@ -3,6 +3,9 @@
   "title": "Smart Pangya Calculator",
   "lang_label": "Idioma:",
 
+  "window_title_settings": "Configuración",
+  "window_title_overlays": "Overlays",
+
   "label_course": "Curso:",
   "label_map": "Mapa",
   "label_hole": "Hoyo",
@@ -76,6 +79,9 @@
   "label_wind_overlay_adjust": "Ajuste del overlay",
   "lock_wind": "Bloquear lector de ángulo",
 
+  "card_infos_shot": "Info del tiro",
+  "label_show_infos_shot": "Mostrar info",
+
   "card_stats": "Estadísticas del personaje",
   "label_power": "Power",
   "label_ring_power": "Ring Power",
@@ -125,7 +131,6 @@
   "label_capture_spin": "Presiona Espacio para capturar la posición del cursor",
   "xy_default_values": "Valores predeterminados",
 
-  "dunk_out_of_range": "Tiro fuera del alcance del palo, sea cual sea el spin probado.",
   "shot_out_of_range": "Tiro fuera del alcance del palo, sea cual sea el spin probado.",
   "shot_extended_spin_used": "Se requiere un spin alto (fuera del rango habitual) para llevar el tiro por debajo del 100% de potencia.",
   "shot_fallback_spin_used": "Ningún spin dentro del rango cumple la restricción , se usó el spin por defecto.",

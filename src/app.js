@@ -147,6 +147,30 @@
   }
 
   /**
+   * Retourne la position et la taille de la fenêtre principale
+   * Utilisée pour positionner les fenêtres settings/overlays au-dessus de main
+   * @returns {Promise<{x:number, y:number, width:number, height:number}|null>}
+   */
+  async function getMainWindowPosition() {
+    try {
+      if (!window.TauriService?.isAvailable) return null;
+      const { getCurrentWindow } = window.__TAURI__.window;
+      const currentWindow = getCurrentWindow();
+      const pos = await currentWindow.outerPosition();
+      const size = await currentWindow.outerSize();
+      return {
+        x: pos.x,
+        y: pos.y,
+        width: size.width,
+        height: size.height,
+      };
+    } catch (err) {
+      console.error("❌ Erreur lecture position fenêtre principale :", err);
+      return null;
+    }
+  }
+
+  /**
    * Objet principal de l'application - exposé globalement
    * Contient toutes les méthodes d'initialisation et de configuration
    */
@@ -251,14 +275,20 @@
         });
 
         // ============================================================
-        // 7. CONFIGURATION DES TOGGLES OVERLAYS
+        // 7. CONFIGURATION DES OPTIONS OVERLAYS (onglet Calculs)
         // ============================================================
-        this.setupOverlayToggles(tauri, storage);
+        this.setupCalculsOverlayOptions(tauri, storage);
 
         // ============================================================
         // 7b. CONFIGURATION DU BOUTON PARAMÈTRES
         // ============================================================
         this.setupSettingsToggle(tauri);
+
+        // ============================================================
+        // 7c. CONFIGURATION DU BOUTON OVERLAYS
+        // Ouvre/ferme la fenêtre dédiée de gestion des overlays
+        // ============================================================
+        this.setupOverlaysToggle(tauri);
 
         // ============================================================
         // 8. CONFIGURATION DES CHAMPS DE SAISIE
@@ -294,7 +324,14 @@
         // ============================================================
         // 13. SÉLECTEUR D'ANGLE (vent)
         // ============================================================
-        const angleSelector = window.WindAngleSelector({ storage });
+        const angleSelector = window.WindAngleSelector({
+          storage,
+          onAngleChange: () => {
+            if (typeof window.triggerCalc === "function") {
+              window.triggerCalc();
+            }
+          },
+        });
         if (angleSelector) {
           window.updateWindCanvas = angleSelector.setAngle;
         }
@@ -306,73 +343,22 @@
     },
 
     // ================================================================
-    // MÉTHODE : setupOverlayToggles()
-    // DESCRIPTION : Configure tous les toggles de superposition (overlays)
+    // MÉTHODE : setupCalculsOverlayOptions()
+    // DESCRIPTION : Configure les contrôles overlay propres à la fenêtre
+    // principale (onglet Calculs). La gestion complète des overlays a été
+    // déplacée vers la fenêtre dédiée screens/overlays/overlays_screen.
     // ================================================================
 
     /**
-     * Configure les contrôles d'affichage et de positionnement des overlays
-     * - Input Bar (fenêtre de calcul)
-     * - Wind overlay (vent)
-     * - Spin overlay (repère de spin)
-     * - Ruler overlay (règle de décalage)
-     * Gère également les mouvements (déplacements) de chaque overlay
+     * Configure les contrôles overlay restant dans la fenêtre principale :
+     * - Zoom de la règle PB (Smart PB ~80% / PB Max 100%)
+     * - Forcer le spin (▼ positif / ▲ négatif, synchronisés avec calc_overlay)
      *
      * @param {Object} tauri - Service Tauri pour les communications
      * @param {Object} storage - Service de stockage pour persister les états
      */
-    setupOverlayToggles: function (tauri, storage) {
-      console.log("🔄 Configuration des overlays...");
-
-      // ============================================================
-      // TOGGLE : INPUT BAR (fenêtre de calcul)
-      // ============================================================
-      const toggleInputBar = document.getElementById("toggle-show-input-bar");
-      if (toggleInputBar) {
-        toggleInputBar.onclick = function () {
-          tauri.setOverlayVisibility("input_bar", this.checked);
-        };
-      }
-
-      // ============================================================
-      // TOGGLE : WIND OVERLAY (vent)
-      // ============================================================
-      const toggleShowWind = document.getElementById(
-        "toggle-show-wind-overlay",
-      );
-      if (toggleShowWind) {
-        toggleShowWind.onclick = function () {
-          tauri.setOverlayVisibility("wind", this.checked);
-        };
-      }
-
-      // ============================================================
-      // TOGGLE : WIND CLICK-THROUGH (verrouillage du vent)
-      // ============================================================
-      const toggleWindMain = document.getElementById(
-        "toggle-wind-click-through",
-      );
-      if (toggleWindMain) {
-        // Récupère l'état sauvegardé
-        const savedState = storage.get("wind_click_through", false);
-        toggleWindMain.checked = savedState;
-
-        // Applique l'état au démarrage
-        if (tauri.isAvailable) {
-          tauri.setOverlayClickThrough("wind_overlay", savedState);
-        }
-
-        // Écoute les changements
-        toggleWindMain.addEventListener("change", function () {
-          const locked = this.checked;
-          if (tauri.isAvailable) {
-            tauri.setOverlayClickThrough("wind_overlay", locked);
-            storage.set("wind_click_through", locked);
-            // Synchronise avec l'InputBar
-            tauri.emit("sync-wind-click-through", { locked });
-          }
-        });
-      }
+    setupCalculsOverlayOptions: function (tauri, storage) {
+      console.log("🔄 Configuration des options overlays (onglet Calculs)...");
 
       // ============================================================
       // TOGGLE : ZOOM RÈGLE PB (Smart PB ~80% / PB Max 100%)
@@ -390,26 +376,6 @@
           }
         });
       }
-
-      // ============================================================
-      // SYNCHRONISATION DE LA VISIBILITÉ DES OVERLAYS
-      // Synchronise l'état des toggles entre les fenêtres
-      // ============================================================
-      const visibilitySyncMap = {
-        "sync-ruler-visibility": "toggle-show-ruler",
-        "sync-wind-visibility": "toggle-show-wind-overlay",
-        "sync-spin-visibility": "toggle-show-spin",
-        "sync-infos-shot-visibility": "toggle-show-infos-shot",
-      };
-
-      Object.entries(visibilitySyncMap).forEach(([eventName, checkboxId]) => {
-        tauri.listen(eventName, (event) => {
-          const cb = document.getElementById(checkboxId);
-          if (cb && cb.checked !== event.payload) {
-            cb.checked = event.payload;
-          }
-        });
-      });
 
       // ============================================================
       // TOGGLES : FORCER LE SPIN (▼ positif / ▲ négatif)
@@ -455,168 +421,7 @@
       if (chkSpinPos) chkSpinPos.checked = savedSpinForce === "positive";
       if (chkSpinNeg) chkSpinNeg.checked = savedSpinForce === "negative";
 
-      // ============================================================
-      // TOGGLE : SPIN OVERLAY (repère de spin)
-      // ============================================================
-      const toggleShowSpin = document.getElementById("toggle-show-spin");
-      if (toggleShowSpin) {
-        toggleShowSpin.onclick = function () {
-          tauri.setOverlayVisibility("spin", this.checked);
-        };
-      }
-
-      // ============================================================
-      // TOGGLE : SPIN CLICK-THROUGH (verrouillage du spin)
-      // ============================================================
-      const toggleClickThroughSpin = document.getElementById(
-        "toggle-click-through-spin",
-      );
-      if (toggleClickThroughSpin) {
-        toggleClickThroughSpin.onclick = function () {
-          tauri.setOverlayClickThrough("spin_overlay", this.checked);
-        };
-      }
-
-      // ============================================================
-      // MOUVEMENT DE L'OVERLAY SPIN
-      // ============================================================
-      const spinButtons = {
-        "btn-spin-move-up": { dx: 0, dy: -1 },
-        "btn-spin-move-down": { dx: 0, dy: 1 },
-        "btn-spin-move-left": { dx: -1, dy: 0 },
-        "btn-spin-move-right": { dx: 1, dy: 0 },
-      };
-      for (const [id, delta] of Object.entries(spinButtons)) {
-        document.getElementById(id)?.addEventListener("click", () => {
-          tauri.invoke("move_spin_overlay", delta);
-        });
-      }
-
-      // ============================================================
-      // TOGGLE : RULER OVERLAY (règle de décalage)
-      // ============================================================
-      const toggleShowRuler = document.getElementById("toggle-show-ruler");
-      if (toggleShowRuler) {
-        toggleShowRuler.onclick = function () {
-          tauri.setOverlayVisibility("ruler", this.checked);
-        };
-      }
-
-      // ============================================================
-      // TOGGLE : RULER CLICK-THROUGH (verrouillage de la règle)
-      // ============================================================
-      const toggleClickThrough = document.getElementById(
-        "toggle-click-through",
-      );
-      if (toggleClickThrough) {
-        toggleClickThrough.onclick = function () {
-          tauri.setOverlayClickThrough("ruler_overlay", this.checked);
-        };
-      }
-
-      // ============================================================
-      // COULEUR DU REPÈRE (smart-indicator de la règle)
-      // ============================================================
-      const rulerSmartColor = document.getElementById("ruler-smart-color");
-      if (rulerSmartColor) {
-        rulerSmartColor.value = storage.get("ruler_smart_color", "#E0098E");
-        rulerSmartColor.addEventListener("input", function () {
-          const color = this.value;
-          storage.set("ruler_smart_color", color);
-          if (tauri.isAvailable) {
-            tauri.emit("update-ruler-smart-color", { color });
-          }
-        });
-      }
-
-      // ============================================================
-      // AFFICHAGE DU REPÈRE T (visible par défaut)
-      // ============================================================
-      const toggleShowTRepere = document.getElementById("toggle-show-t-repere");
-      if (toggleShowTRepere) {
-        toggleShowTRepere.checked = storage.get("ruler_show_t_repere", true);
-        toggleShowTRepere.addEventListener("change", function () {
-          const visible = this.checked;
-          storage.set("ruler_show_t_repere", visible);
-          if (tauri.isAvailable) {
-            tauri.emit("update-ruler-t-repere", { visible });
-          }
-        });
-      }
-
-      // ============================================================
-      // MOUVEMENT DE LA RÈGLE
-      // ============================================================
-      const moveRuler = (dx, dy) =>
-        tauri.invoke("move_ruler", { x: dx, y: dy });
-      document
-        .getElementById("btn-move-up")
-        ?.addEventListener("click", () => moveRuler(0, -1));
-      document
-        .getElementById("btn-move-down")
-        ?.addEventListener("click", () => moveRuler(0, 1));
-      document
-        .getElementById("btn-move-left")
-        ?.addEventListener("click", () => moveRuler(-1, 0));
-      document
-        .getElementById("btn-move-right")
-        ?.addEventListener("click", () => moveRuler(1, 0));
-
-      // ============================================================
-      // MOUVEMENT DE L'OVERLAY VENT
-      // ============================================================
-      const windButtons = {
-        "btn-wind-move-up": { dx: 0, dy: -1 },
-        "btn-wind-move-down": { dx: 0, dy: 1 },
-        "btn-wind-move-left": { dx: -1, dy: 0 },
-        "btn-wind-move-right": { dx: 1, dy: 0 },
-      };
-      for (const [id, delta] of Object.entries(windButtons)) {
-        document.getElementById(id)?.addEventListener("click", () => {
-          tauri.invoke("move_wind_overlay", delta);
-        });
-      }
-
-      // ============================================================
-      // TOGGLE : INFOS SHOT (PB, distance, %)
-      // ============================================================
-      const toggleShowInfosShot = document.getElementById(
-        "toggle-show-infos-shot",
-      );
-      if (toggleShowInfosShot) {
-        toggleShowInfosShot.onclick = function () {
-          tauri.invoke("set_infos_shot_visibility", { show: this.checked });
-        };
-      }
-
-      // ============================================================
-      // TOGGLE : INFOS SHOT CLICK-THROUGH
-      // ============================================================
-      const toggleClickThroughInfosShot = document.getElementById(
-        "toggle-click-through-infos-shot",
-      );
-      if (toggleClickThroughInfosShot) {
-        toggleClickThroughInfosShot.onclick = function () {
-          tauri.setOverlayClickThrough("infos_shot", this.checked);
-        };
-      }
-
-      // ============================================================
-      // MOUVEMENT DE L'OVERLAY INFOS SHOT
-      // ============================================================
-      const infosShotButtons = {
-        "btn-infos-shot-move-up": { dx: 0, dy: -1 },
-        "btn-infos-shot-move-down": { dx: 0, dy: 1 },
-        "btn-infos-shot-move-left": { dx: -1, dy: 0 },
-        "btn-infos-shot-move-right": { dx: 1, dy: 0 },
-      };
-      for (const [id, delta] of Object.entries(infosShotButtons)) {
-        document.getElementById(id)?.addEventListener("click", () => {
-          tauri.invoke("move_infos_shot", delta);
-        });
-      }
-
-      console.log("✅ Overlays configurés");
+      console.log("✅ Options overlays configurées");
     },
 
     // ================================================================
@@ -636,7 +441,31 @@
         if (!tauri.isAvailable) return;
 
         const isVisible = await tauri.invoke("get_settings_visibility");
-        tauri.emit("toggle-settings-visibility", { show: !isVisible });
+        const pos = await getMainWindowPosition();
+        tauri.emit("toggle-settings-visibility", { show: !isVisible, pos });
+      });
+    },
+
+    // ================================================================
+    // MÉTHODE : setupOverlaysToggle()
+    // DESCRIPTION : Configure le bouton pour afficher/masquer les overlays
+    // ================================================================
+
+    /**
+     * Configure le bouton "Overlays" pour ouvrir/fermer la fenêtre
+     * de gestion des overlays (screens/overlays/overlays_screen)
+     * @param {Object} tauri - Service Tauri
+     */
+    setupOverlaysToggle: function (tauri) {
+      const btnOverlays = document.getElementById("btn-overlays-toggle");
+      if (!btnOverlays) return;
+
+      btnOverlays.addEventListener("click", async () => {
+        if (!tauri.isAvailable) return;
+
+        const isVisible = await tauri.invoke("get_overlays_screen_visibility");
+        const pos = await getMainWindowPosition();
+        tauri.emit("toggle-overlays-visibility", { show: !isVisible, pos });
       });
     },
 
@@ -1042,6 +871,18 @@
         const { angle } = event.payload;
 
         const degreeInput = document.getElementById("degree");
+
+        // Ignorer l'écho de notre propre canvas : le champ #degree a déjà
+        // reçu la valeur via updateUI() et le recalcul est déclenché par
+        // onAngleChange(). Évite le dispatchEvent + double triggerCalc
+        // (latence de 400 ms perçue au 2ᵉ clic sur la page principale).
+        if (
+          degreeInput &&
+          Number(degreeInput.value) === Number(angle)
+        ) {
+          return;
+        }
+
         if (degreeInput) {
           degreeInput.value = angle;
           degreeInput.dispatchEvent(new Event("input", { bubbles: true }));

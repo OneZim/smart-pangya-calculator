@@ -42,6 +42,30 @@
   }
 
   // ================================================================
+  // POSITION DE LA FENÊTRE
+  // ================================================================
+
+  /**
+   * Centre la fenêtre au-dessus de la fenêtre principale à chaque
+   * ouverture (payload.pos fourni par app.js).
+   * @param {Object} win - Fenêtre Tauri courante
+   * @param {Object} payload - Payload de l'événement toggle
+   */
+  async function positionWindowOnShow(win, payload) {
+    const pos = payload?.pos;
+    if (pos && typeof pos.x === "number" && typeof pos.y === "number") {
+      const { PhysicalPosition } = window.__TAURI__.dpi;
+      const curSize = await win.outerSize();
+      await win.setPosition(
+        new PhysicalPosition(
+          Math.round(pos.x + (pos.width - curSize.width) / 2),
+          Math.round(pos.y + (pos.height - curSize.height) / 2),
+        ),
+      );
+    }
+  }
+
+  // ================================================================
   // DOSSIER D'IMAGES
   // ================================================================
 
@@ -85,6 +109,7 @@
         if (!win) return;
 
         if (show === true) {
+          await positionWindowOnShow(win, event.payload);
           await win.show();
           await win.setFocus();
         } else if (show === false) {
