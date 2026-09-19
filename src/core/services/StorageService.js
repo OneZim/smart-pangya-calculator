@@ -116,10 +116,6 @@
         cardPower: Number(this.get("card_pwr", 0)),
         mascotPower: Number(this.get("mascot_pwr", 0)),
         cardPsPower: Number(this.get("card_ps_pwr", 0)),
-        spinDunk: Number(this.get("spinDunk", 9)),
-        spinToma: Number(this.get("spinToma", 7)),
-        spinSpike: Number(this.get("spinSpike", 7)),
-        spinCobra: Number(this.get("spinCobra", 9)),
       };
     },
   };

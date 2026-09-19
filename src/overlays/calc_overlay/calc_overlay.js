@@ -86,7 +86,7 @@
     }
 
     if (elements.spin) {
-      const value = playerStore ? playerStore.getSpinForShot(shot) : 9;
+      const value = 0;
       elements.spin.value = value;
       emitSync("spin", String(value));
       if (window.TauriService?.isAvailable) {
@@ -456,11 +456,7 @@
   async function restoreCalcWindowSize() {
     if (!storage || !window.TauriService?.isAvailable) return;
     const saved = storage.get("calc_overlay_size", null);
-    if (
-      !saved ||
-      typeof saved.w !== "number" ||
-      typeof saved.h !== "number"
-    ) {
+    if (!saved || typeof saved.w !== "number" || typeof saved.h !== "number") {
       return;
     }
     try {
@@ -535,18 +531,32 @@
     // Voir updateShortErrorText() plus bas dans ce fichier pour la mise
     // à jour du message d'erreur suite à un changement de langue.
 
-    // Synchro des spins par défaut (changés depuis la fenêtre principale)
-    window.TauriService.listen("sync-spin-default", (event) => {
-      const { id, value } = event.payload;
-      if (storage) {
-        storage.set(id, value); // garde le cache de cette fenêtre à jour
-      }
-      playerStore?.refresh();
-    });
+    // === UPDATE RULER via ShotInfoService ===
+    function renderShotInfo() {
+      const data = window.ShotInfoService.getCurrentData();
+      const pbRealEl = document.getElementById("pbReal-display");
+      const percentEl = document.getElementById("percent-display");
+      const distEl = document.getElementById("distance-display");
 
-    // === UPDATE RULER ===
-    window.TauriService.listen("update-ruler", (event) => {
-      const { pb } = event.payload;
+      if (pbRealEl) {
+        const pbReal = window.ShotInfoService.computeRealPb(
+          data.pb != null ? data.pb : 0,
+        );
+        pbRealEl.textContent = `${pbReal.toFixed(2)} PB`;
+      }
+      if (percentEl) {
+        const percent = data.percent != null ? data.percent : 0;
+        percentEl.textContent = `${percent.toFixed(1)}%`;
+        percentEl.classList.toggle("percent-low", percent < 80);
+      }
+      if (distEl) {
+        const dist = data.distance != null ? data.distance : 0;
+        distEl.textContent = `${dist.toFixed(2)} yds`;
+      }
+    }
+
+    function renderShortError(data) {
+      const { pb } = data;
       const shortErrorLabel = document.getElementById("short-error");
       if (!shortErrorLabel) return;
 
@@ -557,7 +567,18 @@
       } else {
         shortErrorLabel.style.display = "none";
       }
+    }
+
+    window.ShotInfoService.init({
+      tauriService: window.TauriService,
+      storage: storage,
     });
+    window.ShotInfoService.onData((data) => {
+      renderShortError(data);
+      renderShotInfo();
+    });
+    window.ShotInfoService.onConfigChange(renderShotInfo);
+    renderShotInfo();
 
     window.TauriService.listen("dunk-optimize-result", (event) => {
       if (event.payload.success) return; // rien à afficher si succès
@@ -576,24 +597,8 @@
     });
   }
 
-  const toggleShowInfosShot = document.getElementById(
-    "toggle-show-infos-shot-co"
-  );
-  if (toggleShowInfosShot) {
-    toggleShowInfosShot.addEventListener("change", function () {
-      window.TauriService?.invoke("set_infos_shot_visibility", {
-        show: this.checked,
-      });
-    });
-  }
-
   window.TauriService?.listen("sync-ruler-visibility", (event) => {
     const cb = document.getElementById("toggle-show-ruler-co"); // ou l'id côté main
-    if (cb) cb.checked = event.payload;
-  });
-
-  window.TauriService?.listen("sync-infos-shot-visibility", (event) => {
-    const cb = document.getElementById("toggle-show-infos-shot-co");
     if (cb) cb.checked = event.payload;
   });
   // ================================================================
@@ -701,17 +706,39 @@
     await restoreCalcWindowSize();
     initContentZoom();
     window.setupWindowDrag?.(window.TauriService, {
-      selectors: [".wind-panel", ".resize-grip"],
+      selectors: [".wind-panel", ".ball-panel", ".resize-grip"],
     });
     setupTextSelection();
     updateOptimizeDunkBtnState();
 
     // === PANNEAU VENT (SLIDE-IN) ===
     const toggleWindPanel = document.getElementById("btn-toggle-wind-panel");
+    const closeWindPanel = document.getElementById("btn-close-wind-panel");
     const windPanel = document.getElementById("wind-panel");
     if (toggleWindPanel && windPanel) {
       toggleWindPanel.addEventListener("click", () => {
-        windPanel.classList.toggle("open");
+        windPanel.classList.add("open");
+      });
+    }
+    if (closeWindPanel && windPanel) {
+      closeWindPanel.addEventListener("click", () => {
+        windPanel.classList.remove("open");
+      });
+    }
+
+    // === PANNEAU BALLE (SLIDE-IN, sans calcul d'angle) ===
+    const openBallPanel = document.getElementById("btn-open-ball-panel");
+    const closeBallPanel = document.getElementById("btn-close-ball-panel");
+    const ballPanel = document.getElementById("ball-panel");
+    if (openBallPanel && ballPanel) {
+      openBallPanel.addEventListener("click", () => {
+        ballPanel.classList.add("open");
+      });
+    }
+    if (closeBallPanel && ballPanel) {
+      closeBallPanel.addEventListener("click", () => {
+        ballPanel.classList.remove("open");
+        resetBallDots();
       });
     }
 
@@ -729,5 +756,139 @@
     // Même dossier (StorageService partagé) et mêmes événements
     // `nouvelle-capture-detectee` que la page principale.
     window.ScreenshotManager?.(window.TauriService, storage);
+
+    // === IMAGE BALLE (même capture/calibration, offsets dédiés) ===
+    window.ScreenshotManager?.(window.TauriService, storage, {
+      imageId: "ball-image",
+      refreshBtnId: "btn-refresh-ball",
+      cropUpId: "btn-ball-crop-up",
+      cropDownId: "btn-ball-crop-down",
+      cropLeftId: "btn-ball-crop-left",
+      cropRightId: "btn-ball-crop-right",
+      offsetXKey: "ballImgOffsetX",
+      offsetYKey: "ballImgOffsetY",
+      anchorKey: "ballAnchor",
+      zoomKey: "ballZoom",
+      label: "balle",
+    });
+
+    // === IMAGE BALLE (clics : points + polyligne + pente vers slope) ===
+    // Mode d'emploi : clic gauche pose un point, clic droit retire le
+    // dernier point un par un. Les points sont reliés (polyligne) pour
+    // visualiser la pente : dernier point plus à droite que le premier
+    // → count positif, plus à gauche → négatif. 1 point = 1 (positif).
+    // Champ slope : positif sans « + », négatif avec « - ».
+    const ballCounter = document.getElementById("ball-click-counter");
+    const ballCropBox = document.querySelector(".ball-crop-box");
+    const ballClickLayer = document.getElementById("ball-click-layer");
+    const ballPolylineShape = document.getElementById("ball-polyline-shape");
+    const ballPoints = [];
+
+    function syncBallSlope(value) {
+      if (elements.slope_break) {
+        elements.slope_break.value = value;
+        elements.slope_break.dispatchEvent(
+          new Event("input", { bubbles: true }),
+        );
+      }
+    }
+
+    function renderBallLine() {
+      if (!ballPolylineShape) return;
+      if (ballPoints.length === 0) {
+        ballPolylineShape.setAttribute("points", "");
+        return;
+      }
+      ballPolylineShape.setAttribute(
+        "points",
+        ballPoints.map((p) => `${p.x},${p.y}`).join(" "),
+      );
+    }
+
+    function updateBallPente() {
+      const n = ballPoints.length;
+
+      if (n === 0) {
+        if (ballCounter) ballCounter.textContent = "0";
+        syncBallSlope("0");
+        return;
+      }
+
+      if (n === 1) {
+        if (ballCounter) ballCounter.textContent = "+1";
+        syncBallSlope("1");
+        return;
+      }
+
+      const premierPoint = ballPoints[0];
+      const dernierPoint = ballPoints[n - 1];
+
+      let diffX = dernierPoint.x - premierPoint.x;
+      const diffY = premierPoint.y - dernierPoint.y;
+
+      if (diffY < 0) {
+        diffX = -diffX;
+      }
+
+      const seuil = 5;
+      let affichage;
+
+      if (diffX > seuil) {
+        affichage = `-${n}`; // Affiche "-3"
+      } else if (diffX < -seuil) {
+        affichage = `${n}`; // Affiche "+3"
+      } else {
+        affichage = "0";
+      }
+
+      // Le counter et le slope reçoivent EXACTEMENT la même chose
+      if (ballCounter) {
+        ballCounter.textContent = affichage;
+      }
+      syncBallSlope(affichage);
+    }
+
+    function addBallDot(e) {
+      const rect = ballCropBox.getBoundingClientRect();
+      const bar =
+        ballCropBox.closest(".horizontal-calculator-bar") ||
+        document.querySelector(".horizontal-calculator-bar");
+      const zoom = parseFloat(getComputedStyle(bar)?.zoom) || 1;
+      const x = (e.clientX - rect.left) / zoom;
+      const y = (e.clientY - rect.top) / zoom;
+      const dot = document.createElement("div");
+      dot.className = "click-dot";
+      dot.style.left = x + "px";
+      dot.style.top = y + "px";
+      ballClickLayer.appendChild(dot);
+      ballPoints.push({ x, y });
+      renderBallLine();
+      updateBallPente();
+    }
+
+    function removeLastBallDot() {
+      if (ballPoints.length === 0) return;
+      if (ballClickLayer && ballClickLayer.lastElementChild) {
+        ballClickLayer.lastElementChild.remove();
+      }
+      ballPoints.pop();
+      renderBallLine();
+      updateBallPente();
+    }
+
+    function resetBallDots() {
+      ballPoints.length = 0;
+      if (ballClickLayer) ballClickLayer.innerHTML = "";
+      renderBallLine();
+      if (ballCounter) ballCounter.textContent = "0";
+    }
+
+    if (ballCropBox) {
+      ballCropBox.addEventListener("click", addBallDot);
+      ballCropBox.addEventListener("contextmenu", (e) => {
+        e.preventDefault();
+        removeLastBallDot();
+      });
+    }
   });
 })();

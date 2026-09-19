@@ -197,6 +197,12 @@ body {
   margin-top: 10px;
 }
 
+/* Contenu carte restreint aux 2/3 et centré */
+.settings-restricted-width {
+  width: 66.66%;
+  margin: 0 auto;
+}
+
 /* ---------- CHAMPS ---------- */
 .field {
   display: flex;

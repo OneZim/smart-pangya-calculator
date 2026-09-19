@@ -101,45 +101,7 @@
             SECTION : SÉLECTION DU PARCOURS
             Permet de choisir un parcours, un trou et un emplacement de pin.
             Les données sont chargées dynamiquement via CourseStore.js.
-          -->
-          <div class="card mb-20">
-            <div class="flex items-center gap-12">
-              <div class="field grow">
-                <label for="select-parcours" data-i18n="label_course"
-                  >Parcours :</label
-                >
 
-                <!-- Sélecteurs cascade : Map → Hole → Pin -->
-                <div id="course-selector-container">
-                  <div class="course-selector">
-                    <select
-                      id="select-parcours"
-                      class="course-select"
-                      data-placeholder="-- Map --"
-                    >
-                      <option value="">-- Map --</option>
-                    </select>
-                    <select
-                      id="select-trou"
-                      class="course-select"
-                      data-placeholder="-- Hole --"
-                      disabled
-                    >
-                      <option value="">-- Hole --</option>
-                    </select>
-                    <select
-                      id="select-pin"
-                      class="course-select"
-                      data-placeholder="-- Pin --"
-                      disabled
-                    >
-                      <option value="">-- Pin --</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
 
           <!--
             SECTION : CALCULATEUR DE TIR
@@ -154,7 +116,43 @@
               <div class="card-title" data-i18n="card_shot_config">
                 Configuration Tir
               </div>
-
+              <div id="course-selector-container" class="form-grid">
+                <div class="field">
+                  <label for="select-parcours" data-i18n="label_course"
+                    >Parcours :</label
+                  >
+                  <select
+                    id="select-parcours"
+                    class="course-select"
+                    data-placeholder="-- Map --"
+                  >
+                    <option value="">-- Map --</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label>&nbsp;</label>
+                  <select
+                    id="select-trou"
+                    class="course-select"
+                    data-placeholder="-- Hole --"
+                    disabled
+                  >
+                    <option value="">-- Hole --</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label>&nbsp;</label>
+                  <select
+                    id="select-pin"
+                    class="course-select"
+                    data-placeholder="-- Pin --"
+                    disabled
+                  >
+                    <option value="">-- Pin --</option>
+                  </select>
+                </div>
+              </div>
+              <div class="divider"></div>
               <!-- Ligne 1 : Club + Shot + Power Shot -->
               <div class="form-grid">
                 <div class="field select-club">
@@ -219,6 +217,18 @@
                     value="0"
                   />
                 </div>
+                <div class="field">
+                  <!-- Boutons de réinitialisation totale -->
+                  <div class="reset-row">
+                    <button
+                      id="reset-hall"
+                      class="action-btn action-btn--neutral"
+                      data-i18n="btn_reset_hall"
+                    >
+                      Reset Hall
+                    </button>
+                  </div>
+                </div>
               </div>
 
               <!-- Ligne 3 : Wind + Degree -->
@@ -243,8 +253,42 @@
                     value="45"
                   />
                 </div>
+                <div class="field">
+                  <!-- Boutons de réinitialisation partielle -->
+                  <div class="reset-row">
+                    <button
+                      id="reset-params"
+                      class="action-btn action-btn--neutral"
+                      data-i18n="btn_reset_params"
+                    >
+                      Reset : Cr. / Gr. / Slop
+                    </button>
+                  </div>
+                </div>
               </div>
-
+              <div class="form-grid">
+                <div class="field">
+                  <label data-i18n="label_ground">Ground:</label>
+                  <input
+                    id="ground"
+                    autocomplete="off"
+                    type="text"
+                    maxlength="3"
+                    value="100"
+                  />
+                </div>
+                <div class="field">
+                  <label data-i18n="label_slope_break">Slope break:</label>
+                  <input
+                    id="slope_break"
+                    autocomplete="off"
+                    type="text"
+                    maxlength="6"
+                    value="0"
+                  />
+                </div>
+                <div class="field"></div>
+              </div>
               <!-- Ligne 4 : Spin + bouton Spin idéal -->
               <div class="form-grid">
                 <div class="field">
@@ -258,6 +302,40 @@
                   />
                 </div>
                 <div class="field">
+                  <label class="toggle" for="chk-spin-positive">
+                    <span data-i18n="spin_positive_only">Forcer</span>
+                    <span class="arrow">▼</span>
+                    <input
+                      type="checkbox"
+                      id="chk-spin-positive"
+                      class="toggle__input"
+                    />
+                    <span class="toggle__track"></span>
+                  </label>
+                </div>
+                <div class="field">
+                  <!-- Toggle Forcer Spin Négatif (Flèche vers le bas) -->
+                  <label class="toggle" for="chk-spin-negative">
+                    <span data-i18n="spin_negative_only">Forcer</span>
+                    <span class="arrow">▲</span>
+
+                    <input
+                      type="checkbox"
+                      id="chk-spin-negative"
+                      class="toggle__input"
+                    />
+                    <span class="toggle__track"></span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Options et filtres de spin & courbe -->
+              <div class="form-grid">
+                <!-- Toggle Spin Positif Uniquement -->
+              </div>
+              <!-- Ligne 5 : Boutons optimiseurs -->
+              <div class="form-grid">
+                <div class="field">
                   <label data-i18n="label_curve">Curve:</label>
                   <input
                     id="curve"
@@ -267,38 +345,6 @@
                     value="0"
                   />
                 </div>
-              </div>
-
-              <!-- Options et filtres de spin & courbe -->
-              <div class="form-grid">
-                <!-- Toggle Spin Positif Uniquement -->
-                <label class="toggle" for="chk-spin-positive">
-                  <span
-                    ><span data-i18n="spin_positive_only">Forcer</span> ▼</span
-                  >
-                  <input
-                    type="checkbox"
-                    id="chk-spin-positive"
-                    class="toggle__input"
-                  />
-                  <span class="toggle__track"></span>
-                </label>
-
-                <!-- Toggle Forcer Spin Négatif (Flèche vers le bas) -->
-                <label class="toggle" for="chk-spin-negative">
-                  <span
-                    ><span data-i18n="spin_negative_only">Forcer</span> ▲</span
-                  >
-                  <input
-                    type="checkbox"
-                    id="chk-spin-negative"
-                    class="toggle__input"
-                  />
-                  <span class="toggle__track"></span>
-                </label>
-              </div>
-              <!-- Ligne 5 : Boutons optimiseurs -->
-              <div class="form-grid">
                 <div class="field ideal-spin">
                   <button
                     class="action-btn action-btn--success"
@@ -323,65 +369,21 @@
 
               <!-- Ligne 6 : Ground + Slope break -->
               <div class="form-grid">
+                <div class="field"></div>
+                <div class="field"></div>
                 <div class="field">
-                  <label data-i18n="label_ground">Ground:</label>
-                  <input
-                    id="ground"
-                    autocomplete="off"
-                    type="text"
-                    maxlength="3"
-                    value="100"
-                  />
-                </div>
-                <div class="field">
-                  <label data-i18n="label_slope_break">Slope break:</label>
-                  <input
-                    id="slope_break"
-                    autocomplete="off"
-                    type="text"
-                    maxlength="6"
-                    value="0"
-                  />
+                  <!-- Zoom de la règle PB : PB Max (100%) / Smart PB (~80%) -->
+                  <label class="toggle mb-8" for="toggle-ruler-zoom">
+                    <span data-i18n="label_ruler_zoom">PB Max (100%)</span>
+                    <input
+                      type="checkbox"
+                      id="toggle-ruler-zoom"
+                      class="toggle__input"
+                    />
+                    <span class="toggle__track"></span>
+                  </label>
                 </div>
               </div>
-
-              <!-- Boutons de réinitialisation -->
-              <div class="reset-row">
-                <button
-                  id="reset-params"
-                  class="action-btn action-btn--neutral"
-                  data-i18n="btn_reset_params"
-                >
-                  Reset : Cr. / Gr. / Slop
-                </button>
-                <button
-                  id="reset-hall"
-                  class="action-btn action-btn--neutral"
-                  data-i18n="btn_reset_hall"
-                >
-                  Reset Hall
-                </button>
-              </div>
-
-              <!-- Zoom de la règle PB : PB Max (100%) / Smart PB (~80%) -->
-              <label class="toggle mb-8" for="toggle-ruler-zoom">
-                <span data-i18n="label_ruler_zoom">PB Max (100%)</span>
-                <input
-                  type="checkbox"
-                  id="toggle-ruler-zoom"
-                  class="toggle__input"
-                />
-                <span class="toggle__track"></span>
-              </label>
-
-              <!-- Bouton principal de calcul -->
-              <button
-                class="calc-btn"
-                onclick="calc(this)"
-                data-i18n="btn_calc_shot"
-              >
-                CALCULER LE TIR
-              </button>
 
               <!-- Zone d'affichage du résultat -->
               <div class="text-center mt-8">
@@ -509,7 +511,7 @@
             </div>
 
             <!-- Grille des statistiques du personnage -->
-            <div class="form-grid">
+            <div class="character-stats-grid">
               <div class="field">
                 <label data-i18n="label_power">Power:</label>
                 <input id="power" type="text" />
@@ -542,54 +544,6 @@
           </div>
 
           <div class="spacer"></div>
-
-          <!--
-            SECTION : RÉGLAGE DU SPIN PAR DÉFAUT
-            Permet de définir les valeurs de spin pour chaque type de tir.
-          -->
-          <div class="card">
-            <div class="card-title" data-i18n="card_spin_defaut">
-              Réglage du Spin par défaut
-            </div>
-            <div class="adjust-panel">
-              <div class="field-row">
-                <label data-i18n="spin_dunk">Spin Dunk</label>
-                <input
-                  id="spinDunk"
-                  autocomplete="off"
-                  maxlength="2"
-                  class="w-70"
-                />
-              </div>
-              <div class="field-row">
-                <label data-i18n="spin_toma">Spin Tomahawk</label>
-                <input
-                  id="spinToma"
-                  autocomplete="off"
-                  maxlength="2"
-                  class="w-70"
-                />
-              </div>
-              <div class="field-row">
-                <label data-i18n="spin_spike">Spin Spike</label>
-                <input
-                  id="spinSpike"
-                  autocomplete="off"
-                  maxlength="2"
-                  class="w-70"
-                />
-              </div>
-              <div class="field-row">
-                <label data-i18n="spin_cobra">Spin Cobra</label>
-                <input
-                  id="spinCobra"
-                  autocomplete="off"
-                  maxlength="2"
-                  class="w-70"
-                />
-              </div>
-            </div>
-          </div>
         </div>
 
         <!-- ============================================================

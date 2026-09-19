@@ -15,13 +15,13 @@ body {
 .horizontal-calculator-bar {
   position: relative; /* ← ESSENTIEL pour le pseudo-élément */
   width: 350px;
-  height: 390px;
+  height: 400px;
   flex: none;
   zoom: var(--zoom, 1);
   background: rgba(20, 20, 20, 0.65);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 8px;
-  padding: 30px 12px 0px 12px; /* top 28 | gauche/droite 12 | bas 10 */
+  padding: 25px 10px 0px 10px; /* top 28 | gauche/droite 12 | bas 10 */
   box-sizing: border-box;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -75,7 +75,7 @@ body {
   color: #a0a0a0;
   font-size: 9px;
   font-weight: bold;
-  text-transform: uppercase;
+  margin-bottom: 1px;
 }
 
 input[type="text"],
@@ -83,7 +83,7 @@ select {
   background: #2a2a2a;
   color: #ffffff;
   border: 1px solid #555555;
-  padding: 2px 5px;
+  padding: 3px 5px;
   border-radius: 4px;
   font-size: 11px;
   width: 100%;
@@ -136,7 +136,7 @@ select {
   background: #007acc;
   color: white;
   border: none;
-  padding: 3px 8px;
+  padding: 4px 8px;
   border-radius: 4px;
   font-size: 11px;
   cursor: pointer;
@@ -173,8 +173,13 @@ select {
   grid-column: 1 / -1;
 }
 
-/* Toggles "Forcer le spin" (▼ / ▲) dans le formulaire : une colonne
-   chacun (on neutralise le span pleine largeur des toggles d'affichage) */
+/* Toggle règle : une seule colonne (1/3) au lieu de pleine largeur */
+.field.toggle-col:has(.toggle) {
+  grid-column: auto;
+}
+
+/* Groupe "Forcer le spin" (▼ / ▲) : une colonne (on neutralise le
+   .field:has(.toggle) ci-dessus) */
 .field.spin-force:has(.toggle) {
   grid-column: auto;
 }
@@ -211,22 +216,80 @@ select {
 }
 
 .toggle__input:checked + .toggle__track {
-  background: #2e3a32;
-  border-color: #3d6b50;
+  background: rgba(51, 95, 238, 0.65);
+  border-color: #4a6ef0;
 }
 
 .toggle__input:checked + .toggle__track::after {
   transform: translateX(15px);
-  background: #3d6b50;
+  background: #d5d8e2;
 }
 
 .toggle:hover .toggle__track {
-  border-color: #3d6b50;
+  border-color: #4a6ef0;
 }
 .toggle span {
   pointer-events: none;
 }
 
+/* Toggles "Forcer le spin" (▼ / ▲) : checkbox stylées en bouton radio
+   (cercle avec point central). Le type checkbox et le JS restent inchangés. */
+.field.spin-force .toggle__track {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #1e2128;
+  border: 1px solid #2e323e;
+  flex-shrink: 0;
+
+  transition: none;
+}
+
+.field.spin-force .toggle__track::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  transform: translate(-50%, -50%);
+  background: transparent;
+  border-radius: 50%;
+  transition: none;
+}
+
+.field.spin-force .toggle__input:checked + .toggle__track {
+  background: rgba(51, 95, 238, 0.65);
+  border-color: #4a6ef0;
+}
+
+.field.spin-force .toggle__input:checked + .toggle__track::after {
+  background: #d5d8e2;
+}
+
+/* Groupe "Forcer" : label en haut, flèches ▼ / ▲ avec cases côte à côte */
+.spin-force-options {
+  display: flex;
+  justify-content: flex-start;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.spin-force-separator {
+  flex-shrink: 0;
+  align-self: stretch;
+  width: 1px;
+  margin: 0 2px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.arrow-size {
+  font-size: 18px;
+  line-height: 1;
+  color: #9aa0b4;
+  pointer-events: none;
+}
 /* -----------------------------------------------------------------------
    MINI BOUTONS
    ----------------------------------------------------------------------- */
@@ -326,28 +389,23 @@ select {
    ----------------------------------------------------------------------- */
 
 .wind-toggle-btn {
-  position: absolute;
-  bottom: 5px;
-  left: 8px;
-  z-index: 60;
-  width: 30px;
-  height: 30px;
-  padding: 0;
-  font-size: 13px;
+  width: 100%;
+  padding: 3px 8px;
+  font-size: 11px;
   line-height: 1;
   cursor: pointer;
-  background: #737975 url("../../assets/wind_ico.png") center / 28px 28px
-    no-repeat;
-  border: 1px solid #55615a;
-  border-radius: 2px;
-  transition: background-color 0.15s;
+  color: #fff;
+  background: #10b454;
+  border: 1px solid #178846;
+  border-radius: 4px;
 }
 
 .wind-toggle-btn:hover {
-  background-color: #86998e;
+  background: #08c758;
 }
 
-.wind-panel {
+.wind-panel,
+.ball-panel {
   position: absolute;
   top: 0;
   right: 0px;
@@ -364,7 +422,8 @@ select {
   transition: transform 0.3s ease;
 }
 
-.wind-panel.open {
+.wind-panel.open,
+.ball-panel.open {
   transform: translateX(0);
 }
 
@@ -383,7 +442,8 @@ select {
   margin: 0;
 }
 
-.wind-crop-box {
+.wind-crop-box,
+.ball-crop-box {
   width: 330px;
   height: 330px;
   margin: 0 auto;
@@ -394,7 +454,8 @@ select {
   border-radius: 4px;
 }
 
-#wind-image {
+#wind-image,
+#ball-image {
   position: absolute;
   left: 0;
   top: 0;
@@ -412,7 +473,8 @@ select {
   height: 100%;
 }
 
-.wind-crosshair {
+.wind-crosshair,
+.ball-crosshair {
   position: absolute;
   inset: 0;
   z-index: 20;
@@ -420,20 +482,24 @@ select {
 }
 
 .wind-crosshair::before,
-.wind-crosshair::after {
+.wind-crosshair::after,
+.ball-crosshair::before,
+.ball-crosshair::after {
   content: "";
   position: absolute;
   background: rgba(0, 0, 0, 0.2);
 }
 
-.wind-crosshair::before {
+.wind-crosshair::before,
+.ball-crosshair::before {
   left: 0;
   right: 0;
   top: calc(50% - 0.5px);
   height: 1px;
 }
 
-.wind-crosshair::after {
+.wind-crosshair::after,
+.ball-crosshair::after {
   top: 0;
   bottom: 0;
   left: calc(50% - 0.5px);
@@ -452,6 +518,45 @@ select {
   font-weight: 600;
   padding: 2px 6px;
   border-radius: 3px;
+}
+
+.ball-click-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 25;
+  pointer-events: none;
+}
+
+.ball-click-layer .click-dot {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  margin: -3px 0 0 -3px;
+  border-radius: 50%;
+  background: #ffdd55;
+  border: 1px solid #000000;
+}
+
+.ball-polyline {
+  position: absolute;
+  inset: 0;
+  z-index: 24;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.ball-polyline-shape {
+  fill: none;
+  stroke: #ffdd55;
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.ball-counter {
+  right: auto;
+  left: 8px;
 }
 
 .action-btn--success {
@@ -497,7 +602,7 @@ select {
 }
 
 .adjust-row .action-btn {
-  padding: 2px 8px;
+  padding: 3px 8px;
   font-size: 12px;
 }
 
@@ -528,4 +633,35 @@ select {
 .resize-grip:hover {
   background: rgba(0, 122, 204, 0.45);
   color: #ffffff;
+}
+
+/* === INFOS DE TIR (PB, %, distance) === */
+.shot-info-grid {
+  grid-column: 1 / -1;
+  margin-top: 7px;
+}
+
+.shot-info-field {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 6px;
+  align-items: center;
+  background: rgba(90, 130, 255, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 6px;
+  padding: 4px 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.shot-info-field span {
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+  white-space: nowrap;
+}
+
+.shot-info-field #percent-display.percent-low {
+  color: rgb(255, 174, 0);
 }

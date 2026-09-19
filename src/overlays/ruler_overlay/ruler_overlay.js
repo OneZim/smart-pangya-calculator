@@ -2,7 +2,7 @@
 // ruler_overlay.js - Règle de visée pour Tarkov
 // ================================================================
 // Description : Affiche une règle de visée avec indicateurs de PB.
-// Gère le surplus de PB au-delà du seuil de 40 PB. Fenêtre indépendante
+// Gère le surplus de PB au-delà du seuil de 47 PB. Fenêtre indépendante
 // avec persistance de position.
 // ================================================================
 
@@ -43,7 +43,6 @@
     // Données reçues
     lastData: {},
     lastSurplus: 0,
-    surplusMaxPb: 10, // Portée dynamique du surplus (paliers de 10)
 
     // Style de la règle
     smartColor: "#E0098E", // Couleur du repère smart-indicator
@@ -109,7 +108,6 @@
       smartIndicator: document.getElementById("smart-indicator"),
       surplusIndicator: document.getElementById("surplus-indicator"),
       surplusTrait: document.getElementById("surplus-trait"),
-      surplusTicksContainer: document.getElementById("surplus-ticks-container"),
       tRepere: document.getElementById("t-repere"),
     };
   }
@@ -140,41 +138,6 @@
   }
 
   /**
-   * Dessine les graduations du surplus
-   */
-  function drawSurplusTicks(surplus) {
-    const container = elements.surplusTicksContainer;
-    if (!container) return;
-
-    container.innerHTML = "";
-    if (surplus === 0) {
-      container.style.display = "none";
-      return;
-    }
-
-    const sign = surplus > 0 ? 1 : -1;
-    const fragment = document.createDocumentFragment();
-
-    for (let i = 1; i <= state.surplusMaxPb; i++) {
-      const leftPosition = state.rulerCenterPx - sign * i * state.pxPerPb;
-
-      const tick = document.createElement("div");
-      tick.className = "tick-major";
-      tick.style.left = `${leftPosition}px`;
-      fragment.appendChild(tick);
-
-      const label = document.createElement("div");
-      label.className = "tick-label";
-      label.style.left = `${leftPosition}px`;
-      label.innerText = i;
-      fragment.appendChild(label);
-    }
-
-    container.appendChild(fragment);
-    container.style.display = "block";
-  }
-
-  /**
    * Met à jour l'indicateur de surplus
    */
   function updateSurplus(surplus) {
@@ -182,12 +145,17 @@
     const { surplusIndicator, surplusTrait } = elements;
     if (!surplusIndicator) return;
 
-    // Calcul de la portée du surplus (paliers de 10)
-    state.surplusMaxPb = Math.max(10, Math.ceil(Math.abs(surplus) / 10) * 10);
-    drawSurplusTicks(surplus);
-
     if (surplus !== 0) {
-      const value = Math.abs(surplus);
+      // Conversion vers les graduations réelles de la barre de tir
+      // (même principe que pbRealDisplay dans infos_shot.js)
+      const calib = window.ResolutionCalibrationService?.getCalibration(
+        state.currentWidth,
+        state.currentHeight,
+      );
+      const realPxPerPb = calib?.realPxPerPb || 81;
+      const pixelOffset = Math.abs(surplus) * state.pxPerPb;
+      const value = pixelOffset / realPxPerPb;
+
       const leftPosition = state.rulerCenterPx - surplus * state.pxPerPb;
 
       // Texte et position de l'indicateur

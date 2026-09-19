@@ -99,15 +99,14 @@
           />
         </div>
         <div class="field">
-          <label data-i18n="label_ground">Ground</label>
-          <input
-            id="ground"
-            tabindex="5"
-            autocomplete="off"
-            type="text"
-            maxlength="3"
-            value="100"
-          />
+          <button
+            id="reset-hall"
+            type="button"
+            class="action-btn"
+            data-i18n="btn_reset_hall"
+          >
+            Reset H.
+          </button>
         </div>
       </div>
 
@@ -136,18 +135,56 @@
           />
         </div>
         <div class="field">
-          <label data-i18n="label_slope_break">Slope</label>
-          <input
-            id="slope_break"
-            tabindex="6"
-            autocomplete="off"
-            type="text"
-            maxlength="6"
-            value="0"
-          />
+          <label data-i18n="show_wind">Calculateur d'angle</label>
+          <button
+            id="btn-toggle-wind-panel"
+            type="button"
+            class="wind-toggle-btn"
+            data-i18n="btn_open_wind_panel"
+            title="Calcul du vent"
+          >
+            Ouvrir
+          </button>
+        </div>
+
+        <!-- ===== Rangée 6 : Actions ===== -->
+        <div class="form-grid">
+          <div class="field">
+            <label data-i18n="label_ground">Ground</label>
+            <input
+              id="ground"
+              tabindex="5"
+              autocomplete="off"
+              type="text"
+              maxlength="3"
+              value="100"
+            />
+          </div>
+          <div class="field">
+            <label data-i18n="label_slope_break">Slope</label>
+            <input
+              id="slope_break"
+              tabindex="6"
+              autocomplete="off"
+              type="text"
+              maxlength="6"
+              value="0"
+            />
+          </div>
+          <div class="field">
+            <label data-i18n="show_ball">Balle</label>
+            <button
+              id="btn-open-ball-panel"
+              type="button"
+              class="wind-toggle-btn"
+              data-i18n="btn_open_ball_panel"
+              title="Vue de la balle"
+            >
+              Ouvrir
+            </button>
+          </div>
         </div>
       </div>
-
       <!-- ===== Rangée 4 : Spin / Curve / Slope ===== -->
       <div class="form-grid">
         <div class="field">
@@ -161,32 +198,6 @@
             value="0"
           />
         </div>
-        <div class="field spin-force">
-          <label class="toggle" for="chk-spin-positive-co">
-            <span><span data-i18n="spin_positive_only">Forcer</span> ▼</span>
-            <input
-              type="checkbox"
-              id="chk-spin-positive-co"
-              class="toggle__input"
-            />
-            <span class="toggle__track"></span>
-          </label>
-        </div>
-        <div class="field spin-force">
-          <label class="toggle" for="chk-spin-negative-co">
-            <span><span data-i18n="spin_negative_only">Forcer</span> ▲</span>
-            <input
-              type="checkbox"
-              id="chk-spin-negative-co"
-              class="toggle__input"
-            />
-            <span class="toggle__track"></span>
-          </label>
-        </div>
-      </div>
-
-      <!-- ===== Rangée 5 : Forcer le spin (▼ positif / ▲ négatif) ===== -->
-      <div class="form-grid">
         <div class="field">
           <label data-i18n="label_curve">Curve</label>
           <input
@@ -197,6 +208,43 @@
             maxlength="3"
             value="0"
           />
+        </div>
+        <div class="field">
+            <button
+              id="reset-params"
+              type="button"
+              class="action-btn"
+              data-i18n="btn_reset_params"
+            >
+              Reset P.
+            </button>
+      </div>
+
+      <!-- ===== Rangée 5 : Forcer le spin (▼ positif / ▲ négatif) ===== -->
+      <div class="form-grid">
+        <div class="field spin-force">
+          <label data-i18n="spin_positive_only">Forcer</label>
+          <div class="spin-force-options">
+            <label class="toggle" for="chk-spin-positive-co">
+              <span class="arrow-size">▼</span>
+              <input
+                type="checkbox"
+                id="chk-spin-positive-co"
+                class="toggle__input"
+              />
+              <span class="toggle__track"></span>
+            </label>
+            <span class="spin-force-separator"></span>
+            <label class="toggle" for="chk-spin-negative-co">
+              <span class="arrow-size">▲</span>
+              <input
+                type="checkbox"
+                id="chk-spin-negative-co"
+                class="toggle__input"
+              />
+              <span class="toggle__track"></span>
+            </label>
+          </div>
         </div>
         <div class="field">
           <!-- Le bouton qui envoie le signal -->
@@ -216,66 +264,33 @@
         </div>
       </div>
 
-      <!-- ===== Rangée 6 : Actions ===== -->
-      <div class="form-grid">
-        <div class="field"></div>
-        <div class="field">
-          <button
-            id="reset-hall"
-            type="button"
-            class="action-btn"
-            data-i18n="btn_reset_hall"
-          >
-            Reset H.
-          </button>
+      <div class="form-grid shot-info-grid">
+        <div class="field shot-info-field">
+          <span id="pbReal-display">0.00 PB</span>
         </div>
-
-        <div class="field">
-          <button
-            id="reset-params"
-            type="button"
-            class="action-btn spin-btn"
-            data-i18n="btn_reset_params"
-          >
-            Reset P.
-          </button>
+        <div class="field shot-info-field">
+          <span id="distance-display">0.00 yds</span>
+        </div>
+        <div class="field shot-info-field">
+          <span id="percent-display">0.0%</span>
         </div>
       </div>
 
       <div class="divider"></div>
-      <div class="label_show" data-i18n="show_label_calc">
-        Affichage des Overlays
+      <div class="form-grid">
+        <div class="field toggle-col">
+          <label class="toggle" for="toggle-show-ruler-co">
+            <span data-i18n="show_ruler">Afficher la règle :</span>
+            <input
+              type="checkbox"
+              id="toggle-show-ruler-co"
+              class="toggle__input"
+            />
+            <span class="toggle__track"></span>
+          </label>
+        </div>
       </div>
-      <div class="field">
-        <label class="toggle" for="toggle-show-ruler-co">
-          <span data-i18n="show_ruler">Afficher la règle :</span>
-          <input
-            type="checkbox"
-            id="toggle-show-ruler-co"
-            class="toggle__input"
-          />
-          <span class="toggle__track"></span>
-        </label>
-      </div>
-      <div class="field">
-        <label class="toggle" for="toggle-show-infos-shot-co">
-          <span data-i18n="show_infos_shot">Infos du tir :</span>
-          <input
-            type="checkbox"
-            id="toggle-show-infos-shot-co"
-            class="toggle__input"
-          />
-          <span class="toggle__track"></span>
-        </label>
-      </div>
-
       <!-- === PANNEAU VENT (SLIDE-IN : depuis la droite) === -->
-      <button
-        id="btn-toggle-wind-panel"
-        class="wind-toggle-btn"
-        type="button"
-        title="Calcul du vent"
-      ></button>
       <div id="wind-panel" class="wind-panel">
         <!-- Image du vent : capture zoomée sur la flèche du jeu -->
         <div class="wind-crop-box">
@@ -296,16 +311,61 @@
         <div class="adjust-panel">
           <div class="adjust-row">
             <button
+              id="btn-close-wind-panel"
+              class="action-btn"
+              data-i18n="btn_close_wind_panel"
+            >
+              Fermer
+            </button>
+            <button
               id="btn-refresh-img"
               class="action-btn action-btn--success"
               data-i18n="btn_refresh"
             >
               Refresh
             </button>
+
             <button id="btn-crop-up" class="crop-btn">▲</button>
             <button id="btn-crop-left" class="crop-btn">◀</button>
             <button id="btn-crop-right" class="crop-btn">▶</button>
             <button id="btn-crop-down" class="crop-btn">▼</button>
+          </div>
+        </div>
+      </div>
+      <!-- === PANNEAU BALLE (SLIDE-IN : depuis la droite, sans calcul d'angle) === -->
+      <div id="ball-panel" class="ball-panel">
+        <!-- Image du jeu : capture zoomée sur la balle -->
+        <div class="ball-crop-box">
+          <img id="ball-image" />
+          <div class="ball-crosshair"></div>
+          <div id="ball-click-layer" class="ball-click-layer"></div>
+          <svg id="ball-polyline-canvas" class="ball-polyline">
+            <polyline id="ball-polyline-shape" class="ball-polyline-shape" />
+          </svg>
+          <span id="ball-click-counter" class="angle-badge ball-counter">0</span>
+        </div>
+
+        <!-- Recadrage + rafraîchissement -->
+        <div class="adjust-panel">
+          <div class="adjust-row">
+            <button
+              id="btn-close-ball-panel"
+              class="action-btn"
+              data-i18n="btn_close_wind_panel"
+            >
+              Fermer
+            </button>
+            <button
+              id="btn-refresh-ball"
+              class="action-btn action-btn--success"
+              data-i18n="btn_refresh"
+            >
+              Refresh
+            </button>
+            <button id="btn-ball-crop-up" class="crop-btn">▲</button>
+            <button id="btn-ball-crop-left" class="crop-btn">◀</button>
+            <button id="btn-ball-crop-right" class="crop-btn">▶</button>
+            <button id="btn-ball-crop-down" class="crop-btn">▼</button>
           </div>
         </div>
       </div>
@@ -315,6 +375,7 @@
     <script src="../../core/services/TauriService.js"></script>
     <script src="../../core/services/StorageService.js"></script>
     <script src="../../core/services/ResolutionCalibrationService.js"></script>
+    <script src="../../core/services/ShotInfoService.js"></script>
     <script src="../../core/stores/CoursesSelectorCalcOverlay.js"></script>
     <script src="../../core/stores/PlayerStoreCalcOverlay.js"></script>
     <script src="../../core/components/CourseSelector.js"></script>

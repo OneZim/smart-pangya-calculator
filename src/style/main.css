@@ -22,32 +22,9 @@
 /* =====================================================================
    SECTION 1 : VARIABLES CSS - THÈMES
    =====================================================================
-   Les thèmes sont appliqués dynamiquement via theme-loader.js
-   Les variables définissent : couleurs, bordures, ombres, etc.
+   Les variables du thème sont injectées dynamiquement par le loader de thème.
+   Cette feuille globale ne définit ni palette ni police de base.
    ===================================================================== */
-
-/* ---------- THÈME PAR DÉFAUT : PangYa Classic (bleu/vert) ---------- */
-:root {
-  /* Couleurs de fond */
-  --bg-body: #0b1a1e;
-  --bg-card: #13262b;
-  --bg-input: #1a2e33;
-  --bg-dark: #0a1518;
-
-  /* Couleurs de texte */
-  --text: #e8f0f2;
-  --text-soft: #8fa8ae;
-
-  /* Accents et bordures */
-  --accent: #7ab0a1;
-  --gold: #c9a84c;
-  --border: #2a4046;
-  --border-input: #3a555b;
-
-  /* Ombres */
-  --shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-  --shadow-hover: 0 12px 32px rgba(0, 0, 0, 0.6);
-}
 
 /* =====================================================================
    SECTION 2 : STYLES GLOBAUX
@@ -77,6 +54,7 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  font-size: 13px;
 }
 
 /* =====================================================================
@@ -88,6 +66,8 @@ body {
    ===================================================================== */
 
 #titlebar {
+  position: fixed;
+  top: 0;
   width: 100%; /* Barre pleine largeur */
   display: flex;
   justify-content: space-between;
@@ -100,6 +80,7 @@ body {
   -webkit-user-select: none;
   -webkit-app-region: drag; /* Permet de déplacer la fenêtre en glissant */
   flex-shrink: 0; /* La barre ne rétrécit pas */
+  z-index: 99; /* Toujours au-dessus du contenu */
 }
 
 /* Partie gauche de la barre : icône + titre */
@@ -144,7 +125,6 @@ body {
   align-items: center;
   justify-content: center;
   -webkit-app-region: no-drag;
-  font-family: "Segoe UI", "Arial", sans-serif;
 }
 
 .titlebar-btn:hover {
@@ -170,6 +150,7 @@ body {
 .page {
   width: 100%;
   max-width: 1000px;
+  margin-top: 30px; /* Décalage pour la barre de titre */
   padding: 24px 0px 20px 0px;
   flex: 1;
   overflow-y: auto;
@@ -294,6 +275,11 @@ body {
   display: block;
 }
 
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 20px 0;
+}
 /* =====================================================================
    SECTION 7 : CARTES
    =====================================================================
@@ -373,6 +359,14 @@ body {
 .field {
   display: flex;
   flex-direction: column;
+}
+
+/* Grille des statistiques du personnage — 1 colonne, largeur fixe */
+.character-stats-grid {
+  display: grid;
+  grid-template-columns: min(100%, 220px);
+  gap: 12px;
+  margin-top: 10px;
 }
 
 .field > label {
@@ -501,7 +495,7 @@ select {
   border: 1px solid var(--border-input);
   background: var(--bg-input);
   color: var(--text);
-  font-size: 11px;
+  font-size: 12px;
   transition: all 0.25s ease;
   box-sizing: border-box;
 }
@@ -528,7 +522,7 @@ select:hover {
 .reset-row {
   display: flex;
   gap: 8px;
-  margin: 20px 0 10px 0;
+  margin: 20px 0 0 0;
 }
 
 /* =====================================================================
@@ -570,7 +564,7 @@ button.calc-btn {
 
 .action-btn {
   flex: 1;
-  padding: 7px 0;
+  padding: 4px 0;
   position: relative;
   overflow: hidden;
 }
@@ -593,7 +587,6 @@ button.calc-btn {
   border-radius: 4px;
   background: var(--accent, #0067c0);
   color: #ffffff;
-  font-family: inherit;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
@@ -620,7 +613,6 @@ button.calc-btn:active {
   background: var(--bg-card, #ffffff);
   color: var(--text, #1b1b1b);
   cursor: pointer;
-  font-family: inherit;
   font-size: 13px;
   transition:
     background 0.15s ease,
@@ -642,7 +634,6 @@ button.calc-btn:active {
   border: 1px solid transparent;
   border-radius: 3px;
   cursor: pointer;
-  font-family: inherit;
   font-size: 13px;
   font-weight: 500;
   transition:
@@ -685,7 +676,6 @@ button.calc-btn:active {
   background: var(--bg-card, #ffffff);
   color: var(--text, #1b1b1b);
   cursor: pointer;
-  font-family: inherit;
   font-size: 13px;
 }
 
@@ -807,10 +797,11 @@ button.calc-btn:active {
 /* ---------- Toggles ---------- */
 .toggle {
   display: flex;
-  align-items: center;
+  width: 80%;
+  align-items: right;
   justify-content: space-between;
-  gap: 12px;
-  padding: 0 20px;
+  padding: 4px 0px 0px 0px;
+  margin-top: 18px;
 }
 
 /* Le texte occupe l'espace libre : sur textes longs, il se met en retrait
@@ -819,6 +810,11 @@ button.calc-btn:active {
   flex: 1;
 }
 
+.toggle > span.arrow {
+  flex: 1;
+  text-align: center;
+  font-size: 15px;
+}
 .toggle__input {
   display: none;
 }
@@ -1010,8 +1006,8 @@ button.calc-btn:active {
 
 /* Bouton "Spin idéal" - désactivé par défaut */
 .ideal-spin {
-  margin-top: 12px;
-  padding: 10px 0px;
+  margin-top: 9px;
+  padding: 10px 0;
 }
 
 .action-btn--success:disabled {

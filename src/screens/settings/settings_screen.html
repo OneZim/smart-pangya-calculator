@@ -10,7 +10,6 @@
 
   <body data-i18n-window-title="window_title_settings">
     <div class="page">
-
       <div class="card">
         <div class="card-title" data-i18n="card_param">
           Configuration de l'application
@@ -27,9 +26,7 @@
             <option value="dark-golf">Dark Golf</option>
             <option value="pangya-pastel">PangYa Pastel</option>
             <option value="win11">Windows 11</option>
-            <option value="pangya-classic" selected>
-              PangYa Classic
-            </option>
+            <option value="pangya-classic" selected>PangYa Classic</option>
           </select>
         </div>
       </div>
@@ -40,35 +37,57 @@
         <div class="card-title" data-i18n="card_screen_config">
           Paramètres du client de jeu
         </div>
-        <div class="form-grid">
-          <div class="field">
-            <label data-i18n="label_width">Width:</label>
-            <input id="rel-width" type="text" />
+        <div class="settings-restricted-width">
+          <div class="form-grid">
+            <div class="field">
+              <label data-i18n="label_width">Width:</label>
+              <input id="rel-width" type="text" readonly />
+            </div>
+            <div class="field">
+              <label data-i18n="label_height_screen">Height</label>
+              <input id="rel-height" type="text" readonly />
+            </div>
           </div>
-          <div class="field">
-            <label data-i18n="label_height_screen">Height</label>
-            <input id="rel-height" type="text" />
+          <div class="form-grid">
+            <div class="field">
+              <label class="toggle mb-4" for="smart-dev-limit">
+                <span data-i18n="label_smart_dev">Smart deviation limit</span>
+                <input
+                  type="checkbox"
+                  id="smart-dev-limit"
+                  class="toggle__input"
+                  disabled
+                />
+                <span class="toggle__track"></span>
+              </label>
+              <label class="toggle mb-4" for="auto-fit">
+                <span data-i18n="label_auto_fit">Auto fit</span>
+                <input
+                  type="checkbox"
+                  id="auto-fit"
+                  class="toggle__input"
+                  disabled
+                />
+                <span class="toggle__track"></span>
+              </label>
+            </div>
           </div>
-          <label class="toggle mb-4" for="smart-dev-limit">
-            <span data-i18n="label_smart_dev">Smart deviation limit</span>
-            <input
-              type="checkbox"
-              id="smart-dev-limit"
-              class="toggle__input"
-              checked
-            />
-            <span class="toggle__track"></span>
-          </label>
-          <label class="toggle mb-4" for="auto-fit">
-            <span data-i18n="label_auto_fit">Ajustement automatique</span>
-            <input
-              type="checkbox"
-              id="auto-fit"
-              class="toggle__input"
-              checked
-            />
-            <span class="toggle__track"></span>
-          </label>
+          <div class="flex gap-8 mt-8">
+            <button
+              id="btn-refresh-resolution"
+              class="action-btn action-btn--neutral"
+              data-i18n="btn_refresh_resolution"
+            >
+              Actualiser
+            </button>
+            <button
+              id="btn-reset-resolution"
+              class="action-btn action-btn--neutral"
+              data-i18n="btn_reset_resolution"
+            >
+              Défaut
+            </button>
+          </div>
         </div>
       </div>
 

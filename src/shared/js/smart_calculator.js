@@ -1304,12 +1304,8 @@ function calc(el) {
     result.color = "White";
 
     // Récupération de la valeur PB calculée
-    const pbValue =
-      parseFloat(
-        (desvioByDegree(f[index_f].desvio, distance) / 0.2167).toFixed(2),
-      ) || 0.0;
 
-    result.innerHTML = `${(f[index_f].power * 100).toFixed(1)}%, ${(f[index_f].power_range * f[index_f].power).toFixed(1)}y, ${pbValue.toFixed(2)}pb Real(${((f[index_f].desvio / 0.2167) * -1).toFixed(2)}pb), Smart(${smartDesvio(f[index_f].smartData)})`;
+    result.innerHTML = `${(f[index_f].power * 100).toFixed(1)}%, ${(f[index_f].power_range * f[index_f].power).toFixed(1)}y, ${(desvioByDegree(f[index_f].desvio, distance) / 0.2167).toFixed(2)}pb Real(${((f[index_f].desvio / 0.2167) * -1).toFixed(2)}pb), Smart(${smartDesvio(f[index_f].smartData)})`;
   } else {
     // Fallback immédiat
     result.innerHTML =

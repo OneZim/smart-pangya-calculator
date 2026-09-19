@@ -8,7 +8,7 @@
       clearTimeout(window._calcTimeout);
       window._calcTimeout = setTimeout(() => {
         window.calc();
-      }, 250);
+      }, 150);
     }
   }
 

@@ -485,7 +485,7 @@
     setupInputFields: function (storage, playerStore) {
       console.log("🔄 Configuration des champs de saisie...");
 
-      /**
+/**
        * NOTES IMPORTANTES :
        * Les champs suivants sont EXCLUS de cette liste car ils sont gérés
        * par le CharacterManager + CharacterStore (par personnage) :
@@ -494,45 +494,9 @@
        * - card_pwr
        * - mascot_pwr
        * - card_ps_pwr
-       * Les laisser ici les ferait écraser par une ancienne valeur globale
+       * Les laisser ici les feraient écraser par une ancienne valeur globale
        * à chaque changement de personnage.
        */
-      const fields = ["spinDunk", "spinToma", "spinSpike", "spinCobra"];
-
-      // Chargement et sauvegarde des champs
-      fields.forEach((id) => {
-        const el = document.getElementById(id);
-        if (!el) return;
-
-        const isCheckbox = el.type === "checkbox";
-
-        // Chargement de la valeur sauvegardée
-        const saved = storage.get(id);
-        if (saved !== null) {
-          if (isCheckbox) {
-            el.checked = saved === true || saved === "true";
-          } else {
-            el.value = saved;
-          }
-        }
-
-        // Sauvegarde à chaque changement
-        el.addEventListener(isCheckbox ? "change" : "input", () => {
-          const value = isCheckbox ? el.checked : el.value;
-          storage.set(id, value);
-
-          // Synchronisation des spins avec le PlayerStore et les autres fenêtres
-          if (id.startsWith("spin")) {
-            playerStore?.initialize();
-            if (window.TauriService?.isAvailable) {
-              window.TauriService.emit("sync-spin-default", {
-                id,
-                value,
-              });
-            }
-          }
-        });
-      });
 
       // ============================================================
       // SYNCHRONISATION DES CHAMPS AVEC L'OVERLAY
@@ -674,9 +638,9 @@
             }
           }
 
-          // Sélection automatique du Spin
+          // Sélection automatique du Spin (fixé à 0 par défaut)
           if (spinInput) {
-            const value = playerStore ? playerStore.getSpinForShot(shot) : 9;
+            const value = 0;
             spinInput.value = value;
             if (window.TauriService?.isAvailable) {
               window.TauriService.emit("sync-input-value", {

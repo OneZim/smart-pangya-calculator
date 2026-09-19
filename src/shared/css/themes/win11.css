@@ -284,7 +284,7 @@ select:focus {
    BARRE DE TITRE
    ----------------------------------------------------------------------- */
 #titlebar {
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255);
 }
 ::-webkit-scrollbar-track {
   background: transparent;

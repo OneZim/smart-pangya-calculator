@@ -22,8 +22,6 @@ body {
   pointer-events: none;
   cursor: move;
   user-select: none;
-
-  /*border: 1px solid red;*/
 }
 
 /* ============================================================
@@ -37,45 +35,6 @@ body {
   width: var(--ruler-width, 1920px);
   height: var(--ruler-height, 150px);
   background: transparent;
-  /*border: 1px solid rgb(60, 25, 143);*/
-}
-
-/* ============================================================
-   SURPLUS TICKS – Graduations du surplus, affichées d'un seul
-   côté du centre selon le signe du surplus, masquées si inactif.
-   ============================================================ */
-#surplus-ticks-container {
-  display: none;
-  position: absolute;
-  top: 20px;
-  left: 0;
-  width: 100%;
-  height: 18px;
-  pointer-events: none;
-}
-
-/* ============================================================
-   TICKS – Graduations majeures
-   ============================================================ */
-.tick-major {
-  position: absolute;
-  top: 32px;
-  width: 1px;
-  height: 18px;
-  background-color: #084c96;
-}
-
-/* ============================================================
-   TICK LABELS – Étiquettes numériques sous les graduations
-   ============================================================ */
-.tick-label {
-  position: absolute;
-  top: 15px;
-  width: 30px;
-  text-align: center;
-  font-size: 10px;
-  color: rgba(59, 28, 6, 0.85);
-  transform: translateX(-50%);
 }
 
 /* ============================================================
@@ -112,7 +71,7 @@ body {
   background-color: #5a82ff;
 }
 /* ============================================================
-   SURPLUS INDICATOR – Bulle d'info (valeur surplus + "clic")
+   SURPLUS INDICATOR – Bulle d'info (valeur surplus )
    ============================================================ */
 #surplus-indicator {
   display: none;
@@ -137,15 +96,6 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
   pointer-events: none;
   white-space: nowrap;
-}
-
-#surplus-indicator::after {
-  content: "clic";
-  font-size: 11px;
-  font-weight: normal;
-  color: #ffe08a;
-  line-height: 1;
-  margin-top: 1px;
 }
 
 #surplus-indicator.negative {

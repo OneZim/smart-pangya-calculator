@@ -14,7 +14,6 @@
   // ================================================================
 
   const CONFIG = {
-    DEFAULT_PX_PER_PB: 81,
     STORAGE_KEY: "infos_shot_position",
   };
 
@@ -23,37 +22,18 @@
   // ================================================================
 
   const state = {
-    pxPerPb: CONFIG.DEFAULT_PX_PER_PB,
-    currentZoom: "80", // "80" = Smart PB, "100" = PB Max
-    currentWidth: 1920,
-    currentHeight: 1080,
     lastData: {},
     tauriService: null,
     storage: null,
     savePosition: null,
+    unsubscribeData: null,
+    unsubscribeConfig: null,
   };
 
   let elements = {};
 
   // ================================================================
-  // 3. SERVICES ET UTILITAIRES
-  // ================================================================
-
-  function getPxPerPb() {
-    const calib = window.ResolutionCalibrationService?.getCalibration(
-      state.currentWidth,
-      state.currentHeight,
-    );
-    const ppb = calib?.pxPerPb || {};
-    return ppb[state.currentZoom] != null
-      ? ppb[state.currentZoom]
-      : ppb["100"] != null
-        ? ppb["100"]
-        : CONFIG.DEFAULT_PX_PER_PB;
-  }
-
-  // ================================================================
-  // 4. GESTION DU DOM
+  // 3. GESTION DU DOM
   // ================================================================
 
   function getElements() {
@@ -64,11 +44,13 @@
     };
   }
 
-  function updateUI(data) {
-    state.lastData = data || {};
+  function updateUI() {
+    // Utiliser le service pour obtenir les données et faire les calculs
+    const data = window.ShotInfoService.getCurrentData();
     const actualPb = data.pb !== undefined ? data.pb : 0;
     const actualDist = data.distance !== undefined ? data.distance : 0;
     const actualPercent = data.percent !== undefined ? data.percent : 0;
+    state.lastData = data;
 
     // Pourcentage
     if (elements.percentDisplay) {
@@ -84,26 +66,15 @@
       elements.distanceDisplay.innerText = `${actualDist.toFixed(2)} yds`;
     }
 
-    // PB réel (calibré)
+    // PB réel (calibré) - calculé via le service
     if (elements.pbRealDisplay) {
-      const calib = window.ResolutionCalibrationService?.getCalibration(
-        state.currentWidth,
-        state.currentHeight,
-      );
-      const realPxPerPb = calib?.realPxPerPb || 81;
-      const pixelOffset = actualPb * state.pxPerPb;
-      const pbReal = pixelOffset / realPxPerPb;
+      const pbReal = window.ShotInfoService.computeRealPb(actualPb);
       elements.pbRealDisplay.innerText = `${pbReal.toFixed(2)} PB`;
     }
   }
 
-  function refreshScale() {
-    state.pxPerPb = getPxPerPb();
-    updateUI(state.lastData || {});
-  }
-
   // ================================================================
-  // 5. GESTION DE LA FENÊTRE
+  // 4. GESTION DE LA FENÊTRE
   // ================================================================
 
   function setupDrag() {
@@ -137,37 +108,28 @@
   }
 
   // ================================================================
-  // 6. COMMUNICATION TAURI
+  // 5. COMMUNICATION TAURI VIA SERVICE
   // ================================================================
 
-  function setupTauriListeners() {
-    if (!state.tauriService?.isAvailable) return;
-
-    // Mise à jour des données de tir (émis par smart_calculator.js)
-    state.tauriService.listen("update-ruler", (event) => {
-      updateUI(event.payload);
+  function setupShotInfoService() {
+    // Initialiser le service avec les dépendances
+    window.ShotInfoService.init({
+      tauriService: window.TauriService,
+      storage: window.StorageService,
     });
 
-    // Changement de zoom (Smart PB / PB Max)
-    state.tauriService.listen("update-ruler-zoom", (event) => {
-      state.currentZoom = event.payload?.zoom === "100" ? "100" : "80";
-      refreshScale();
-    });
+    // S'abonner aux changements de données
+    state.unsubscribeData = window.ShotInfoService.onData(updateUI);
 
-    // Changement de résolution
-    state.tauriService.listen("update-game-resolution", (event) => {
-      const width = Number(event.payload?.width) || 0;
-      const height = Number(event.payload?.height) || 0;
-      if (width > 0 && height > 0) {
-        state.currentWidth = width;
-        state.currentHeight = height;
-        refreshScale();
-      }
-    });
+    // S'abonner aux changements de configuration (zoom/résolution)
+    state.unsubscribeConfig = window.ShotInfoService.onConfigChange(updateUI);
+
+    // Mettre à jour l'UI immédiatement avec l'état actuel du service
+    updateUI();
   }
 
   // ================================================================
-  // 7. INITIALISATION
+  // 6. INITIALISATION
   // ================================================================
 
   document.addEventListener("DOMContentLoaded", async () => {
@@ -179,26 +141,11 @@
 
     elements = getElements();
 
-    if (state.storage) {
-      state.currentZoom = state.storage.get("ruler_zoom", false)
-        ? "100"
-        : "80";
-    }
+    // Configurer le service ShotInfo (remplace les listeners Tauri directs)
+    setupShotInfoService();
 
-    try {
-      const res = await state.tauriService.invoke("get_game_resolution");
-      if (res?.width) {
-        state.currentWidth = res.width;
-        state.currentHeight = res.height || state.currentHeight;
-      }
-    } catch (err) {
-      console.warn("⚠️ Résolution non détectée, valeurs par défaut.", err);
-    }
-
-    refreshScale();
-
+    // Gestion de la fenêtre (drag, position)
     setupDrag();
-    setupTauriListeners();
     await setupPositionPersistence();
 
     console.log("✅ Infos shot overlay initialisé avec succès");
