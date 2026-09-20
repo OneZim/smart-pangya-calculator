@@ -87,12 +87,6 @@
           >Statistiques</label
         >
 
-        <!-- Onglet 3 : Options avancées (Slope) -->
-        <input type="radio" name="tab" id="tab3" />
-        <label for="tab3" class="tab-label" data-i18n="tab_slope"
-          >Options avancées</label
-        >
-
         <!-- ============================================================
              CONTENU ONGLET 1 : CALCULS
              ============================================================ -->
@@ -544,45 +538,6 @@
           </div>
 
           <div class="spacer"></div>
-        </div>
-
-        <!-- ============================================================
-             CONTENU ONGLET 3 : OPTIONS AVANCÉES (SLOPE/BREAKS)
-             ============================================================ -->
-        <div class="tab-content" id="content3">
-          <!--
-            SECTION : CALCUL DE PENTE
-            Permet de calculer les breaks et les angles de pente.
-            Utilise la fonction calcMycella() définie dans recalc.js.
-          -->
-          <div class="card">
-            <div class="card-title" data-i18n="card_slope">
-              Calcul Slope/Breaks
-            </div>
-
-            <div class="form-grid">
-              <div class="field">
-                <label data-i18n="label_myce_degree">Degree:</label>
-                <input id="shot-degree" type="text" autocomplete="off" />
-              </div>
-              <div class="field">
-                <label data-i18n="label_align_degree">Align degree:</label>
-                <input id="align-degree" type="text" autocomplete="off" />
-              </div>
-              <div class="field">
-                <label data-i18n="label_slope_break">Slope break:</label>
-                <input id="slope-break" type="text" autocomplete="off" />
-              </div>
-            </div>
-
-            <button
-              class="calc-btn"
-              onclick="calcMycella(this)"
-              data-i18n="btn_calc_slope"
-            >
-              Calcule Slope
-            </button>
-          </div>
         </div>
       </div>
 

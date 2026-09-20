@@ -219,7 +219,7 @@ body {
 input,
 select {
   width: 100%;
-  padding: 8px 6px;
+  padding: 6px 4px;
   border-radius: 5px;
   border: 1px solid var(--border-input);
   background: var(--bg-input);
@@ -327,7 +327,9 @@ select:hover {
   font-family: inherit;
   font-size: 13px;
   font-weight: 500;
-  transition: background 0.15s ease, filter 0.15s ease;
+  transition:
+    background 0.15s ease,
+    filter 0.15s ease;
 }
 
 .action-btn--neutral {

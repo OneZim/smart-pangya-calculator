@@ -23,7 +23,7 @@
         "title": "Settings",
         "url": "screens/settings/settings_screen.html",
         "width": 800,
-        "height": 600,
+        "height": 620,
         "visible": false,
         "decorations": true,
         "transparent": false,

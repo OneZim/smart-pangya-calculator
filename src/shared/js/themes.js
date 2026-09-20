@@ -14,7 +14,7 @@
       name: "🌊 PangYa Classic",
       css: "shared/css/themes/pangya-classic.css",
     },
-    win11: {
+    "win11": {
       name: "💠 Windows 11",
       css: "shared/css/themes/win11.css",
     },
@@ -25,7 +25,7 @@
   let storage = null;
   // Valeur par défaut ; corrigée dans initThemesSystem() une fois
   // storage.init() terminé (lecture async, donc pas dispo à ce stade).
-  let currentTheme = "pangya-classic";
+  let currentTheme = "win11";
   // URL absolue (normalisée par le navigateur) de ce script, capturée PENDANT
   // l'exécution du IIFE : document.currentScript n'est plus disponible plus
   // tard (retourne null hors évaluation synchrone). Sert à résoudre le chemin
@@ -143,7 +143,7 @@
         "--scrollbar": "#97e6ff",
         "--scrollbar-hover": "#4eb8ff",
       },
-      win11: {
+      "win11": {
         "--bg-body": "linear-gradient(180deg, #f7f7f5 0%, #efefef 100%)",
         "--bg-card": "#ffffff",
         "--bg-input": "#fbfbfb",
@@ -262,12 +262,12 @@
     storage = window.StorageService || null;
     if (storage) {
       await storage.init();
-      currentTheme = storage.get("theme", "pangya-classic");
+      currentTheme = storage.get("theme", "win11");
     } else {
       console.warn(
         "⚠️ StorageService non chargé dans cette fenêtre — fallback localStorage pour le thème.",
       );
-      currentTheme = localStorage.getItem("pangya_theme") || "pangya-classic";
+      currentTheme = localStorage.getItem("pangya_theme") || "win11";
     }
     initThemeSelector();
     setupCrossWindowThemeSync();

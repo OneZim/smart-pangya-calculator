@@ -3,7 +3,7 @@
 (function () {
   "use strict";
 
-  const theme = localStorage.getItem("pangya_theme") || "pangya-classic";
+  const theme = localStorage.getItem("pangya_theme") || "win11";
 
   const styles = {
     "dark-golf": {
@@ -77,7 +77,7 @@
       "--scrollbar": "#97e6ff",
       "--scrollbar-hover": "#4eb8ff",
     },
-    win11: {
+    "win11": {
       "--bg-body": "linear-gradient(180deg, #f7f7f5 0%, #efefef 100%)",
       "--bg-card": "#ffffff",
       "--bg-input": "#fbfbfb",
@@ -103,7 +103,7 @@
   };
 
   const root = document.documentElement;
-  const themeVars = styles[theme] || styles["pangya-classic"];
+  const themeVars = styles[theme] || styles["win11"];
 
   for (const [key, value] of Object.entries(themeVars)) {
     root.style.setProperty(key, value);

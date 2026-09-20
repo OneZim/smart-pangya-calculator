@@ -79,9 +79,9 @@
           w +
           "x" +
           h +
-          " -> source \"" +
+          ' -> source "' +
           calib._source +
-          "\" (ancre " +
+          '" (ancre ' +
           calib[anchorKey]?.x +
           "," +
           calib[anchorKey]?.y +

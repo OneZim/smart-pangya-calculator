@@ -16,8 +16,21 @@ Application **Tauri v2** multi-fenêtres (bureau Windows) pour le jeu Pangya Reb
   - `src/style/` : styles principaux ; `src/utils/` : helpers de fenêtres, recalcul et options des boutons.
   - `src/assets/avatars/` : avatars des personnages.
 - **Backend Rust (`src-tauri/src/`)** :
-  - `lib.rs` : Point d'entrée principal — commandes IPC, logique Win32 (transparence, click-through), gestionnaire de fenêtres, surveillance de dossier, raccourcis globaux, interactions souris via `enigo`.
+  - `lib.rs` : Point d'entrée et orchestration Tauri — enregistrement des plugins, états, commandes IPC et événements applicatifs.
   - `main.rs` : Point d'entrée minimal appelant `smart_pangya_calculator_lib::run()`.
+  - `constants.rs` : constantes partagées du backend.
+  - `state.rs` : états partagés de l'application.
+  - `detection.rs` : détection du jeu et des changements utiles aux overlays.
+  - `window_style.rs` : styles et comportements spécifiques aux fenêtres Windows.
+  - `foreground.rs` : gestion de la fenêtre ou du processus au premier plan.
+  - `error.rs` : types d'erreurs partagés du backend.
+  - `commands/` : commandes IPC organisées par domaine :
+    - `mod.rs` : déclaration et regroupement des modules de commandes.
+    - `overlays.rs` : commandes relatives aux overlays.
+    - `game.rs` : commandes relatives au jeu.
+    - `input.rs` : commandes relatives aux entrées utilisateur.
+    - `media.rs` : commandes relatives aux captures et médias.
+    - `i18n.rs` : commandes relatives aux traductions.
   - `src-tauri/data/` : données embarquées, notamment les positions des pins (`pin_location.json`).
   - `src-tauri/lang/` : traductions embarquées (`de`, `en`, `es`, `fr`, `it`, `pt`).
   - `src-tauri/capabilities/` : permissions Tauri v2 ; `src-tauri/gen/` : schémas générés ; `src-tauri/icons/` : icônes de l'application.

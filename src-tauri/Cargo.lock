@@ -3404,6 +3404,7 @@ dependencies = [
  "tauri-plugin-global-shortcut",
  "tauri-plugin-opener",
  "tauri-plugin-store",
+ "thiserror 2.0.20",
  "windows 0.61.3",
 ]
 
