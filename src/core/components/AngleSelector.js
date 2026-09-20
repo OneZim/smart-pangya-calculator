@@ -177,9 +177,6 @@
       const degreeInput = document.getElementById(degreeId);
       if (degreeInput) degreeInput.value = angleInt;
 
-      // Sauvegarder (nombre natif, plus besoin de String())
-      storage.set(storageKey, angleInt);
-
       // Synchroniser via Tauri (UNIQUEMENT si enabled)
       if (syncEnabled && window.TauriService?.isAvailable) {
         window.TauriService.emit("sync-wind-angle", { angle: angleInt });
@@ -291,8 +288,9 @@
     // INIT
     // ================================================================
 
-    const savedAngle = storage.get(storageKey, 0);
-    angle = Number(savedAngle) || 0;
+    // L'angle du vent change à chaque coup : pas de persistance disque,
+    // on part toujours de 0 au démarrage.
+    angle = 0;
     updatePosition();
 
     setupEvents();

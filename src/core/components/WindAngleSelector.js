@@ -48,7 +48,7 @@
     const BASE_SIZE = 300;
     let scale = canvas.width / BASE_SIZE;
 
-    const DEFAULT_RADIUS = 110;
+    const DEFAULT_RADIUS = 115;
 
     let radius = DEFAULT_RADIUS * scale;
     let clickPos = null;
@@ -170,7 +170,7 @@
       }
 
       // `angle` (interne) pilote uniquement le dessin (clickPos/trait
-      // rouge) et ne change pas. La valeur AFFICHÉE/stockée/synchronisée
+      // rouge) et ne change pas. La valeur AFFICHÉE/synchronisée
       // (utilisée aussi par le champ #degree et le moteur de calcul) est
       // le miroir de l'interne, pour corriger la convention 0-360°.
       const displayAngle = (360 - angle) % 360;
@@ -181,8 +181,6 @@
 
       const degreeInput = document.getElementById(degreeId);
       if (degreeInput) degreeInput.value = angleRounded;
-
-      storage.set(storageKey, angleRounded);
 
       if (syncEnabled && window.TauriService?.isAvailable) {
         window.TauriService.emit("sync-wind-angle", { angle: angleRounded });
@@ -259,7 +257,9 @@
       const normalizedDelta = delta > 180 ? delta - 360 : delta;
 
       if (markers.length === 2 && Math.abs(normalizedDelta) <= 1) {
-        markers = markers.map((m) => rotatePointAroundCenter(m, -normalizedDelta));
+        markers = markers.map((m) =>
+          rotatePointAroundCenter(m, -normalizedDelta),
+        );
       } else {
         markers = [];
       }
@@ -327,10 +327,9 @@
     // INIT
     // ================================================================
 
-    // La valeur persistée est en convention AFFICHÉE (voir updateUI) ;
-    // on la reconvertit en interne (miroir) pour le dessin.
-    const savedDisplay = Number(storage.get(storageKey, 0)) || 0;
-    angle = (360 - savedDisplay + 360) % 360;
+    // L'angle du vent change à chaque coup : pas de persistance disque,
+    // on part toujours de 0 au démarrage.
+    angle = 0;
     updatePosition();
 
     setupEvents();

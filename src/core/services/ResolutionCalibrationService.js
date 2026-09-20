@@ -58,7 +58,7 @@
       // Image du vent : ancre (px dans la capture) = point de la flèche du jeu
       // à centrer dans le canvas, et zoom (Z = taille_canvas / taille_région).
       windAnchor: { x: 1823, y: 969 },
-      windZoom: 360 / 171,
+      windZoom: 360 / 170,
 
       // Image du d ela balle: ancre (px dans la capture) = point de la flèche du jeu
       // à centrer dans le canvas, et zoom (Z = taille_canvas / taille_région).
@@ -95,7 +95,7 @@
       // Image du d ela balle: ancre (px dans la capture) = point de la flèche du jeu
       // à centrer dans le canvas, et zoom (Z = taille_canvas / taille_région).
       ballAnchor: { x: 538, y: 842 },
-      ballZoom: 360 / 66, // = 2 → région 180×180 affichée en 360×360// = 2 → région 180×180 affichée en 360×360
+      ballZoom: 360 / 65, // = 2 → région 180×180 affichée en 360×360// = 2 → région 180×180 affichée en 360×360
     },
     "1440x900": {
       _note:
@@ -128,7 +128,7 @@
       // Image du d ela balle: ancre (px dans la capture) = point de la flèche du jeu
       // à centrer dans le canvas, et zoom (Z = taille_canvas / taille_région).
       ballAnchor: { x: 458, y: 842 },
-      ballZoom: 360 / 66, // = 2 → région 180×180 affichée en 360×360// = 2 → région 180×180 affichée en 360×360
+      ballZoom: 360 / 65, // = 2 → région 180×180 affichée en 360×360// = 2 → région 180×180 affichée en 360×360
     },
 
     "1400x900": {
@@ -160,7 +160,7 @@
       windZoom: 360 / 85, // = 2 → région 180×180 affichée en 360×360
 
       ballAnchor: { x: 438, y: 842 },
-      ballZoom: 360 / 66, // = 2 → région 180×180 affichée en 360×360// = 2 → région 180×180 affichée en 360×360
+      ballZoom: 360 / 65, // = 2 → région 180×180 affichée en 360×360// = 2 → région 180×180 affichée en 360×360
     },
     "1280x720": {
       _note:

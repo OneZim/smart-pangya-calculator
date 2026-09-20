@@ -362,8 +362,8 @@
     if (!appWindow) return;
 
     // Référence fenêtre (ratio verrouillé 350/420) : échelle uniforme
-    const REF_W = 350;
-    const REF_H = 420;
+    const REF_W = 360;
+    const REF_H = 400;
     const DIR = "SouthEast";
     let drag = null;
 
@@ -446,7 +446,7 @@
     const bar = document.querySelector(".horizontal-calculator-bar");
     if (!bar) return;
     const apply = () => {
-      const z = Math.min(window.innerWidth / 350, window.innerHeight / 420);
+      const z = Math.min(window.innerWidth / 360, window.innerHeight / 400);
       bar.style.zoom = String(Math.max(1, Math.min(2.5, z)));
     };
     apply();

@@ -14,7 +14,7 @@ body {
 
 .horizontal-calculator-bar {
   position: relative; /* ← ESSENTIEL pour le pseudo-élément */
-  width: 350px;
+  width: 360px;
   height: 400px;
   flex: none;
   zoom: var(--zoom, 1);
@@ -168,7 +168,7 @@ select {
   padding: 0;
 }
 
-/* Les toggles d'affichage occupent toute la largeur (sinon débordement à 350px) */
+/* Les toggles d'affichage occupent toute la largeur (sinon débordement à 360px) */
 .field:has(.toggle) {
   grid-column: 1 / -1;
 }
@@ -410,7 +410,7 @@ select {
   top: 0;
   right: 0px;
   z-index: 50;
-  width: 350px;
+  width: 360px;
   height: 100%;
   box-sizing: border-box;
   padding: 6px 10px 8px;
