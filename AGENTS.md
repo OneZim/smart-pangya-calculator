@@ -9,7 +9,7 @@ Application **Tauri v2** multi-fenêtres (bureau Windows) pour le jeu Pangya Reb
 - **Frontend (`src/`)** : JavaScript vanilla (sans bundler), structuré par dossiers :
   - `src/index.html`, `src/app.js` et `src/main.js` : fenêtre principale, initialisation et orchestration de l'application.
   - `src/core/` : `components/`, `services/`, `stores/` (sélection, stockage, calibration, informations de tir et communication Tauri).
-  - `src/models/` : modèles métier (`Character`, `Course`, `Hole`, `Pin`, `Player`).
+  - `src/models/` : modèle métier `Character` exposé globalement.
   - `src/screens/<screen>/` : écrans Tauri secondaires avec leur trio HTML/CSS/JS : `settings` et `overlays`.
   - `src/overlays/<overlay>/` : une fenêtre par overlay, chacune avec son trio HTML/CSS/JS : `calc_overlay`, `wind_overlay`, `spin_overlay`, `ruler_overlay`, `infos_shot`.
   - `src/shared/` : JavaScript partagé (`i18n`, thèmes, calculateur intelligent, optimisation Dunk) et CSS des thèmes.
