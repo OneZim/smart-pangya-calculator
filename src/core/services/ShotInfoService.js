@@ -5,12 +5,12 @@
   window.ShotInfoService = {
     // === ÉTAT INTERNE ====================================================
     _state: {
-      data: {},          // dernier payload update-ruler
-      zoom: "80",        // "80" ou "100"
-      width: 1920,       // résolution actuelle
-      height: 1080,      // résolution actuelle
-      pxPerPb: 81,       // px par PB pour zoom courant
-      realPxPerPb: 72,   // px par PB sur jauge réelle (calibré)
+      data: {}, // dernier payload update-ruler
+      zoom: "80", // "80" ou "100"
+      width: 1920, // résolution actuelle
+      height: 1080, // résolution actuelle
+      pxPerPb: 81, // px par PB pour zoom courant
+      realPxPerPb: 72, // px par PB sur jauge réelle (calibré)
     },
 
     // === LISTENERS TAURI (stockés pour désabonnement) ====================
@@ -42,7 +42,10 @@
           this._state.height = res.height || this._state.height;
         }
       } catch (err) {
-        console.warn("[ShotInfoService] Résolution non détectée, valeurs par défaut", err);
+        console.warn(
+          "[ShotInfoService] Résolution non détectée, valeurs par défaut",
+          err,
+        );
       }
 
       // Charger le zoom depuis le storage (ruler_zoom = true => "100")
@@ -67,29 +70,39 @@
       this._listeners["update-ruler"] = unsubscribeData;
 
       // Changement de zoom (Smart PB / PB Max)
-      const unsubscribeZoom = tauriService.listen("update-ruler-zoom", (event) => {
-        const zoom = event.payload?.zoom === "100" ? "100" : "80";
-        if (this._state.zoom !== zoom) {
-          this._state.zoom = zoom;
-          this._recalculateDerived();
-          // Notifier les abonnés aux changements de config
-          this._notifyConfigSubscribers();
-        }
-      });
+      const unsubscribeZoom = tauriService.listen(
+        "update-ruler-zoom",
+        (event) => {
+          const zoom = event.payload?.zoom === "100" ? "100" : "80";
+          if (this._state.zoom !== zoom) {
+            this._state.zoom = zoom;
+            this._recalculateDerived();
+            // Notifier les abonnés aux changements de config
+            this._notifyConfigSubscribers();
+          }
+        },
+      );
       this._listeners["update-ruler-zoom"] = unsubscribeZoom;
 
       // Changement de résolution du jeu
-      const unsubscribeRes = tauriService.listen("update-game-resolution", (event) => {
-        const width = Number(event.payload?.width) || 0;
-        const height = Number(event.payload?.height) || 0;
-        if (width > 0 && height > 0 && (this._state.width !== width || this._state.height !== height)) {
-          this._state.width = width;
-          this._state.height = height;
-          this._recalculateDerived();
-          // Notifier les abonnés aux changements de config
-          this._notifyConfigSubscribers();
-        }
-      });
+      const unsubscribeRes = tauriService.listen(
+        "update-game-resolution",
+        (event) => {
+          const width = Number(event.payload?.width) || 0;
+          const height = Number(event.payload?.height) || 0;
+          if (
+            width > 0 &&
+            height > 0 &&
+            (this._state.width !== width || this._state.height !== height)
+          ) {
+            this._state.width = width;
+            this._state.height = height;
+            this._recalculateDerived();
+            // Notifier les abonnés aux changements de config
+            this._notifyConfigSubscribers();
+          }
+        },
+      );
       this._listeners["update-game-resolution"] = unsubscribeRes;
 
       this._initialized = true;
@@ -102,7 +115,7 @@
     _recalculateDerived() {
       const calib = window.ResolutionCalibrationService?.getCalibration(
         this._state.width,
-        this._state.height
+        this._state.height,
       );
       if (calib) {
         const ppb = calib?.pxPerPb || {};
@@ -126,11 +139,11 @@
     _configSubscribers: new Set(),
 
     _notifyDataSubscribers(data) {
-      this._dataSubscribers.forEach(cb => cb(data));
+      this._dataSubscribers.forEach((cb) => cb(data));
     },
 
     _notifyConfigSubscribers() {
-      this._configSubscribers.forEach(cb => cb());
+      this._configSubscribers.forEach((cb) => cb());
     },
 
     // === API PUBLIQUE ====================================================
@@ -211,7 +224,7 @@
      * Désabonne tous les listeners Tauri (utile en dev)
      */
     destroy() {
-      Object.values(this._listeners).forEach(unsub => {
+      Object.values(this._listeners).forEach((unsub) => {
         if (typeof unsub === "function") unsub();
       });
       this._listeners = {};

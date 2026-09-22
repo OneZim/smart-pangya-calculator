@@ -1,6 +1,6 @@
 {
   "productName": "Smart Pangya Calculator",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "identifier": "com.onezim.smart-pangya-calculator",
   "build": {
     "frontendDist": "../src"
@@ -27,7 +27,7 @@
         "visible": false,
         "decorations": true,
         "transparent": false,
-        "alwaysOnTop": true
+        "alwaysOnTop": false
       },
       {
         "label": "overlays_screen",
@@ -38,7 +38,7 @@
         "visible": false,
         "decorations": true,
         "transparent": false,
-        "alwaysOnTop": true
+        "alwaysOnTop": false
       },
       {
         "label": "ruler_overlay",

@@ -30,7 +30,7 @@
    * - invoke : Permet d'appeler des fonctions du backend Rust
    * - getCurrentWindow : Récupère l'instance de la fenêtre actuelle
    */
-  const { invoke } = window.__TAURI__.core;
+  /*const { invoke } = window.__TAURI__.core;*/
   const { getCurrentWindow } = window.__TAURI__.window;
 
   // ================================================================
@@ -38,6 +38,7 @@
   // ================================================================
 
   let win = null; // Instance de la fenêtre Tauri (initialisée dans setupTitlebar)
+  let isClosing = false;
 
   // ================================================================
   // FONCTION : setupTitlebar()
@@ -55,6 +56,25 @@
   function setupTitlebar() {
     // Récupération de l'instance de la fenêtre Tauri
     win = getCurrentWindow();
+
+    // Intercepte aussi les fermetures système pour vider le debounce du store.
+    void win
+      .onCloseRequested(async (event) => {
+        if (isClosing) return;
+
+        event.preventDefault();
+        isClosing = true;
+        try {
+          await window.StorageService?.flush();
+        } catch (error) {
+          console.error("❌ Erreur sauvegarde avant fermeture:", error);
+        } finally {
+          await win.close();
+        }
+      })
+      .catch((error) => {
+        console.error("❌ Impossible d'intercepter la fermeture:", error);
+      });
 
     // Sélection des boutons de la barre de titre
     const minimizeBtn = document.getElementById("titlebar-minimize");
@@ -158,7 +178,6 @@
    * S'exécute lorsque le DOM est complètement chargé
    */
   document.addEventListener("DOMContentLoaded", () => {
-
     // ============================================================
     // 2. CONFIGURATION DE LA BARRE DE TITRE
     // ============================================================

@@ -752,9 +752,7 @@
       storageKey: "wind_angle",
     });
 
-    // === IMAGE VENT (chargement + calibration + recadrage) ===
-    // Même dossier (StorageService partagé) et mêmes événements
-    // `nouvelle-capture-detectee` que la page principale.
+    // === IMAGE VENT ===
     window.ScreenshotManager?.(window.TauriService, storage);
 
     // === IMAGE BALLE (même capture/calibration, offsets dédiés) ===

@@ -97,6 +97,15 @@
 
     tauri.listen("nouvelle-capture-detectee", chargerDerniereImage);
 
+    tauri.listen("screenshot-folder-changed", (event) => {
+      const folderPath = event.payload?.folderPath;
+      if (!folderPath) return;
+
+      selectedFolderPath = folderPath;
+      if (inputFolderPath) inputFolderPath.value = folderPath;
+      chargerDerniereImage();
+    });
+
     // ================================================================
     // SÉLECTIONNER LE DOSSIER
     // ================================================================
@@ -109,7 +118,11 @@
           selectedFolderPath = selected;
           if (inputFolderPath) inputFolderPath.value = selected;
           store.set("screenshot_folder", selected);
-          await chargerDerniereImage();
+          await tauri.emit("screenshot-folder-changed", {
+            folderPath: selected,
+          });
+          const win = await tauri.getCurrentWindow();
+          if (win) await win.setFocus();
         } catch (err) {
           console.error("❌ Erreur select_folder:", err);
         }

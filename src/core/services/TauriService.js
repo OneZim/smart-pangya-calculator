@@ -30,9 +30,9 @@
     async listen(eventName, callback) {
       if (!this.isAvailable) {
         console.warn(`⚠️ Tauri non disponible pour listen("${eventName}")`);
-        return;
+        return () => {};
       }
-      await this.event.listen(eventName, callback);
+      return await this.event.listen(eventName, callback);
     },
 
     async emit(eventName, payload) {

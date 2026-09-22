@@ -31,8 +31,7 @@ fn lancer_surveillance_dossier(app: AppHandle, path_str: String) {
 
     let mut watcher = match watcher_result {
         Ok(w) => w,
-        Err(e) => {
-            eprintln!("Impossible de créer le watcher de dossier : {}", e);
+        Err(_e) => {
             state_lock.watched_path = None;
             return;
         }
@@ -56,9 +55,12 @@ pub fn select_folder(app: AppHandle) -> Option<String> {
         .file()
         .set_title("Sélectionner le dossier des captures Pangya")
         .blocking_pick_folder();
-
     if let Some(ref f) = folder {
         lancer_surveillance_dossier(app.clone(), f.to_string());
+
+        // Notifier le frontend qu'il doit rafraîchir l'image immédiatement,
+        // sans attendre une nouvelle capture. Cela force l'appel à get_latest_image.
+        let _ = app.emit(EVT_NEW_CAPTURE, ());
     }
 
     folder.map(|f| f.to_string())

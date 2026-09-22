@@ -149,7 +149,6 @@
       const value = e.target.value;
       store.selectPin(value);
       if (options.onChange) options.onChange("pin", value);
-      applyPinData();
     });
 
     // ================================================================
