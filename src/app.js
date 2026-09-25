@@ -624,6 +624,7 @@
 
         const state = courseStore.getState();
         tauri.emit("current-course-state", {
+          courses: state.courses,
           selected: state.selected,
           mapOptions: state.mapOptions,
           holeOptions: state.holeOptions,

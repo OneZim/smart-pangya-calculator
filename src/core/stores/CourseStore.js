@@ -169,6 +169,43 @@
     };
     const subscribers = new Set();
 
+    // Compute options from courses (like real CourseStore)
+    function recomputeOptions() {
+      const { courses, selected } = currentState;
+      const course = courses[selected.map] || null;
+      const hole = course
+        ? (course.holes || course.trous || {})[selected.hole] || null
+        : null;
+
+      currentState.mapOptions = Object.keys(currentState.courses).map((key) => ({
+        value: key,
+        label: currentState.courses[key]?.name || key,
+      }));
+
+      const holeKeys = course
+        ? Object.keys(course.holes || course.trous || {})
+        : [];
+      const sortedHoleKeys = holeKeys.sort((a, b) => {
+        const numA = parseInt(a.replace(/\D/g, "")) || 0;
+        const numB = parseInt(b.replace(/\D/g, "")) || 0;
+        return numA - numB;
+      });
+      currentState.holeOptions = sortedHoleKeys.map((key) => {
+        const holeData = (course?.holes || course?.trous || {})[key];
+        const par = holeData?.par || "";
+        return {
+          value: key,
+          label: par ? ` ${key} (Par ${par})` : ` ${key}`,
+        };
+      });
+
+      const pinKeys = hole ? Object.keys(hole.pins || hole.positions || {}) : [];
+      currentState.pinOptions = pinKeys.map((key) => ({
+        value: key,
+        label: ` ${key.toUpperCase()}`,
+      }));
+    }
+
     // Notify all subscribers
     function notify() {
       for (const cb of subscribers) {
@@ -202,6 +239,7 @@
         } else if (type === "hole") {
           currentState.selected.pin = null;
         }
+        recomputeOptions();
         notify();
       }
     }
@@ -217,6 +255,7 @@
       const payload = event.payload;
       if (payload) {
         currentState = { ...currentState, ...payload };
+        recomputeOptions();
         notify();
       }
     });
@@ -251,7 +290,7 @@
         return () => subscribers.delete(cb);
       },
       getState: () => ({
-        courses: {},
+        courses: currentState.courses,
         selected: currentState.selected,
         mapOptions: currentState.mapOptions,
         holeOptions: currentState.holeOptions,
