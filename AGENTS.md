@@ -11,7 +11,7 @@ Application **Tauri v2** multi-fenêtres (bureau Windows) pour le jeu Pangya Reb
   - `src/core/` : `components/`, `services/`, `stores/` (sélection, stockage, calibration, informations de tir et communication Tauri).
   - `src/models/` : modèle métier `Character` exposé globalement.
   - `src/screens/<screen>/` : écrans Tauri secondaires avec leur trio HTML/CSS/JS : `settings` et `overlays`.
-  - `src/overlays/<overlay>/` : une fenêtre par overlay, chacune avec son trio HTML/CSS/JS : `calc_overlay`, `wind_overlay`, `spin_overlay`, `ruler_overlay`, `infos_shot`.
+  - `src/overlays/<overlay>/` : une fenêtre par overlay, chacune avec son trio HTML/CSS/JS : `calc_overlay`, `spin_overlay`, `ruler_overlay`, `infos_shot`.
   - `src/shared/` : JavaScript partagé (`i18n`, thèmes, calculateur intelligent, optimisation Dunk) et CSS des thèmes.
   - `src/style/` : styles principaux ; `src/utils/` : helpers de fenêtres, recalcul et options des boutons.
   - `src/assets/avatars/` : avatars des personnages.
@@ -51,7 +51,6 @@ Application **Tauri v2** multi-fenêtres (bureau Windows) pour le jeu Pangya Reb
 | `overlays_screen` | Gestion des overlays        | `screens/overlays/overlays_screen.html`     |
 | `input_overlay`   | Saisie                      | `overlays/calc_overlay/calc_overlay.html`   |
 | `ruler_overlay`   | Règle de visée              | `overlays/ruler_overlay/ruler_overlay.html` |
-| `wind_overlay`    | Angle de vent               | `overlays/wind_overlay/wind_overlay.html`   |
 | `spin_overlay`    | Spin                        | `overlays/spin_overlay/spin_overlay.html`   |
 | `infos_shot`      | Infos tir (PB, %, distance) | `overlays/infos_shot/infos_shot.html`       |
 

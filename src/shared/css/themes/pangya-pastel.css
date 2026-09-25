@@ -185,17 +185,19 @@ footer {
 /* -----------------------------------------------------------------------
    IMAGE VENT
    ----------------------------------------------------------------------- */
-.wind-crop-box {
+.wind-crop-box,
+.ball-crop-box {
   background: var(--input-bg);
   border: 2px solid var(--border);
   border-radius: 4px;
   box-shadow: var(--shadow);
   transition: all 0.25s ease;
 }
-.wind-crop-box:hover {
+.wind-crop-box:hover,
+.ball-crop-box:hover {
   border-color: var(--rose);
 }
-#angle-display {
+.angle-badge {
   font-family: "Baloo 2", sans-serif;
   font-weight: 700;
   color: var(--gold);
@@ -218,11 +220,6 @@ footer {
   letter-spacing: 1px;
   text-transform: uppercase;
   border-radius: 4px;
-}
-.adjust-label {
-  font-family: "Baloo 2", sans-serif;
-  color: var(--gold);
-  font-weight: 700;
 }
 .toggle {
   font-weight: 600;
@@ -255,6 +252,21 @@ footer {
 }
 .toggle__input:checked + .toggle__track::after {
   background: var(--rose);
+}
+/* Radio "Forcer" ▼/▲ — rendu propre au thème */
+.field.spin-force .toggle__track {
+  background: var(--input-bg);
+  border-color: var(--border-dark);
+}
+.field.spin-force .toggle:hover .toggle__track {
+  border-color: var(--rose);
+}
+.field.spin-force .toggle__input:checked + .toggle__track {
+  background: var(--rose);
+  border-color: var(--rose-dark);
+}
+.field.spin-force .toggle__input:checked + .toggle__track::after {
+  background: #ffffff;
 }
 .overlay-separator {
   background: var(--border);

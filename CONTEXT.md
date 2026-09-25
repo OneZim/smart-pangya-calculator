@@ -21,10 +21,10 @@ Document de contexte issu d'un audit complet du dépôt (à jour au 22/09/2026).
 | `src/index.html` + `app.js` + `main.js` | Fenêtre principale (4 onglets : Calculs, Statistiques ; barre de titre personnalisée). `app.js` orchestre stores/composants/listeners ; `main.js` gère titlebar + flush avant fermeture. |
 | `src/core/services/`                    | `TauriService`, `StorageService`, `ShotInfoService`, `ResolutionCalibrationService` (IIFE, exposés sur `window.*`).                                                                      |
 | `src/core/stores/`                      | `CharacterStore`, `CourseStore`, `PlayerStore` (fenêtre principale), `CoursesSelectorCalcOverlay`, `PlayerStoreCalcOverlay` (overlay de saisie). Pattern factory + observateurs.         |
-| `src/core/components/`                  | `AngleSelector`, `WindAngleSelector` (visée à 2 clics), `CharacterManager`, `CourseSelector`, `ScreenshotManager`.                                                                       |
+| `src/core/components/`                  | `WindAngleSelector` (visée à 2 clics), `CharacterManager`, `CourseSelector`, `ScreenshotManager`.                                                                                      |
 | `src/models/`                           | `Character.js` (exposé sur `window`).                                                                                                                                                    |
 | `src/screens/`                          | `settings` (résolution, dossier captures, verrous dev) et `overlays` (visibilité/lock/déplacement des overlays, options règle).                                                          |
-| `src/overlays/`                         | `calc_overlay`, `ruler_overlay`, `wind_overlay`, `spin_overlay`, `infos_shot` — chacun un trio HTML/CSS/JS.                                                                              |
+| `src/overlays/`                         | `calc_overlay`, `ruler_overlay`, `spin_overlay`, `infos_shot` — chacun un trio HTML/CSS/JS.                                                                                            |
 | `src/shared/js/`                        | `i18n`, `theme-loader`, `themes`, `smart_calculator` (moteur physique), `dunk_optimizer`, `dunk_button`, `dunk_request_listener`.                                                        |
 | `src/utils/`                            | `recalc` (`window.triggerCalc`), `WindowDragHelper`, `WindowPositionHelper`, `dunk_options_boutons`.                                                                                     |
 | `src/style/`, `src/shared/css/themes/`  | Styles principaux + 4 thèmes (`win11`, `dark-golf`, `pangya-pastel`, `pangya-classic`).                                                                                                  |
@@ -33,7 +33,7 @@ Document de contexte issu d'un audit complet du dépôt (à jour au 22/09/2026).
 
 - `lib.rs` : orchestration, états `Arc<Mutex<…>>` partagés, transparence de base des overlays via `enable_transparency`, raccourci global `Ctrl+Shift+X` (émet `global-trigger-click-pb`), affichage de la fenêtre `main` à `on_page_load` (anti-FOUC), fenêtres `settings_screen`/`overlays_screen` masquées au lieu de fermées (`prevent_close` + `hide`).
 - `commands/` (IPC par domaine) :
-  - `overlays.rs` : visibilité des overlays (`set_*_visibility` + événement `sync-*`), click-through (`set_overlay_click_through`, `enable_click_through`/`disable_click_through`), déplacements (`move_ruler`, `move_wind_overlay`, `move_spin_overlay`, `move_infos_shot`), angle du vent (`emit_wind_angle`).
+  - `overlays.rs` : visibilité des overlays (`set_*_visibility` + événement `sync-*`), click-through (`set_overlay_click_through`, `enable_click_through`/`disable_click_through`), déplacements (`move_ruler`, `move_spin_overlay`, `move_infos_shot`).
   - `game.rs` : `get_game_resolution`, `refresh_game_resolution`, `get_game_info`, `get_game_client_rect_on_screen`, `get_game_dpi_debug`, `list_all_visible_windows` — correction DPI (scale factor) + correspondance aux 16 résolutions officielles Pangya.
   - `input.rs` : `move_and_click`, `get_mouse_position`, `move_and_click_focused` (force le focus du jeu via `AttachThreadInput` + polling `wait_for_focus`).
   - `media.rs` : `select_folder`, `get_latest_image` (base64 + MIME), `clear_screenshot_folder` — sous surveillance `notify` (`nouvelle-capture-detectee`).
@@ -53,7 +53,6 @@ Document de contexte issu d'un audit complet du dépôt (à jour au 22/09/2026).
 | `overlays_screen` | `screens/overlays/overlays_screen.html`     | Gestion des overlays   | idem                                                         |
 | `input_overlay`   | `overlays/calc_overlay/calc_overlay.html`   | Saisie du tir          | 350×420 transparent, toujours au premier plan, `skipTaskbar` |
 | `ruler_overlay`   | `overlays/ruler_overlay/ruler_overlay.html` | Règle de visée PB      | 1920×150 transparent, AoT                                    |
-| `wind_overlay`    | `overlays/wind_overlay/wind_overlay.html`   | Cadran d'angle du vent | 300×250 (compact 150×170) transparent                        |
 | `spin_overlay`    | `overlays/spin_overlay/spin_overlay.html`   | Cadran spin/curve      | 200×200 transparent                                          |
 | `infos_shot`      | `overlays/infos_shot/infos_shot.html`       | PB réel, %, distance   | 500×150 transparent                                          |
 
@@ -96,14 +95,13 @@ Document de contexte issu d'un audit complet du dépôt (à jour au 22/09/2026).
 ### Calibration par résolution (`ResolutionCalibrationService`)
 
 - Table manuelle (pas de formule) : `1920x1080`, `1600x900`, `1440x900`, `1400x900`, `1280x720` ; repli sur la référence `1920x1080` sinon (flag `_source: calibrated|estimated`).
-- Chaque entrée fournit : `spinDialCenter`, `pxParUniteSpin`, `pxPerPb {80,100}`, `realPxPerPb`, paramètres de rendu de la règle, ancres/zooms vent et balle.
-- `ShotInfoService` agrège résolution + zoom + données `update-ruler` et calcule `pxPerPb`, `realPxPerPb` et le PB réel (`pb * pxPerPb / realPxPerPb`).
+- Chaque entrée fournit : `spinDialCenter`, `pxParUniteSpin`, `pxPerPb` (zoom Smart PB ~80 %), `realPxPerPb`, paramètres de rendu de la règle, ancres/zooms vent et balle.
+- `ShotInfoService` agrège résolution + données `update-ruler` et calcule `pxPerPb`, `realPxPerPb` et le PB réel (`pb * pxPerPb / realPxPerPb`).
 
 ### Overlays
 
-- **calc_overlay** (input bar) : formulaire complet synchro bidirectionnel avec la fenêtre principale (`sync-input-value`, `sync-dropdown-parcours`), sélecteur d'angle canvas, captures vent/ballet (visée 2 clics + pente auto), fenêtre redimensionnable (grip, ratio 360×400), toggles click-through vent / spin forcé, boutons optimiseur Dunk.
-- **ruler_overlay** : règle PB centrée sur le jeu, **gestion du surplus > 47 PB** (repère principal clampé à ±45 + indicateur secondaire recalibré via `realPxPerPb`), zoom 80/100 %, couleurs et repère T configurables, position persistée (`ruler_overlay_position`).
-- **wind_overlay** : cadran d'angle (compact si largeur < 1920 px), flèche, drag + déplacement clavier (pas entiers), persistance position.
+- **calc_overlay** (input bar) : formulaire complet synchro bidirectionnel avec la fenêtre principale (`sync-input-value`, `sync-dropdown-parcours`), sélecteur d'angle canvas, captures vent/ballet (visée 2 clics + pente auto), fenêtre redimensionnable (grip, ratio 360×400), toggle spin forcé, boutons optimiseur Dunk.
+- **ruler_overlay** : règle PB centrée sur le jeu, **gestion du surplus > 47 PB** (repère principal clampé à ±45 + indicateur secondaire recalibré via `realPxPerPb`), zoom Smart PB ~80 %, couleurs et repère T configurables, position persistée (`ruler_overlay_position`).
 - **spin_overlay** : repère spin/curve construit depuis la calibration, marqueur positionné selon `update-spin`, accepte spins négatifs (Dunk).
 - **infos_shot** : PB réel calibré, % (classe `percent-low` sous 80 %), distance — alimenté uniquement par `ShotInfoService`.
 
@@ -129,7 +127,7 @@ Document de contexte issu d'un audit complet du dépôt (à jour au 22/09/2026).
 
 1. **Incohérence de puissance totale** : `Character.getTotalPower()` = 6 termes (inclut `cardSpin`) vs `Player.getTotalPower()` = 5 termes (sans `cardSpin`/`cardCurve`).
 2. **`PlayerStoreCalcOverlay` ignore le stockage** : le joueur de l'overlay de saisie est toujours `{}` (choix assumé ?).
-3. **`AngleSelector`/`WindAngleSelector` déclarent `storageKey` sans l'utiliser** — pas de persistance de l'angle (volontaire : l'angle change à chaque coup).
+3. **`WindAngleSelector` déclare `storageKey` sans l'utiliser** — pas de persistance de l'angle (volontaire : l'angle change à chaque coup).
 4. **Defaults de `ShotInfoService`** (`pxPerPb=81`, `realPxPerPb=72`) différents de la calibration 1080p (20.3/72) — les defaults ne servent qu'en cas d'échec de calibration, mais à surveiller.
 5. **Clic PB** : coordonnées fixes `960/540` dans `setupTauriListeners()` (étape 7 du plan) — incohérent avec les résolutions/scalings autres que 1080p.
 6. Suivi git : dossiers `.vs/` et `plan.md` non suivis.
@@ -163,13 +161,13 @@ Astuce debug backend : lancer les commandes depuis `src-tauri` ; les `eprintln!`
 
 ### Commandes Tauri (backend)
 
-`enable_click_through`, `disable_click_through`, `set_overlay_click_through`, `set_ruler_visibility`, `set_spin_visibility`, `set_input_bar_visibility`, `set_wind_visibility`, `emit_wind_angle`, `move_wind_overlay`, `move_spin_overlay`, `set_infos_shot_visibility`, `get_settings_visibility`, `get_overlays_screen_visibility`, `move_infos_shot`, `move_ruler`, `select_folder`, `get_latest_image`, `clear_screenshot_folder`, `get_available_languages`, `load_language_json`, `parcours`, `move_and_click`, `get_mouse_position`, `move_and_click_focused`, `get_game_resolution`, `refresh_game_resolution`, `get_game_info`, `get_game_client_rect_on_screen`, `get_game_dpi_debug`, `list_all_visible_windows`.
+`enable_click_through`, `disable_click_through`, `set_overlay_click_through`, `set_ruler_visibility`, `set_spin_visibility`, `set_input_bar_visibility`, `move_spin_overlay`, `set_infos_shot_visibility`, `get_settings_visibility`, `get_overlays_screen_visibility`, `move_infos_shot`, `move_ruler`, `select_folder`, `get_latest_image`, `clear_screenshot_folder`, `get_available_languages`, `load_language_json`, `parcours`, `move_and_click`, `get_mouse_position`, `move_and_click_focused`, `get_game_resolution`, `refresh_game_resolution`, `get_game_info`, `get_game_client_rect_on_screen`, `get_game_dpi_debug`, `list_all_visible_windows`.
 
 ### Événements Tauri
 
-- **Backend → front** : `sync-ruler-visibility`, `sync-wind-visibility`, `sync-spin-visibility`, `sync-infos-shot-visibility`, `sync-wind-angle`, `update-game-resolution`, `nouvelle-capture-detectee`, `global-trigger-click-pb`.
-- **Front ⇄ front (bus Tauri)** : `sync-input-value`, `sync-dropdown-parcours`, `sync-spin-force`, `sync-wind-angle`, `sync-wind-click-through`, `update-spin`, `update-ruler`, `update-ruler-zoom`, `update-ruler-smart-color`, `update-ruler-t-repere`, `update-zoom-step`, `ruler-visibility`, `ruler-lock`, `ruler-move`, `spin-visibility`, `toggle-settings-visibility`, `toggle-overlays-visibility`, `screenshot-folder-changed`, `click-optimize-dunk`, `click-spin-only`, `request-dunk-optimization`, `dunk-optimization-result`, `dunk-optimize-result`, `trigger-main-calculation`, `app-lang-changed`, `app-theme-changed`.
+- **Backend → front** : `sync-ruler-visibility`, `sync-spin-visibility`, `sync-infos-shot-visibility`, `update-game-resolution`, `nouvelle-capture-detectee`, `global-trigger-click-pb`.
+- **Front ⇄ front (bus Tauri)** : `sync-input-value`, `sync-dropdown-parcours`, `sync-spin-force`, `sync-wind-angle`, `update-spin`, `update-ruler`, `update-ruler-smart-color`, `update-ruler-t-repere`, `update-zoom-step`, `ruler-visibility`, `ruler-lock`, `ruler-move`, `spin-visibility`, `toggle-settings-visibility`, `toggle-overlays-visibility`, `screenshot-folder-changed`, `click-optimize-dunk`, `click-spin-only`, `request-dunk-optimization`, `dunk-optimization-result`, `dunk-optimize-result`, `trigger-main-calculation`, `app-lang-changed`, `app-theme-changed`.
 
 ### Clés de stockage (toutes préfixées `pangya_` via `StorageService`)
 
-`lastMap`, `lastHole`, `lastPin`, `lastSelection` (overlay), `power`, `auxpart_pwr`, `card_pwr`, `mascot_pwr`, `card_ps_pwr`, `ruler_zoom`, `characters`, `characters_selected`, `screenshot_folder`, `imgOffsetX`, `imgOffsetY`, `ballImgOffsetX`, `ballImgOffsetY`, `wind_click_through`, `spin_force`, `wind_angle`, `calc_overlay_size`, `ruler_overlay_position`, `wind_overlay_position`, `spin_overlay_position`, `infos_shot_position`, `ruler_smart_color`, `ruler_show_t_repere`, `rel-width`, `rel-height`, `smart-dev-limit`, `auto-fit`, `app_lang`, `theme` (+ miroir `localStorage.pangya_theme`, `localStorage.app_lang`).
+`lastMap`, `lastHole`, `lastPin`, `lastSelection` (overlay), `power`, `auxpart_pwr`, `card_pwr`, `mascot_pwr`, `card_ps_pwr`, `characters`, `characters_selected`, `screenshot_folder`, `imgOffsetX`, `imgOffsetY`, `ballImgOffsetX`, `ballImgOffsetY`, `spin_force`, `wind_angle`, `calc_overlay_size`, `ruler_overlay_position`, `spin_overlay_position`, `infos_shot_position`, `ruler_smart_color`, `ruler_show_t_repere`, `rel-width`, `rel-height`, `smart-dev-limit`, `auto-fit`, `app_lang`, `theme` (+ miroir `localStorage.pangya_theme`, `localStorage.app_lang`).

@@ -3,8 +3,7 @@
 // Sélecteur d'angle dédié à la carte "Calcul du vent" de la fenêtre
 // principale (canvas 360×360 superposé à la capture zoomée du jeu).
 //
-// Différences avec core/components/AngleSelector.js (partagé par
-// wind_overlay, canvas 206, mode compact) :
+// Différences avec l'ancien composant wind_overlay (supprimé) :
 //   - Aucune croix dessinée sur le canvas : le repère central est fourni
 //     par l'élément CSS `.wind-crosshair` posé au-dessus de l'image.
 //   - Toutes les tailles (rayon, longueur, épaisseurs) sont proportionnelles

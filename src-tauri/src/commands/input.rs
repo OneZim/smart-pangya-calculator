@@ -33,34 +33,40 @@ pub fn get_mouse_position() -> Result<(i32, i32), AppError> {
 
 #[tauri::command]
 pub fn move_and_click_focused(app: AppHandle, x: f64, y: f64) -> Result<(), AppError> {
-    std::thread::sleep(std::time::Duration::from_millis(100));
-
     let mut enigo = Enigo::new(&Settings::default()).map_err(|e| AppError::Enigo(e.to_string()))?;
 
+    // 1. Déplace la souris sur la cible AVANT d'activer le jeu : ainsi, quand le
+    //    jeu passe au premier plan, le clic physique déjà capté (cli sur le bouton
+    //    « Appliquer » alors que le curseur était dans la zone du jeu) est rejoué
+    //    par le jeu sur la cible elle-même, et non sur la position du curseur.
     enigo
         .move_mouse(x.round() as i32, y.round() as i32, Coordinate::Abs)
         .map_err(|e| AppError::Enigo(e.to_string()))?;
 
-    std::thread::sleep(std::time::Duration::from_millis(50));
+    std::thread::sleep(std::time::Duration::from_millis(15));
 
+    // 2. Focus ensuite, confirmé avant le clic.
     if let Some(game_data) = find_pangya_cached(&app) {
         let focus_ok = force_foreground(game_data.hwnd);
         if !focus_ok {
             eprintln!("Impossible de donner le focus à la fenêtre du jeu.");
         }
-        // On attend que le jeu ait réellement le focus (polling au lieu d'un sleep fixe).
-        // Timeout de 500 ms : largement suffisant pour un changement de focus.
+
         let focused = wait_for_focus(game_data.hwnd, 500);
         if !focused {
-            eprintln!("Le focus du jeu n'a pas pu être confirmé dans le délai imparti.");
+            return Err(AppError::Enigo(
+                "Focus du jeu non confirmé, clic annulé.".into(),
+            ));
         }
-        // Petit délai de stabilisation après confirmation du focus, pour laisser au jeu
-        // le temps de préparer la réception des entrées avant le clic.
+
+        // Stabilisation après focus (le jeu doit être prêt à recevoir les inputs).
         std::thread::sleep(std::time::Duration::from_millis(50));
     } else {
-        eprintln!("Fenêtre Pangya introuvable.");
+        return Err(AppError::Enigo("Fenêtre Pangya introuvable.".into()));
     }
 
+    // 3. Clic quasi immédiat, pour réduire la fenêtre où un mouvement physique
+    //    de la souris pourrait écraser la position.
     enigo
         .button(Button::Left, Direction::Press)
         .map_err(|e| AppError::Enigo(e.to_string()))?;

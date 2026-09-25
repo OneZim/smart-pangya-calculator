@@ -171,20 +171,22 @@ footer:hover {
 /* -----------------------------------------------------------------------
    IMAGE VENT (canvas + crop)
    ----------------------------------------------------------------------- */
-.wind-crop-box {
+.wind-crop-box,
+.ball-crop-box {
   border: 1px solid #2e323e;
   background-color: #0d0f14;
   border-radius: 3px;
   transition: border-color 0.3s ease;
 }
-.wind-crop-box:hover {
+.wind-crop-box:hover,
+.ball-crop-box:hover {
   border-color: #3d6b50;
   box-shadow: #4e8864;
 }
 /* -----------------------------------------------------------------------
    AFFICHAGE DE L'ANGLE
    ----------------------------------------------------------------------- */
-#angle-display {
+.angle-badge {
   font-weight: 600;
   color: #c9a84c;
 }
@@ -203,10 +205,6 @@ footer:hover {
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-}
-.adjust-label {
-  color: #c9a84c;
-  font-weight: 700;
 }
 /* -----------------------------------------------------------------------
    TOGGLE SWITCH
@@ -240,6 +238,21 @@ footer:hover {
 }
 .toggle:hover .toggle__track {
   border-color: #3d6b50;
+}
+/* Radio "Forcer" ▼/▲ — rendu propre au thème */
+.field.spin-force .toggle__track {
+  background: #1e2128;
+  border-color: #2e323e;
+}
+.field.spin-force .toggle:hover .toggle__track {
+  border-color: #4e8864;
+}
+.field.spin-force .toggle__input:checked + .toggle__track {
+  background: #2e3a32;
+  border-color: #3d6b50;
+}
+.field.spin-force .toggle__input:checked + .toggle__track::after {
+  background: #c9a84c;
 }
 .panel {
   border: 1px solid #252830;

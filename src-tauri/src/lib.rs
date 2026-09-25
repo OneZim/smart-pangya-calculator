@@ -47,9 +47,6 @@ pub fn run() {
             commands::overlays::set_ruler_visibility,
             commands::overlays::set_spin_visibility,
             commands::overlays::set_input_bar_visibility,
-            commands::overlays::set_wind_visibility,
-            commands::overlays::emit_wind_angle,
-            commands::overlays::move_wind_overlay,
             commands::overlays::move_spin_overlay,
             commands::overlays::set_infos_shot_visibility,
             commands::overlays::get_settings_visibility,
@@ -83,7 +80,7 @@ pub fn run() {
             let handle = app.app_handle();
 
             // Transparence de base pour tous les overlays (ordre historique conservé)
-            for label in [WIN_RULER, WIN_WIND, WIN_INPUT, WIN_SPIN, WIN_INFOS] {
+            for label in [WIN_RULER, WIN_INPUT, WIN_SPIN, WIN_INFOS] {
                 enable_transparency(handle, label);
             }
 

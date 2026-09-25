@@ -1,6 +1,6 @@
 {
   "productName": "Smart Pangya Calculator",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "identifier": "com.onezim.smart-pangya-calculator",
   "build": {
     "frontendDist": "../src"
@@ -12,8 +12,8 @@
         "url": "index.html",
         "label": "main",
         "title": "Smart Pangya Calculator",
-        "width": 1000,
-        "height": 950,
+        "width": 950,
+        "height": 850,
         "visible": false,
         "decorations": false,
         "transparent": false
@@ -68,20 +68,6 @@
         "resizable": false,
         "minWidth": 350,
         "minHeight": 420,
-        "shadow": false
-      },
-      {
-        "label": "wind_overlay",
-        "title": "Wind Angle Overlay",
-        "url": "overlays/wind_overlay/wind_overlay.html",
-        "width": 300,
-        "height": 250,
-        "transparent": true,
-        "decorations": false,
-        "alwaysOnTop": true,
-        "skipTaskbar": true,
-        "visible": false,
-        "resizable": false,
         "shadow": false
       },
       {

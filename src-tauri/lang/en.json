@@ -53,6 +53,9 @@
   "btn_calc_shot": "CALCULATE SHOT",
 
   "card_wind": "Wind Calculation",
+  "card_ball": "Ball Analysis",
+  "btn_view_wind": "Wind view",
+  "btn_view_ball": "Ball view",
   "label_angle": "Angle: 0°",
 
   "label_image_params": "Image Settings",
@@ -72,12 +75,6 @@
   "label_ruler_adjust": "Overlay Adjustment",
 
   "card_spin": "Spin Marker",
-
-  "card_wind_overlay": "Angle Calculator",
-  "label_show_wind_overlay": "Show Calculator",
-  "label_lock_wind_overlay": "Lock overlay (non-clickable)",
-  "label_wind_overlay_adjust": "Overlay Adjustment",
-  "lock_wind": "Lock Angle Reader",
 
   "card_infos_shot": "Shot Info",
   "label_show_infos_shot": "Show Info",

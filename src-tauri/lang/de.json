@@ -54,6 +54,9 @@
   "label_card_spin": "Max Spin",
 
   "card_wind": "Windberechnung",
+  "card_ball": "Ballanalyse",
+  "btn_view_wind": "Windansicht",
+  "btn_view_ball": "Ballansicht",
   "label_angle": "Winkel: 0°",
 
   "label_image_params": "Bildparameter",
@@ -73,12 +76,6 @@
   "label_ruler_adjust": "Overlay-Anpassung",
 
   "card_spin": "Spin-Markierung",
-
-  "card_wind_overlay": "Winkelrechner",
-  "label_show_wind_overlay": "Rechner anzeigen",
-  "label_lock_wind_overlay": "Overlay sperren (nicht anklickbar)",
-  "label_wind_overlay_adjust": "Overlay-Anpassung",
-  "lock_wind": "Winkelanzeige sperren",
 
   "card_infos_shot": "Schussinfo",
   "label_show_infos_shot": "Infos anzeigen",

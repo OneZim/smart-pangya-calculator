@@ -248,35 +248,6 @@
 
       triggerCalc();
     });
-
-    // === TOGGLE WIND CLICK-THROUGH ===
-    // Même clé ("wind_click_through") que dans app.js, pour que les deux
-    // fenêtres lisent/écrivent la même valeur persistée. Fallback sur
-    // localStorage si StorageService n'est pas dispo dans cette fenêtre.
-    const toggleWind = document.getElementById("toggle-wind-click-through");
-    if (toggleWind) {
-      const savedState = storage
-        ? storage.get("wind_click_through", false)
-        : localStorage.getItem("pangya_wind_click_through") === "true";
-      toggleWind.checked = savedState;
-
-      if (window.TauriService?.isAvailable) {
-        window.TauriService.setOverlayClickThrough("wind_overlay", savedState);
-      }
-
-      toggleWind.addEventListener("change", function () {
-        const locked = this.checked;
-        if (window.TauriService?.isAvailable) {
-          window.TauriService.setOverlayClickThrough("wind_overlay", locked);
-          if (storage) {
-            storage.set("wind_click_through", locked);
-          } else {
-            localStorage.setItem("pangya_wind_click_through", String(locked));
-          }
-          window.TauriService.emit("sync-wind-click-through", { locked });
-        }
-      });
-    }
   }
   // ================================================================
   // BOUTON POUR DÉCLENCHER LE SPIN IDÉAL SUR LA PAGE PRINCIPALE

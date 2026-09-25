@@ -163,7 +163,8 @@ footer {
 /* -----------------------------------------------------------------------
    IMAGE VENT
    ----------------------------------------------------------------------- */
-.wind-crop-box {
+.wind-crop-box,
+.ball-crop-box {
   background: linear-gradient(#f4fcff, #dff3ff);
   border: 2px solid var(--border);
   border-radius: 6px;
@@ -171,7 +172,7 @@ footer {
     inset 0 2px 0 rgba(255, 255, 255, 0.8),
     var(--shadow);
 }
-#angle-display {
+.angle-badge {
   font-weight: bold;
   color: var(--gold);
   text-shadow:
@@ -200,14 +201,6 @@ footer {
   text-transform: uppercase;
   border-radius: 3px;
 }
-/* -----------------------------------------------------------------------
-   LABEL REGLAGES
-   ----------------------------------------------------------------------- */
-.adjust-label {
-  color: var(--gold);
-  font-weight: bold;
-  text-shadow: 0 1px white;
-}
 .toggle {
   color: var(--text);
   font-weight: bold;
@@ -232,6 +225,21 @@ footer {
 .toggle__input:checked + .toggle__track {
   background: linear-gradient(#8de4ff, #4eb8ff);
   border-color: #3aa8ff;
+}
+/* Radio "Forcer" ▼/▲ — rendu propre au thème */
+.field.spin-force .toggle__track {
+  background: #d8f3ff;
+  border-color: #8fd8ff;
+}
+.field.spin-force .toggle:hover .toggle__track {
+  border-color: #4fb9ff;
+}
+.field.spin-force .toggle__input:checked + .toggle__track {
+  background: linear-gradient(#8de4ff, #4eb8ff);
+  border-color: #3aa8ff;
+}
+.field.spin-force .toggle__input:checked + .toggle__track::after {
+  background: #ffffff;
 }
 .overlay-separator {
   background: #9fdcff;
@@ -402,10 +410,12 @@ button i,
 /* -----------------------------------------------------------------------
    IMAGE VENT
    ----------------------------------------------------------------------- */
-.wind-crop-box {
+.wind-crop-box,
+.ball-crop-box {
   transition: 0.2s;
 }
-.wind-crop-box:hover {
+.wind-crop-box:hover,
+.ball-crop-box:hover {
   border-color: var(--accent);
   box-shadow: var(--shadow-hover);
 }
@@ -440,7 +450,8 @@ select:focus {
 .card,
 .panel,
 .adjust-panel,
-.wind-crop-box {
+.wind-crop-box,
+.ball-crop-box {
   box-shadow:
     0 6px 18px rgba(0, 110, 200, 0.18),
     inset 0 2px 0 rgba(255, 255, 255, 0.85);

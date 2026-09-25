@@ -169,7 +169,8 @@ select:focus {
 /* -----------------------------------------------------------------------
    IMAGE VENT (canvas + crop)
    ----------------------------------------------------------------------- */
-.wind-crop-box {
+.wind-crop-box,
+.ball-crop-box {
   border: 1px solid var(--border);
   border-radius: 8px;
   background: var(--panel-bg);
@@ -178,11 +179,12 @@ select:focus {
     box-shadow 0.15s ease,
     border-color 0.15s ease;
 }
-.wind-crop-box:hover {
+.wind-crop-box:hover,
+.ball-crop-box:hover {
   border-color: var(--accent);
   box-shadow: var(--shadow-hover);
 }
-#angle-display {
+.angle-badge {
   color: var(--accent);
   font-weight: 600;
 }
@@ -193,14 +195,11 @@ select:focus {
   background: var(--panel-bg);
   border: 1px solid var(--border);
   border-radius: 8px;
+  padding: 4px;
 }
 .adjust-title {
   font-weight: 600;
   color: var(--text);
-}
-.adjust-label {
-  color: var(--text-label);
-  font-weight: 600;
 }
 /* -----------------------------------------------------------------------
    TOGGLE SWITCH
@@ -228,6 +227,21 @@ select:focus {
 }
 .toggle__input:checked + .toggle__track {
   background: var(--toggle-checked);
+}
+/* Radio "Forcer" ▼/▲ — rendu propre au thème */
+.field.spin-force .toggle__track {
+  background: var(--toggle-bg);
+  border-color: var(--border-input);
+}
+.field.spin-force .toggle:hover .toggle__track {
+  border-color: var(--accent-hover);
+}
+.field.spin-force .toggle__input:checked + .toggle__track {
+  background: var(--toggle-checked);
+  border-color: var(--accent);
+}
+.field.spin-force .toggle__input:checked + .toggle__track::after {
+  background: #ffffff;
 }
 .panel {
   background: var(--bg-card);

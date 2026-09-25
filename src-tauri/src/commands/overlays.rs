@@ -82,11 +82,6 @@ pub fn set_ruler_visibility(app: AppHandle, show: bool) {
 }
 
 #[tauri::command]
-pub fn set_wind_visibility(app: AppHandle, show: bool) {
-    set_overlay_visibility_internal(&app, WIN_WIND, Some(EVT_SYNC_WIND_VIS), show);
-}
-
-#[tauri::command]
 pub fn set_spin_visibility(app: AppHandle, show: bool) {
     set_overlay_visibility_internal(&app, WIN_SPIN, Some(EVT_SYNC_SPIN_VIS), show);
 }
@@ -108,11 +103,6 @@ pub fn set_input_bar_visibility(app: AppHandle, show: bool) {
 #[tauri::command]
 pub fn move_ruler(app: AppHandle, x: i32, y: i32) {
     let _ = move_overlay_by(&app, WIN_RULER, x, y);
-}
-
-#[tauri::command]
-pub fn move_wind_overlay(app_handle: AppHandle, dx: i32, dy: i32) -> Result<(), AppError> {
-    move_overlay_by(&app_handle, WIN_WIND, dx, dy)
 }
 
 #[tauri::command]
@@ -141,13 +131,4 @@ pub fn get_overlays_screen_visibility(app: AppHandle) -> bool {
     app.get_webview_window(WIN_OVERLAYS_SCREEN)
         .map(|w| w.is_visible().unwrap_or(false))
         .unwrap_or(false)
-}
-
-#[tauri::command]
-pub fn emit_wind_angle(app_handle: AppHandle, angle: i32) -> Result<(), AppError> {
-    app_handle
-        .emit(EVT_SYNC_WIND_ANGLE, serde_json::json!({ "angle": angle }))
-        .map_err(|e| AppError::Emit(e.to_string()))?;
-
-    Ok(())
 }

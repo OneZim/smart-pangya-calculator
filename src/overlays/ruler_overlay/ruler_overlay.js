@@ -34,8 +34,7 @@
   // État global
   const state = {
     // Calibration
-    pxPerPb: CONFIG.DEFAULT_PX_PER_PB, // Pixels par PB (résolution × zoom)
-    currentZoom: "80", // "80" = Smart PB, "100" = PB Max
+    pxPerPb: CONFIG.DEFAULT_PX_PER_PB, // Pixels par PB (résolution × zoom 80%)
     currentWidth: 1920, // Résolution largeur
     currentHeight: 1080, // Résolution hauteur
     rulerCenterPx: 960, // Centre de la règle en pixels
@@ -69,12 +68,9 @@
       state.currentWidth,
       state.currentHeight,
     );
-    const ppb = calib?.pxPerPb || {};
-    return ppb[state.currentZoom] != null
-      ? ppb[state.currentZoom]
-      : ppb["100"] != null
-        ? ppb["100"]
-        : CONFIG.DEFAULT_PX_PER_PB;
+    return calib?.pxPerPb != null
+      ? calib.pxPerPb
+      : CONFIG.DEFAULT_PX_PER_PB;
   }
 
   /**
@@ -313,12 +309,6 @@
       updateUI(event.payload);
     });
 
-    // Changement de zoom (Smart PB / PB Max)
-    state.tauriService.listen("update-ruler-zoom", (event) => {
-      state.currentZoom = event.payload?.zoom === "100" ? "100" : "80";
-      refreshScale();
-    });
-
     // Couleur du repère (smart-indicator)
     state.tauriService.listen("update-ruler-smart-color", (event) => {
       const color = event.payload?.color;
@@ -404,11 +394,6 @@
 
     // --- Récupération des éléments DOM ---
     elements = getElements();
-
-    // --- Récupération du zoom ---
-    if (state.storage) {
-      state.currentZoom = state.storage.get("ruler_zoom", false) ? "100" : "80";
-    }
 
     // --- Style de la règle (couleur repère + visibilité repère T) ---
     if (state.storage) {

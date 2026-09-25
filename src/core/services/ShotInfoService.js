@@ -6,10 +6,9 @@
     // === ÉTAT INTERNE ====================================================
     _state: {
       data: {}, // dernier payload update-ruler
-      zoom: "80", // "80" ou "100"
       width: 1920, // résolution actuelle
       height: 1080, // résolution actuelle
-      pxPerPb: 81, // px par PB pour zoom courant
+      pxPerPb: 81, // px par PB (zoom 80%)
       realPxPerPb: 72, // px par PB sur jauge réelle (calibré)
     },
 
@@ -48,13 +47,6 @@
         );
       }
 
-      // Charger le zoom depuis le storage (ruler_zoom = true => "100")
-      if (storage) {
-        await storage.init();
-        const isZoomMax = storage.get("ruler_zoom", false);
-        this._state.zoom = isZoomMax ? "100" : "80";
-      }
-
       // Recalculer les valeurs dérivées
       this._recalculateDerived();
 
@@ -68,21 +60,6 @@
         this._notifyDataSubscribers(payload);
       });
       this._listeners["update-ruler"] = unsubscribeData;
-
-      // Changement de zoom (Smart PB / PB Max)
-      const unsubscribeZoom = tauriService.listen(
-        "update-ruler-zoom",
-        (event) => {
-          const zoom = event.payload?.zoom === "100" ? "100" : "80";
-          if (this._state.zoom !== zoom) {
-            this._state.zoom = zoom;
-            this._recalculateDerived();
-            // Notifier les abonnés aux changements de config
-            this._notifyConfigSubscribers();
-          }
-        },
-      );
-      this._listeners["update-ruler-zoom"] = unsubscribeZoom;
 
       // Changement de résolution du jeu
       const unsubscribeRes = tauriService.listen(
@@ -118,13 +95,8 @@
         this._state.height,
       );
       if (calib) {
-        const ppb = calib?.pxPerPb || {};
         this._state.pxPerPb =
-          ppb[this._state.zoom] != null
-            ? ppb[this._state.zoom]
-            : ppb["100"] != null
-              ? ppb["100"]
-              : 81; // DEFAULT_PX_PER_PB
+          calib?.pxPerPb != null ? calib.pxPerPb : 81; // DEFAULT_PX_PER_PB
 
         this._state.realPxPerPb = calib?.realPxPerPb || 72;
       } else {
@@ -153,14 +125,6 @@
      */
     getCurrentData() {
       return { ...this._state.data };
-    },
-
-    /**
-     * Retourne le zoom actuel ("80" ou "100")
-     * @returns {"80"|"100"}
-     */
-    getCurrentZoom() {
-      return this._state.zoom;
     },
 
     /**

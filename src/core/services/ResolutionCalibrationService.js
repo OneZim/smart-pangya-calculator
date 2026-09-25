@@ -34,8 +34,8 @@
       autoFitHitBar: false,
       spinDialCenter: { x: 436, y: 964 },
       pxParUniteSpin: 2,
-      // Règle PB : px par unité, selon zoom (80 = Smart PB ~80%, 100 = PB Max).
-      pxPerPb: { 80: 20.3, 100: 72 },
+      // Règle PB : px par unité (zoom Smart PB ~80%).
+      pxPerPb: 20.3,
       // Px par PB sur la jauge réelle du joueur (calibré à l'œil).
       realPxPerPb: 72,
       // Px par PB sur la vraie jauge (A      // Positions verticales de la règle (ruler-container porte l'offset,
@@ -70,8 +70,8 @@
       autoFitHitBar: false,
       spinDialCenter: { x: 538, y: 842 },
       pxParUniteSpin: 1,
-      // Règle PB : px par unité, selon zoom (80 = Smart PB ~80%, 100 = PB Max).
-      pxPerPb: { 80: 16.86, 100: 67.9 }, // 80:16.86 validé
+      // Règle PB : px par unité (zoom Smart PB ~80%).
+      pxPerPb: 16.86, // 16.86 validé
       // Px par PB sur la jauge réelle du joueur (calibré à l'œil).
       realPxPerPb: 36,
       // Depuis la recentration du marqueur (origine = centre fenêtre), ces
@@ -103,8 +103,8 @@
       autoFitHitBar: false,
       spinDialCenter: { x: 458, y: 842 },
       pxParUniteSpin: 0.99,
-      // Règle PB : px par unité, selon zoom (80 = Smart PB ~80%, 100 = PB Max).
-      pxPerPb: { 80: 16.9, 100: 36 },
+      // Règle PB : px par unité (zoom Smart PB ~80%).
+      pxPerPb: 16.9,
       // Px par PB sur la jauge réelle du joueur (calibré à l'œil).
       realPxPerPb: 36,
       // Depuis la recentration du marqueur (origine = centre fenêtre), ces
@@ -137,8 +137,8 @@
       autoFitHitBar: false,
       spinDialCenter: { x: 438, y: 842 },
       pxParUniteSpin: 0.99,
-      // Règle PB : px par unité, selon zoom (80 = Smart PB ~80%, 100 = PB Max).
-      pxPerPb: { 80: 16.9, 100: 50 },
+      // Règle PB : px par unité (zoom Smart PB ~80%).
+      pxPerPb: 16.9,
       // Px par PB sur la jauge réelle du joueur (calibré à l'œil).
       realPxPerPb: 36,
       // Depuis la recentration du marqueur (origine = centre fenêtre), ces
@@ -168,8 +168,8 @@
       autoFitHitBar: false,
       spinDialCenter: { x: 378, y: 662 },
       pxParUniteSpin: 0.99,
-      // Règle PB : px par unité, selon zoom (80 = Smart PB ~80%, 100 = PB Max).
-      pxPerPb: { 80: 13.5, 100: 54.26 },
+      // Règle PB : px par unité (zoom Smart PB ~80%).
+      pxPerPb: 13.5,
       // Px par PB sur la jauge réelle du joueur (calibré à l'œil).
       realPxPerPb: 36,
 

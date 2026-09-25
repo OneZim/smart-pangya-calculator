@@ -3,7 +3,7 @@
 // DESCRIPTION : Logique de la fenêtre Overlays dédiée
 // =====================================================================
 // Gère :
-//   1. Affichage/masquage des overlays (input bar, ruler, wind, spin, infos)
+//   1. Affichage/masquage des overlays (input bar, ruler, spin, infos)
 //   2. Verrouillage (click-through) de chaque overlay
 //   3. Déplacement (mouvement) de chaque overlay
 //   4. Couleur du repère + repère T de la règle
@@ -24,16 +24,6 @@
     if (toggleInputBar) {
       toggleInputBar.onclick = function () {
         tauri.setOverlayVisibility("input_bar", this.checked);
-      };
-    }
-
-    // Wind overlay
-    const toggleShowWind = document.getElementById(
-      "toggle-show-wind-overlay",
-    );
-    if (toggleShowWind) {
-      toggleShowWind.onclick = function () {
-        tauri.setOverlayVisibility("wind", this.checked);
       };
     }
 
@@ -64,31 +54,7 @@
     }
   }
 
-  function setupClickThroughToggles(tauri, storage) {
-    // ============================================================
-    // WIND CLICK-THROUGH (verrouillage du vent)
-    // ============================================================
-    const toggleWindMain = document.getElementById(
-      "toggle-wind-click-through",
-    );
-    if (toggleWindMain) {
-      const savedState = storage.get("wind_click_through", false);
-      toggleWindMain.checked = savedState;
-
-      if (tauri.isAvailable) {
-        tauri.setOverlayClickThrough("wind_overlay", savedState);
-      }
-
-      toggleWindMain.addEventListener("change", function () {
-        const locked = this.checked;
-        if (tauri.isAvailable) {
-          tauri.setOverlayClickThrough("wind_overlay", locked);
-          storage.set("wind_click_through", locked);
-          tauri.emit("sync-wind-click-through", { locked });
-        }
-      });
-    }
-
+  function setupClickThroughToggles(tauri) {
     // ============================================================
     // SPIN CLICK-THROUGH (verrouillage du spin)
     // ============================================================
@@ -192,19 +158,6 @@
       });
     }
 
-    // Vent
-    const windButtons = {
-      "btn-wind-move-up": { dx: 0, dy: -1 },
-      "btn-wind-move-down": { dx: 0, dy: 1 },
-      "btn-wind-move-left": { dx: -1, dy: 0 },
-      "btn-wind-move-right": { dx: 1, dy: 0 },
-    };
-    for (const [id, delta] of Object.entries(windButtons)) {
-      document.getElementById(id)?.addEventListener("click", () => {
-        tauri.invoke("move_wind_overlay", delta);
-      });
-    }
-
     // Infos Shot
     const infosShotButtons = {
       "btn-infos-shot-move-up": { dx: 0, dy: -1 },
@@ -227,7 +180,6 @@
   function setupVisibilitySync(tauri) {
     const visibilitySyncMap = {
       "sync-ruler-visibility": "toggle-show-ruler",
-      "sync-wind-visibility": "toggle-show-wind-overlay",
       "sync-spin-visibility": "toggle-show-spin",
       "sync-infos-shot-visibility": "toggle-show-infos-shot",
     };
@@ -303,7 +255,7 @@
     if (!tauri || !tauri.isAvailable) return;
 
     setupOverlayVisibilityToggles(tauri);
-    setupClickThroughToggles(tauri, storage);
+    setupClickThroughToggles(tauri);
     setupRulerOptions(tauri, storage);
     setupMovementButtons(tauri);
     setupVisibilitySync(tauri);

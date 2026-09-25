@@ -537,6 +537,7 @@ select:hover {
 #result {
   margin-top: 25px;
   text-align: center;
+  display: none;
 }
 
 /* ---------- Pied de page ---------- */
@@ -546,6 +547,24 @@ footer {
   bottom: 10px;
   display: block;
   text-align: center;
+}
+
+/* ---------- Pied de page de l'accueil (infos de tir) ---------- */
+.footer_home {
+  margin-top: 12px;
+}
+
+.footer-title {
+  width: 200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Définitions SVG (filtres) : invisibles, hors flux */
+.svg-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
 }
 
 /* ---------- Bouton principal + touches du pavé ---------- */
@@ -567,6 +586,14 @@ button.calc-btn {
   padding: 4px 0;
   position: relative;
   overflow: hidden;
+}
+
+/* Bouton action dans une cellule .field sans label :
+   largeur pleine, hauteur naturelle, collé en bas (aligné avec les inputs voisins) */
+.cell-action {
+  flex: 0 1 auto;
+  width: 100%;
+  margin-top: auto;
 }
 
 .crop-btn {
@@ -706,52 +733,58 @@ button.calc-btn:active {
 /* ---------- Panneau de réglage image + titre ---------- */
 .adjust-panel {
   position: relative;
-  margin-top: 30px;
-  padding: 18px;
+  margin-top: 8px;
+  padding: 8px 0 0;
 }
 
-/* ---------- Croix directionnelle de recadrage ---------- */
-.adjust-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto auto auto;
-  justify-items: center;
-  align-items: center;
-  gap: 8px;
-  margin-top: 22px;
-}
-
-.adjust-top {
-  grid-row: 1;
-}
-
-.adjust-center {
-  grid-row: 2;
+/* ---------- Rangée de réglages horizontale (calquée sur calc_overlay) ---------- */
+.adjust-row {
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
 }
 
-.adjust-bottom {
-  grid-row: 3;
+.adjust-row .action-btn {
+  padding: 3px 8px;
+  font-size: 12px;
 }
 
-/* ---------- Image du vent ---------- */
-.wind-crop-box {
-  width: 360px;
-  height: 360px;
+.adjust-row .crop-btn {
+  padding: 2px 6px;
+  font-size: 10px;
+}
+
+.adjust-row .adjust-spacer {
+  margin: 0 5px 0 15px;
+}
+
+/* ---------- Vues Vent / Balle (une seule affichée à la fois) ---------- */
+.view-panel[hidden] {
+  display: none;
+}
+
+/* ---------- Image du vent / de la balle ---------- */
+.wind-crop-box,
+.ball-crop-box {
+  width: 380px;
+  height: 380px;
   margin: auto;
   overflow: hidden;
   position: relative;
 }
 
-#wind-image {
+#wind-image,
+#ball-image {
   position: absolute;
   left: 0;
   top: 0;
   transform-origin: 0 0;
   object-fit: none;
   object-position: 100% 100%;
+  image-rendering: -webkit-optimize-contrast;
+  filter: url(#sharpen-capture);
 }
 
 #angle-canvas {
@@ -761,7 +794,8 @@ button.calc-btn:active {
   z-index: 10;
 }
 
-.wind-crosshair {
+.wind-crosshair,
+.ball-crosshair {
   position: absolute;
   inset: 0;
   z-index: 20;
@@ -769,29 +803,99 @@ button.calc-btn:active {
 }
 
 .wind-crosshair::before,
-.wind-crosshair::after {
+.wind-crosshair::after,
+.ball-crosshair::before,
+.ball-crosshair::after {
   content: "";
   position: absolute;
   background: rgba(0, 0, 0, 0.2);
 }
 
-.wind-crosshair::before {
+.wind-crosshair::before,
+.ball-crosshair::before {
   left: 0;
   right: 0;
   top: calc(50% - 0.5px);
   height: 1px;
 }
 
-.wind-crosshair::after {
+.wind-crosshair::after,
+.ball-crosshair::after {
   top: 0;
   bottom: 0;
   left: calc(50% - 0.5px);
   width: 1px;
 }
 
-#angle-display {
-  margin-top: 12px;
-  text-align: center;
+/* ---------- Clics + polyligne de la balle (calqués sur calc_overlay) ---------- */
+.ball-click-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 25;
+  pointer-events: none;
+}
+
+.ball-click-layer .click-dot {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  margin: -3px 0 0 -3px;
+  border-radius: 50%;
+  background: #ffdd55;
+  border: 1px solid #000000;
+}
+
+.ball-polyline {
+  position: absolute;
+  inset: 0;
+  z-index: 24;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.ball-polyline-shape {
+  fill: none;
+  stroke: #ffdd55;
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.ball-counter {
+  right: auto;
+  left: 8px;
+}
+
+/* ---------- Badge d'angle superposé (calqué sur calc_overlay) ---------- */
+.angle-badge {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  z-index: 30;
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.55);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+/* ---------- Contrôles d'angle dans le coin (calqués sur calc_overlay) ---------- */
+.wind-corner-controls {
+  position: absolute;
+  left: 8px;
+  bottom: 6px;
+  z-index: 30;
+  display: flex;
+  gap: 4px;
+}
+
+.wind-corner-controls .mini-btn {
+  padding: 1px 5px;
+  font-size: 12px;
+  margin: 0;
 }
 
 /* ---------- Toggles ---------- */
@@ -1004,10 +1108,122 @@ button.calc-btn:active {
   height: 10px;
 }
 
+/* Rangée "Forcer le spin" ▼ / ▲ : 3 colonnes alignées en bas (comme calc_overlay) */
+.form-grid.spin-actions-grid {
+  grid-template-columns: repeat(3, 1fr);
+  align-items: end;
+}
+
+/* Neutralise le .toggle global (width:80% / margin-top:18px) dans cette rangée */
+.field.spin-force .toggle {
+  width: auto;
+  margin-top: 0;
+  justify-content: flex-start;
+  gap: 6px;
+}
+
+.field.spin-force .toggle > span:first-child {
+  flex: 0;
+}
+
+/* Groupe "Forcer" : flèches ▼ / ▲ côte à côte avec séparateur */
+.spin-force-options {
+  display: flex;
+  justify-content: flex-start;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.spin-force-separator {
+  flex-shrink: 0;
+  align-self: stretch;
+  width: 1px;
+  margin: 0 2px;
+  background: var(--border-input);
+}
+
+.arrow-size {
+  font-size: 22px;
+  line-height: 1;
+  color: var(--text-soft);
+  pointer-events: none;
+}
+
+/* Toggles "Forcer le spin" (▼ / ▲) : checkbox stylées en bouton radio
+   (cercle avec point central) — géométrie neutre + fallback.
+   Chaque thème fournit sa propre palette (skin) dans src/shared/css/themes/. */
+.field.spin-force .toggle__track {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--toggle-bg, #1e2128);
+  border: 1px solid var(--border-input, #2e323e);
+  flex-shrink: 0;
+  transition: none;
+}
+
+.field.spin-force .toggle__track::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  transform: translate(-50%, -50%);
+  background: transparent;
+  border-radius: 50%;
+  transition: none;
+}
+
+.field.spin-force .toggle__input:checked + .toggle__track {
+  background: var(--toggle-checked, rgba(51, 95, 238, 0.65));
+  border-color: var(--accent, #4a6ef0);
+}
+
+.field.spin-force .toggle__input:checked + .toggle__track::after {
+  transform: translate(-50%, -50%); /* neutralise translateX(18px) du switch */
+  background: var(--text, #d5d8e2);
+}
+
 /* Bouton "Spin idéal" - désactivé par défaut */
 .ideal-spin {
   margin-top: 9px;
   padding: 10px 0;
+}
+
+/* === INFOS DE TIR (PB réel, distance, %) ===
+   Géométrie uniquement — les couleurs viennent du thème actif. */
+.shot-info-grid {
+  width: 80%;
+  margin: 0 auto;
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 10px;
+}
+
+.shot-info-field {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 6px;
+  align-items: center;
+  background: var(--bg-input);
+  border: 1px solid var(--border-input);
+  border-radius: 6px;
+  padding: 4px 8px;
+  box-shadow: var(--shadow);
+}
+
+.shot-info-field span {
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+#percent-display.percent-low {
+  color: var(--gold, rgb(255, 174, 0));
 }
 
 .action-btn--success:disabled {

@@ -53,6 +53,9 @@
   "btn_calc_shot": "CALCULAR TIRO",
 
   "card_wind": "Cálculo do vento",
+  "card_ball": "Análise da bola",
+  "btn_view_wind": "Vista do vento",
+  "btn_view_ball": "Vista da bola",
   "label_angle": "Ângulo: 0°",
 
   "label_image_params": "Parâmetros da imagem",
@@ -72,12 +75,6 @@
   "label_ruler_adjust": "Ajuste do overlay",
 
   "card_spin": "Marcador de Spin",
-
-  "card_wind_overlay": "Calculadora de ângulos",
-  "label_show_wind_overlay": "Mostrar calculadora",
-  "label_lock_wind_overlay": "Bloquear overlay (não clicável)",
-  "label_wind_overlay_adjust": "Ajuste do overlay",
-  "lock_wind": "Bloquear leitor de ângulo",
 
   "card_infos_shot": "Info do tiro",
   "label_show_infos_shot": "Mostrar info",

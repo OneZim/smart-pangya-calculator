@@ -462,6 +462,8 @@ select {
   transform-origin: 0 0;
   object-fit: none;
   object-position: 100% 100%;
+  image-rendering: -webkit-optimize-contrast;
+  filter: url(#sharpen-capture);
 }
 
 #angle-canvas {

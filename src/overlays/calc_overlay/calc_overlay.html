@@ -210,16 +210,16 @@
           />
         </div>
         <div class="field">
-            <button
-              id="reset-params"
-              type="button"
-              class="action-btn"
-              data-i18n="btn_reset_params"
-            >
-              Reset P.
-            </button>
+          <button
+            id="reset-params"
+            type="button"
+            class="action-btn"
+            data-i18n="btn_reset_params"
+          >
+            Reset P.
+          </button>
+        </div>
       </div>
-
       <!-- ===== Rangée 5 : Forcer le spin (▼ positif / ▲ négatif) ===== -->
       <div class="form-grid">
         <div class="field spin-force">
@@ -342,7 +342,9 @@
           <svg id="ball-polyline-canvas" class="ball-polyline">
             <polyline id="ball-polyline-shape" class="ball-polyline-shape" />
           </svg>
-          <span id="ball-click-counter" class="angle-badge ball-counter">0</span>
+          <span id="ball-click-counter" class="angle-badge ball-counter"
+            >0</span
+          >
         </div>
 
         <!-- Recadrage + rafraîchissement -->
@@ -372,6 +374,16 @@
       <!-- === GRIP DE REDIMENSIONNEMENT (bas droite, toujours visible) === -->
       <div id="resize-grip" class="resize-grip" title="Redimensionner">⤡</div>
     </div>
+
+    <svg width="0" height="0" style="position: absolute">
+      <filter id="sharpen-capture">
+        <feConvolveMatrix
+          order="3"
+          kernelMatrix="0 -1 0  -1 5 -1  0 -1 0"
+          preserveAlpha="true"
+        />
+      </filter>
+    </svg>
     <script src="../../core/services/TauriService.js"></script>
     <script src="../../core/services/StorageService.js"></script>
     <script src="../../core/services/ResolutionCalibrationService.js"></script>

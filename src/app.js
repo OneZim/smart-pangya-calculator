@@ -88,6 +88,37 @@
 
           await this.setupCalculsOverlayOptions(tauri, storage);
 
+          // === INFOS DE TIR (PB réel, distance, %) ===
+          // Alimenté par l'événement "update-ruler" via ShotInfoService.
+          await window.ShotInfoService.init({ tauriService: tauri, storage });
+
+          const renderShotInfo = () => {
+            const data = window.ShotInfoService.getCurrentData();
+            const pbRealEl = document.getElementById("pbReal-display");
+            const percentEl = document.getElementById("percent-display");
+            const distEl = document.getElementById("distance-display");
+
+            if (pbRealEl) {
+              const pbReal = window.ShotInfoService.computeRealPb(
+                data.pb != null ? data.pb : 0,
+              );
+              pbRealEl.textContent = `${pbReal.toFixed(2)} PB`;
+            }
+            if (percentEl) {
+              const percent = data.percent != null ? data.percent : 0;
+              percentEl.textContent = `${percent.toFixed(1)}%`;
+              percentEl.classList.toggle("percent-low", percent < 80);
+            }
+            if (distEl) {
+              const dist = data.distance != null ? data.distance : 0;
+              distEl.textContent = `${dist.toFixed(2)} yds`;
+            }
+          };
+
+          window.ShotInfoService.onData(renderShotInfo);
+          window.ShotInfoService.onConfigChange(renderShotInfo);
+          renderShotInfo();
+
           this.setupSettingsToggle(tauri);
 
           this.setupOverlaysToggle(tauri);
@@ -113,6 +144,10 @@
           if (angleSelector) {
             window.updateWindCanvas = angleSelector.setAngle;
           }
+
+          this.setupViewToggle();
+
+          this.initBallPanel(tauri, storage);
         } catch (error) {
           this._initPromise = null;
           console.error("❌ Erreur d'initialisation:", error);
@@ -125,23 +160,6 @@
 
     // Configure les options d'overlay de la fenêtre principale.
     setupCalculsOverlayOptions: async function (tauri, storage) {
-      // Smart PB (80 %) ou PB Max (100 %).
-      const toggleRulerZoom = document.getElementById("toggle-ruler-zoom");
-      if (toggleRulerZoom) {
-        // Défaut : Smart PB (~80%) → décoché ; PB Max (100%) → coché.
-        toggleRulerZoom.checked = storage.get("ruler_zoom", false);
-        window.__rulerZoom = toggleRulerZoom.checked ? 100 : 80;
-
-        toggleRulerZoom.addEventListener("change", function () {
-          const zoom = this.checked ? "100" : "80";
-          window.__rulerZoom = Number(zoom);
-          storage.set("ruler_zoom", this.checked);
-          if (window.TauriService?.isAvailable) {
-            window.TauriService.emit("update-ruler-zoom", { zoom });
-          }
-        });
-      }
-
       // Les deux options sont exclusives et synchronisées avec l'overlay.
       const chkSpinPos = document.getElementById("chk-spin-positive");
       const chkSpinNeg = document.getElementById("chk-spin-negative");
@@ -181,6 +199,172 @@
       const savedSpinForce = storage.get("spin_force", "");
       if (chkSpinPos) chkSpinPos.checked = savedSpinForce === "positive";
       if (chkSpinNeg) chkSpinNeg.checked = savedSpinForce === "negative";
+    },
+
+    // Bascule entre la vue Vent et la vue Balle de la carte droite.
+    // Une seule vue est affichée à la fois ; quitter la vue Balle réinitialise
+    // les points posés sur la capture.
+    setupViewToggle: function () {
+      const btnWind = document.getElementById("btn-toggle-wind-view");
+      const btnBall = document.getElementById("btn-toggle-ball-view");
+      const viewWind = document.getElementById("view-wind");
+      const viewBall = document.getElementById("view-ball");
+      const title = document.getElementById("wind-view-title");
+      if (!btnWind || !btnBall || !viewWind || !viewBall) return;
+
+      const setActiveView = (isBall) => {
+        viewWind.hidden = isBall;
+        viewBall.hidden = !isBall;
+        btnWind.classList.toggle("action-btn--success", !isBall);
+        btnBall.classList.toggle("action-btn--success", isBall);
+
+        const key = isBall ? "card_ball" : "card_wind";
+        if (title) {
+          title.setAttribute("data-i18n", key);
+          if (typeof window.t === "function") title.textContent = window.t(key);
+        }
+
+        if (isBall && typeof window.resetBallDots === "function") {
+          window.resetBallDots();
+        }
+      };
+
+      btnWind.addEventListener("click", () => setActiveView(false));
+      btnBall.addEventListener("click", () => setActiveView(true));
+      setActiveView(false);
+    },
+
+    // Panneau "Balle" : capture + calibration dédiées (ScreenshotManager),
+    // et interaction clic gauche / clic droit pour tracer la pente sur la
+    // capture, avec report du résultat dans le champ slope_break.
+    initBallPanel: function (tauri, storage) {
+      if (!tauri || !window.ScreenshotManager) return;
+
+      window.ScreenshotManager(tauri, storage, {
+        imageId: "ball-image",
+        refreshBtnId: "btn-refresh-ball",
+        cropUpId: "btn-ball-crop-up",
+        cropDownId: "btn-ball-crop-down",
+        cropLeftId: "btn-ball-crop-left",
+        cropRightId: "btn-ball-crop-right",
+        offsetXKey: "ballImgOffsetX",
+        offsetYKey: "ballImgOffsetY",
+        anchorKey: "ballAnchor",
+        zoomKey: "ballZoom",
+        label: "balle",
+      });
+
+      const ballCounter = document.getElementById("ball-click-counter");
+      const ballCropBox = document.querySelector(".ball-crop-box");
+      const ballClickLayer = document.getElementById("ball-click-layer");
+      const ballPolylineShape = document.getElementById("ball-polyline-shape");
+      const ballPoints = [];
+
+      function syncBallSlope(value) {
+        const slopeInput = document.getElementById("slope_break");
+        if (slopeInput && slopeInput.value !== value) {
+          slopeInput.value = value;
+          slopeInput.dispatchEvent(new Event("input", { bubbles: true }));
+        }
+        if (typeof window.triggerCalc === "function") {
+          window.triggerCalc();
+        }
+      }
+
+      function renderBallLine() {
+        if (!ballPolylineShape) return;
+        if (ballPoints.length === 0) {
+          ballPolylineShape.setAttribute("points", "");
+          return;
+        }
+        ballPolylineShape.setAttribute(
+          "points",
+          ballPoints.map((p) => `${p.x},${p.y}`).join(" "),
+        );
+      }
+
+      function updateBallPente() {
+        const n = ballPoints.length;
+
+        if (n === 0) {
+          if (ballCounter) ballCounter.textContent = "0";
+          syncBallSlope("0");
+          return;
+        }
+
+        if (n === 1) {
+          if (ballCounter) ballCounter.textContent = "+1";
+          syncBallSlope("1");
+          return;
+        }
+
+        const premierPoint = ballPoints[0];
+        const dernierPoint = ballPoints[n - 1];
+
+        let diffX = dernierPoint.x - premierPoint.x;
+        const diffY = premierPoint.y - dernierPoint.y;
+
+        if (diffY < 0) {
+          diffX = -diffX;
+        }
+
+        const seuil = 5;
+        let affichage;
+
+        if (diffX > seuil) {
+          affichage = `-${n}`; // Affiche "-3"
+        } else if (diffX < -seuil) {
+          affichage = `${n}`; // Affiche "+3"
+        } else {
+          affichage = "0";
+        }
+
+        if (ballCounter) ballCounter.textContent = affichage;
+        syncBallSlope(affichage);
+      }
+
+      function addBallDot(e) {
+        if (!ballCropBox) return;
+        const rect = ballCropBox.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const dot = document.createElement("div");
+        dot.className = "click-dot";
+        dot.style.left = x + "px";
+        dot.style.top = y + "px";
+        if (ballClickLayer) ballClickLayer.appendChild(dot);
+        ballPoints.push({ x, y });
+        renderBallLine();
+        updateBallPente();
+      }
+
+      function removeLastBallDot() {
+        if (ballPoints.length === 0) return;
+        if (ballClickLayer && ballClickLayer.lastElementChild) {
+          ballClickLayer.lastElementChild.remove();
+        }
+        ballPoints.pop();
+        renderBallLine();
+        updateBallPente();
+      }
+
+      function resetBallDots() {
+        ballPoints.length = 0;
+        if (ballClickLayer) ballClickLayer.innerHTML = "";
+        renderBallLine();
+        if (ballCounter) ballCounter.textContent = "0";
+      }
+
+      if (ballCropBox) {
+        ballCropBox.addEventListener("click", addBallDot);
+        ballCropBox.addEventListener("contextmenu", (e) => {
+          e.preventDefault();
+          removeLastBallDot();
+        });
+      }
+
+      // Exposé pour que le toggle réinitialise les points à la fermeture.
+      window.resetBallDots = resetBallDots;
     },
 
     // Ouvre ou ferme la fenêtre des paramètres.
@@ -502,15 +686,6 @@
         }
       });
 
-      await tauri.listen("sync-wind-click-through", (event) => {
-        const locked = event?.payload?.locked;
-        if (typeof locked !== "boolean") return;
-        const toggle = document.getElementById("toggle-wind-click-through");
-        if (toggle && toggle.checked !== locked) {
-          toggle.checked = locked;
-        }
-      });
-
       let lastPbValue = 0;
       // Fallback de test lorsque Pangya n'est pas lancé.
       let gameResolution = { width: 1920, height: 1080 };
@@ -546,8 +721,7 @@
           resolution.width,
           resolution.height,
         );
-        const zoom = window.__rulerZoom || 80;
-        const pxPerPb = Number(calibration?.pxPerPb?.[zoom]) || 20;
+        const pxPerPb = Number(calibration?.pxPerPb) || 20;
         const rulerCenterX = resolution.width / 2;
         const rulerY = resolution.height / 2;
 

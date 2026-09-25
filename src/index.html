@@ -253,17 +253,14 @@
                   />
                 </div>
                 <div class="field">
-                  <!-- Boutons de réinitialisation partielle -->
-                  <div class="reset-row">
-                    <button
-                      id="reset-params"
-                      class="action-btn action-btn--neutral"
-                      tabindex="12"
-                      data-i18n="btn_reset_params"
-                    >
-                      Reset : Cr. / Gr. / Slop
-                    </button>
-                  </div>
+                  <button
+                    id="btn-toggle-wind-view"
+                    type="button"
+                    class="action-btn action-btn--success cell-action"
+                    data-i18n="btn_view_wind"
+                  >
+                    Vue vent
+                  </button>
                 </div>
               </div>
               <div class="form-grid">
@@ -289,7 +286,16 @@
                     tabindex="6"
                   />
                 </div>
-                <div class="field"></div>
+                <div class="field">
+                  <button
+                    id="btn-toggle-ball-view"
+                    type="button"
+                    class="action-btn cell-action"
+                    data-i18n="btn_view_ball"
+                  >
+                    Vue balle
+                  </button>
+                </div>
               </div>
               <!-- Ligne 4 : Spin + bouton Spin idéal -->
               <div class="form-grid">
@@ -305,40 +311,6 @@
                   />
                 </div>
                 <div class="field">
-                  <label class="toggle" for="chk-spin-positive">
-                    <span data-i18n="spin_positive_only">Forcer</span>
-                    <span class="arrow">▼</span>
-                    <input
-                      type="checkbox"
-                      id="chk-spin-positive"
-                      class="toggle__input"
-                    />
-                    <span class="toggle__track"></span>
-                  </label>
-                </div>
-                <div class="field">
-                  <!-- Toggle Forcer Spin Négatif (Flèche vers le bas) -->
-                  <label class="toggle" for="chk-spin-negative">
-                    <span data-i18n="spin_negative_only">Forcer</span>
-                    <span class="arrow">▲</span>
-
-                    <input
-                      type="checkbox"
-                      id="chk-spin-negative"
-                      class="toggle__input"
-                    />
-                    <span class="toggle__track"></span>
-                  </label>
-                </div>
-              </div>
-
-              <!-- Options et filtres de spin & courbe -->
-              <div class="form-grid">
-                <!-- Toggle Spin Positif Uniquement -->
-              </div>
-              <!-- Ligne 5 : Boutons optimiseurs -->
-              <div class="form-grid">
-                <div class="field">
                   <label data-i18n="label_curve">Curve:</label>
                   <input
                     id="curve"
@@ -349,9 +321,51 @@
                     tabindex="8"
                   />
                 </div>
-                <div class="field ideal-spin">
+
+                <div class="field">
+                  <!-- Boutons de réinitialisation partielle -->
+                  <div class="reset-row">
+                    <button
+                      id="reset-params"
+                      class="action-btn action-btn--neutral cell-action"
+                      tabindex="12"
+                      data-i18n="btn_reset_params"
+                    >
+                      Reset : Cr. / Gr. / Slop
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Ligne 5 : Forcer le spin (▼ positif / ▲ négatif) + optimisation -->
+              <div class="form-grid spin-actions-grid">
+                <div class="field spin-force">
+                  <label data-i18n="spin_positive_only">Forcer</label>
+                  <div class="spin-force-options">
+                    <label class="toggle" for="chk-spin-positive">
+                      <span class="arrow-size">▼</span>
+                      <input
+                        type="checkbox"
+                        id="chk-spin-positive"
+                        class="toggle__input"
+                      />
+                      <span class="toggle__track"></span>
+                    </label>
+                    <span class="spin-force-separator"></span>
+                    <label class="toggle" for="chk-spin-negative">
+                      <span class="arrow-size">▲</span>
+                      <input
+                        type="checkbox"
+                        id="chk-spin-negative"
+                        class="toggle__input"
+                      />
+                      <span class="toggle__track"></span>
+                    </label>
+                  </div>
+                </div>
+                <div class="field">
                   <button
-                    class="action-btn action-btn--success"
+                    class="action-btn action-btn--success cell-action"
                     id="btn-optimize-spin"
                     type="button"
                     tabindex="9"
@@ -360,34 +374,16 @@
                     Spin idéal
                   </button>
                 </div>
-                <div class="field ideal-spin">
+                <div class="field">
                   <button
                     id="btn-click-spin"
-                    class="action-btn action-btn--success"
+                    class="action-btn action-btn--success cell-action"
                     type="button"
                     tabindex="10"
                     data-i18n="apply-spin"
                   >
                     Appliquer le spin
                   </button>
-                </div>
-              </div>
-
-              <!-- Ligne 6 : Ground + Slope break -->
-              <div class="form-grid">
-                <div class="field"></div>
-                <div class="field"></div>
-                <div class="field">
-                  <!-- Zoom de la règle PB : PB Max (100%) / Smart PB (~80%) -->
-                  <label class="toggle mb-8" for="toggle-ruler-zoom">
-                    <span data-i18n="label_ruler_zoom">PB Max (100%)</span>
-                    <input
-                      type="checkbox"
-                      id="toggle-ruler-zoom"
-                      class="toggle__input"
-                    />
-                    <span class="toggle__track"></span>
-                  </label>
                 </div>
               </div>
 
@@ -402,14 +398,19 @@
               Permet de visualiser et ajuster la direction du vent.
             -->
             <div class="flex flex-col gap-20 grow">
-              <!-- Carte : Calculateur de vent -->
+              <!-- Carte : Calculateur de vent / Analyse de la balle -->
               <div class="card">
-                <div class="card-title" data-i18n="card_wind">
+                <div
+                  class="card-title"
+                  id="wind-view-title"
+                  data-i18n="card_wind"
+                >
                   Calcul du vent
                 </div>
 
-                <!-- Image du vent : capture zoomée sur la flèche du jeu -->
-                <div class="flex justify-center">
+                <!-- ===== VUE VENT ===== -->
+                <div class="view-panel" id="view-wind">
+                  <!-- Image du vent : capture zoomée sur la flèche du jeu -->
                   <div class="wind-crop-box relative">
                     <img id="wind-image" />
                     <div class="angle-wrapper">
@@ -420,58 +421,108 @@
                       ></canvas>
                     </div>
                     <div class="wind-crosshair"></div>
-                  </div>
-                </div>
-
-                <!-- Contrôles : angle -->
-                <div
-                  class="flex flex-wrap gap-20 items-center justify-center mt-8"
-                >
-                  <div class="flex flex-col items-center gap-6">
                     <span
                       id="angle-display"
-                      class="angle-value"
+                      class="angle-badge"
                       data-i18n="label_angle"
                       >Angle : 0°</span
                     >
-                    <div class="flex gap-6">
+                    <div class="wind-corner-controls">
                       <button id="btn-angle-minus" class="mini-btn">
-                        - 0.5°
+                        -0.5°
                       </button>
                       <button id="btn-angle-plus" class="mini-btn">
-                        + 0.5°
+                        +0.5°
                       </button>
                     </div>
                   </div>
-                </div>
-                <div class="adjust-panel">
-                  <div class="flex gap-8 flex-wrap mt-8">
-                    <button
-                      id="btn-refresh-img"
-                      class="action-btn action-btn--success"
-                      data-i18n="btn_refresh"
-                    >
-                      Refresh
-                    </button>
-                  </div>
 
-                  <!-- Contrôles de recadrage de l'image -->
-                  <div class="adjust-grid">
-                    <div class="adjust-top">
-                      <button id="btn-crop-up" class="crop-btn">▲</button>
-                    </div>
-                    <div class="adjust-center">
-                      <button id="btn-crop-left" class="crop-btn">◀</button>
-                      <span class="adjust-label" data-i18n="label_adjust_image"
-                        >Adjust Image</span
+                  <!-- Panneau de réglages : Refresh + recadrage -->
+                  <div class="adjust-panel">
+                    <div class="adjust-row">
+                      <button
+                        id="btn-refresh-img"
+                        class="action-btn action-btn--success"
+                        data-i18n="btn_refresh"
                       >
+                        Refresh
+                      </button>
+                      <span class="adjust-spacer">Ajuster l'image</span
+                      >
+                      <button id="btn-crop-up" class="crop-btn">▲</button>
+                      <button id="btn-crop-left" class="crop-btn">◀</button>
                       <button id="btn-crop-right" class="crop-btn">▶</button>
-                    </div>
-                    <div class="adjust-bottom">
                       <button id="btn-crop-down" class="crop-btn">▼</button>
                     </div>
                   </div>
                 </div>
+
+                <!-- ===== VUE BALLE ===== -->
+                <div class="view-panel" id="view-ball" hidden>
+                  <!-- Image de la balle : capture zoomée sur la balle -->
+                  <div class="ball-crop-box">
+                    <img id="ball-image" />
+                    <div class="ball-crosshair"></div>
+                    <div id="ball-click-layer" class="ball-click-layer"></div>
+                    <svg id="ball-polyline-canvas" class="ball-polyline">
+                      <polyline
+                        id="ball-polyline-shape"
+                        class="ball-polyline-shape"
+                      ></polyline>
+                    </svg>
+                    <span
+                      id="ball-click-counter"
+                      class="angle-badge ball-counter"
+                      >0</span
+                    >
+                  </div>
+
+                  <!-- Panneau de réglages : Refresh + recadrage -->
+                  <div class="adjust-panel">
+                    <div class="adjust-row">
+                      <button
+                        id="btn-refresh-ball"
+                        class="action-btn action-btn--success"
+                        data-i18n="btn_refresh"
+                      >
+                        Refresh
+                      </button>
+                      <span class="adjust-spacer">Ajuster l'image</span
+                      >
+                      <button id="btn-ball-crop-up" class="crop-btn">▲</button>
+                      <button id="btn-ball-crop-left" class="crop-btn">
+                        ◀
+                      </button>
+                      <button id="btn-ball-crop-right" class="crop-btn">
+                        ▶
+                      </button>
+                      <button id="btn-ball-crop-down" class="crop-btn">
+                        ▼
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="footer_home">
+            <div class="divider"></div>
+            <h2
+              data-i18n="card_infos_shot"
+              class="footer-title"
+            >
+              Informations de tir
+            </h2>
+            <!-- Infos de tir : PB réel, distance, % -->
+            <div class="form-grid shot-info-grid">
+              <div class="field shot-info-field">
+                <span id="pbReal-display">0.00 PB</span>
+              </div>
+              <div class="field shot-info-field">
+                <span id="distance-display">0.00 yds</span>
+              </div>
+              <div class="field shot-info-field">
+                <span id="percent-display">0.0%</span>
               </div>
             </div>
           </div>
@@ -588,7 +639,15 @@
         </div>
       </div>
     </div>
-
+    <svg class="svg-defs">
+      <filter id="sharpen-capture">
+        <feConvolveMatrix
+          order="3"
+          kernelMatrix="0 -1 0  -1 5 -1  0 -1 0"
+          preserveAlpha="true"
+        />
+      </filter>
+    </svg>
     <!-- ================================================================
          CHARGEMENT DES SCRIPTS
          Ordre d'exécution important pour les dépendances
@@ -623,6 +682,7 @@
     <!-- 8. Composants UI -->
     <script src="core/components/CourseSelector.js"></script>
     <script src="core/services/ResolutionCalibrationService.js"></script>
+    <script src="core/services/ShotInfoService.js"></script>
     <script src="core/components/ScreenshotManager.js"></script>
     <script src="core/components/WindAngleSelector.js"></script>
     <script src="core/components/CharacterManager.js"></script>

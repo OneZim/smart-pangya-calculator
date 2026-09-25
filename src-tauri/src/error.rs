@@ -19,9 +19,6 @@ pub enum AppError {
     #[error("Erreur fenêtre : {0}")]
     Window(String),
 
-    #[error("Erreur événement : {0}")]
-    Emit(String),
-
     #[error("Erreur souris : {0}")]
     Enigo(String),
 
