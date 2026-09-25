@@ -157,4 +157,107 @@
 
     return store;
   };
+
+  // Proxy for Calc Overlay - forwards to Main, listens for updates
+  window.CourseStore.createProxy = function (tauriService) {
+    let currentState = {
+      courses: {},
+      selected: { map: null, hole: null, pin: null },
+      mapOptions: [],
+      holeOptions: [],
+      pinOptions: [],
+    };
+    const subscribers = new Set();
+
+    // Notify all subscribers
+    function notify() {
+      for (const cb of subscribers) {
+        cb({
+          courses: currentState.courses,
+          selected: currentState.selected,
+          mapOptions: currentState.mapOptions,
+          holeOptions: currentState.holeOptions,
+          pinOptions: currentState.pinOptions,
+        });
+      }
+    }
+
+    // Update internal state from Main's payload
+    function updateFromPayload(payload) {
+      const { id, value, sender } = payload;
+      if (sender === "input_bar") return; // ignore own echoes
+
+      const typeMap = {
+        "select-parcours": "map",
+        "select-trou": "hole",
+        "select-pin": "pin",
+      };
+      const type = typeMap[id];
+      if (type) {
+        currentState.selected[type] = value;
+        // reset downstream selections
+        if (type === "map") {
+          currentState.selected.hole = null;
+          currentState.selected.pin = null;
+        } else if (type === "hole") {
+          currentState.selected.pin = null;
+        }
+        notify();
+      }
+    }
+
+    // Listen for updates from Main
+    tauriService.listen("sync-dropdown-parcours", (event) => {
+      const payload = event.payload;
+      if (payload) updateFromPayload(payload);
+    });
+
+    // Listen for full state from Main (initial sync)
+    tauriService.listen("current-course-state", (event) => {
+      const payload = event.payload;
+      if (payload) {
+        currentState = { ...currentState, ...payload };
+        notify();
+      }
+    });
+
+    // Request initial state from Main on startup
+    tauriService.emit("request-current-course", { sender: "input_bar" });
+
+    // Proxy methods that forward to Main
+    const forward = (type, value) => {
+      const idMap = { map: "select-parcours", hole: "select-trou", pin: "select-pin" };
+      tauriService.emit("sync-dropdown-parcours", {
+        id: idMap[type],
+        value,
+        sender: "input_bar",
+      });
+    };
+
+    return {
+      selectMap: (v) => forward("map", v),
+      selectHole: (v) => forward("hole", v),
+      selectPin: (v) => forward("pin", v),
+      subscribe: (cb) => {
+        subscribers.add(cb);
+        // Immediately call with current state
+        cb({
+          courses: currentState.courses,
+          selected: currentState.selected,
+          mapOptions: currentState.mapOptions,
+          holeOptions: currentState.holeOptions,
+          pinOptions: currentState.pinOptions,
+        });
+        return () => subscribers.delete(cb);
+      },
+      getState: () => ({
+        courses: {},
+        selected: currentState.selected,
+        mapOptions: currentState.mapOptions,
+        holeOptions: currentState.holeOptions,
+        pinOptions: currentState.pinOptions,
+      }),
+      getSelectedPin: () => null,
+    };
+  };
 })();

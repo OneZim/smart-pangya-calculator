@@ -617,23 +617,18 @@
         return;
       }
 
-      await tauri.listen("sync-dropdown-parcours", (event) => {
+      // Provide current course state to overlay on request
+      await tauri.listen("request-current-course", (event) => {
         const payload = event?.payload;
-        if (!payload || typeof payload !== "object") return;
+        if (!payload || payload.sender !== "input_bar") return;
 
-        const { id, value, sender } = payload;
-        if (sender === "main") return; // Évite les boucles
-
-        const mapId = {
-          "select-parcours": "map",
-          "select-trou": "hole",
-          "select-pin": "pin",
-        };
-        const type = mapId[id];
-        if (!type || value === undefined || value === null) return;
-        if (type === "map") courseStore.selectMap(value);
-        else if (type === "hole") courseStore.selectHole(value);
-        else if (type === "pin") courseStore.selectPin(value);
+        const state = courseStore.getState();
+        tauri.emit("current-course-state", {
+          selected: state.selected,
+          mapOptions: state.mapOptions,
+          holeOptions: state.holeOptions,
+          pinOptions: state.pinOptions,
+        });
       });
 
       await tauri.listen("sync-input-value", (event) => {

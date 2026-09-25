@@ -446,22 +446,6 @@
   function setupTauriListeners() {
     if (!window.TauriService?.isAvailable) return;
 
-    // Synchro dropdown
-    window.TauriService.listen("sync-dropdown-parcours", (event) => {
-      const { id, value, sender } = event.payload;
-      if (sender === "input_bar") return;
-
-      const mapId = {
-        "select-parcours": "map",
-        "select-trou": "hole",
-        "select-pin": "pin",
-      };
-      const type = mapId[id];
-      if (type === "map") courseStore.selectMap(value);
-      else if (type === "hole") courseStore.selectHole(value);
-      else if (type === "pin") courseStore.selectPin(value);
-    });
-
     // Synchro champs
     window.TauriService.listen("sync-input-value", (event) => {
       const { id, value } = event.payload;
@@ -631,14 +615,10 @@
       );
     }
 
-    courseStore = window.createCourseStoreCalcOverlay
-      ? window.createCourseStoreCalcOverlay(
-          window.TauriService,
-          emitDropdownSync,
-          storage,
-        )
+    // Use CourseStore proxy that forwards to Main and listens for updates
+    const courseStoreProxy = window.CourseStore?.createProxy
+      ? window.CourseStore.createProxy(window.TauriService)
       : null;
-    await courseStore?.initialize();
 
     playerStore = window.createPlayerStoreCalcOverlay
       ? window.createPlayerStoreCalcOverlay(storage)
@@ -646,26 +626,13 @@
     playerStore?.initialize();
 
     const container = document.getElementById("course-selector-container");
-    if (container) {
+    if (container && window.CourseSelector) {
       courseSelector = window.CourseSelector(
         container,
-        courseStore,
+        courseStoreProxy,
         window.TauriService,
         {
-          onChange: (type, value) => {
-            const idMap = {
-              map: "select-parcours",
-              hole: "select-trou",
-              pin: "select-pin",
-            };
-            if (window.TauriService?.isAvailable) {
-              window.TauriService.emit("sync-dropdown-parcours", {
-                id: idMap[type],
-                value: value,
-                sender: "input_bar",
-              });
-            }
-          },
+          // onChange not needed - proxy handles forwarding automatically
         },
       );
     }
