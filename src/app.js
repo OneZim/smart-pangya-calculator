@@ -227,6 +227,13 @@
         if (isBall && typeof window.resetBallDots === "function") {
           window.resetBallDots();
         }
+
+        // Réappliquer la calibration/positionnement de l'image lorsque la vue devient visible
+        if (isBall && window.__ballScreenshotManager) {
+          if (typeof window.__ballScreenshotManager.updateWindImagePosition === "function") {
+            window.__ballScreenshotManager.updateWindImagePosition();
+          }
+        }
       };
 
       btnWind.addEventListener("click", () => setActiveView(false));
@@ -240,7 +247,7 @@
     initBallPanel: function (tauri, storage) {
       if (!tauri || !window.ScreenshotManager) return;
 
-      window.ScreenshotManager(tauri, storage, {
+      window.__ballScreenshotManager = window.ScreenshotManager(tauri, storage, {
         imageId: "ball-image",
         refreshBtnId: "btn-refresh-ball",
         cropUpId: "btn-ball-crop-up",
@@ -727,7 +734,10 @@
 
         const clickX = Math.round(rulerCenterX - lastPbValue * pxPerPb);
 
-        tauri.invoke("move_and_click_focused", { x: clickX, y: rulerY });
+        tauri.invoke("move_and_click_focused", { x: clickX, y: rulerY }).catch((err) => {
+          console.error("❌ Erreur move_and_click_focused:", err);
+          alert("Impossible de cliquer dans Pangya : jeu absent ou sans focus.");
+        });
       });
 
       await tauri.listen("update-ruler", (event) => {

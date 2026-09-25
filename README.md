@@ -7,7 +7,7 @@ Outil overlay multi-fenêtres pour **Pangya Reborn**, conçu pour aider à calcu
 - Calcul de puissance (PB) basé sur la physique réelle du jeu
 - Overlay de spin/curve avec dial 2D
 - Optimiseur de dunk (Dunk, Tomahawk, Spike)
-- Base de données de parcours (20 parcours, ~780 pins)
+- Base de données de parcours (20 parcours, 821 pins)
 - Support multi-résolution avec calibration par preset
 - Automatisation clic/clavier (raccourcis globaux)
 - Interface multilingue (FR, EN, IT, ES, DE, PT)
@@ -25,7 +25,7 @@ Projet personnel en développement actif. Les fonctionnalités et l'interface é
 ## 📦 Installation
 
 ```bash
-git clone https://github.com/ton-user/smart-pangya-calculator.git
+git clone https://github.com/OneZim/smart-pangya-calculator.git
 cd smart-pangya-calculator
 npm install
 npm run tauri dev

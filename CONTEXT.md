@@ -1,6 +1,6 @@
 # CONTEXT.md — Smart Pangya Calculator
 
-Document de contexte issu d'un audit complet du dépôt (à jour au 22/09/2026). Il complète `README.md` et `AGENTS.md` avec l'état réel du code, l'inventaire des fonctionnalités opérationnelles et les chantiers en cours.
+Document de contexte issu d'un audit complet du dépôt (à jour au 25/09/2026). Il complète `README.md` et `AGENTS.md` avec l'état réel du code, l'inventaire des fonctionnalités opérationnelles et les chantiers en cours.
 
 ---
 
@@ -8,7 +8,7 @@ Document de contexte issu d'un audit complet du dépôt (à jour au 22/09/2026).
 
 ### Stack
 
-- **Application Tauri v2 multi-fenêtres** (Windows uniquement), version **3.0.1** (`identifier`: `com.onezim.smart-pangya-calculator`).
+- **Application Tauri v2 multi-fenêtres** (Windows uniquement), version **3.0.2** (`identifier`: `com.onezim.smart-pangya-calculator`).
 - **Frontend 100 % JavaScript vanilla** (aucun bundler, aucun framework) + HTML/CSS, distribué directement depuis `src/` (`frontendDist: "../src"`).
 - **Backend Rust** (`src-tauri/`), crates : `tauri 2`, `windows 0.61`, `enigo 0.2` (souris), `notify 6` (surveillance dossier), `tauri-plugin-store`, `tauri-plugin-dialog`, `tauri-plugin-opener`, `tauri-plugin-global-shortcut`, `base64`, `serde`, `thiserror`.
 - **API Tauri globale** (`withGlobalTauri: true`) : le frontend accède au runtime via `window.__TAURI__`, encadré par le wrapper `window.TauriService`.
@@ -18,7 +18,7 @@ Document de contexte issu d'un audit complet du dépôt (à jour au 22/09/2026).
 
 | Zone                                    | Contenu                                                                                                                                                                                  |
 | --------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `src/index.html` + `app.js` + `main.js` | Fenêtre principale (4 onglets : Calculs, Statistiques ; barre de titre personnalisée). `app.js` orchestre stores/composants/listeners ; `main.js` gère titlebar + flush avant fermeture. |
+| `src/index.html` + `app.js` + `main.js` | Fenêtre principale (2 onglets : Calculs, Statistiques ; barre de titre personnalisée). `app.js` orchestre stores/composants/listeners ; `main.js` gère titlebar + flush avant fermeture. |
 | `src/core/services/`                    | `TauriService`, `StorageService`, `ShotInfoService`, `ResolutionCalibrationService` (IIFE, exposés sur `window.*`).                                                                      |
 | `src/core/stores/`                      | `CharacterStore`, `CourseStore`, `PlayerStore` (fenêtre principale), `CoursesSelectorCalcOverlay`, `PlayerStoreCalcOverlay` (overlay de saisie). Pattern factory + observateurs.         |
 | `src/core/components/`                  | `WindAngleSelector` (visée à 2 clics), `CharacterManager`, `CourseSelector`, `ScreenshotManager`.                                                                                      |
@@ -48,7 +48,7 @@ Document de contexte issu d'un audit complet du dépôt (à jour au 22/09/2026).
 
 | Label             | URL                                         | Rôle                   | Particularités                                               |
 | ----------------- | ------------------------------------------- | ---------------------- | ------------------------------------------------------------ |
-| `main`            | `index.html`                                | Interface principale   | 1000×950, `visible: false` au démarrage, sans décorations    |
+| `main`            | `index.html`                                | Interface principale   | 950×850, `visible: false` au démarrage, sans décorations    |
 | `settings_screen` | `screens/settings/settings_screen.html`     | Paramètres             | 800×620, `alwaysOnTop: false`, masquée au lieu de fermée     |
 | `overlays_screen` | `screens/overlays/overlays_screen.html`     | Gestion des overlays   | idem                                                         |
 | `input_overlay`   | `overlays/calc_overlay/calc_overlay.html`   | Saisie du tir          | 350×420 transparent, toujours au premier plan, `skipTaskbar` |
@@ -64,7 +64,7 @@ Document de contexte issu d'un audit complet du dépôt (à jour au 22/09/2026).
 
 ### Données embarquées
 
-- `src-tauri/data/pin_location.json` : **20 parcours, ~780 pins**. Schéma : `{ "course": { "<Map>": { name, short, holes: { "H1": { par, name, pins: { "415.96y": { pinDistance, pinHeight, teeSlope, ground } } } } } } }` (alias `trous`/`positions` tolérés). Chargé une seule fois et mis en cache (`PinLocationCache`).
+- `src-tauri/data/pin_location.json` : **20 parcours, 821 pins**. Schéma : `{ "course": { "<Map>": { name, short, holes: { "H1": { par, name, pins: { "415.96y": { pinDistance, pinHeight, teeSlope, ground } } } } } } }` (alias `trous`/`positions` tolérés). Chargé une seule fois et mis en cache (`PinLocationCache`).
 - `src-tauri/lang/{de,en,es,fr,it,pt}.json` : traductions embarquées (cache `LanguagesCache`).
 - `src/assets/avatars/` : avatars des personnages (`.webp` + `.png`).
 
@@ -90,7 +90,7 @@ Document de contexte issu d'un audit complet du dépôt (à jour au 22/09/2026).
 ### Clic automatique dans le jeu (`dunk_button.js` + `input.rs` + `foreground.rs`)
 
 - Bouton « Appliquer le spin » : conversion spin/curve en coordonnées écran (dial calibré `spinDialCenter`/`pxParUniteSpin` + scale), `move_and_click_focused` avec mise au premier plan du jeu confirmée par polling.
-- Raccourci global `Ctrl+Shift+X` (`global-trigger-click-pb`) → clic sur la règle PB à la position calibrée (zoom 80/100 %).
+- Raccourci global `Ctrl+Shift+X` (`global-trigger-click-pb`) → clic sur la règle PB à la position calibrée.
 
 ### Calibration par résolution (`ResolutionCalibrationService`)
 
@@ -107,7 +107,7 @@ Document de contexte issu d'un audit complet du dépôt (à jour au 22/09/2026).
 
 ### Données & personnages
 
-- Base de 20 parcours / ~780 pins avec distance, hauteur, pente de tee et ground ; sélection Map → Trou → Pin (tri numérique + Par), application automatique aux champs (`CourseSelector.applyPinData` : distance, height, ground=100, teeSlope→slope_break, curve).
+- Base de 20 parcours / 821 pins avec distance, hauteur, pente de tee et ground ; sélection Map → Trou → Pin (tri numérique + Par), application automatique aux champs (`CourseSelector.applyPinData` : distance, height, ground=100, teeSlope→slope_break, curve).
 - 11 personnages par défaut, avatars, stats complètes (power, ring, carte, mascotto, card PS, max spin/curve), puissances et total persistés (`pangya_characters`).
 
 ### Captures d'écran (`ScreenshotManager` + `media.rs`)
@@ -130,11 +130,10 @@ Document de contexte issu d'un audit complet du dépôt (à jour au 22/09/2026).
 3. **`WindAngleSelector` déclare `storageKey` sans l'utiliser** — pas de persistance de l'angle (volontaire : l'angle change à chaque coup).
 4. **Defaults de `ShotInfoService`** (`pxPerPb=81`, `realPxPerPb=72`) différents de la calibration 1080p (20.3/72) — les defaults ne servent qu'en cas d'échec de calibration, mais à surveiller.
 5. **Clic PB** : coordonnées fixes `960/540` dans `setupTauriListeners()` (étape 7 du plan) — incohérent avec les résolutions/scalings autres que 1080p.
-6. Suivi git : dossiers `.vs/` et `plan.md` non suivis.
+6. Suivi git : dossier `.vs/` non suivi (ignoré dans `.gitignore`).
 
 ### Écart README vs code
 
-- Le README mentionne « 4 onglets » (Calculs, Overlays, Statistiques, Options avancées) alors que `index.html` n'en contient que **2** (Calculs et Statistiques).
 - Fonctionnalité « automatisation clic/clavier » = clic spin + raccourci global `Ctrl+Shift+X` (pas d'automatisation clavier avancée).
 
 ---
@@ -148,7 +147,7 @@ Depuis la racine :
 | Développement (Tauri dev, hot reload) | `npm run dev` (équiv. `npm run tauri dev`)                  | Lance `cargo run` + WebView2 ; nécessite le jeu **Pangya Reborn** lancé pour tester la détection/calibration                                                      |
 | Build de production                   | `npm run build` (équiv. `npm run tauri build`)              | NSIS/MSI/à la brique, icônes incluses                                                                                                                             |
 | Vérification JS (syntaxe)             | `node --check <fichier>.js`                                 | À faire sur chaque fichier JS modifié                                                                                                                             |
-| Vérification Rust                     | `cd src-tauri && cargo check`                               | Compilation rapide (pas de build) ; `cargo build` pour un binaire local                                                                                           |
+| Vérification Rust                     | `Set-Location "D:\Dev\smart-pangya-calculator\src-tauri"` ; `cargo check --locked` | Compilation rapide (pas de build) ; `cargo build` pour un binaire local                                                                                           |
 | Lint/typecheck                        | **Aucun** configuré (ni ESLint, ni Prettier, ni TypeScript) | Contrôles manuels `node --check` uniquement                                                                                                                       |
 | Tests automatisés                     | **Aucun framework de test**                                 | Validation manuelle : scénarios du `plan.md` (init idempotent, sélection pin, angle distant, payloads invalides, flush à la fermeture, clic PB multi-résolutions) |
 | Prérequis                             | Node, Rust toolchain (MSVC), WebView2                       | Positions des overlays et calibration dépendent de la résolution du jeu                                                                                           |

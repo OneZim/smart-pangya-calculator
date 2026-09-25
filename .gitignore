@@ -22,6 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+.vs/
 
 # --- TAURI & RUST SPECIFIC ---
 # Dossier de compilation Rust (très lourd !)

@@ -768,8 +768,8 @@ button.calc-btn:active {
 /* ---------- Image du vent / de la balle ---------- */
 .wind-crop-box,
 .ball-crop-box {
-  width: 380px;
-  height: 380px;
+  width: 360px;
+  height: 360px;
   margin: auto;
   overflow: hidden;
   position: relative;

@@ -33,24 +33,8 @@
       this._tauri = tauriService;
       this._storage = storage;
 
-      // Charger la résolution actuelle
-      try {
-        const res = await tauriService.invoke("get_game_resolution");
-        if (res?.width) {
-          this._state.width = res.width;
-          this._state.height = res.height || this._state.height;
-        }
-      } catch (err) {
-        console.warn(
-          "[ShotInfoService] Résolution non détectée, valeurs par défaut",
-          err,
-        );
-      }
-
-      // Recalculer les valeurs dérivées
-      this._recalculateDerived();
-
-      // === POSITIONNER LES LISTENERS TAURI ==============================
+      // === POSITIONNER LES LISTENERS TAURI IMMÉDIATEMENT ================
+      // Pour ne manquer aucun événement update-ruler dès le démarrage
 
       // Mise à jour des données de tir (pb, distance, percent)
       const unsubscribeData = tauriService.listen("update-ruler", (event) => {
@@ -81,6 +65,23 @@
         },
       );
       this._listeners["update-game-resolution"] = unsubscribeRes;
+
+      // Charger la résolution actuelle (après les listeners)
+      try {
+        const res = await tauriService.invoke("get_game_resolution");
+        if (res?.width) {
+          this._state.width = res.width;
+          this._state.height = res.height || this._state.height;
+        }
+      } catch (err) {
+        console.warn(
+          "[ShotInfoService] Résolution non détectée, valeurs par défaut",
+          err,
+        );
+      }
+
+      // Recalculer les valeurs dérivées
+      this._recalculateDerived();
 
       this._initialized = true;
     },
