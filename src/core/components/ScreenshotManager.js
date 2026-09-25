@@ -185,6 +185,37 @@
       });
     }
 
+    // Register crop buttons (per view - each view has its own offsets)
+    const cropUpBtn = document.getElementById(cropUpId);
+    const cropDownBtn = document.getElementById(cropDownId);
+    const cropLeftBtn = document.getElementById(cropLeftId);
+    const cropRightBtn = document.getElementById(cropRightId);
+
+    if (cropUpBtn) {
+      cropUpBtn.addEventListener("click", () => {
+        view.windImgOffsetY -= 0.5;
+        view.updateWindImagePosition();
+      });
+    }
+    if (cropDownBtn) {
+      cropDownBtn.addEventListener("click", () => {
+        view.windImgOffsetY += 0.5;
+        view.updateWindImagePosition();
+      });
+    }
+    if (cropLeftBtn) {
+      cropLeftBtn.addEventListener("click", () => {
+        view.windImgOffsetX -= 0.5;
+        view.updateWindImagePosition();
+      });
+    }
+    if (cropRightBtn) {
+      cropRightBtn.addEventListener("click", () => {
+        view.windImgOffsetX += 0.5;
+        view.updateWindImagePosition();
+      });
+    }
+
     // Register clear folder handler (shared across views, attach once)
     if (btnClearFolder && confirmModal && sharedState.tauri) {
       if (!btnClearFolder._listenerAttached) {
