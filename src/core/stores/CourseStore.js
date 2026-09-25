@@ -176,6 +176,9 @@
       const hole = course
         ? (course.holes || course.trous || {})[selected.hole] || null
         : null;
+      const pin = hole
+        ? (hole.pins || hole.positions || {})[selected.pin] || null
+        : null;
 
       currentState.mapOptions = Object.keys(currentState.courses).map((key) => ({
         value: key,
@@ -204,6 +207,10 @@
         value: key,
         label: ` ${key.toUpperCase()}`,
       }));
+
+      currentState.selectedCourse = course;
+      currentState.selectedHole = hole;
+      currentState.selectedPin = pin;
     }
 
     // Notify all subscribers
@@ -212,6 +219,9 @@
         cb({
           courses: currentState.courses,
           selected: currentState.selected,
+          selectedCourse: currentState.selectedCourse,
+          selectedHole: currentState.selectedHole,
+          selectedPin: currentState.selectedPin,
           mapOptions: currentState.mapOptions,
           holeOptions: currentState.holeOptions,
           pinOptions: currentState.pinOptions,
@@ -265,6 +275,18 @@
 
     // Proxy methods that forward to Main
     const forward = (type, value) => {
+      // Update local state optimistically
+      currentState.selected[type] = value;
+      if (type === "map") {
+        currentState.selected.hole = null;
+        currentState.selected.pin = null;
+      } else if (type === "hole") {
+        currentState.selected.pin = null;
+      }
+      recomputeOptions();
+      notify();
+
+      // Forward to Main
       const idMap = { map: "select-parcours", hole: "select-trou", pin: "select-pin" };
       tauriService.emit("sync-dropdown-parcours", {
         id: idMap[type],
@@ -283,6 +305,9 @@
         cb({
           courses: currentState.courses,
           selected: currentState.selected,
+          selectedCourse: currentState.selectedCourse,
+          selectedHole: currentState.selectedHole,
+          selectedPin: currentState.selectedPin,
           mapOptions: currentState.mapOptions,
           holeOptions: currentState.holeOptions,
           pinOptions: currentState.pinOptions,
@@ -292,11 +317,14 @@
       getState: () => ({
         courses: currentState.courses,
         selected: currentState.selected,
+        selectedCourse: currentState.selectedCourse,
+        selectedHole: currentState.selectedHole,
+        selectedPin: currentState.selectedPin,
         mapOptions: currentState.mapOptions,
         holeOptions: currentState.holeOptions,
         pinOptions: currentState.pinOptions,
       }),
-      getSelectedPin: () => null,
+      getSelectedPin: () => currentState.selectedPin,
     };
   };
 })();

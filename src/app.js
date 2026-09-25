@@ -632,6 +632,26 @@
         });
       });
 
+      // Handle dropdown changes from Calc Overlay (sender: "input_bar")
+      await tauri.listen("sync-dropdown-parcours", (event) => {
+        const payload = event?.payload;
+        if (!payload || typeof payload !== "object") return;
+
+        const { id, value, sender } = payload;
+        if (sender !== "input_bar") return; // Only process from overlay
+
+        const mapId = {
+          "select-parcours": "map",
+          "select-trou": "hole",
+          "select-pin": "pin",
+        };
+        const type = mapId[id];
+        if (!type || value === undefined || value === null) return;
+        if (type === "map") courseStore.selectMap(value);
+        else if (type === "hole") courseStore.selectHole(value);
+        else if (type === "pin") courseStore.selectPin(value);
+      });
+
       await tauri.listen("sync-input-value", (event) => {
         const payload = event?.payload;
         if (!payload || typeof payload !== "object") return;
