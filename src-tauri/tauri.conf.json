@@ -1,6 +1,6 @@
 {
   "productName": "Smart Pangya Calculator",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "identifier": "com.onezim.smart-pangya-calculator",
   "build": {
     "frontendDist": "../src"

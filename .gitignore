@@ -35,3 +35,7 @@ Cargo.lock
 # Fichiers temporaires générés par Tauri v2
 .tauri/
 src-tauri/.tauri/
+
+# Sorties d'analyse locale (repomix)
+repomix-output.md
+repomix.config.json

@@ -8,7 +8,7 @@ Document de contexte issu d'un audit complet du dépôt (à jour au 25/09/2026).
 
 ### Stack
 
-- **Application Tauri v2 multi-fenêtres** (Windows uniquement), version **3.0.2** (`identifier`: `com.onezim.smart-pangya-calculator`).
+- **Application Tauri v2 multi-fenêtres** (Windows uniquement), version **3.0.3** (`identifier`: `com.onezim.smart-pangya-calculator`).
 - **Frontend 100 % JavaScript vanilla** (aucun bundler, aucun framework) + HTML/CSS, distribué directement depuis `src/` (`frontendDist: "../src"`).
 - **Backend Rust** (`src-tauri/`), crates : `tauri 2`, `windows 0.61`, `enigo 0.2` (souris), `notify 6` (surveillance dossier), `tauri-plugin-store`, `tauri-plugin-dialog`, `tauri-plugin-opener`, `tauri-plugin-global-shortcut`, `base64`, `serde`, `thiserror`.
 - **API Tauri globale** (`withGlobalTauri: true`) : le frontend accède au runtime via `window.__TAURI__`, encadré par le wrapper `window.TauriService`.
