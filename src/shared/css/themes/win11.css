@@ -132,7 +132,8 @@ body {
    INPUTS & SELECTS
    ----------------------------------------------------------------------- */
 input,
-select {
+select,
+.editor-toggle-btn {
   border-radius: 3px;
   border: 1px solid var(--border-input);
   background: var(--bg-input);
@@ -185,7 +186,7 @@ select:focus {
   box-shadow: var(--shadow-hover);
 }
 .angle-badge {
-  color: var(--accent);
+  color: var(--btn1);
   font-weight: 600;
 }
 /* -----------------------------------------------------------------------

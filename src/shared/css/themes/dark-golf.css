@@ -118,7 +118,8 @@ body {
    INPUTS & SELECTS
    ----------------------------------------------------------------------- */
 input,
-select {
+select,
+.editor-toggle-btn {
   border-radius: 3px;
   border: 1px solid #2e323e;
   background: #0d0f14;

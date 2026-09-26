@@ -106,7 +106,8 @@ body {
    INPUTS
    ----------------------------------------------------------------------- */
 input,
-select {
+select,
+.editor-toggle-btn {
   border-radius: 3px;
   border: 2px solid #97d8ff;
   background: linear-gradient(white, #f8fdff);

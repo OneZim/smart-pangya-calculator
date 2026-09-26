@@ -5,6 +5,7 @@
 
   "window_title_settings": "Configurações",
   "window_title_overlays": "Overlays",
+  "window_title_editor": "Editor de percursos",
 
   "label_course": "Percurso:",
   "label_map": "Mapa",
@@ -43,7 +44,7 @@
   "label_degree": "Ângulo",
   "label_spin": "Spin",
   "ideal_spin": "Spin Otimizado",
-  "apply-spin": "Aplicar o Spin",
+  "apply_spin": "Aplicar o Spin",
   "label_curve": "Curve",
   "label_ground": "Ground",
   "label_slope_break": "Slope (Break)",
@@ -59,6 +60,7 @@
   "label_angle": "Ângulo: 0°",
 
   "label_image_params": "Parâmetros da imagem",
+  "card_image_folder": "Pasta de imagens",
   "placeholder_folder": "Selecione a pasta de capturas...",
   "btn_browse": "Procurar…",
   "btn_refresh": "Atualizar",
@@ -86,6 +88,7 @@
   "label_mascot_power": "Mascot Power",
   "label_card_ps_power": "Card PS Power",
   "label_card_spin": "Max Spin",
+  "label_card_curve": "Max Curve",
 
   "card_slope": "Opções avançadas",
   "label_myce_degree": "Degree",
@@ -100,15 +103,39 @@
   "label_smart_dev": "Smart deviation limit",
   "label_auto_fit": "Ajuste automático",
   "btn_refresh_resolution": "Atualizar",
+  "btn_reset_resolution": "Padrão",
 
   "modal_title": "⚠️ Atenção",
   "modal_body": "Deseja realmente apagar TODAS as imagens desta pasta? Esta ação é irreversível.",
-  "modal_confirm": "Sim, apagar",
+  "modal_confirm": "Confirmar",
+  "modal_confirm_empty": "Sim, limpar a pasta",
   "modal_cancel": "Cancelar",
+
+  "map_label_card": "Editor de percursos",
+  "map_label_par": "Par",
+  "map_label_hole": "Buraco",
+  "map_add_hole": "Adicionar buraco",
+  "map_add_pin": "Adicionar bandeira",
+  "btn_save": "Guardar",
+
+  "btn_delete_course": "Apagar este percurso",
+  "btn_delete_hole": "Apagar este buraco",
+
+  "editor_confirm_delete_course": "⚠️ Deseja realmente apagar este percurso? Todos os buracos também serão apagados!",
+  "editor_confirm_delete_hole": "⚠️ Deseja realmente apagar este buraco?",
+  "editor_course_modal_title": "Adicionar curso",
+  "editor_course_modal_description": "Introduza o nome exato",
+  "placeholder_course_name": "Nome do curso",
+  "editor_hole_modal_title": "Adicionar foro",
+  "editor_hole_modal_description": "Exemplo: 1",
+  "placeholder_hole_number": "Número do foro",
 
   "show_label_calc": "Exibição dos Overlays",
   "show_ruler": "Mostrar marca",
   "show_spin": "Marcador de Spin",
+  "label_show_spin": "Mostrar marca:",
+  "label_ruler_color": "Cor do marcador:",
+  "label_show_t_repere": "Mostrar marcador T:",
   "show_infos_shot": "Info do tiro",
   "spin_positive_only": "Forçar",
   "spin_negative_only": "Forçar",
@@ -120,6 +147,7 @@
 
   "error_shot_too_short": "O tiro não pôde ser calculado; está muito curto ou muito fraco.",
   "error_shot_shot_short": "Cálculo impossível",
+  "dunk_optimize_no_solution": "Nenhum cálculo possível",
 
   "card_offset_config": "Configuração Offset do Spin",
   "label_offset_x": "Centro do mostrador de spin - X",

@@ -5,6 +5,7 @@
 
   "window_title_settings": "Paramètres",
   "window_title_overlays": "Overlays",
+  "window_title_editor": "Éditeur de parcours",
 
   "label_course": "Parcours:",
   "label_map": "Map",
@@ -43,7 +44,7 @@
   "label_degree": "Angle ",
   "label_spin": "Spin ",
   "ideal_spin": "Spin Optimisé",
-  "apply-spin": "Appliquer le Spin",
+  "apply_spin": "Appliquer le Spin",
   "label_curve": "Curve ",
   "label_ground": "Ground ",
   "label_slope_break": "Slope (Break) ",
@@ -59,6 +60,7 @@
   "label_angle": "Angle : 0°",
 
   "label_image_params": "Paramètres d’image",
+  "card_image_folder": "Dossier d’Images",
   "placeholder_folder": "Sélectionnez le dossier de capture...",
   "btn_browse": "Parcourir…",
   "btn_refresh": "Rafraîchir",
@@ -86,6 +88,7 @@
   "label_mascot_power": "Mascot Power",
   "label_card_ps_power": "Card PS Power (Lolo)",
   "label_card_spin": "Max Spin",
+  "label_card_curve": "Max Curve",
 
   "card_slope": "Options avancées",
   "label_myce_degree": "Degree",
@@ -102,14 +105,37 @@
   "btn_refresh_resolution": "Actualiser",
   "btn_reset_resolution": "Défaut",
 
-  "modal_title": "��️ Attention",
+  "modal_title": "⚠️ Attention",
   "modal_body": "Voulez-vous vraiment supprimer TOUTES les images de ce dossier ? Cette action est irréversible.",
-  "modal_confirm": "Oui, vider",
+  "modal_confirm": "Confirmer",
+  "modal_confirm_empty": "Oui, vider le dossier",
   "modal_cancel": "Annuler",
+
+  "map_label_card": "Éditeur de parcours",
+  "map_label_par": "Par",
+  "map_label_hole": "Trou",
+  "map_add_hole": "Ajouter un trou",
+  "map_add_pin": "Ajouter un pin",
+  "btn_save": "Sauvegarder",
+
+  "btn_delete_course": "Supprimer ce parcours",
+  "btn_delete_hole": "Supprimer ce trou",
+
+  "editor_confirm_delete_course": "⚠️ Voulez-vous vraiment supprimer ce parcours ? Tous les trous seront aussi supprimés !",
+  "editor_confirm_delete_hole": "⚠️ Voulez-vous vraiment supprimer ce trou ?",
+  "editor_course_modal_title": "Ajouter un parcours",
+  "editor_course_modal_description": "Entrez le nom exact",
+  "placeholder_course_name": "Nom du parcours",
+  "editor_hole_modal_title": "Ajouter un trou",
+  "editor_hole_modal_description": "Exemple : 1",
+  "placeholder_hole_number": "Numéro du trou",
 
   "show_label_calc": "Affichage des Overlays",
   "show_ruler": "Afficher le repère",
   "show_spin": "Repère de Spin ",
+  "label_show_spin": "Afficher le repère :",
+  "label_ruler_color": "Couleur du repère :",
+  "label_show_t_repere": "Afficher le repère T :",
   "show_infos_shot": "Infos du tir",
   "spin_positive_only": "Forcer",
   "spin_negative_only": "Forcer",
@@ -121,6 +147,7 @@
 
   "error_shot_too_short": "Le tir n’a pas pu être calculé, il est trop court ou trop faible.",
   "error_shot_shot_short": "Calcul impossible",
+  "dunk_optimize_no_solution": "Aucun calcul possible",
 
   "card_offset_config": "Configuration Offset du Spin",
   "label_offset_x": "Centre cadran spin - X",

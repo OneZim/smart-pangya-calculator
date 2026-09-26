@@ -5,6 +5,7 @@
 
   "window_title_settings": "Configuración",
   "window_title_overlays": "Overlays",
+  "window_title_editor": "Editor de recorridos",
 
   "label_course": "Curso:",
   "label_map": "Mapa",
@@ -43,7 +44,7 @@
   "label_degree": "Ángulo",
   "label_spin": "Spin",
   "ideal_spin": "Spin Optimizado",
-  "apply-spin": "Aplicar el Spin",
+  "apply_spin": "Aplicar el Spin",
   "label_curve": "Curve",
   "label_ground": "Ground",
   "label_slope_break": "Slope (Break)",
@@ -59,6 +60,7 @@
   "label_angle": "Ángulo: 0°",
 
   "label_image_params": "Parámetros de imagen",
+  "card_image_folder": "Carpeta de imágenes",
   "placeholder_folder": "Seleccione la carpeta de capturas...",
   "btn_browse": "Buscar…",
   "btn_refresh": "Actualizar",
@@ -86,6 +88,7 @@
   "label_mascot_power": "Mascot Power",
   "label_card_ps_power": "Card PS Power",
   "label_card_spin": "Max Spin",
+  "label_card_curve": "Max Curve",
 
   "card_slope": "Opciones avanzadas",
   "label_myce_degree": "Degree",
@@ -100,15 +103,39 @@
   "label_smart_dev": "Smart deviation limit",
   "label_auto_fit": "Ajuste automático",
   "btn_refresh_resolution": "Actualizar",
+  "btn_reset_resolution": "Predeterminado",
 
   "modal_title": "⚠️ Atención",
   "modal_body": "¿Desea realmente eliminar TODAS las imágenes de esta carpeta? Esta acción es irreversible.",
-  "modal_confirm": "Sí, eliminar",
+  "modal_confirm": "Confirmar",
+  "modal_confirm_empty": "Sí, vaciar la carpeta",
   "modal_cancel": "Cancelar",
+
+  "map_label_card": "Editor de recorridos",
+  "map_label_par": "Par",
+  "map_label_hole": "Hoyo",
+  "map_add_hole": "Añadir hoyo",
+  "map_add_pin": "Añadir bandera",
+  "btn_save": "Guardar",
+
+  "btn_delete_course": "Eliminar este recorrido",
+  "btn_delete_hole": "Eliminar este hoyo",
+
+  "editor_confirm_delete_course": "⚠️ ¿Desea realmente eliminar este recorrido? ¡También se eliminarán todos los hoyos!",
+  "editor_confirm_delete_hole": "⚠️ ¿Desea realmente eliminar este hoyo?",
+  "editor_course_modal_title": "Añadir recorrido",
+  "editor_course_modal_description": "Introduzca el nombre exacto",
+  "placeholder_course_name": "Nombre del recorrido",
+  "editor_hole_modal_title": "Añadir hoyo",
+  "editor_hole_modal_description": "Ejemplo: 1",
+  "placeholder_hole_number": "Número de hoyo",
 
   "show_label_calc": "Visualización de Overlays",
   "show_ruler": "Mostrar marca",
   "show_spin": "Marcador de Spin",
+  "label_show_spin": "Mostrar marca:",
+  "label_ruler_color": "Color del marcador:",
+  "label_show_t_repere": "Mostrar marcador T:",
   "show_infos_shot": "Info del tiro",
   "spin_positive_only": "Forzar",
   "spin_negative_only": "Forzar",
@@ -120,6 +147,7 @@
 
   "error_shot_too_short": "El tiro no pudo calcularse; es demasiado corto o débil.",
   "error_shot_shot_short": "Cálculo imposible",
+  "dunk_optimize_no_solution": "Ningún cálculo posible",
 
   "card_offset_config": "Configuración Offset del Spin",
   "label_offset_x": "Centro del dial de spin - X",

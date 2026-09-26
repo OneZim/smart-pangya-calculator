@@ -12,7 +12,7 @@ pub const WIN_INPUT: &str = "input_overlay";
 pub const WIN_RULER: &str = "ruler_overlay";
 pub const WIN_SPIN: &str = "spin_overlay";
 pub const WIN_INFOS: &str = "infos_shot";
-
+pub const WIN_EDITOR: &str = "editor_screen";
 // =====================================================================
 // ÉVÉNEMENTS TAURI
 // =====================================================================
@@ -20,6 +20,8 @@ pub const WIN_INFOS: &str = "infos_shot";
 pub const EVT_SYNC_RULER_VIS: &str = "sync-ruler-visibility";
 pub const EVT_SYNC_SPIN_VIS: &str = "sync-spin-visibility";
 pub const EVT_SYNC_INFOS_VIS: &str = "sync-infos-shot-visibility";
+pub const EVT_SYNC_INPUT_VIS: &str = "sync-input-bar-visibility";
+pub const EVT_COURSES_UPDATED: &str = "courses-updated";
 pub const EVT_UPDATE_GAME_RESOLUTION: &str = "update-game-resolution";
 pub const EVT_NEW_CAPTURE: &str = "nouvelle-capture-detectee";
 pub const EVT_GLOBAL_CLICK_PB: &str = "global-trigger-click-pb";

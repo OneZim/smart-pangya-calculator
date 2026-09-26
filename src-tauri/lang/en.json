@@ -5,6 +5,7 @@
 
   "window_title_settings": "Settings",
   "window_title_overlays": "Overlays",
+  "window_title_editor": "Course Editor",
 
   "label_course": "Course:",
   "label_map": "Map",
@@ -43,7 +44,7 @@
   "label_degree": "Angle",
   "label_spin": "Spin",
   "ideal_spin": "Optimized Spin",
-  "apply-spin": "Apply Spin",
+  "apply_spin": "Apply Spin",
   "label_curve": "Curve",
   "label_ground": "Ground",
   "label_slope_break": "Slope (Break)",
@@ -59,6 +60,7 @@
   "label_angle": "Angle: 0°",
 
   "label_image_params": "Image Settings",
+  "card_image_folder": "Image Folder",
   "placeholder_folder": "Select capture folder...",
   "btn_browse": "Browse…",
   "btn_refresh": "Refresh",
@@ -86,6 +88,7 @@
   "label_mascot_power": "Mascot Power",
   "label_card_ps_power": "Card PS Power",
   "label_card_spin": "Max Spin",
+  "label_card_curve": "Max Curve",
 
   "card_slope": "Advanced Options",
   "label_myce_degree": "Degree",
@@ -100,15 +103,39 @@
   "label_smart_dev": "Smart deviation limit",
   "label_auto_fit": "Auto Fit",
   "btn_refresh_resolution": "Refresh",
+  "btn_reset_resolution": "Default",
 
   "modal_title": "⚠️ Warning",
   "modal_body": "Do you really want to delete ALL images in this folder? This action is irreversible.",
-  "modal_confirm": "Yes, delete",
+  "modal_confirm": "Confirm",
+  "modal_confirm_empty": "Yes, clear the folder",
   "modal_cancel": "Cancel",
+
+  "map_label_card": "Course Editor",
+  "map_label_par": "Par",
+  "map_label_hole": "Hole",
+  "map_add_hole": "Add hole",
+  "map_add_pin": "Add pin",
+  "btn_save": "Save",
+
+  "btn_delete_course": "Delete this course",
+  "btn_delete_hole": "Delete this hole",
+
+  "editor_confirm_delete_course": "⚠️ Do you really want to delete this course? All holes will be deleted too!",
+  "editor_confirm_delete_hole": "⚠️ Do you really want to delete this hole?",
+  "editor_course_modal_title": "Add course",
+  "editor_course_modal_description": "Enter the exact name",
+  "placeholder_course_name": "Course name",
+  "editor_hole_modal_title": "Add hole",
+  "editor_hole_modal_description": "Example: 1",
+  "placeholder_hole_number": "Hole number",
 
   "show_label_calc": "Overlay Display",
   "show_ruler": "Show marker",
   "show_spin": "Spin Marker",
+  "label_show_spin": "Show marker:",
+  "label_ruler_color": "Marker color:",
+  "label_show_t_repere": "Show T marker:",
   "show_infos_shot": "Shot Info",
   "spin_positive_only": "Force",
   "spin_negative_only": "Force",
@@ -120,6 +147,7 @@
 
   "error_shot_too_short": "The shot could not be calculated; it is too short or too weak.",
   "error_shot_shot_short": "Calculation impossible",
+  "dunk_optimize_no_solution": "No calculation possible",
 
   "card_offset_config": "Spin Dial Offset Configuration",
   "label_offset_x": "Spin dial center - X",

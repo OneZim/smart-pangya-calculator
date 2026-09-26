@@ -111,8 +111,20 @@
                 Configuration Tir
               </div>
               <div id="course-selector-container" class="form-grid">
+                <div class="field btn-edit">
+                  <button
+                    id="btn-editor-toggle"
+                    class="editor-toggle-btn"
+                    data-i18n-title="window_title_editor"
+                  >
+                    ✏️
+                  </button>
+                </div>
                 <div class="field">
-                  <label for="select-parcours" data-i18n="label_course"
+                  <label
+                    for="select-parcours"
+                    data-i18n="label_course"
+                    class="label-courses"
                     >Parcours :</label
                   >
                   <select
@@ -380,7 +392,7 @@
                     class="action-btn action-btn--success cell-action"
                     type="button"
                     tabindex="10"
-                    data-i18n="apply-spin"
+                    data-i18n="apply_spin"
                   >
                     Appliquer le spin
                   </button>
@@ -447,8 +459,7 @@
                       >
                         Refresh
                       </button>
-                      <span class="adjust-spacer">Ajuster l'image</span
-                      >
+                      <span class="adjust-spacer">Ajuster l'image</span>
                       <button id="btn-crop-up" class="crop-btn">▲</button>
                       <button id="btn-crop-left" class="crop-btn">◀</button>
                       <button id="btn-crop-right" class="crop-btn">▶</button>
@@ -487,8 +498,7 @@
                       >
                         Refresh
                       </button>
-                      <span class="adjust-spacer">Ajuster l'image</span
-                      >
+                      <span class="adjust-spacer">Ajuster l'image</span>
                       <button id="btn-ball-crop-up" class="crop-btn">▲</button>
                       <button id="btn-ball-crop-left" class="crop-btn">
                         ◀
@@ -507,10 +517,7 @@
           </div>
           <div class="footer_home">
             <div class="divider"></div>
-            <h2
-              data-i18n="card_infos_shot"
-              class="footer-title"
-            >
+            <h2 data-i18n="card_infos_shot" class="footer-title">
               Informations de tir
             </h2>
             <!-- Infos de tir : PB réel, distance, % -->
@@ -625,7 +632,7 @@
           <button
             id="modal-confirm-btn"
             class="modal-btn modal-btn--danger"
-            data-i18n="modal_confirm"
+            data-i18n="modal_confirm_empty"
           >
             Oui, vider
           </button>

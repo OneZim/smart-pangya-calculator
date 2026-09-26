@@ -9,7 +9,8 @@
     "ruler_overlay",
     "input_overlay",
     "spin_overlay",
-    "infos_shot"
+    "infos_shot",
+    "editor_screen"
   ],
   "permissions": [
     "core:default",
@@ -24,6 +25,8 @@
     "core:window:allow-start-dragging",
     "core:webview:default",
     "dialog:allow-open",
+    "dialog:allow-message",
+    "dialog:allow-confirm",
     "core:window:allow-set-ignore-cursor-events",
     "core:window:allow-show",
     "core:window:allow-hide",

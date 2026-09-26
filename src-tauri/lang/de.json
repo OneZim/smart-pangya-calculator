@@ -5,6 +5,7 @@
 
   "window_title_settings": "Einstellungen",
   "window_title_overlays": "Overlays",
+  "window_title_editor": "Kurs-Editor",
 
   "label_course": "Kurs:",
   "label_map": "Karte",
@@ -43,7 +44,7 @@
   "label_degree": "Winkel",
   "label_spin": "Spin",
   "ideal_spin": "Optimierter Spin",
-  "apply-spin": "Spin anwenden",
+  "apply_spin": "Spin anwenden",
   "label_curve": "Curve",
   "label_ground": "Ground",
   "label_slope_break": "Slope (Break)",
@@ -51,7 +52,6 @@
   "btn_reset_params": "Teil-Reset",
   "btn_reset_hall": "Komplett‑Reset",
   "btn_calc_shot": "SCHUSS BERECHNEN",
-  "label_card_spin": "Max Spin",
 
   "card_wind": "Windberechnung",
   "card_ball": "Ballanalyse",
@@ -60,6 +60,7 @@
   "label_angle": "Winkel: 0°",
 
   "label_image_params": "Bildparameter",
+  "card_image_folder": "Bilderordner",
   "placeholder_folder": "Capture-Ordner auswählen...",
   "btn_browse": "Durchsuchen…",
   "btn_refresh": "Aktualisieren",
@@ -86,6 +87,8 @@
   "label_card_power": "Card Power",
   "label_mascot_power": "Mascot Power",
   "label_card_ps_power": "Card PS Power",
+  "label_card_spin": "Max Spin",
+  "label_card_curve": "Max Curve",
 
   "card_slope": "Erweiterte Optionen",
   "label_myce_degree": "Degree",
@@ -100,15 +103,39 @@
   "label_smart_dev": "Smart deviation limit",
   "label_auto_fit": "Automatische Anpassung",
   "btn_refresh_resolution": "Aktualisieren",
+  "btn_reset_resolution": "Standard",
 
   "modal_title": "⚠️ Warnung",
   "modal_body": "Möchten Sie wirklich ALLE Bilder in diesem Ordner löschen? Diese Aktion ist unwiderruflich.",
-  "modal_confirm": "Ja, löschen",
+  "modal_confirm": "Bestätigen",
+  "modal_confirm_empty": "Ja, Ordner leeren",
   "modal_cancel": "Abbrechen",
+
+  "map_label_card": "Kurs-Editor",
+  "map_label_par": "Par",
+  "map_label_hole": "Loch",
+  "map_add_hole": "Loch hinzufügen",
+  "map_add_pin": "Pin hinzufügen",
+  "btn_save": "Speichern",
+
+  "btn_delete_course": "Diesen Kurs löschen",
+  "btn_delete_hole": "Dieses Loch löschen",
+
+  "editor_confirm_delete_course": "⚠️ Möchten Sie diesen Kurs wirklich löschen? Alle Löcher werden ebenfalls gelöscht!",
+  "editor_confirm_delete_hole": "⚠️ Möchten Sie dieses Loch wirklich löschen?",
+  "editor_course_modal_title": "Kurs hinzufügen",
+  "editor_course_modal_description": "Geben Sie den exakten Namen ein",
+  "placeholder_course_name": "Name des Kurses",
+  "editor_hole_modal_title": "Loch hinzufügen",
+  "editor_hole_modal_description": "Beispiel: 1",
+  "placeholder_hole_number": "Nummer des Lochs",
 
   "show_label_calc": "Overlay-Anzeige",
   "show_ruler": "Markierung anzeigen",
   "show_spin": "Spin-Markierung",
+  "label_show_spin": "Markierung anzeigen:",
+  "label_ruler_color": "Farbe der Markierung:",
+  "label_show_t_repere": "T-Markierung anzeigen:",
   "show_infos_shot": "Schussinfo",
   "spin_positive_only": "Erzwingen",
   "spin_negative_only": "Erzwingen",
@@ -120,6 +147,7 @@
 
   "error_shot_too_short": "Der Schuss konnte nicht berechnet werden; er ist zu kurz oder zu schwach.",
   "error_shot_shot_short": "Berechnung unmöglich",
+  "dunk_optimize_no_solution": "Keine Berechnung möglich",
 
   "card_offset_config": "Spin-Zifferblatt Offset-Konfiguration",
   "label_offset_x": "Spin-Zifferblatt Mitte - X",

@@ -1,0 +1,300 @@
+/* =====================================================================
+   FICHIER : editor_screen.css
+   DESCRIPTION : Styles de la fenêtre Éditeur de parcours
+   Utilise les variables CSS du système de thèmes (skin only)
+   ===================================================================== */
+
+/* ---------- RESET ---------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ---------- BODY ---------- */
+body {
+  background: var(--bg-body);
+  color: var(--text);
+  padding: 20px;
+  min-height: 100vh;
+}
+
+/* ---------- PAGE ---------- */
+.page {
+  max-width: 100%;
+}
+
+/* ---------- CARTES ---------- */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: var(--shadow);
+  transition:
+    box-shadow 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.card:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-hover);
+}
+
+.card-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+
+/* ---------- TOOLBAR ---------- */
+.toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.toolbar-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.toolbar-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.toolbar-row label {
+  font-size: 14px;
+  color: var(--text-label);
+  min-width: 70px;
+  font-weight: 600;
+}
+
+.toolbar-row select {
+  flex: 1;
+  min-width: 200px;
+}
+
+.toolbar-row input {
+  width: 60px;
+}
+
+/* ---------- INPUTS & SELECTS ---------- */
+input,
+select {
+  border-radius: 3px;
+  border: 1px solid var(--border-input);
+  background: var(--bg-input);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 14px;
+  padding: 2px 6px;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+input::placeholder {
+  color: var(--text-soft);
+  opacity: 0.8;
+}
+
+input:hover,
+select:hover {
+  border-color: var(--accent-hover);
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+/* ---------- BOUTONS ---------- */
+.btn {
+  border-radius: 4px;
+  padding: 4px 8px;
+  cursor: pointer;
+  font-size: 14px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text);
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.btn:hover {
+  background: var(--bg-hover);
+  border-color: var(--accent-hover);
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn:disabled:hover {
+  background: var(--bg-card);
+  border-color: var(--border);
+}
+
+.btn-primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.btn-danger {
+  background: var(--accent-dark);
+  border-color: var(--accent-dark);
+  color: #ffffff;
+}
+
+.btn-danger:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+.btn-add {
+  width: 180px;
+}
+
+/* ---------- PINS TABLE ---------- */
+.pins-table {
+  margin-bottom: 20px;
+}
+
+.table-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 60px;
+  gap: 10px;
+  padding: 10px;
+  background: var(--bg-input);
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: var(--text-label);
+}
+
+.pin-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 60px;
+  gap: 10px;
+  padding: 4px 6px;
+  background: var(--bg-input);
+  border-radius: 4px;
+  margin-bottom: 5px;
+  align-items: center;
+}
+
+.pin-row input {
+  width: 100%;
+  padding: 3px 6px;
+  font-size: 14px;
+}
+
+/* ---------- ACTIONS ---------- */
+.actions {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+/* ---------- MESSAGES ---------- */
+#message {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 4px;
+  display: none;
+}
+
+#message.success {
+  background: var(--accent);
+  color: #ffffff;
+  display: block;
+}
+
+#message.error {
+  background: var(--accent-dark);
+  color: #ffffff;
+  display: block;
+}
+
+/* ---------- MODALS ---------- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modal-overlay[hidden] {
+  display: none;
+}
+
+.modal-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  min-width: 300px;
+  max-width: 90vw;
+  color: var(--text);
+  box-shadow: var(--shadow);
+}
+
+.modal-title {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.modal-description {
+  margin: 0 0 12px 0;
+  font-size: 13px;
+  color: var(--text-soft);
+  line-height: 1.4;
+}
+
+.modal-input {
+  width: 100%;
+  padding: 8px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-input);
+  color: var(--text);
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+  margin-bottom: 12px;
+}
+
+.modal-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+.modal-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}

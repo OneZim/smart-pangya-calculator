@@ -5,6 +5,7 @@
 
   "window_title_settings": "Impostazioni",
   "window_title_overlays": "Overlays",
+  "window_title_editor": "Editor dei percorsi",
 
   "label_course": "Percorso:",
   "label_map": "Mappa",
@@ -43,7 +44,7 @@
   "label_degree": "Angolo",
   "label_spin": "Spin",
   "ideal_spin": "Spin Ottimizzato",
-  "apply-spin": "Applicare lo Spin",
+  "apply_spin": "Applicare lo Spin",
   "label_curve": "Curve",
   "label_ground": "Ground",
   "label_slope_break": "Slope (Break)",
@@ -59,6 +60,7 @@
   "label_angle": "Angolo: 0°",
 
   "label_image_params": "Parametri immagine",
+  "card_image_folder": "Cartella immagini",
   "placeholder_folder": "Seleziona la cartella di cattura...",
   "btn_browse": "Sfoglia…",
   "btn_refresh": "Aggiorna",
@@ -86,6 +88,7 @@
   "label_mascot_power": "Mascot Power",
   "label_card_ps_power": "Card PS Power",
   "label_card_spin": "Max Spin",
+  "label_card_curve": "Max Curve",
 
   "card_slope": "Opzioni avanzate",
   "label_myce_degree": "Degree",
@@ -100,15 +103,39 @@
   "label_smart_dev": "Smart deviation limit",
   "label_auto_fit": "Adattamento automatico",
   "btn_refresh_resolution": "Aggiorna",
+  "btn_reset_resolution": "Predefinito",
 
   "modal_title": "⚠️ Attenzione",
   "modal_body": "Vuoi davvero eliminare TUTTE le immagini in questa cartella? L’azione è irreversibile.",
-  "modal_confirm": "Sì, elimina",
+  "modal_confirm": "Conferma",
+  "modal_confirm_empty": "Sì, svuota la cartella",
   "modal_cancel": "Annulla",
+
+  "map_label_card": "Editor dei percorsi",
+  "map_label_par": "Par",
+  "map_label_hole": "Buco",
+  "map_add_hole": "Aggiungi buco",
+  "map_add_pin": "Aggiungi bandierina",
+  "btn_save": "Salva",
+
+  "btn_delete_course": "Elimina questo percorso",
+  "btn_delete_hole": "Elimina questo buco",
+
+  "editor_confirm_delete_course": "⚠️ Vuoi davvero eliminare questo percorso? Verranno eliminati anche tutti i buchi!",
+  "editor_confirm_delete_hole": "⚠️ Vuoi davvero eliminare questo buco?",
+  "editor_course_modal_title": "Aggiungi corso",
+  "editor_course_modal_description": "Inserisci il nome esatto",
+  "placeholder_course_name": "Nome del corso",
+  "editor_hole_modal_title": "Aggiungi foro",
+  "editor_hole_modal_description": "Esempio: 1",
+  "placeholder_hole_number": "Numero del foro",
 
   "show_label_calc": "Visualizzazione degli Overlays",
   "show_ruler": "Mostra indicatore",
   "show_spin": "Indicatore di Spin",
+  "label_show_spin": "Mostra indicatore:",
+  "label_ruler_color": "Colore dell’indicatore:",
+  "label_show_t_repere": "Mostra indicatore T:",
   "show_infos_shot": "Info del tiro",
   "spin_positive_only": "Forza",
   "spin_negative_only": "Forza",
@@ -120,6 +147,7 @@
 
   "error_shot_too_short": "Il tiro non può essere calcolato; è troppo corto o troppo debole.",
   "error_shot_shot_short": "Calcolo impossibile",
+  "dunk_optimize_no_solution": "Nessun calcolo possibile",
 
   "card_offset_config": "Configurazione Offset dello Spin",
   "label_offset_x": "Centro quadrante spin - X",

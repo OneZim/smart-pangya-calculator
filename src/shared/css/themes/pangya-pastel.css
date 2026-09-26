@@ -116,7 +116,8 @@ body {
    INPUTS
    ----------------------------------------------------------------------- */
 input,
-select {
+select,
+.editor-toggle-btn {
   border-radius: 4px;
   border: 2px solid var(--border);
   background: var(--input-bg);

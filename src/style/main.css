@@ -355,6 +355,13 @@ body {
   margin-top: 10px;
 }
 
+/* Ligne selecteur de map : colonne fixe de 20px pour le bouton d'ouverture de
+   l'editeur, puis les 3 select. Sans cette contrainte, auto-fit reduit le nombre
+   de colonnes et le bouton passe seul a la ligne dans les fenetres etroites. */
+#course-selector-container {
+  grid-template-columns: 20px repeat(3, minmax(0, 1fr));
+}
+
 /* Bloc champ (label + contrôle) */
 .field {
   display: flex;
@@ -596,6 +603,39 @@ button.calc-btn {
   margin-top: auto;
 }
 
+/* Bouton icône d'ouverture de l'éditeur de parcours (ligne selecteur de map) :
+   largeur fixe de 20px, colle en bas du champ pour se placer au niveau du select
+   voisin (les cellules de select ont un label au-dessus) */
+.editor-toggle-btn {
+  width: 27px;
+  max-width: 27px;
+  margin-top: auto;
+  margin-bottom: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: var(--text-soft);
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  height: 27px;
+}
+
+.editor-toggle-btn:hover {
+  color: var(--accent, #0067c0);
+  transform: scale(1.1);
+}
+
+.editor-toggle-btn:active {
+  transform: scale(0.95);
+}
+
+.label-courses {
+  margin-left: -35px;
+}
 .crop-btn {
   padding: 6px 12px;
 }

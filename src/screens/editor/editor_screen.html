@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title data-i18n="label_course">Parcours</title>
+    <script src="../../shared/js/theme-loader.js"></script>
+    <link rel="stylesheet" href="editor_screen.css" />
+  </head>
+  <body data-i18n-window-title="window_title_editor">
+    <div class="page">
+      <div class="card">
+        <div class="card-title" data-i18n="map_label_card">
+          Éditeur de parcours
+        </div>
+
+        <div class="toolbar">
+          <div class="toolbar-column">
+            <div class="toolbar-row">
+              <label data-i18n="label_course">Parcours</label>
+              <select id="course-select"></select>
+              <button
+                id="btn-add-course"
+                class="btn btn-add"
+                data-i18n="editor_course_modal_title"
+              >
+                Ajouter une parcours
+              </button>
+              <button
+                id="btn-delete-course"
+                class="btn btn-danger"
+                title="Supprimer ce parcours"
+                data-i18n-title="btn_delete_course"
+              >
+                🗑️
+              </button>
+            </div>
+            <div class="toolbar-row">
+              <label data-i18n="map_label_hole">Trou</label>
+              <select id="hole-select"></select>
+              <button
+                id="btn-add-hole"
+                class="btn btn-add"
+                data-i18n="map_add_hole"
+              >
+                Ajouter un trou
+              </button>
+              <button
+                id="btn-delete-hole"
+                class="btn btn-danger"
+                title="Supprimer ce trou"
+                data-i18n-title="btn_delete_hole"
+              >
+                🗑️
+              </button>
+            </div>
+            <div class="toolbar-row">
+              <label data-i18n="map_label_par">Par</label>
+              <input type="number" id="hole-par" min="1" max="9" value="4" />
+            </div>
+          </div>
+        </div>
+
+        <div class="pins-table">
+          <div class="table-header">
+            <div class="col-distance">Distance</div>
+            <div class="col-height">Height</div>
+            <div class="col-slope">Tee slope</div>
+            <div class="col-ground">Ground</div>
+            <div class="col-actions"></div>
+          </div>
+          <div id="pins-list"></div>
+        </div>
+
+        <div class="actions">
+          <button id="btn-add-pin" class="btn" data-i18n="map_add_pin">
+            Ajouter un Pin
+          </button>
+          <button id="btn-save" class="btn btn-primary" data-i18n="btn_save">
+            Sauvegarder
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="course-modal" class="modal-overlay" hidden>
+      <div class="modal-box">
+        <h3 class="modal-title" data-i18n="editor_course_modal_title">
+          Ajouter un parcours
+        </h3>
+        <p
+          class="modal-description"
+          data-i18n="editor_course_modal_description"
+        >
+          Entrez le nom exact
+        </p>
+        <input
+          id="course-modal-input"
+          class="modal-input"
+          type="text"
+          placeholder="Nom du parcours"
+          data-i18n-placeholder="placeholder_course_name"
+        />
+        <div class="modal-actions">
+          <button id="course-modal-cancel" class="btn" data-i18n="modal_cancel">
+            Annuler
+          </button>
+          <button
+            id="course-modal-ok"
+            class="btn btn-primary"
+            data-i18n="modal_confirm"
+          >
+            OK
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="hole-modal" class="modal-overlay" hidden>
+      <div class="modal-box">
+        <h3 class="modal-title" data-i18n="editor_hole_modal_title">
+          Ajouter un trou
+        </h3>
+        <p class="modal-description" data-i18n="editor_hole_modal_description">
+          Exemple : 1
+        </p>
+        <input
+          id="hole-modal-input"
+          class="modal-input"
+          type="text"
+          placeholder="Numéro du trou"
+          data-i18n-placeholder="placeholder_hole_number"
+        />
+        <div class="modal-actions">
+          <button id="hole-modal-cancel" class="btn" data-i18n="modal_cancel">
+            Annuler
+          </button>
+          <button
+            id="hole-modal-ok"
+            class="btn btn-primary"
+            data-i18n="modal_confirm"
+          >
+            Confirmer
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="confirm-modal" class="modal-overlay" hidden>
+      <div class="modal-box">
+        <p id="confirm-modal-message" class="modal-description"></p>
+        <div class="modal-actions">
+          <button
+            id="confirm-modal-cancel"
+            class="btn"
+            data-i18n="modal_cancel"
+          >
+            Annuler
+          </button>
+          <button id="confirm-modal-ok" class="btn btn-danger">
+            Confirmer
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="../../core/services/TauriService.js"></script>
+    <script src="../../shared/js/themes.js"></script>
+    <script src="../../shared/js/i18n.js"></script>
+    <script src="editor_screen.js"></script>
+  </body>
+</html>

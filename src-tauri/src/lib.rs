@@ -68,6 +68,8 @@ pub fn run() {
             commands::game::get_game_client_rect_on_screen,
             commands::game::get_game_dpi_debug,
             commands::game::list_all_visible_windows,
+            commands::i18n::save_pin_location,
+            commands::overlays::get_editor_visibility,
         ])
         // Affiche la fenêtre principale seulement quand sa page a fini de charger.
         // Remplace l'ancien thread + sleep(300ms) : on attend le chargement réel (anti-FOUC).
@@ -113,9 +115,12 @@ pub fn run() {
                 if window.label() == WIN_MAIN {
                     std::process::exit(0);
                 } else if window.label() == WIN_SETTINGS {
-                    api.prevent_close(); // Annule la destruction de la fenêtre
-                    let _ = window.hide(); // La garde vivante mais masquée
+                    api.prevent_close();
+                    let _ = window.hide();
                 } else if window.label() == WIN_OVERLAYS_SCREEN {
+                    api.prevent_close();
+                    let _ = window.hide();
+                } else if window.label() == WIN_EDITOR {
                     api.prevent_close();
                     let _ = window.hide();
                 }

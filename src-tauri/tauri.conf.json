@@ -41,6 +41,17 @@
         "alwaysOnTop": false
       },
       {
+        "label": "editor_screen",
+        "title": "Course Editor",
+        "url": "screens/editor/editor_screen.html",
+        "width": 600,
+        "height": 500,
+        "visible": false,
+        "decorations": true,
+        "transparent": false,
+        "alwaysOnTop": false
+      },
+      {
         "label": "ruler_overlay",
         "title": "Overlay Règle",
         "url": "overlays/ruler_overlay/ruler_overlay.html",
