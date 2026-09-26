@@ -30,6 +30,19 @@
     }
   }
 
+  // Charge utile de l'événement "current-course-state" consommé par le proxy
+  // du calc_overlay (CourseStore.createProxy). Source unique pour le diffusion
+  // à chaque changement ET la réponse aux requêtes de l'overlay.
+  function courseStatePayload(state) {
+    return {
+      courses: state.courses,
+      selected: state.selected,
+      mapOptions: state.mapOptions,
+      holeOptions: state.holeOptions,
+      pinOptions: state.pinOptions,
+    };
+  }
+
   window.App = {
     _initPromise: null,
 
@@ -52,6 +65,18 @@
           // Chargement des données
           await courseStore.initialize();
           playerStore.initialize();
+
+          // Diffuser l'état des parcours à chaque changement : le calc_overlay
+          // écoute "current-course-state" en permanence, il reste donc
+          // synchronisé sans dépendre du moment où il a démarré.
+          courseStore.subscribe(() => {
+            if (tauri.isAvailable) {
+              tauri.emit(
+                "current-course-state",
+                courseStatePayload(courseStore.getState()),
+              );
+            }
+          });
 
           window.__app = { courseStore, playerStore };
 
@@ -120,7 +145,7 @@
           renderShotInfo();
 
           this.setupSettingsToggle(tauri);
-
+          this.setupEditorToggle(tauri);
           this.setupOverlaysToggle(tauri);
 
           this.setupInputFields(storage, playerStore);
@@ -230,7 +255,10 @@
 
         // Réappliquer la calibration/positionnement de l'image lorsque la vue devient visible
         if (isBall && window.__ballScreenshotManager) {
-          if (typeof window.__ballScreenshotManager.updateWindImagePosition === "function") {
+          if (
+            typeof window.__ballScreenshotManager.updateWindImagePosition ===
+            "function"
+          ) {
             window.__ballScreenshotManager.updateWindImagePosition();
           }
         }
@@ -247,19 +275,23 @@
     initBallPanel: function (tauri, storage) {
       if (!tauri || !window.ScreenshotManager) return;
 
-      window.__ballScreenshotManager = window.ScreenshotManager(tauri, storage, {
-        imageId: "ball-image",
-        refreshBtnId: "btn-refresh-ball",
-        cropUpId: "btn-ball-crop-up",
-        cropDownId: "btn-ball-crop-down",
-        cropLeftId: "btn-ball-crop-left",
-        cropRightId: "btn-ball-crop-right",
-        offsetXKey: "ballImgOffsetX",
-        offsetYKey: "ballImgOffsetY",
-        anchorKey: "ballAnchor",
-        zoomKey: "ballZoom",
-        label: "balle",
-      });
+      window.__ballScreenshotManager = window.ScreenshotManager(
+        tauri,
+        storage,
+        {
+          imageId: "ball-image",
+          refreshBtnId: "btn-refresh-ball",
+          cropUpId: "btn-ball-crop-up",
+          cropDownId: "btn-ball-crop-down",
+          cropLeftId: "btn-ball-crop-left",
+          cropRightId: "btn-ball-crop-right",
+          offsetXKey: "ballImgOffsetX",
+          offsetYKey: "ballImgOffsetY",
+          anchorKey: "ballAnchor",
+          zoomKey: "ballZoom",
+          label: "balle",
+        },
+      );
 
       const ballCounter = document.getElementById("ball-click-counter");
       const ballCropBox = document.querySelector(".ball-crop-box");
@@ -387,7 +419,17 @@
         tauri.emit("toggle-settings-visibility", { show: !isVisible, pos });
       });
     },
-
+    // Ouvre ou ferme la fenêtre éditeur de parcours.
+    setupEditorToggle: function (tauri) {
+      const btnEditor = document.getElementById("btn-editor-toggle");
+      if (!btnEditor) return;
+      btnEditor.addEventListener("click", async () => {
+        if (!tauri.isAvailable) return;
+        const isVisible = await tauri.invoke("get_editor_visibility");
+        const pos = await getMainWindowPosition();
+        tauri.emit("toggle-editor-visibility", { show: !isVisible, pos });
+      });
+    },
     // Ouvre ou ferme la fenêtre de gestion des overlays.
     setupOverlaysToggle: function (tauri) {
       const btnOverlays = document.getElementById("btn-overlays-toggle");
@@ -622,14 +664,20 @@
         const payload = event?.payload;
         if (!payload || payload.sender !== "input_bar") return;
 
-        const state = courseStore.getState();
-        tauri.emit("current-course-state", {
-          courses: state.courses,
-          selected: state.selected,
-          mapOptions: state.mapOptions,
-          holeOptions: state.holeOptions,
-          pinOptions: state.pinOptions,
-        });
+        try {
+          tauri.emit(
+            "current-course-state",
+            courseStatePayload(courseStore.getState()),
+          );
+        } catch (err) {
+          console.error("❌ Erreur lecture état des parcours:", err);
+        }
+      });
+
+      // Sauvegarde faite depuis l'éditeur de parcours : recharger puis
+      // rediffuser (le notify() du reload déclenche la diffusion ci-dessus).
+      await tauri.listen("courses-updated", async () => {
+        await courseStore.reload();
       });
 
       // Handle dropdown changes from Calc Overlay (sender: "input_bar")
@@ -750,10 +798,14 @@
 
         const clickX = Math.round(rulerCenterX - lastPbValue * pxPerPb);
 
-        tauri.invoke("move_and_click_focused", { x: clickX, y: rulerY }).catch((err) => {
-          console.error("❌ Erreur move_and_click_focused:", err);
-          alert("Impossible de cliquer dans Pangya : jeu absent ou sans focus.");
-        });
+        tauri
+          .invoke("move_and_click_focused", { x: clickX, y: rulerY })
+          .catch((err) => {
+            console.error("❌ Erreur move_and_click_focused:", err);
+            alert(
+              "Impossible de cliquer dans Pangya : jeu absent ou sans focus.",
+            );
+          });
       });
 
       await tauri.listen("update-ruler", (event) => {

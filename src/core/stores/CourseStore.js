@@ -13,37 +13,60 @@
         if (this.initialized) return this.courses;
 
         try {
-          const data = await tauriService.invoke("parcours");
-          this.courses = data?.course || data || {};
-          this.initialized = true;
+          await this.loadFromSource();
+        } catch (error) {
+          console.error("❌ Erreur chargement:", error);
+          throw error;
+        }
+        return this.courses;
+      },
 
-          // Restaurer la dernière sélection
-          const saved = storageService.getLastSelection();
-          if (saved.map && this.courses[saved.map]) {
-            this.selected.map = saved.map;
-            if (saved.hole) {
-              const holes =
-                this.courses[saved.map].holes ||
-                this.courses[saved.map].trous ||
-                {};
-              if (holes[saved.hole]) {
-                this.selected.hole = saved.hole;
-                if (saved.pin) {
-                  const pins =
-                    holes[saved.hole].pins || holes[saved.hole].positions || {};
-                  if (pins[saved.pin]) {
-                    this.selected.pin = saved.pin;
-                  }
+      // (Ré)charge les parcours depuis la source de vérité (fichier de travail
+      // en AppData, sinon fichier embarqué) puis resélectionne le dernier
+      // parcours utilisé. Utilisé au démarrage et par reload() après une
+      // sauvegarde faite dans l'éditeur.
+      async loadFromSource() {
+        const data = await tauriService.invoke("parcours");
+        this.courses = data?.course || data || {};
+        this.initialized = true;
+
+        // Repartir d'une sélection propre avant de la restaurer
+        this.selected.map = null;
+        this.selected.hole = null;
+        this.selected.pin = null;
+
+        // Restaurer la dernière sélection
+        const saved = storageService.getLastSelection();
+        if (saved.map && this.courses[saved.map]) {
+          this.selected.map = saved.map;
+          if (saved.hole) {
+            const holes =
+              this.courses[saved.map].holes ||
+              this.courses[saved.map].trous ||
+              {};
+            if (holes[saved.hole]) {
+              this.selected.hole = saved.hole;
+              if (saved.pin) {
+                const pins =
+                  holes[saved.hole].pins || holes[saved.hole].positions || {};
+                if (pins[saved.pin]) {
+                  this.selected.pin = saved.pin;
                 }
               }
             }
           }
+        }
 
-          this.notify();
-          return this.courses;
+        this.notify();
+      },
+
+      // Recharge après une modification externe (sauvegarde de l'éditeur).
+      // Un échec ne doit pas casser l'application déjà fonctionnelle.
+      async reload() {
+        try {
+          await this.loadFromSource();
         } catch (error) {
-          console.error("❌ Erreur chargement:", error);
-          throw error;
+          console.error("❌ Erreur rechargement:", error);
         }
       },
 

@@ -556,6 +556,15 @@
     const cb = document.getElementById("toggle-show-ruler-co"); // ou l'id côté main
     if (cb) cb.checked = event.payload;
   });
+
+  // À chaque affichage de l'overlay, redemander l'état des parcours à la
+  // fenêtre principale : elle est nécessairement initialisée à ce moment,
+  // ce qui rend la synchronisation déterministique (sinon la demande initiale
+  // du DOMContentLoaded pouvait partir avant l'écoute principale).
+  window.TauriService?.listen("sync-input-bar-visibility", (event) => {
+    if (event.payload !== true) return;
+    window.TauriService.emit("request-current-course", { sender: "input_bar" });
+  });
   // ================================================================
   // SELECTION TEXTE
   // ================================================================
@@ -677,6 +686,20 @@
       closeBallPanel.addEventListener("click", () => {
         ballPanel.classList.remove("open");
         resetBallDots();
+      });
+    }
+
+    // === BOUTON ÉDITEUR DE PARCOURS (ouvre/ferme depuis l'overlay) ===
+    const btnEditorToggle = document.getElementById("btn-editor-toggle");
+    if (btnEditorToggle && window.TauriService?.isAvailable) {
+      btnEditorToggle.addEventListener("click", async () => {
+        const isVisible = await window.TauriService.invoke(
+          "get_editor_visibility",
+        );
+        await window.TauriService.emit("toggle-editor-visibility", {
+          show: !isVisible,
+          pos: null,
+        });
       });
     }
 

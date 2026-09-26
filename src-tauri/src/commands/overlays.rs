@@ -93,7 +93,7 @@ pub fn set_infos_shot_visibility(app: AppHandle, show: bool) {
 
 #[tauri::command]
 pub fn set_input_bar_visibility(app: AppHandle, show: bool) {
-    set_overlay_visibility_internal(&app, WIN_INPUT, None, show);
+    set_overlay_visibility_internal(&app, WIN_INPUT, Some(EVT_SYNC_INPUT_VIS), show);
 }
 
 // =====================================================================
@@ -129,6 +129,13 @@ pub fn get_settings_visibility(app: AppHandle) -> bool {
 #[tauri::command]
 pub fn get_overlays_screen_visibility(app: AppHandle) -> bool {
     app.get_webview_window(WIN_OVERLAYS_SCREEN)
+        .map(|w| w.is_visible().unwrap_or(false))
+        .unwrap_or(false)
+}
+
+#[tauri::command]
+pub fn get_editor_visibility(app: AppHandle) -> bool {
+    app.get_webview_window("editor_screen")
         .map(|w| w.is_visible().unwrap_or(false))
         .unwrap_or(false)
 }

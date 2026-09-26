@@ -21,7 +21,7 @@ body {
   background: rgba(20, 20, 20, 0.65);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 8px;
-  padding: 25px 10px 0px 10px; /* top 28 | gauche/droite 12 | bas 10 */
+  padding: 30px 10px 0px 10px; /* top 28 | gauche/droite 12 | bas 10 */
   box-sizing: border-box;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -93,6 +93,35 @@ select {
 select {
   width: 100%;
 }
+
+/* Bouton icône d'ouverture de l'éditeur de parcours (ligne selecteur de map) */
+.editor-toggle-btn {
+  flex: 0 0 20px;
+  width: 20px;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid #555555;
+  border-radius: 4px;
+  color: #e0e0e0;
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.editor-toggle-btn:hover {
+  background: #3a3a3a;
+  color: #ffffff;
+}
+
+.editor-toggle-btn:active {
+  transform: scale(0.95);
+}
+
 .divider {
   grid-column: span 3;
   height: 1px;
