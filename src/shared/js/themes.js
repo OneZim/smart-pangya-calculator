@@ -32,6 +32,12 @@
   // du CSS du thème quel que soit l'enfoncement de la page.
   const scriptSrc =
     (document.currentScript && document.currentScript.src) || "";
+
+  // Helper Tauri event, autonome sans dépendance i18n.js
+  function getTauriEvent() {
+    return window.__TAURI__ && window.__TAURI__.event ? window.__TAURI__.event : null;
+  }
+
   // ================================================================
   // CHARGER LE CSS DU THÈME
   // ================================================================
