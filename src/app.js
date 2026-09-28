@@ -31,16 +31,53 @@
   }
 
   // Charge utile de l'événement "current-course-state" consommé par le proxy
-  // du calc_overlay (CourseStore.createProxy). Source unique pour le diffusion
+  // du calc_overlay (CourseStore.createProxy). Source unique pour la diffusion
   // à chaque changement ET la réponse aux requêtes de l'overlay.
+  //
+  // `source` permet à l'overlay de vérifier qu'il reçoit bien l'état de la
+  // fenêtre principale : l'événement est diffusé à toutes les fenêtres.
   function courseStatePayload(state) {
     return {
+      source: "main",
+      revision: state.revision,
       courses: state.courses,
       selected: state.selected,
       mapOptions: state.mapOptions,
       holeOptions: state.holeOptions,
       pinOptions: state.pinOptions,
     };
+  }
+
+  // Signature de l'état diffusé : révision des données + sélection courante.
+  // Sert uniquement à ne pas rediffuser un état identique à toutes les
+  // fenêtres lors d'un changement d'état. Elle ne doit PAS servir à
+  // filtrer une réponse à une requête : voir le gestionnaire
+  // "request-current-course" plus bas.
+  function courseStateSignature(state) {
+    const s = state.selected || {};
+    return [state.revision, s.map, s.hole, s.pin].join("|");
+  }
+
+  // Dernière signature diffusée, pour la déduplication du seul chemin
+  // "courseStore.subscribe".
+  let lastCourseStateSignature = null;
+
+  /**
+   * Affiche le bandeau d'avertissement sur les données de parcours ignorées.
+   * @param {string[]} rejets une ligne par fichier écarté, avec le motif
+   */
+  function showPinDataWarning(rejets) {
+    const banner = document.getElementById("pin-data-warning");
+    const list = document.getElementById("pin-data-warning-list");
+    if (!banner || !list) return;
+
+    list.innerHTML = "";
+    for (const motif of rejets) {
+      const item = document.createElement("li");
+      item.textContent = motif;
+      list.appendChild(item);
+    }
+    banner.hidden = false;
   }
 
   window.App = {
@@ -71,10 +108,11 @@
           // synchronisé sans dépendre du moment où il a démarré.
           courseStore.subscribe(() => {
             if (tauri.isAvailable) {
-              tauri.emit(
-                "current-course-state",
-                courseStatePayload(courseStore.getState()),
-              );
+              const state = courseStore.getState();
+              const signature = courseStateSignature(state);
+              if (signature === lastCourseStateSignature) return;
+              lastCourseStateSignature = signature;
+              tauri.emit("current-course-state", courseStatePayload(state));
             }
           });
 
@@ -147,6 +185,7 @@
           this.setupSettingsToggle(tauri);
           this.setupEditorToggle(tauri);
           this.setupOverlaysToggle(tauri);
+          this.setupPinDataWarningDismiss();
 
           this.setupInputFields(storage, playerStore);
 
@@ -159,7 +198,6 @@
           window.ScreenshotManager(tauri, storage);
 
           const angleSelector = window.WindAngleSelector({
-            storage,
             onAngleChange: () => {
               if (typeof window.triggerCalc === "function") {
                 window.triggerCalc();
@@ -444,6 +482,17 @@
       });
     },
 
+    // Permet de masquer le bandeau d'avertissement sur les parcours ignorés.
+    setupPinDataWarningDismiss: function () {
+      const btnClose = document.getElementById("pin-data-warning-close");
+      const banner = document.getElementById("pin-data-warning");
+      if (!btnClose || !banner) return;
+
+      btnClose.addEventListener("click", () => {
+        banner.hidden = true;
+      });
+    },
+
     // Configure la persistance et la synchronisation des champs.
     setupInputFields: function (storage, playerStore) {
       // Les statistiques du personnage sont gérées par CharacterManager.
@@ -495,41 +544,6 @@
             }
           });
         });
-      });
-
-      let currentZoomSteps = 0;
-      const MAX_ZOOM_STEPS = 10;
-
-      document.addEventListener("keydown", (e) => {
-        if (["INPUT", "TEXTAREA", "SELECT"].includes(e.target.tagName)) return;
-
-        const key = e.key.toLowerCase();
-        let updated = false;
-
-        if (key === "p") {
-          if (currentZoomSteps < MAX_ZOOM_STEPS) {
-            currentZoomSteps++;
-            updated = true;
-          }
-        } else if (key === "o") {
-          if (currentZoomSteps > 0) {
-            currentZoomSteps--;
-            updated = true;
-          }
-        } else if (e.key === "End") {
-          if (currentZoomSteps !== 0) {
-            currentZoomSteps = 0;
-            updated = true;
-          }
-        }
-
-        if (updated) {
-          if (window.TauriService?.isAvailable) {
-            window.TauriService.emit("update-zoom-step", {
-              step: currentZoomSteps,
-            });
-          }
-        }
       });
     },
 
@@ -665,6 +679,10 @@
         if (!payload || payload.sender !== "input_bar") return;
 
         try {
+          // Réponse inconditionnelle : le demandeur ne peut pas savoir s'il a
+          // déjà reçu cette diffusion (overlay démarré plus tard, diffusion
+          // ratée). Dédupliquer ici le priverait de tout état tant que la
+          // sélection de la fenêtre principale n'aurait pas changé.
           tauri.emit(
             "current-course-state",
             courseStatePayload(courseStore.getState()),
@@ -678,6 +696,16 @@
       // rediffuser (le notify() du reload déclenche la diffusion ci-dessus).
       await tauri.listen("courses-updated", async () => {
         await courseStore.reload();
+      });
+
+      // Un fichier de parcours a été ignoré au chargement : l'application
+      // tourne sur les données embarquées. Sans information, l'utilisateur
+      // croit que ses modifications d'éditeur ont été perdues.
+      await tauri.listen("pin-data-warning", (event) => {
+        const rejets = event?.payload;
+        if (Array.isArray(rejets) && rejets.length > 0) {
+          showPinDataWarning(rejets);
+        }
       });
 
       // Handle dropdown changes from Calc Overlay (sender: "input_bar")

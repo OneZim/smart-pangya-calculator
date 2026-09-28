@@ -36,8 +36,10 @@ impl PangyaWindowCache {
     }
 }
 
-// Cache des données de parcours (pin_location.json). Chargé une seule fois à la première
-// demande, puis servi depuis la mémoire pour éviter de relire le disque à chaque appel.
+// Cache des données de parcours (parcours.json, ou le fichier legacy
+// pin_location.json converti à la lecture). Chargé une seule fois à la première
+// demande, puis servi depuis la mémoire pour éviter de relire le disque à
+// chaque appel. Invalidé à chaque enregistrement depuis l'éditeur.
 pub struct PinLocationCache {
     pub data: Option<serde_json::Value>,
 }

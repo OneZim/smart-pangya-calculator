@@ -2,12 +2,105 @@
 (function () {
   "use strict";
 
+  // -------------------------------------------------------------------
+  // Helpers de construction des options de select.
+  //
+  // Ils sont factorisés et exposés en global car deux implémentations
+  // doivent produire exactement les mêmes options : le store de la fenêtre
+  // principale (CourseStore) et le proxy de l'overlay de saisie
+  // (CourseStore.createProxy). Toute divergence entre les deux se
+  // traduirait par des listes de pins différentes selon la fenêtre.
+  //
+  // Le modèle de données est figé par src-tauri/src/commands/i18n.rs :
+  // la clé d'un pin est un ordinal technique ("1", "2", "3") et
+  // `pinDistance` porte la seule donnée métier. Les libellés doivent donc
+  // être dérivés de la distance, jamais de la clé, sinon l'overlay
+  // afficherait « 1 », « 2 », « 3 » au lieu de « 415.96Y ».
+  // -------------------------------------------------------------------
+
+  /** Alias de lecture tolérés par les anciennes versions du fichier. */
+  function holesOf(course) {
+    return course?.holes || course?.trous || {};
+  }
+
+  function pinsOf(hole) {
+    return hole?.pins || hole?.positions || {};
+  }
+
+  /** Libellé de parcours : nom lisible, sinon clé. */
+  function buildMapOptions(courses) {
+    return Object.keys(courses || {}).map((key) => ({
+      value: key,
+      label: courses[key]?.name || key,
+    }));
+  }
+
+  /** Tri naturel des trous : H2 avant H10. */
+  function sortHoleKeys(keys) {
+    return [...keys].sort((a, b) => {
+      const numA = parseInt(a.replace(/\D/g, ""), 10) || 0;
+      const numB = parseInt(b.replace(/\D/g, ""), 10) || 0;
+      return numA - numB;
+    });
+  }
+
+  function buildHoleOptions(course) {
+    const holes = holesOf(course);
+    return sortHoleKeys(Object.keys(holes)).map((key) => {
+      const par = holes[key]?.par || "";
+      return { value: key, label: par ? ` ${key} (Par ${par})` : ` ${key}` };
+    });
+  }
+
+  /**
+   * Distance affichée au format historique « 415.96Y ».
+   * Le repli sur la clé ne sert que pour un pin sans `pinDistance`
+   * exploitable, que le validateur Rust refuse par ailleurs.
+   */
+  function formatPinLabel(pin, key) {
+    const distance = Number(pin?.pinDistance);
+    if (Number.isFinite(distance)) return ` ${distance.toFixed(2)}Y`;
+    return ` ${String(key).toUpperCase()}`;
+  }
+
+  /**
+   * Options du select de pins, triées par distance croissante.
+   *
+   * La clé reste l'ordinal technique : c'est la valeur transportée par
+   * l'événement `select-pin` et persistée par le StorageService, donc
+   * stable même si l'utilisateur renumérote ou réordonne les pins.
+   */
+  function buildPinOptions(hole) {
+    const pins = pinsOf(hole);
+
+    return Object.keys(pins)
+      .map((key) => ({ key, pin: pins[key] }))
+      .sort((a, b) => {
+        const da = Number(a.pin?.pinDistance);
+        const db = Number(b.pin?.pinDistance);
+        if (Number.isFinite(da) && Number.isFinite(db) && da !== db) {
+          return da - db;
+        }
+        // Repli ordinal si une distance est absente ou invalide.
+        const ordA = parseInt(a.key, 10);
+        const ordB = parseInt(b.key, 10);
+        if (Number.isFinite(ordA) && Number.isFinite(ordB)) return ordA - ordB;
+        return 0;
+      })
+      .map(({ key, pin }) => ({ value: key, label: formatPinLabel(pin, key) }));
+  }
+
   window.CourseStore = function (tauriService, storageService) {
     const store = {
       courses: {},
       selected: { map: null, hole: null, pin: null },
       observers: [],
       initialized: false,
+      // Incrémenté à chaque rechargement des parcours. Permet à l'émetteur
+      // de `current-course-state` de ne pas rediffuser un état identique
+      // (l'overlay demande l'état au démarrage alors qu'il vient déjà de le
+      // recevoir) sans avoir à sérialiser les 821 pins pour le comparer.
+      revision: 0,
 
       async initialize() {
         if (this.initialized) return this.courses;
@@ -29,6 +122,7 @@
         const data = await tauriService.invoke("parcours");
         this.courses = data?.course || data || {};
         this.initialized = true;
+        this.revision++;
 
         // Repartir d'une sélection propre avant de la restaurer
         this.selected.map = null;
@@ -40,15 +134,15 @@
         if (saved.map && this.courses[saved.map]) {
           this.selected.map = saved.map;
           if (saved.hole) {
-            const holes =
-              this.courses[saved.map].holes ||
-              this.courses[saved.map].trous ||
-              {};
+            const holes = holesOf(this.courses[saved.map]);
             if (holes[saved.hole]) {
               this.selected.hole = saved.hole;
               if (saved.pin) {
-                const pins =
-                  holes[saved.hole].pins || holes[saved.hole].positions || {};
+                // Tolérance : une sélection persistée peut dater d'avant la
+                // migration vers les clés ordinales. Le pin est introuvable,
+                // on laisse simplement la sélection vide plutôt que de
+                // bloquer le parcours au démarrage.
+                const pins = pinsOf(holes[saved.hole]);
                 if (pins[saved.pin]) {
                   this.selected.pin = saved.pin;
                 }
@@ -100,17 +194,11 @@
       },
 
       getSelectedHole() {
-        const course = this.getSelectedCourse();
-        if (!course) return null;
-        const holes = course.holes || course.trous || {};
-        return holes[this.selected.hole] || null;
+        return holesOf(this.getSelectedCourse())[this.selected.hole] || null;
       },
 
       getSelectedPin() {
-        const hole = this.getSelectedHole();
-        if (!hole) return null;
-        const pins = hole.pins || hole.positions || {};
-        return pins[this.selected.pin] || null;
+        return pinsOf(this.getSelectedHole())[this.selected.pin] || null;
       },
 
       // core/stores/CourseStore.js - getState() modifié
@@ -122,36 +210,9 @@
         const hole = this.getSelectedHole();
         const pin = this.getSelectedPin();
 
-        const mapOptions = Object.keys(this.courses).map((key) => ({
-          value: key,
-          label: this.courses[key].name || key,
-        }));
-
-        // === TRI NUMÉRIQUE DES TROUS ===
-        const holeKeys = course
-          ? Object.keys(course.holes || course.trous || {})
-          : [];
-        const sortedHoleKeys = holeKeys.sort((a, b) => {
-          const numA = parseInt(a.replace(/\D/g, "")) || 0;
-          const numB = parseInt(b.replace(/\D/g, "")) || 0;
-          return numA - numB;
-        });
-
-        const holeOptions = sortedHoleKeys.map((key) => {
-          const holeData = (course?.holes || course?.trous || {})[key];
-          const par = holeData?.par || "";
-          return {
-            value: key,
-            label: par ? ` ${key} (Par ${par})` : ` ${key}`,
-          };
-        });
-
-        const pinOptions = hole
-          ? Object.keys(hole.pins || hole.positions || {}).map((key) => ({
-              value: key,
-              label: ` ${key.toUpperCase()}`,
-            }))
-          : [];
+        const mapOptions = buildMapOptions(this.courses);
+        const holeOptions = buildHoleOptions(course);
+        const pinOptions = buildPinOptions(hole);
 
         return {
           courses: this.courses,
@@ -194,42 +255,18 @@
 
     // Compute options from courses (like real CourseStore)
     function recomputeOptions() {
+      // `selected` doit être lu depuis currentState : toute référence nue
+      // lèverait un ReferenceError en mode strict, et notify() n'étant
+      // appelé qu'après ce calcul, l'overlay resterait sur son état vide
+      // (seul le libellé par défaut « Map » subsisterait).
       const { courses, selected } = currentState;
       const course = courses[selected.map] || null;
-      const hole = course
-        ? (course.holes || course.trous || {})[selected.hole] || null
-        : null;
-      const pin = hole
-        ? (hole.pins || hole.positions || {})[selected.pin] || null
-        : null;
+      const hole = holesOf(course)[selected.hole] || null;
+      const pin = pinsOf(hole)[selected.pin] || null;
 
-      currentState.mapOptions = Object.keys(currentState.courses).map((key) => ({
-        value: key,
-        label: currentState.courses[key]?.name || key,
-      }));
-
-      const holeKeys = course
-        ? Object.keys(course.holes || course.trous || {})
-        : [];
-      const sortedHoleKeys = holeKeys.sort((a, b) => {
-        const numA = parseInt(a.replace(/\D/g, "")) || 0;
-        const numB = parseInt(b.replace(/\D/g, "")) || 0;
-        return numA - numB;
-      });
-      currentState.holeOptions = sortedHoleKeys.map((key) => {
-        const holeData = (course?.holes || course?.trous || {})[key];
-        const par = holeData?.par || "";
-        return {
-          value: key,
-          label: par ? ` ${key} (Par ${par})` : ` ${key}`,
-        };
-      });
-
-      const pinKeys = hole ? Object.keys(hole.pins || hole.positions || {}) : [];
-      currentState.pinOptions = pinKeys.map((key) => ({
-        value: key,
-        label: ` ${key.toUpperCase()}`,
-      }));
+      currentState.mapOptions = buildMapOptions(currentState.courses);
+      currentState.holeOptions = buildHoleOptions(course);
+      currentState.pinOptions = buildPinOptions(hole);
 
       currentState.selectedCourse = course;
       currentState.selectedHole = hole;
@@ -286,11 +323,13 @@
     // Listen for full state from Main (initial sync)
     tauriService.listen("current-course-state", (event) => {
       const payload = event.payload;
-      if (payload) {
-        currentState = { ...currentState, ...payload };
-        recomputeOptions();
-        notify();
-      }
+      if (!payload) return;
+      // L'événement est diffusé à toutes les fenêtres : n'accepter que
+      // l'état produit par la fenêtre principale.
+      if (payload.source && payload.source !== "main") return;
+      currentState = { ...currentState, ...payload };
+      recomputeOptions();
+      notify();
     });
 
     // Request initial state from Main on startup

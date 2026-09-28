@@ -57,6 +57,28 @@
          ================================================================ -->
     <div class="page">
       <!-- ============================================================
+           AVERTISSEMENT DONNÉES DE PARCOURS
+           Rempli par l'événement "pin-data-warning" quand un fichier de
+           parcours a été ignoré (illisible ou structure invalide) et que
+           l'application est repartie sur les données embarquées.
+           Masqué par défaut : rien à signaler au démarrage normal.
+           ============================================================ -->
+      <div id="pin-data-warning" class="pin-data-warning" hidden>
+        <span class="pin-data-warning-icon">⚠️</span>
+        <div class="pin-data-warning-body">
+          <strong data-i18n="pin_data_warning_title"></strong>
+          <ul id="pin-data-warning-list"></ul>
+        </div>
+        <button
+          id="pin-data-warning-close"
+          class="pin-data-warning-close"
+          data-i18n-title="pin_data_warning_close"
+        >
+          ✕
+        </button>
+      </div>
+
+      <!-- ============================================================
            BOUTON PARAMÈTRES
            ============================================================ -->
       <div class="top_menu">

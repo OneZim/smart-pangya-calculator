@@ -362,9 +362,10 @@
       const win = await state.tauriService.getCurrentWindow();
       if (!win) return;
 
+      const { PhysicalPosition } = window.__TAURI__.dpi;
       const currentPos = await win.outerPosition();
       await win.setPosition(
-        new window.__TAURI__.window.PhysicalPosition(
+        new PhysicalPosition(
           currentPos.x + (event.payload.x || 0),
           currentPos.y + (event.payload.y || 0),
         ),

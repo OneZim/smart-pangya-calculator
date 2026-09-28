@@ -4,13 +4,15 @@ Outil overlay multi-fenêtres pour **Pangya Reborn**, conçu pour aider à calcu
 
 ## ✨ Fonctionnalités
 
-- Calcul de puissance (PB) basé sur la physique réelle du jeu
+- Calcul de puissance et décalage (PB) basé sur la physique réelle du jeu
 - Overlay de spin/curve avec dial 2D
 - Optimiseur de dunk (Dunk, Tomahawk, Spike)
-- Base de données de parcours (20 parcours, 821 pins)
+- Base de données de parcours (20 parcours, 302 trous, 821 pins) sélectionnable Map → Trou → Pin
+- Éditeur de parcours intégré pour ajuster les positions de pins
+- Règle de visée PB, cadran spin et infos de tir (PB réel, %, distance) en overlays
 - Support multi-résolution avec calibration par preset
-- Automatisation clic/clavier (raccourcis globaux)
-- Interface multilingue (FR, EN, IT, ES, DE, PT)
+- Clic automatique dans le jeu via raccourci global
+- Interface multilingue (FR, EN, IT, ES, DE, PT) et 4 thèmes
 
 ## 🛠️ Stack technique
 
@@ -30,6 +32,14 @@ cd smart-pangya-calculator
 npm install
 npm run tauri dev
 ```
+
+## 🗂️ Données de parcours
+
+Les parcours sont livrés avec l'application dans `src-tauri/data/parcours.json` et copiés dans
+`%APPDATA%\com.onezim.smart-pangya-calculator\` au premier enregistrement depuis l'éditeur.
+
+Pour revenir aux parcours d'origine : quittez l'application, supprimez `parcours.json` et
+`pin_location.json` (ancien format) de ce dossier, puis relancez l'application.
 
 ## 📄 Licence
 

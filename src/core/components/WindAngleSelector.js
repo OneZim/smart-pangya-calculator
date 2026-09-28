@@ -15,16 +15,12 @@
   "use strict";
 
   window.WindAngleSelector = function (options = {}) {
-    // === STORAGE ===
-    const storage = options.storage || window.StorageService;
-
     // === PARAMÈTRES ===
     const canvasId = options.canvasId || "angle-canvas";
     const displayId = options.displayId || "angle-display";
     const degreeId = options.degreeId || "degree";
     const syncEnabled =
       options.syncEnabled !== undefined ? options.syncEnabled : true;
-    const storageKey = options.storageKey || "wind_angle";
     const onAngleChange = options.onAngleChange || null;
 
     // === RÉCUPÉRATION DU CANVAS ===

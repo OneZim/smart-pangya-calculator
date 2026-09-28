@@ -9,7 +9,7 @@
 // principale (donc avec le vrai power_player du personnage sélectionné),
 // applique les champs reçus depuis l'overlay (distance/height/wind/etc.
 // peuvent différer si l'overlay n'est pas synchronisé à 100%), calcule le
-// meilleur spin/capler, puis émet "dunk-optimization-result".
+// meilleur spin/capler, puis émet "dunk-optimize-result".
 
 (function () {
   "use strict";
@@ -49,7 +49,7 @@
 
       if (!input_values) {
         console.error("❌ buildInputValuesFromForm indisponible");
-        window.TauriService.emit("dunk-optimization-result", {
+        window.TauriService.emit("dunk-optimize-result", {
           success: false,
           reason: "Fonction de construction des paramètres indisponible.",
         });
@@ -70,7 +70,7 @@
           reason: "Type de shot non optimisable (Cobra).",
         };
       })();
-      window.TauriService.emit("dunk-optimization-result", dunkResult);
+      window.TauriService.emit("dunk-optimize-result", dunkResult);
     });
   });
 })();

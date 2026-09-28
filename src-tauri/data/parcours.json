@@ -1,0 +1,6842 @@
+{
+  "course": {
+    "Blue Lagoon": {
+      "name": "Blue Lagoon",
+      "holes": {
+        "H1": {
+          "par": 4,
+          "name": "H1",
+          "pins": {
+            "1": {
+              "pinDistance": 415.96,
+              "pinHeight": -0.7,
+              "teeSlope": -0.23,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 417.11,
+              "pinHeight": -0.56,
+              "teeSlope": -0.22,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 425.16,
+              "pinHeight": -0.98,
+              "teeSlope": -0.23,
+              "ground": 100
+            }
+          }
+        },
+        "H2": {
+          "par": 3,
+          "name": "H2",
+          "pins": {
+            "1": {
+              "pinDistance": 224.42,
+              "pinHeight": -3.41,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 227.72,
+              "pinHeight": -3.65,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 230.83,
+              "pinHeight": -3.1,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H3": {
+          "par": 4,
+          "name": "H3",
+          "pins": {
+            "1": {
+              "pinDistance": 368.4,
+              "pinHeight": 0.15,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 371.6,
+              "pinHeight": 0.33,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 381.1,
+              "pinHeight": 0.27,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H4": {
+          "par": 4,
+          "name": "H4",
+          "pins": {
+            "1": {
+              "pinDistance": 369.28,
+              "pinHeight": -3.04,
+              "teeSlope": 0.13,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 370.7,
+              "pinHeight": -3.25,
+              "teeSlope": 0.13,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 375.35,
+              "pinHeight": -3.46,
+              "teeSlope": 0.13,
+              "ground": 100
+            }
+          }
+        },
+        "H5": {
+          "par": 5,
+          "name": "H5",
+          "pins": {
+            "1": {
+              "pinDistance": 485.77,
+              "pinHeight": -5.91,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 492.7,
+              "pinHeight": -7.55,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 507.27,
+              "pinHeight": -6.49,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H6": {
+          "par": 3,
+          "name": "H6",
+          "pins": {
+            "1": {
+              "pinDistance": 214.57,
+              "pinHeight": -2.2,
+              "teeSlope": 0.03,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 215.62,
+              "pinHeight": -2.64,
+              "teeSlope": 0.03,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 226.18,
+              "pinHeight": -2.5,
+              "teeSlope": 0.03,
+              "ground": 100
+            }
+          }
+        },
+        "H7": {
+          "par": 5,
+          "name": "H7",
+          "pins": {
+            "1": {
+              "pinDistance": 485.02,
+              "pinHeight": -3.18,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 490.2,
+              "pinHeight": -3.08,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H8": {
+          "par": 4,
+          "name": "H8",
+          "pins": {
+            "1": {
+              "pinDistance": 415.77,
+              "pinHeight": -0.48,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 425.81,
+              "pinHeight": -0.52,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 429.88,
+              "pinHeight": -0.27,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H9": {
+          "par": 4,
+          "name": "H9",
+          "pins": {
+            "1": {
+              "pinDistance": 382.57,
+              "pinHeight": 0.35,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 382.66,
+              "pinHeight": 0.3,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 388.49,
+              "pinHeight": 0.24,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H10": {
+          "par": 3,
+          "name": "H10",
+          "pins": {
+            "1": {
+              "pinDistance": 282.83,
+              "pinHeight": -2.97,
+              "teeSlope": 0.02,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 289.14,
+              "pinHeight": -2.67,
+              "teeSlope": 0.02,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 291.39,
+              "pinHeight": -2.48,
+              "teeSlope": 0.02,
+              "ground": 100
+            }
+          }
+        },
+        "H11": {
+          "par": 4,
+          "name": "H11",
+          "pins": {
+            "1": {
+              "pinDistance": 356.13,
+              "pinHeight": -6.27,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 357.18,
+              "pinHeight": -6.12,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 363.84,
+              "pinHeight": -5.94,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H13": {
+          "par": 4,
+          "name": "H13",
+          "pins": {
+            "1": {
+              "pinDistance": 427.63,
+              "pinHeight": -0.38,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 441.68,
+              "pinHeight": -0.82,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 442.7,
+              "pinHeight": -1.07,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H14": {
+          "par": 4,
+          "name": "H14",
+          "pins": {
+            "1": {
+              "pinDistance": 425.12,
+              "pinHeight": -6.63,
+              "teeSlope": 0.19,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 441.35,
+              "pinHeight": -6.11,
+              "teeSlope": -0.2,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 441.47,
+              "pinHeight": -6.23,
+              "teeSlope": 0.18,
+              "ground": 100
+            }
+          }
+        },
+        "H15": {
+          "par": 5,
+          "name": "H15",
+          "pins": {
+            "1": {
+              "pinDistance": 260.73,
+              "pinHeight": -0.05,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 270.14,
+              "pinHeight": -0.05,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 278.51,
+              "pinHeight": -0.04,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H16": {
+          "par": 3,
+          "name": "H16",
+          "pins": {
+            "1": {
+              "pinDistance": 219.5,
+              "pinHeight": -6.25,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 231.41,
+              "pinHeight": -5.52,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 236.44,
+              "pinHeight": -5.41,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H17": {
+          "par": 4,
+          "name": "H17",
+          "pins": {
+            "1": {
+              "pinDistance": 416,
+              "pinHeight": -24.2,
+              "teeSlope": 0.07,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 417.06,
+              "pinHeight": -24.4,
+              "teeSlope": 0.07,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 438.74,
+              "pinHeight": -24.8,
+              "teeSlope": 0.07,
+              "ground": 100
+            }
+          }
+        },
+        "H18": {
+          "par": 4,
+          "name": "H18",
+          "pins": {
+            "1": {
+              "pinDistance": 408.91,
+              "pinHeight": -4.82,
+              "teeSlope": 0.04,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 414.77,
+              "pinHeight": -5.02,
+              "teeSlope": 0.05,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 426.62,
+              "pinHeight": -5.21,
+              "teeSlope": 0.04,
+              "ground": 100
+            }
+          }
+        }
+      }
+    },
+    "Blue Moon": {
+      "name": "Blue Moon",
+      "holes": {
+        "H1": {
+          "par": 4,
+          "name": "H1",
+          "pins": {
+            "1": {
+              "pinDistance": 377.24,
+              "pinHeight": -1.11,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 384.53,
+              "pinHeight": -1.44,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 401.45,
+              "pinHeight": -1.35,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H2": {
+          "par": 3,
+          "name": "H2",
+          "pins": {
+            "1": {
+              "pinDistance": 228.26,
+              "pinHeight": 3.01,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 231.38,
+              "pinHeight": 3.49,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 241.9,
+              "pinHeight": 3.32,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H3": {
+          "par": 4,
+          "name": "H3",
+          "pins": {
+            "1": {
+              "pinDistance": 375.03,
+              "pinHeight": 4.57,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 385.74,
+              "pinHeight": 4.68,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 393.65,
+              "pinHeight": 4.73,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H4": {
+          "par": 4,
+          "name": "H4",
+          "pins": {
+            "1": {
+              "pinDistance": 416.96,
+              "pinHeight": 5.98,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 434.45,
+              "pinHeight": 6.13,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 437.56,
+              "pinHeight": 5.6,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H5": {
+          "par": 5,
+          "name": "H5",
+          "pins": {
+            "1": {
+              "pinDistance": 515.32,
+              "pinHeight": 4.22,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H6": {
+          "par": 3,
+          "name": "H6",
+          "pins": {
+            "1": {
+              "pinDistance": 206.75,
+              "pinHeight": 5.47,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 209.96,
+              "pinHeight": 5.8,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 221.28,
+              "pinHeight": 6.09,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H7": {
+          "par": 5,
+          "name": "H7",
+          "pins": {
+            "1": {
+              "pinDistance": 541.78,
+              "pinHeight": 12.8,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 555.39,
+              "pinHeight": 12.6,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H8": {
+          "par": 4,
+          "name": "H8",
+          "pins": {
+            "1": {
+              "pinDistance": 411.8,
+              "pinHeight": 26.7,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 422.27,
+              "pinHeight": 27.5,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 436.59,
+              "pinHeight": 27.19,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H9": {
+          "par": 4,
+          "name": "H9",
+          "pins": {
+            "1": {
+              "pinDistance": 414.2,
+              "pinHeight": -0.79,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 427.18,
+              "pinHeight": -0.3,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 431.94,
+              "pinHeight": -0.21,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H10": {
+          "par": 3,
+          "name": "H10",
+          "pins": {
+            "1": {
+              "pinDistance": 220.9,
+              "pinHeight": 5.82,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 220.94,
+              "pinHeight": 5.24,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 236.12,
+              "pinHeight": 5.8,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H11": {
+          "par": 4,
+          "name": "H11",
+          "pins": {
+            "1": {
+              "pinDistance": 439.98,
+              "pinHeight": 2.09,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 440.99,
+              "pinHeight": 1.72,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 454.8,
+              "pinHeight": 1.47,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H12": {
+          "par": 5,
+          "name": "H12",
+          "pins": {
+            "1": {
+              "pinDistance": 268.3,
+              "pinHeight": 0.06,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 268.95,
+              "pinHeight": 0.05,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 279.53,
+              "pinHeight": 0.04,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H13": {
+          "par": 4,
+          "name": "H13",
+          "pins": {
+            "1": {
+              "pinDistance": 384.78,
+              "pinHeight": -1.89,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 394.91,
+              "pinHeight": -1.84,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 396.26,
+              "pinHeight": -2.16,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H14": {
+          "par": 4,
+          "name": "H14",
+          "pins": {
+            "1": {
+              "pinDistance": 369.5,
+              "pinHeight": 3.83,
+              "teeSlope": -0.02,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 383.82,
+              "pinHeight": 4.51,
+              "teeSlope": -0.02,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 394.78,
+              "pinHeight": 4.69,
+              "teeSlope": -0.02,
+              "ground": 100
+            }
+          }
+        },
+        "H15": {
+          "par": 4,
+          "name": "H15",
+          "pins": {
+            "1": {
+              "pinDistance": 505.42,
+              "pinHeight": 6.29,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 511.86,
+              "pinHeight": 6.61,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H16": {
+          "par": 3,
+          "name": "H16",
+          "pins": {
+            "1": {
+              "pinDistance": 265.25,
+              "pinHeight": 2.21,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 268.28,
+              "pinHeight": 2.38,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 285.13,
+              "pinHeight": 2.71,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H17": {
+          "par": 4,
+          "name": "H17",
+          "pins": {
+            "1": {
+              "pinDistance": 423.88,
+              "pinHeight": 1.26,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 427.09,
+              "pinHeight": 1.25,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 435.14,
+              "pinHeight": 1.48,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H18": {
+          "par": 4,
+          "name": "H18",
+          "pins": {
+            "1": {
+              "pinDistance": 454.97,
+              "pinHeight": 8.1,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        }
+      }
+    },
+    "Lost Seaway": {
+      "name": "Lost Seaway",
+      "holes": {
+        "H1": {
+          "par": 4,
+          "name": "H1",
+          "pins": {
+            "1": {
+              "pinDistance": 359.98,
+              "pinHeight": -0.71,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 360.57,
+              "pinHeight": -0.64,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 369.01,
+              "pinHeight": -0.43,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H2": {
+          "par": 3,
+          "name": "H2",
+          "pins": {
+            "1": {
+              "pinDistance": 229.53,
+              "pinHeight": 0.23,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 234.18,
+              "pinHeight": 0.38,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 256.34,
+              "pinHeight": 0.47,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H3": {
+          "par": 5,
+          "name": "H3",
+          "pins": {
+            "1": {
+              "pinDistance": 493.33,
+              "pinHeight": -26,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 502.91,
+              "pinHeight": -26.4,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H4": {
+          "par": 4,
+          "name": "H4",
+          "pins": {
+            "1": {
+              "pinDistance": 403.09,
+              "pinHeight": -11.5,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 404.01,
+              "pinHeight": -11.4,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 410.87,
+              "pinHeight": -11.48,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H5": {
+          "par": 4,
+          "name": "H5",
+          "pins": {
+            "1": {
+              "pinDistance": 323.77,
+              "pinHeight": -7.07,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 332.99,
+              "pinHeight": -7,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 339.3,
+              "pinHeight": -6.79,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H6": {
+          "par": 5,
+          "name": "H6",
+          "pins": {
+            "1": {
+              "pinDistance": 562.26,
+              "pinHeight": 16.9,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H7": {
+          "par": 4,
+          "name": "H7",
+          "pins": {
+            "1": {
+              "pinDistance": 384.72,
+              "pinHeight": -15.7,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 390,
+              "pinHeight": -15.5,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 397.29,
+              "pinHeight": -15.3,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H8": {
+          "par": 4,
+          "name": "H8",
+          "pins": {
+            "1": {
+              "pinDistance": 302.33,
+              "pinHeight": -13.1,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 306.59,
+              "pinHeight": -13.1,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 314.39,
+              "pinHeight": -13.2,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H9": {
+          "par": 4,
+          "name": "H9",
+          "pins": {
+            "1": {
+              "pinDistance": 387.74,
+              "pinHeight": -19.2,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 397.53,
+              "pinHeight": -19.5,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 402.93,
+              "pinHeight": -19.6,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H10": {
+          "par": 3,
+          "name": "H10",
+          "pins": {
+            "1": {
+              "pinDistance": 229.94,
+              "pinHeight": -11.9,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 239.41,
+              "pinHeight": -11.8,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 247.29,
+              "pinHeight": -11.5,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H11": {
+          "par": 4,
+          "name": "H11",
+          "pins": {
+            "1": {
+              "pinDistance": 349.48,
+              "pinHeight": -14.2,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 355.88,
+              "pinHeight": -14.2,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 362.53,
+              "pinHeight": -14.2,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H13": {
+          "par": 4,
+          "name": "H13",
+          "pins": {
+            "1": {
+              "pinDistance": 286.98,
+              "pinHeight": -13.9,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 293.22,
+              "pinHeight": -14.1,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 299.94,
+              "pinHeight": -14.1,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H14": {
+          "par": 4,
+          "name": "H14",
+          "pins": {
+            "1": {
+              "pinDistance": 205.79,
+              "pinHeight": -11.7,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 216.75,
+              "pinHeight": -11.8,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 225.28,
+              "pinHeight": -11.6,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H15": {
+          "par": 4,
+          "name": "H15",
+          "pins": {
+            "1": {
+              "pinDistance": 493.93,
+              "pinHeight": -6.83,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 504.62,
+              "pinHeight": -6.52,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H16": {
+          "par": 4,
+          "name": "H16",
+          "pins": {
+            "1": {
+              "pinDistance": 371.9,
+              "pinHeight": 2.48,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 373.91,
+              "pinHeight": 2.46,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 388.54,
+              "pinHeight": 2.46,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H17": {
+          "par": 3,
+          "name": "H17",
+          "pins": {
+            "1": {
+              "pinDistance": 256.85,
+              "pinHeight": -21.5,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 259.91,
+              "pinHeight": -21.4,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 272.3,
+              "pinHeight": -21.1,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H18": {
+          "par": 4,
+          "name": "H18",
+          "pins": {
+            "1": {
+              "pinDistance": 455.35,
+              "pinHeight": -4.67,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 455.88,
+              "pinHeight": -4.66,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 466.81,
+              "pinHeight": -4.69,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        }
+      }
+    },
+    "Ice Cannon": {
+      "name": "Ice Cannon",
+      "holes": {
+        "H1": {
+          "par": 4,
+          "name": "H1",
+          "pins": {
+            "1": {
+              "pinDistance": 447.43,
+              "pinHeight": -27.4,
+              "teeSlope": -0.33,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 454.72,
+              "pinHeight": -26.72,
+              "teeSlope": -0.33,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 467.78,
+              "pinHeight": -27.82,
+              "teeSlope": -0.34,
+              "ground": 100
+            }
+          }
+        },
+        "H2": {
+          "par": 3,
+          "name": "H2",
+          "pins": {
+            "1": {
+              "pinDistance": 181.14,
+              "pinHeight": -0.3,
+              "teeSlope": -0.04,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 197.8,
+              "pinHeight": -1.33,
+              "teeSlope": -0.02,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 201.71,
+              "pinHeight": -0.88,
+              "teeSlope": -0.05,
+              "ground": 100
+            }
+          }
+        },
+        "H3": {
+          "par": 4,
+          "name": "H3",
+          "pins": {
+            "1": {
+              "pinDistance": 347.28,
+              "pinHeight": -16.5,
+              "teeSlope": -0.15,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 357.2,
+              "pinHeight": -16.9,
+              "teeSlope": -0.14,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 370.46,
+              "pinHeight": -16.7,
+              "teeSlope": -0.15,
+              "ground": 100
+            }
+          }
+        },
+        "H4": {
+          "par": 5,
+          "name": "H4",
+          "pins": {
+            "1": {
+              "pinDistance": 522.84,
+              "pinHeight": -29.37,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 522.85,
+              "pinHeight": -29.4,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 536.83,
+              "pinHeight": -29.6,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H5": {
+          "par": 4,
+          "name": "H5",
+          "pins": {
+            "1": {
+              "pinDistance": 431.46,
+              "pinHeight": -20.6,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 441.9,
+              "pinHeight": -21,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 454.64,
+              "pinHeight": -20.7,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H6": {
+          "par": 4,
+          "name": "H6",
+          "pins": {
+            "1": {
+              "pinDistance": 364.22,
+              "pinHeight": 6.71,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 376.57,
+              "pinHeight": 7.18,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 376.6,
+              "pinHeight": 7.91,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H7": {
+          "par": 3,
+          "name": "H7",
+          "pins": {
+            "1": {
+              "pinDistance": 236.38,
+              "pinHeight": -19.2,
+              "teeSlope": -0.11,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 249.54,
+              "pinHeight": -19.7,
+              "teeSlope": -0.09,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 259.14,
+              "pinHeight": -19.5,
+              "teeSlope": -0.11,
+              "ground": 100
+            }
+          }
+        },
+        "H8": {
+          "par": 5,
+          "name": "H8",
+          "pins": {
+            "1": {
+              "pinDistance": 377.7,
+              "pinHeight": -7.54,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 384.02,
+              "pinHeight": -7.54,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 387.12,
+              "pinHeight": -7.54,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H9": {
+          "par": 4,
+          "name": "H9",
+          "pins": {
+            "1": {
+              "pinDistance": 475,
+              "pinHeight": 0,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 483,
+              "pinHeight": 0,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 485,
+              "pinHeight": -18,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H10": {
+          "par": 4,
+          "name": "H10",
+          "pins": {
+            "1": {
+              "pinDistance": 405.88,
+              "pinHeight": -35.4,
+              "teeSlope": -0.09,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 419.88,
+              "pinHeight": -36,
+              "teeSlope": -0.08,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 428.23,
+              "pinHeight": -35.7,
+              "teeSlope": -0.09,
+              "ground": 100
+            }
+          }
+        },
+        "H11": {
+          "par": 4,
+          "name": "H11",
+          "pins": {
+            "1": {
+              "pinDistance": 368.49,
+              "pinHeight": -29.6,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 385.7,
+              "pinHeight": -30,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 388,
+              "pinHeight": -29.8,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H12": {
+          "par": 4,
+          "name": "H12",
+          "pins": {
+            "1": {
+              "pinDistance": 495,
+              "pinHeight": -27.3,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 504,
+              "pinHeight": 0,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 507,
+              "pinHeight": 0,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H13": {
+          "par": 3,
+          "name": "H13",
+          "pins": {
+            "1": {
+              "pinDistance": 168.66,
+              "pinHeight": -14.3,
+              "teeSlope": -0.02,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 182.08,
+              "pinHeight": -14,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 191.4,
+              "pinHeight": -13.8,
+              "teeSlope": -0.03,
+              "ground": 100
+            }
+          }
+        },
+        "H14": {
+          "par": 5,
+          "name": "H14",
+          "pins": {
+            "1": {
+              "pinDistance": 540.65,
+              "pinHeight": -18.3,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 554.13,
+              "pinHeight": -18.3,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H15": {
+          "par": 4,
+          "name": "H15",
+          "pins": {
+            "1": {
+              "pinDistance": 391.39,
+              "pinHeight": 14.1,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 411.51,
+              "pinHeight": 13.7,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 415.87,
+              "pinHeight": 14.2,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H16": {
+          "par": 3,
+          "name": "H16",
+          "pins": {
+            "1": {
+              "pinDistance": 180.29,
+              "pinHeight": -3.34,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 184.05,
+              "pinHeight": -3.15,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 188.6,
+              "pinHeight": -3.32,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H17": {
+          "par": 4,
+          "name": "H17",
+          "pins": {
+            "1": {
+              "pinDistance": 420.83,
+              "pinHeight": -33.8,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 430.91,
+              "pinHeight": -34.3,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 444.02,
+              "pinHeight": -34.2,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H18": {
+          "par": 4,
+          "name": "H18",
+          "pins": {
+            "1": {
+              "pinDistance": 576.38,
+              "pinHeight": -8.32,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        }
+      }
+    },
+    "Ice Spa": {
+      "name": "Ice Spa",
+      "holes": {
+        "H1": {
+          "par": 4,
+          "name": "H1",
+          "pins": {
+            "1": {
+              "pinDistance": 239.41,
+              "pinHeight": -7.55,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 377.6,
+              "pinHeight": -27.21,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 381.43,
+              "pinHeight": -27.4,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H2": {
+          "par": 3,
+          "name": "H2",
+          "pins": {
+            "1": {
+              "pinDistance": 231.68,
+              "pinHeight": -7.53,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 236.09,
+              "pinHeight": -7.54,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 239.41,
+              "pinHeight": -7.55,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H3": {
+          "par": 5,
+          "name": "H3",
+          "pins": {
+            "1": {
+              "pinDistance": 421.86,
+              "pinHeight": -30.5,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 423.36,
+              "pinHeight": -30.34,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H4": {
+          "par": 4,
+          "name": "H4",
+          "pins": {
+            "1": {
+              "pinDistance": 344.51,
+              "pinHeight": -20.6,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 351.88,
+              "pinHeight": -20.7,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 353.45,
+              "pinHeight": -20.4,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H5": {
+          "par": 4,
+          "name": "H5",
+          "pins": {
+            "1": {
+              "pinDistance": 275,
+              "pinHeight": -17.5,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 282.42,
+              "pinHeight": -17.5,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 284.11,
+              "pinHeight": -17.5,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H6": {
+          "par": 3,
+          "name": "H6",
+          "pins": {
+            "1": {
+              "pinDistance": 233.47,
+              "pinHeight": -12.3,
+              "teeSlope": 0.02,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 238.91,
+              "pinHeight": -11.9,
+              "teeSlope": 0.02,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 239.62,
+              "pinHeight": -12.1,
+              "teeSlope": 0.02,
+              "ground": 100
+            }
+          }
+        },
+        "H7": {
+          "par": 4,
+          "name": "H7",
+          "pins": {
+            "1": {
+              "pinDistance": 369.76,
+              "pinHeight": 0.64,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 378.87,
+              "pinHeight": 0.93,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 384.34,
+              "pinHeight": 0.84,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H8": {
+          "par": 4,
+          "name": "H8",
+          "pins": {
+            "1": {
+              "pinDistance": 371.64,
+              "pinHeight": -71.3,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 379.19,
+              "pinHeight": -71.3,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 381.35,
+              "pinHeight": -71.1,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H9": {
+          "par": 5,
+          "name": "H9",
+          "pins": {
+            "1": {
+              "pinDistance": 263.86,
+              "pinHeight": -9.66,
+              "teeSlope": -0.01,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 268.14,
+              "pinHeight": -9.76,
+              "teeSlope": -0.01,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 269.7,
+              "pinHeight": -9.74,
+              "teeSlope": -0.01,
+              "ground": 100
+            }
+          }
+        },
+        "H10": {
+          "par": 3,
+          "name": "H10",
+          "pins": {
+            "1": {
+              "pinDistance": 232.03,
+              "pinHeight": -19.4,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 233.84,
+              "pinHeight": -19.4,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 241.21,
+              "pinHeight": -13.9,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H11": {
+          "par": 4,
+          "name": "H11",
+          "pins": {
+            "1": {
+              "pinDistance": 303.43,
+              "pinHeight": -20.4,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 310.14,
+              "pinHeight": -20.1,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 353.94,
+              "pinHeight": -13.8,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H12": {
+          "par": 5,
+          "name": "H12",
+          "pins": {
+            "1": {
+              "pinDistance": 395,
+              "pinHeight": -28.7,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 402.24,
+              "pinHeight": -28.8,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 403.43,
+              "pinHeight": -28.8,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H13": {
+          "par": 4,
+          "name": "H13",
+          "pins": {
+            "1": {
+              "pinDistance": 385.3,
+              "pinHeight": -42.7,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 389.76,
+              "pinHeight": -42.4,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H14": {
+          "par": 4,
+          "name": "H14",
+          "pins": {
+            "1": {
+              "pinDistance": 230.01,
+              "pinHeight": -13.8,
+              "teeSlope": -0.16,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 237.76,
+              "pinHeight": -13.8,
+              "teeSlope": -0.16,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 241.21,
+              "pinHeight": -13.9,
+              "teeSlope": -0.17,
+              "ground": 100
+            }
+          }
+        },
+        "H15": {
+          "par": 3,
+          "name": "H15",
+          "pins": {
+            "1": {
+              "pinDistance": 233.16,
+              "pinHeight": -2.51,
+              "teeSlope": 0.05,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 236.88,
+              "pinHeight": -2.8,
+              "teeSlope": 0.05,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 238.65,
+              "pinHeight": -2.57,
+              "teeSlope": 0.05,
+              "ground": 100
+            }
+          }
+        },
+        "H16": {
+          "par": 4,
+          "name": "H16",
+          "pins": {
+            "1": {
+              "pinDistance": 349.46,
+              "pinHeight": -13.8,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 352.17,
+              "pinHeight": -14.1,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 353.94,
+              "pinHeight": -13.8,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H17": {
+          "par": 4,
+          "name": "H17",
+          "pins": {
+            "1": {
+              "pinDistance": 317.83,
+              "pinHeight": -43.7,
+              "teeSlope": -0.01,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 326.45,
+              "pinHeight": -43.6,
+              "teeSlope": -0.01,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 447.43,
+              "pinHeight": -27.4,
+              "teeSlope": -0.01,
+              "ground": 100
+            }
+          }
+        },
+        "H18": {
+          "par": 5,
+          "name": "H18",
+          "pins": {
+            "1": {
+              "pinDistance": 434.57,
+              "pinHeight": -14.1,
+              "teeSlope": -0.34,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 438.56,
+              "pinHeight": -14.3,
+              "teeSlope": -0.35,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 440.22,
+              "pinHeight": -14.2,
+              "teeSlope": -0.35,
+              "ground": 100
+            }
+          }
+        }
+      }
+    },
+    "Pink Wind": {
+      "name": "Pink Wind",
+      "holes": {
+        "H1": {
+          "par": 4,
+          "name": "H1",
+          "pins": {
+            "1": {
+              "pinDistance": 337.78,
+              "pinHeight": -3.44,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 352.1,
+              "pinHeight": -3.36,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 356.74,
+              "pinHeight": -3.37,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H2": {
+          "par": 3,
+          "name": "H2",
+          "pins": {
+            "1": {
+              "pinDistance": 211.22,
+              "pinHeight": -2.76,
+              "teeSlope": 0.08,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 223.29,
+              "pinHeight": -2.66,
+              "teeSlope": 0.08,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 231.31,
+              "pinHeight": -2.66,
+              "teeSlope": 0.08,
+              "ground": 100
+            }
+          }
+        },
+        "H3": {
+          "par": 4,
+          "name": "H3",
+          "pins": {
+            "1": {
+              "pinDistance": 364.78,
+              "pinHeight": -2.1,
+              "teeSlope": 0.07,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 373.38,
+              "pinHeight": -2.1,
+              "teeSlope": 0.07,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 377.73,
+              "pinHeight": -2.1,
+              "teeSlope": 0.07,
+              "ground": 100
+            }
+          }
+        },
+        "H4": {
+          "par": 5,
+          "name": "H4",
+          "pins": {
+            "1": {
+              "pinDistance": 323.5,
+              "pinHeight": -8.82,
+              "teeSlope": -0.04,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 326.78,
+              "pinHeight": -8.82,
+              "teeSlope": -0.04,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 330.03,
+              "pinHeight": -8.82,
+              "teeSlope": -0.04,
+              "ground": 100
+            }
+          }
+        },
+        "H5": {
+          "par": 4,
+          "name": "H5",
+          "pins": {
+            "1": {
+              "pinDistance": 360.23,
+              "pinHeight": -6.13,
+              "teeSlope": 0.1,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 375.5,
+              "pinHeight": -6.06,
+              "teeSlope": 0.09,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 377.44,
+              "pinHeight": -6.03,
+              "teeSlope": 0.08,
+              "ground": 100
+            }
+          }
+        },
+        "H6": {
+          "par": 3,
+          "name": "H6",
+          "pins": {
+            "1": {
+              "pinDistance": 230.46,
+              "pinHeight": 6.65,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 238.15,
+              "pinHeight": 6.97,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 240.1,
+              "pinHeight": 6.93,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H7": {
+          "par": 4,
+          "name": "H7",
+          "pins": {
+            "1": {
+              "pinDistance": 469.82,
+              "pinHeight": 0.31,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H8": {
+          "par": 4,
+          "name": "H8",
+          "pins": {
+            "1": {
+              "pinDistance": 386.87,
+              "pinHeight": -2.67,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 395.9,
+              "pinHeight": -2.62,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 399.3,
+              "pinHeight": -2.58,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H9": {
+          "par": 4,
+          "name": "H9",
+          "pins": {
+            "1": {
+              "pinDistance": 438.99,
+              "pinHeight": -2.22,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 444.66,
+              "pinHeight": -2.23,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 448.08,
+              "pinHeight": -2.23,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H10": {
+          "par": 4,
+          "name": "H10",
+          "pins": {
+            "1": {
+              "pinDistance": 379.19,
+              "pinHeight": -1.61,
+              "teeSlope": -0.04,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 389.45,
+              "pinHeight": -1.61,
+              "teeSlope": -0.04,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 395.31,
+              "pinHeight": -1.47,
+              "teeSlope": -0.04,
+              "ground": 100
+            }
+          }
+        },
+        "H11": {
+          "par": 4,
+          "name": "H11",
+          "pins": {
+            "1": {
+              "pinDistance": 378.64,
+              "pinHeight": -1.85,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 387.95,
+              "pinHeight": -1.81,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 394.71,
+              "pinHeight": -1.84,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H12": {
+          "par": 3,
+          "name": "H12",
+          "pins": {
+            "1": {
+              "pinDistance": 235.27,
+              "pinHeight": -1.29,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 240.98,
+              "pinHeight": -1.36,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 244.06,
+              "pinHeight": -1.39,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H13": {
+          "par": 5,
+          "name": "H13",
+          "pins": {
+            "1": {
+              "pinDistance": 495.83,
+              "pinHeight": 1.83,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 504.34,
+              "pinHeight": 1.83,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H14": {
+          "par": 4,
+          "name": "H14",
+          "pins": {
+            "1": {
+              "pinDistance": 403.64,
+              "pinHeight": -2,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 412.25,
+              "pinHeight": -1.94,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 416.87,
+              "pinHeight": -1.91,
+              "teeSlope": 0.01,
+              "ground": 100
+            }
+          }
+        },
+        "H15": {
+          "par": 4,
+          "name": "H15",
+          "pins": {
+            "1": {
+              "pinDistance": 362.51,
+              "pinHeight": -9.22,
+              "teeSlope": -0.04,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 371.11,
+              "pinHeight": -9.22,
+              "teeSlope": -0.04,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 375.13,
+              "pinHeight": -9.22,
+              "teeSlope": -0.04,
+              "ground": 100
+            }
+          }
+        },
+        "H16": {
+          "par": 3,
+          "name": "H16",
+          "pins": {
+            "1": {
+              "pinDistance": 227.81,
+              "pinHeight": 15.6,
+              "teeSlope": 0.17,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 236.86,
+              "pinHeight": 15.6,
+              "teeSlope": 0.18,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 237.15,
+              "pinHeight": 15.6,
+              "teeSlope": 0.18,
+              "ground": 100
+            }
+          }
+        },
+        "H17": {
+          "par": 4,
+          "name": "H17",
+          "pins": {
+            "1": {
+              "pinDistance": 395.94,
+              "pinHeight": -4.57,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 401.13,
+              "pinHeight": -4.5,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 401.46,
+              "pinHeight": -4.54,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H18": {
+          "par": 4,
+          "name": "H18",
+          "pins": {
+            "1": {
+              "pinDistance": 519.59,
+              "pinHeight": 8.69,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        }
+      }
+    },
+    "West Wiz": {
+      "name": "West Wiz",
+      "holes": {
+        "H1": {
+          "par": 4,
+          "name": "H1",
+          "pins": {
+            "1": {
+              "pinDistance": 368.53,
+              "pinHeight": -7.98,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 371.48,
+              "pinHeight": -7.87,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 380.57,
+              "pinHeight": -8.04,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H2": {
+          "par": 3,
+          "name": "H2",
+          "pins": {
+            "1": {
+              "pinDistance": 207.44,
+              "pinHeight": -3.01,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 211.23,
+              "pinHeight": -2.92,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 220.86,
+              "pinHeight": -2.69,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H3": {
+          "par": 4,
+          "name": "H3",
+          "pins": {
+            "1": {
+              "pinDistance": 426.87,
+              "pinHeight": -21.8,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 431.13,
+              "pinHeight": -21.7,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 443.03,
+              "pinHeight": -21.6,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H5": {
+          "par": 4,
+          "name": "H5",
+          "pins": {
+            "1": {
+              "pinDistance": 414.59,
+              "pinHeight": -15.1,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 422.46,
+              "pinHeight": -15.3,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 428.91,
+              "pinHeight": -15.5,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H6": {
+          "par": 3,
+          "name": "H6",
+          "pins": {
+            "1": {
+              "pinDistance": 212.44,
+              "pinHeight": -5,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 215.47,
+              "pinHeight": -4.93,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 242.41,
+              "pinHeight": -4.71,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H8": {
+          "par": 4,
+          "name": "H8",
+          "pins": {
+            "1": {
+              "pinDistance": 360.31,
+              "pinHeight": -3.56,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 381.1,
+              "pinHeight": -3.91,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 390.25,
+              "pinHeight": -4.12,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H9": {
+          "par": 4,
+          "name": "H9",
+          "pins": {
+            "1": {
+              "pinDistance": 422.18,
+              "pinHeight": -18.1,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 434.53,
+              "pinHeight": -18.1,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 447.46,
+              "pinHeight": -18.1,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H10": {
+          "par": 4,
+          "name": "H10",
+          "pins": {
+            "1": {
+              "pinDistance": 360.5,
+              "pinHeight": -7.01,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 374.04,
+              "pinHeight": -7.09,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 379.34,
+              "pinHeight": -6.78,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H11": {
+          "par": 4,
+          "name": "H11",
+          "pins": {
+            "1": {
+              "pinDistance": 319.96,
+              "pinHeight": -13.1,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 323.54,
+              "pinHeight": -12.8,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 344.95,
+              "pinHeight": -12.8,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H12": {
+          "par": 4,
+          "name": "H12",
+          "pins": {
+            "1": {
+              "pinDistance": 431.67,
+              "pinHeight": -11,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 432.65,
+              "pinHeight": -10.6,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 442.7,
+              "pinHeight": -10.8,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H14": {
+          "par": 3,
+          "name": "H14",
+          "pins": {
+            "1": {
+              "pinDistance": 199.41,
+              "pinHeight": 14.4,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 199.56,
+              "pinHeight": 14.6,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 205.69,
+              "pinHeight": 14.5,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H15": {
+          "par": 4,
+          "name": "H15",
+          "pins": {
+            "1": {
+              "pinDistance": 451.82,
+              "pinHeight": -13,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 462.19,
+              "pinHeight": -12.8,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 467.99,
+              "pinHeight": -13.3,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H16": {
+          "par": 3,
+          "name": "H16",
+          "pins": {
+            "1": {
+              "pinDistance": 209,
+              "pinHeight": -8.36,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 218.86,
+              "pinHeight": -8.47,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 234.53,
+              "pinHeight": -8.55,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H17": {
+          "par": 4,
+          "name": "H17",
+          "pins": {
+            "1": {
+              "pinDistance": 437.68,
+              "pinHeight": -8.75,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 450.77,
+              "pinHeight": -9.09,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 450.88,
+              "pinHeight": -8.74,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H18": {
+          "par": 5,
+          "name": "H18",
+          "pins": {
+            "1": {
+              "pinDistance": 331.6,
+              "pinHeight": -4.93,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 340.9,
+              "pinHeight": -4.89,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 356.24,
+              "pinHeight": -4.93,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        }
+      }
+    },
+    "Shining Sand": {
+      "name": "Shining Sand",
+      "holes": {
+        "H1": {
+          "par": 4,
+          "name": "H1",
+          "pins": {
+            "1": {
+              "pinDistance": 400.75,
+              "pinHeight": -17.8,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 410.59,
+              "pinHeight": -17.5,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H2": {
+          "par": 3,
+          "name": "H2",
+          "pins": {
+            "1": {
+              "pinDistance": 230.51,
+              "pinHeight": -15.8,
+              "teeSlope": -0.03,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 239.33,
+              "pinHeight": -16,
+              "teeSlope": -0.03,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 247.55,
+              "pinHeight": -16.1,
+              "teeSlope": -0.03,
+              "ground": 100
+            }
+          }
+        },
+        "H3": {
+          "par": 4,
+          "name": "H3",
+          "pins": {
+            "1": {
+              "pinDistance": 270.77,
+              "pinHeight": -3.09,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 279.27,
+              "pinHeight": -3.21,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 283.93,
+              "pinHeight": -3.4,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H4": {
+          "par": 4,
+          "name": "H4",
+          "pins": {
+            "1": {
+              "pinDistance": 406.97,
+              "pinHeight": -5.98,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 413.94,
+              "pinHeight": -5.97,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 425.3,
+              "pinHeight": -5.91,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H5": {
+          "par": 5,
+          "name": "H5",
+          "pins": {
+            "1": {
+              "pinDistance": 430.66,
+              "pinHeight": -17.8,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 433.13,
+              "pinHeight": -17.7,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 437.99,
+              "pinHeight": -17.8,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H6": {
+          "par": 3,
+          "name": "H6",
+          "pins": {
+            "1": {
+              "pinDistance": 228.11,
+              "pinHeight": -20.1,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 230.72,
+              "pinHeight": -20.1,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 237.55,
+              "pinHeight": -20.1,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H8": {
+          "par": 4,
+          "name": "H8",
+          "pins": {
+            "1": {
+              "pinDistance": 412.01,
+              "pinHeight": -22.8,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 413.27,
+              "pinHeight": -22.9,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 418.97,
+              "pinHeight": -22.9,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H9": {
+          "par": 4,
+          "name": "H9",
+          "pins": {
+            "1": {
+              "pinDistance": 273.7,
+              "pinHeight": -20.7,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 283.64,
+              "pinHeight": -20.5,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 284.37,
+              "pinHeight": -20.7,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H10": {
+          "par": 3,
+          "name": "H10",
+          "pins": {
+            "1": {
+              "pinDistance": 226.43,
+              "pinHeight": -5.98,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 229.74,
+              "pinHeight": -5.99,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 233.28,
+              "pinHeight": -5.99,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H11": {
+          "par": 4,
+          "name": "H11",
+          "pins": {
+            "1": {
+              "pinDistance": 438.06,
+              "pinHeight": -21,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 443.59,
+              "pinHeight": -20.9,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 444.98,
+              "pinHeight": -21.1,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H12": {
+          "par": 4,
+          "name": "H12",
+          "pins": {
+            "1": {
+              "pinDistance": 378.1,
+              "pinHeight": -26.6,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 386.6,
+              "pinHeight": -26.6,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 391.2,
+              "pinHeight": -26.6,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H14": {
+          "par": 4,
+          "name": "H14",
+          "pins": {
+            "1": {
+              "pinDistance": 413.7,
+              "pinHeight": -18.9,
+              "teeSlope": -0.08,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 416.9,
+              "pinHeight": -18.7,
+              "teeSlope": -0.08,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 422.73,
+              "pinHeight": -18.7,
+              "teeSlope": -0.07,
+              "ground": 100
+            }
+          }
+        },
+        "H15": {
+          "par": 4,
+          "name": "H15",
+          "pins": {
+            "1": {
+              "pinDistance": 354.4,
+              "pinHeight": -19.9,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 357.9,
+              "pinHeight": -20,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 364.04,
+              "pinHeight": -19.9,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H16": {
+          "par": 3,
+          "name": "H16",
+          "pins": {
+            "1": {
+              "pinDistance": 241.32,
+              "pinHeight": -11,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 242.06,
+              "pinHeight": -11.2,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 249.14,
+              "pinHeight": -11.1,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H17": {
+          "par": 4,
+          "name": "H17",
+          "pins": {
+            "1": {
+              "pinDistance": 366.3,
+              "pinHeight": -2.39,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 367.82,
+              "pinHeight": -2.42,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 375.84,
+              "pinHeight": -2.54,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        }
+      }
+    },
+    "Eastern Valley": {
+      "name": "Eastern Valley",
+      "holes": {
+        "H1": {
+          "par": 4,
+          "name": "H1",
+          "pins": {
+            "1": {
+              "pinDistance": 388.15,
+              "pinHeight": -14.5,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 395.58,
+              "pinHeight": -14.86,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 402.32,
+              "pinHeight": -14.75,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H3": {
+          "par": 3,
+          "name": "H3",
+          "pins": {
+            "1": {
+              "pinDistance": 198.09,
+              "pinHeight": -0.33,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 203.54,
+              "pinHeight": -0.42,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 203.59,
+              "pinHeight": -0.33,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H4": {
+          "par": 4,
+          "name": "H4",
+          "pins": {
+            "1": {
+              "pinDistance": 400.84,
+              "pinHeight": -0.68,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 406.87,
+              "pinHeight": -0.69,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 407.72,
+              "pinHeight": -0.68,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H5": {
+          "par": 4,
+          "name": "H5",
+          "pins": {
+            "1": {
+              "pinDistance": 366.03,
+              "pinHeight": -1.76,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 372.54,
+              "pinHeight": -1.76,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 373.43,
+              "pinHeight": -1.76,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H6": {
+          "par": 4,
+          "name": "H6",
+          "pins": {
+            "1": {
+              "pinDistance": 385.7,
+              "pinHeight": 0.09,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 388.56,
+              "pinHeight": 0.1,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 390.02,
+              "pinHeight": 0.1,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H7": {
+          "par": 5,
+          "name": "H7",
+          "pins": {
+            "1": {
+              "pinDistance": 479.54,
+              "pinHeight": -1.6,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H8": {
+          "par": 3,
+          "name": "H8",
+          "pins": {
+            "1": {
+              "pinDistance": 257.73,
+              "pinHeight": -7.85,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 267,
+              "pinHeight": -8.03,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 268.58,
+              "pinHeight": -8.18,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H9": {
+          "par": 4,
+          "name": "H9",
+          "pins": {
+            "1": {
+              "pinDistance": 290.41,
+              "pinHeight": -1.66,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 294.12,
+              "pinHeight": -1.73,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 298.73,
+              "pinHeight": -1.73,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H10": {
+          "par": 3,
+          "name": "H10",
+          "pins": {
+            "1": {
+              "pinDistance": 223.99,
+              "pinHeight": 1.07,
+              "teeSlope": 0.02,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 225.02,
+              "pinHeight": 0.99,
+              "teeSlope": 0.02,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 233.44,
+              "pinHeight": 0.9,
+              "teeSlope": 0.02,
+              "ground": 100
+            }
+          }
+        },
+        "H11": {
+          "par": 4,
+          "name": "H11",
+          "pins": {
+            "1": {
+              "pinDistance": 442.07,
+              "pinHeight": -6.88,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 449.59,
+              "pinHeight": -6.97,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 456.68,
+              "pinHeight": -6.97,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H12": {
+          "par": 4,
+          "name": "H12",
+          "pins": {
+            "1": {
+              "pinDistance": 493.83,
+              "pinHeight": -7.24,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H13": {
+          "par": 4,
+          "name": "H13",
+          "pins": {
+            "1": {
+              "pinDistance": 374.75,
+              "pinHeight": -14.4,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 384.73,
+              "pinHeight": -14.7,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 394.48,
+              "pinHeight": -15.1,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H14": {
+          "par": 4,
+          "name": "H14",
+          "pins": {
+            "1": {
+              "pinDistance": 370.72,
+              "pinHeight": -17.8,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 373.7,
+              "pinHeight": -17.8,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 380.03,
+              "pinHeight": -17.7,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H15": {
+          "par": 3,
+          "name": "H15",
+          "pins": {
+            "1": {
+              "pinDistance": 241.47,
+              "pinHeight": -13.5,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 248.88,
+              "pinHeight": -13.6,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 250.91,
+              "pinHeight": -13.6,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H16": {
+          "par": 4,
+          "name": "H16",
+          "pins": {
+            "1": {
+              "pinDistance": 380.3,
+              "pinHeight": -6.08,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 381.97,
+              "pinHeight": -6.18,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 384.01,
+              "pinHeight": -6.18,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H17": {
+          "par": 4,
+          "name": "H17",
+          "pins": {
+            "1": {
+              "pinDistance": 353.5,
+              "pinHeight": -1.25,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 358.35,
+              "pinHeight": -1.08,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 364.33,
+              "pinHeight": -1.22,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H18": {
+          "par": 4,
+          "name": "H18",
+          "pins": {
+            "1": {
+              "pinDistance": 342.79,
+              "pinHeight": -9.55,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 346.41,
+              "pinHeight": -9.45,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 347.29,
+              "pinHeight": -9.6,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        }
+      }
+    },
+    "Abbot Mine": {
+      "name": "Abbot Mine",
+      "holes": {
+        "H1": {
+          "par": 4,
+          "name": "H1",
+          "pins": {
+            "1": {
+              "pinDistance": 489.18,
+              "pinHeight": -28.1,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H2": {
+          "par": 3,
+          "name": "H2",
+          "pins": {
+            "1": {
+              "pinDistance": 244.79,
+              "pinHeight": -13,
+              "teeSlope": 0.11,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 247.9,
+              "pinHeight": -12.9,
+              "teeSlope": 0.11,
+              "ground": 100
+            }
+          }
+        },
+        "H3": {
+          "par": 4,
+          "name": "H3",
+          "pins": {
+            "1": {
+              "pinDistance": 429.63,
+              "pinHeight": -28.54,
+              "teeSlope": 0.07,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 443.83,
+              "pinHeight": -28.2,
+              "teeSlope": 0.07,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 449.48,
+              "pinHeight": -28.12,
+              "teeSlope": 0.08,
+              "ground": 100
+            }
+          }
+        },
+        "H4": {
+          "par": 4,
+          "name": "H4",
+          "pins": {
+            "1": {
+              "pinDistance": 413.45,
+              "pinHeight": -18.39,
+              "teeSlope": 0.05,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 414.61,
+              "pinHeight": -18.5,
+              "teeSlope": 0.05,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 414.64,
+              "pinHeight": -18.5,
+              "teeSlope": 0.05,
+              "ground": 100
+            }
+          }
+        },
+        "H5": {
+          "par": 5,
+          "name": "H5",
+          "pins": {
+            "1": {
+              "pinDistance": 562.6,
+              "pinHeight": 23,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H6": {
+          "par": 3,
+          "name": "H6",
+          "pins": {
+            "1": {
+              "pinDistance": 229.83,
+              "pinHeight": 7.26,
+              "teeSlope": -0.11,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 238.24,
+              "pinHeight": 7.76,
+              "teeSlope": -0.1,
+              "ground": 100
+            }
+          }
+        },
+        "H7": {
+          "par": 5,
+          "name": "H7",
+          "pins": {
+            "1": {
+              "pinDistance": 244.87,
+              "pinHeight": -54.3,
+              "teeSlope": -0.09,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 246.68,
+              "pinHeight": -54.6,
+              "teeSlope": -0.09,
+              "ground": 100
+            }
+          }
+        },
+        "H8": {
+          "par": 4,
+          "name": "H8",
+          "pins": {
+            "1": {
+              "pinDistance": 327,
+              "pinHeight": -36,
+              "teeSlope": 0.07,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 332.65,
+              "pinHeight": -36.3,
+              "teeSlope": 0.07,
+              "ground": 100
+            }
+          }
+        },
+        "H9": {
+          "par": 4,
+          "name": "H9",
+          "pins": {
+            "1": {
+              "pinDistance": 485.65,
+              "pinHeight": -43.9,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H10": {
+          "par": 3,
+          "name": "H10",
+          "pins": {
+            "1": {
+              "pinDistance": 227.96,
+              "pinHeight": -5.37,
+              "teeSlope": -0.02,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 237.36,
+              "pinHeight": -5.19,
+              "teeSlope": -0.02,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 240.9,
+              "pinHeight": -5.32,
+              "teeSlope": -0.02,
+              "ground": 100
+            }
+          }
+        },
+        "H11": {
+          "par": 4,
+          "name": "H11",
+          "pins": {
+            "1": {
+              "pinDistance": 477.19,
+              "pinHeight": -68.2,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H13": {
+          "par": 4,
+          "name": "H13",
+          "pins": {
+            "1": {
+              "pinDistance": 336.09,
+              "pinHeight": -3.31,
+              "teeSlope": 0.01,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 347.05,
+              "pinHeight": -3.64,
+              "teeSlope": 0.01,
+              "ground": 100
+            }
+          }
+        },
+        "H14": {
+          "par": 4,
+          "name": "H14",
+          "pins": {
+            "1": {
+              "pinDistance": 373.62,
+              "pinHeight": -19.3,
+              "teeSlope": -0.1,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 379.32,
+              "pinHeight": -19.6,
+              "teeSlope": -0.1,
+              "ground": 100
+            }
+          }
+        },
+        "H15": {
+          "par": 5,
+          "name": "H15",
+          "pins": {
+            "1": {
+              "pinDistance": 294.89,
+              "pinHeight": -19.3,
+              "teeSlope": 0.1,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 302.82,
+              "pinHeight": -19.3,
+              "teeSlope": 0.1,
+              "ground": 100
+            }
+          }
+        },
+        "H16": {
+          "par": 3,
+          "name": "H16",
+          "pins": {
+            "1": {
+              "pinDistance": 185.05,
+              "pinHeight": 6.93,
+              "teeSlope": -0.06,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 211.56,
+              "pinHeight": 6.79,
+              "teeSlope": -0.06,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 211.99,
+              "pinHeight": 6.76,
+              "teeSlope": -0.07,
+              "ground": 100
+            }
+          }
+        },
+        "H17": {
+          "par": 4,
+          "name": "H17",
+          "pins": {
+            "1": {
+              "pinDistance": 370.22,
+              "pinHeight": -3.78,
+              "teeSlope": -0.05,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 374.05,
+              "pinHeight": -3.73,
+              "teeSlope": -0.05,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 383.61,
+              "pinHeight": -3.74,
+              "teeSlope": -0.05,
+              "ground": 100
+            }
+          }
+        },
+        "H18": {
+          "par": 4,
+          "name": "H18",
+          "pins": {
+            "1": {
+              "pinDistance": 451.07,
+              "pinHeight": -1.84,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        }
+      }
+    },
+    "Wiz City": {
+      "name": "Wiz City",
+      "holes": {
+        "H1": {
+          "par": 4,
+          "name": "H1",
+          "pins": {
+            "1": {
+              "pinDistance": 226.57,
+              "pinHeight": -10.8,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 235.75,
+              "pinHeight": -11,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 244.35,
+              "pinHeight": -11.1,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H6": {
+          "par": 3,
+          "name": "H6",
+          "pins": {
+            "1": {
+              "pinDistance": 240.68,
+              "pinHeight": -13.7,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 241.3,
+              "pinHeight": -13.7,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 255.63,
+              "pinHeight": -13.7,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H8": {
+          "par": 4,
+          "name": "H8",
+          "pins": {
+            "1": {
+              "pinDistance": 408.43,
+              "pinHeight": -40.2,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 420.65,
+              "pinHeight": -40.5,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 420.78,
+              "pinHeight": -40.5,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H9": {
+          "par": 4,
+          "name": "H9",
+          "pins": {
+            "1": {
+              "pinDistance": 347.43,
+              "pinHeight": 5.08,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 356.57,
+              "pinHeight": 5.05,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 360.81,
+              "pinHeight": 5.08,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H10": {
+          "par": 3,
+          "name": "H10",
+          "pins": {
+            "1": {
+              "pinDistance": 263.89,
+              "pinHeight": -33.6,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 279.57,
+              "pinHeight": -34.1,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 286.67,
+              "pinHeight": -34.6,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H13": {
+          "par": 4,
+          "name": "H13",
+          "pins": {
+            "1": {
+              "pinDistance": 223.05,
+              "pinHeight": -38.3,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 242.05,
+              "pinHeight": -38.5,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 248.08,
+              "pinHeight": -38.6,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H16": {
+          "par": 3,
+          "name": "H16",
+          "pins": {
+            "1": {
+              "pinDistance": 175.67,
+              "pinHeight": -15.4,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 185.34,
+              "pinHeight": -15.4,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 190.13,
+              "pinHeight": -15.4,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H17": {
+          "par": 4,
+          "name": "H17",
+          "pins": {
+            "1": {
+              "pinDistance": 386.1,
+              "pinHeight": -35.3,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 399.98,
+              "pinHeight": -36,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 410.5,
+              "pinHeight": -36.8,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        }
+      }
+    },
+    "Sepia Wind": {
+      "name": "Sepia Wind",
+      "holes": {
+        "H1": {
+          "par": 4,
+          "name": "H1",
+          "pins": {
+            "1": {
+              "pinDistance": 406.87,
+              "pinHeight": -7.17,
+              "teeSlope": -0.18,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 414.82,
+              "pinHeight": -7.77,
+              "teeSlope": -0.17,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 415.43,
+              "pinHeight": -7.52,
+              "teeSlope": -0.18,
+              "ground": 100
+            }
+          }
+        },
+        "H2": {
+          "par": 3,
+          "name": "H2",
+          "pins": {
+            "1": {
+              "pinDistance": 291.51,
+              "pinHeight": -7.2,
+              "teeSlope": 0.09,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 299.36,
+              "pinHeight": -7.21,
+              "teeSlope": 0.09,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 309.24,
+              "pinHeight": -7.53,
+              "teeSlope": 0.09,
+              "ground": 100
+            }
+          }
+        },
+        "H3": {
+          "par": 4,
+          "name": "H3",
+          "pins": {
+            "1": {
+              "pinDistance": 414.24,
+              "pinHeight": -1.76,
+              "teeSlope": 0.02,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 419.35,
+              "pinHeight": -1.4,
+              "teeSlope": 0.02,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 433.9,
+              "pinHeight": -1.33,
+              "teeSlope": 0.02,
+              "ground": 100
+            }
+          }
+        },
+        "H4": {
+          "par": 4,
+          "name": "H4",
+          "pins": {
+            "1": {
+              "pinDistance": 450.92,
+              "pinHeight": 0.57,
+              "teeSlope": 0.25,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 463.76,
+              "pinHeight": 1.29,
+              "teeSlope": 0.25,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 466.32,
+              "pinHeight": 1.04,
+              "teeSlope": 0.23,
+              "ground": 100
+            }
+          }
+        },
+        "H6": {
+          "par": 4,
+          "name": "H6",
+          "pins": {
+            "1": {
+              "pinDistance": 414.91,
+              "pinHeight": -6.02,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 428.74,
+              "pinHeight": -5.87,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 438.81,
+              "pinHeight": -6.21,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H7": {
+          "par": 3,
+          "name": "H7",
+          "pins": {
+            "1": {
+              "pinDistance": 231.21,
+              "pinHeight": -15.01,
+              "teeSlope": -0.92,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 239.91,
+              "pinHeight": -14.5,
+              "teeSlope": -0.85,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 244.67,
+              "pinHeight": -14.4,
+              "teeSlope": -0.93,
+              "ground": 100
+            }
+          }
+        },
+        "H8": {
+          "par": 4,
+          "name": "H8",
+          "pins": {
+            "1": {
+              "pinDistance": 409.89,
+              "pinHeight": -2.78,
+              "teeSlope": 0.32,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 421.47,
+              "pinHeight": -2.97,
+              "teeSlope": 0.34,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 439.98,
+              "pinHeight": -2.94,
+              "teeSlope": 0.33,
+              "ground": 100
+            }
+          }
+        },
+        "H10": {
+          "par": 4,
+          "name": "H10",
+          "pins": {
+            "1": {
+              "pinDistance": 384.2,
+              "pinHeight": 6.49,
+              "teeSlope": 0.22,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 387.2,
+              "pinHeight": 6.14,
+              "teeSlope": 0.06,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 398.31,
+              "pinHeight": 6.12,
+              "teeSlope": 0.15,
+              "ground": 100
+            }
+          }
+        },
+        "H12": {
+          "par": 4,
+          "name": "H12",
+          "pins": {
+            "1": {
+              "pinDistance": 443.03,
+              "pinHeight": -3.37,
+              "teeSlope": 0.04,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 446.57,
+              "pinHeight": -3.09,
+              "teeSlope": 0.04,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 452.45,
+              "pinHeight": -3.01,
+              "teeSlope": 0.04,
+              "ground": 100
+            }
+          }
+        },
+        "H13": {
+          "par": 3,
+          "name": "H13",
+          "pins": {
+            "1": {
+              "pinDistance": 223.87,
+              "pinHeight": -13.9,
+              "teeSlope": -0.05,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 227.37,
+              "pinHeight": -13.82,
+              "teeSlope": -0.06,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 235.72,
+              "pinHeight": -13.9,
+              "teeSlope": -0.07,
+              "ground": 100
+            }
+          }
+        },
+        "H14": {
+          "par": 4,
+          "name": "H14",
+          "pins": {
+            "1": {
+              "pinDistance": 353.66,
+              "pinHeight": -17.4,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 371.91,
+              "pinHeight": -17.6,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 383.61,
+              "pinHeight": -17.74,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H15": {
+          "par": 4,
+          "name": "H15",
+          "pins": {
+            "1": {
+              "pinDistance": 412.65,
+              "pinHeight": 12.5,
+              "teeSlope": 0.04,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 417.16,
+              "pinHeight": 12,
+              "teeSlope": 0.1,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 423.54,
+              "pinHeight": 13.1,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H16": {
+          "par": 3,
+          "name": "H16",
+          "pins": {
+            "1": {
+              "pinDistance": 248.45,
+              "pinHeight": -5.63,
+              "teeSlope": 0.01,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 255.2,
+              "pinHeight": -5.62,
+              "teeSlope": 0.01,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 261.74,
+              "pinHeight": -5.59,
+              "teeSlope": 0.01,
+              "ground": 100
+            }
+          }
+        },
+        "H18": {
+          "par": 4,
+          "name": "H18",
+          "pins": {
+            "1": {
+              "pinDistance": 385.13,
+              "pinHeight": -8.07,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 395.1,
+              "pinHeight": -8.22,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 401.97,
+              "pinHeight": -8.24,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        }
+      }
+    },
+    "Blue Water": {
+      "name": "Blue Water",
+      "holes": {
+        "H1": {
+          "par": 4,
+          "name": "H1",
+          "pins": {
+            "1": {
+              "pinDistance": 409.21,
+              "pinHeight": -0.42,
+              "teeSlope": -0.09,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 437.83,
+              "pinHeight": -1.17,
+              "teeSlope": -0.09,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 446.24,
+              "pinHeight": -1.55,
+              "teeSlope": -0.09,
+              "ground": 100
+            }
+          }
+        },
+        "H2": {
+          "par": 3,
+          "name": "H2",
+          "pins": {
+            "1": {
+              "pinDistance": 213.31,
+              "pinHeight": -3.48,
+              "teeSlope": -0.1,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 227.83,
+              "pinHeight": -2.99,
+              "teeSlope": -0.1,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 235.75,
+              "pinHeight": -2.96,
+              "teeSlope": -0.1,
+              "ground": 100
+            }
+          }
+        },
+        "H3": {
+          "par": 4,
+          "name": "H3",
+          "pins": {
+            "1": {
+              "pinDistance": 378.74,
+              "pinHeight": -0.28,
+              "teeSlope": -0.02,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 391.71,
+              "pinHeight": -0.06,
+              "teeSlope": -0.02,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 398.29,
+              "pinHeight": -0.32,
+              "teeSlope": -0.02,
+              "ground": 100
+            }
+          }
+        },
+        "H4": {
+          "par": 4,
+          "name": "H4",
+          "pins": {
+            "1": {
+              "pinDistance": 375.94,
+              "pinHeight": -2.94,
+              "teeSlope": 0.25,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 379.04,
+              "pinHeight": -2.84,
+              "teeSlope": 0.25,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 392.34,
+              "pinHeight": -2.32,
+              "teeSlope": 0.25,
+              "ground": 100
+            }
+          }
+        },
+        "H5": {
+          "par": 5,
+          "name": "H5",
+          "pins": {
+            "1": {
+              "pinDistance": 506.75,
+              "pinHeight": -6.23,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H6": {
+          "par": 3,
+          "name": "H6",
+          "pins": {
+            "1": {
+              "pinDistance": 234.51,
+              "pinHeight": -3.16,
+              "teeSlope": 0.02,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 238.59,
+              "pinHeight": -3.53,
+              "teeSlope": 0.02,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 242.58,
+              "pinHeight": -3.28,
+              "teeSlope": 0.02,
+              "ground": 100
+            }
+          }
+        },
+        "H7": {
+          "par": 4,
+          "name": "H7",
+          "pins": {
+            "1": {
+              "pinDistance": 505.63,
+              "pinHeight": -3.21,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H8": {
+          "par": 4,
+          "name": "H8",
+          "pins": {
+            "1": {
+              "pinDistance": 433.56,
+              "pinHeight": -0.31,
+              "teeSlope": 0.47,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 434.15,
+              "pinHeight": -0.35,
+              "teeSlope": 0.46,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 445.01,
+              "pinHeight": -0.17,
+              "teeSlope": 0.48,
+              "ground": 100
+            }
+          }
+        },
+        "H9": {
+          "par": 4,
+          "name": "H9",
+          "pins": {
+            "1": {
+              "pinDistance": 382.87,
+              "pinHeight": 0.33,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 395.43,
+              "pinHeight": 0.27,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 401.19,
+              "pinHeight": 0.05,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H10": {
+          "par": 3,
+          "name": "H10",
+          "pins": {
+            "1": {
+              "pinDistance": 292.15,
+              "pinHeight": -2.95,
+              "teeSlope": 0.02,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 307.15,
+              "pinHeight": -2.17,
+              "teeSlope": 0.02,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 310.38,
+              "pinHeight": -1.78,
+              "teeSlope": 0.02,
+              "ground": 100
+            }
+          }
+        },
+        "H11": {
+          "par": 4,
+          "name": "H11",
+          "pins": {
+            "1": {
+              "pinDistance": 363.82,
+              "pinHeight": -6.39,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 370.61,
+              "pinHeight": -6.17,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 389.75,
+              "pinHeight": -6.45,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H12": {
+          "par": 4,
+          "name": "H12",
+          "pins": {
+            "1": {
+              "pinDistance": 558.4,
+              "pinHeight": -13,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H13": {
+          "par": 4,
+          "name": "H13",
+          "pins": {
+            "1": {
+              "pinDistance": 424.24,
+              "pinHeight": -0.69,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 438.84,
+              "pinHeight": -1.11,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 440.96,
+              "pinHeight": -0.99,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H14": {
+          "par": 4,
+          "name": "H14",
+          "pins": {
+            "1": {
+              "pinDistance": 472.02,
+              "pinHeight": -6.12,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H15": {
+          "par": 5,
+          "name": "H15",
+          "pins": {
+            "1": {
+              "pinDistance": 271.84,
+              "pinHeight": -0.06,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 283.21,
+              "pinHeight": -0.13,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 286.46,
+              "pinHeight": -0.06,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H16": {
+          "par": 3,
+          "name": "H16",
+          "pins": {
+            "1": {
+              "pinDistance": 227.31,
+              "pinHeight": -5.85,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 236.12,
+              "pinHeight": -5.53,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 245.64,
+              "pinHeight": -5.21,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H17": {
+          "par": 4,
+          "name": "H17",
+          "pins": {
+            "1": {
+              "pinDistance": 403.16,
+              "pinHeight": -24.1,
+              "teeSlope": 0.07,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 442.33,
+              "pinHeight": -25.2,
+              "teeSlope": 0.07,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 453.1,
+              "pinHeight": -25.2,
+              "teeSlope": 0.07,
+              "ground": 100
+            }
+          }
+        },
+        "H18": {
+          "par": 4,
+          "name": "H18",
+          "pins": {
+            "1": {
+              "pinDistance": 404.56,
+              "pinHeight": -5.01,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 434.32,
+              "pinHeight": -5.12,
+              "teeSlope": -0.01,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 444.2,
+              "pinHeight": -5.41,
+              "teeSlope": 0.01,
+              "ground": 100
+            }
+          }
+        }
+      }
+    },
+    "White Wiz": {
+      "name": "White Wiz",
+      "holes": {
+        "H1": {
+          "par": 4,
+          "name": "H1",
+          "pins": {
+            "1": {
+              "pinDistance": 396.21,
+              "pinHeight": -14,
+              "teeSlope": 0.01,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 406.47,
+              "pinHeight": -13.8,
+              "teeSlope": 0.01,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 419.4,
+              "pinHeight": -13.5,
+              "teeSlope": 0.01,
+              "ground": 100
+            }
+          }
+        },
+        "H2": {
+          "par": 3,
+          "name": "H2",
+          "pins": {
+            "1": {
+              "pinDistance": 167.7,
+              "pinHeight": -5.7,
+              "teeSlope": -0.02,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 167.89,
+              "pinHeight": -5.58,
+              "teeSlope": -0.02,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 180.53,
+              "pinHeight": -5.68,
+              "teeSlope": -0.02,
+              "ground": 100
+            }
+          }
+        },
+        "H3": {
+          "par": 4,
+          "name": "H3",
+          "pins": {
+            "1": {
+              "pinDistance": 397.87,
+              "pinHeight": 7.39,
+              "teeSlope": 0.02,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 403.39,
+              "pinHeight": 7.34,
+              "teeSlope": 0.08,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 409.55,
+              "pinHeight": 7.48,
+              "teeSlope": 0.03,
+              "ground": 100
+            }
+          }
+        },
+        "H4": {
+          "par": 5,
+          "name": "H4",
+          "pins": {
+            "1": {
+              "pinDistance": 469.7,
+              "pinHeight": -7.76,
+              "teeSlope": -0.13,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 472.98,
+              "pinHeight": -7.62,
+              "teeSlope": -0.12,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 481.13,
+              "pinHeight": -7.56,
+              "teeSlope": -0.13,
+              "ground": 100
+            }
+          }
+        },
+        "H5": {
+          "par": 4,
+          "name": "H5",
+          "pins": {
+            "1": {
+              "pinDistance": 414.31,
+              "pinHeight": -7.29,
+              "teeSlope": -0.18,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 422.12,
+              "pinHeight": -7.72,
+              "teeSlope": -0.17,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 427.47,
+              "pinHeight": -7.46,
+              "teeSlope": -0.18,
+              "ground": 100
+            }
+          }
+        },
+        "H6": {
+          "par": 5,
+          "name": "H6",
+          "pins": {
+            "1": {
+              "pinDistance": 499.48,
+              "pinHeight": -0.15,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H7": {
+          "par": 4,
+          "name": "H7",
+          "pins": {
+            "1": {
+              "pinDistance": 420.03,
+              "pinHeight": -7.06,
+              "teeSlope": 0.01,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 424.05,
+              "pinHeight": -7.06,
+              "teeSlope": 0.01,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 441.12,
+              "pinHeight": -7.16,
+              "teeSlope": 0.01,
+              "ground": 100
+            }
+          }
+        },
+        "H8": {
+          "par": 4,
+          "name": "H8",
+          "pins": {
+            "1": {
+              "pinDistance": 398.37,
+              "pinHeight": -8.09,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 403.02,
+              "pinHeight": -8.23,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 414.68,
+              "pinHeight": -8.23,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H9": {
+          "par": 3,
+          "name": "H9",
+          "pins": {
+            "1": {
+              "pinDistance": 230.61,
+              "pinHeight": -14.2,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 236.72,
+              "pinHeight": -14.2,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 237.32,
+              "pinHeight": -14.26,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H10": {
+          "par": 5,
+          "name": "H10",
+          "pins": {
+            "1": {
+              "pinDistance": 488.03,
+              "pinHeight": -3.52,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H11": {
+          "par": 4,
+          "name": "H11",
+          "pins": {
+            "1": {
+              "pinDistance": 382.9,
+              "pinHeight": -4.19,
+              "teeSlope": 0.02,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 391.73,
+              "pinHeight": -4.28,
+              "teeSlope": 0.02,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 395.76,
+              "pinHeight": -4.26,
+              "teeSlope": 0.02,
+              "ground": 100
+            }
+          }
+        },
+        "H12": {
+          "par": 3,
+          "name": "H12",
+          "pins": {
+            "1": {
+              "pinDistance": 190.72,
+              "pinHeight": 8.63,
+              "teeSlope": -0.87,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 197.7,
+              "pinHeight": 8.29,
+              "teeSlope": -0.87,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 201.25,
+              "pinHeight": 8.3,
+              "teeSlope": -0.88,
+              "ground": 100
+            }
+          }
+        },
+        "H13": {
+          "par": 4,
+          "name": "H13",
+          "pins": {
+            "1": {
+              "pinDistance": 386.63,
+              "pinHeight": -3.24,
+              "teeSlope": 0.15,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 386.94,
+              "pinHeight": -3.04,
+              "teeSlope": 0.16,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 393.48,
+              "pinHeight": -3.12,
+              "teeSlope": 0.16,
+              "ground": 100
+            }
+          }
+        },
+        "H15": {
+          "par": 4,
+          "name": "H15",
+          "pins": {
+            "1": {
+              "pinDistance": 465.12,
+              "pinHeight": -4.12,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H16": {
+          "par": 3,
+          "name": "H16",
+          "pins": {
+            "1": {
+              "pinDistance": 164.63,
+              "pinHeight": -3.58,
+              "teeSlope": -0.53,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 168.94,
+              "pinHeight": -3.61,
+              "teeSlope": -0.53,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 178.25,
+              "pinHeight": -3.53,
+              "teeSlope": -0.53,
+              "ground": 100
+            }
+          }
+        },
+        "H17": {
+          "par": 4,
+          "name": "H17",
+          "pins": {
+            "1": {
+              "pinDistance": 452.24,
+              "pinHeight": 3.81,
+              "teeSlope": -0.79,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 453.04,
+              "pinHeight": 3.72,
+              "teeSlope": -0.79,
+              "ground": 100
+            }
+          }
+        },
+        "H18": {
+          "par": 4,
+          "name": "H18",
+          "pins": {
+            "1": {
+              "pinDistance": 357.2,
+              "pinHeight": -22.2,
+              "teeSlope": -0.5,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 366.18,
+              "pinHeight": -22.3,
+              "teeSlope": -0.52,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 388.6,
+              "pinHeight": -22.6,
+              "teeSlope": -0.5,
+              "ground": 100
+            }
+          }
+        }
+      }
+    },
+    "Ice Inferno": {
+      "name": "Ice Inferno",
+      "holes": {
+        "H1": {
+          "par": 4,
+          "name": "H1",
+          "pins": {
+            "1": {
+              "pinDistance": 359.46,
+              "pinHeight": -1.53,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 370.79,
+              "pinHeight": -1.01,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 373.9,
+              "pinHeight": -1.2,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H2": {
+          "par": 3,
+          "name": "H2",
+          "pins": {
+            "1": {
+              "pinDistance": 260.81,
+              "pinHeight": -10.6,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 263.23,
+              "pinHeight": -10.9,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 272.76,
+              "pinHeight": -10.9,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H3": {
+          "par": 4,
+          "name": "H3",
+          "pins": {
+            "1": {
+              "pinDistance": 460.62,
+              "pinHeight": -7.79,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 463.48,
+              "pinHeight": -7.75,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 472.83,
+              "pinHeight": -7.77,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H4": {
+          "par": 4,
+          "name": "H4",
+          "pins": {
+            "1": {
+              "pinDistance": 473.39,
+              "pinHeight": -6.37,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 477.41,
+              "pinHeight": -6.39,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 486.14,
+              "pinHeight": -6.27,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H6": {
+          "par": 3,
+          "name": "H6",
+          "pins": {
+            "1": {
+              "pinDistance": 237.2,
+              "pinHeight": -4.89,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 237.95,
+              "pinHeight": -4.81,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 241.04,
+              "pinHeight": -4.83,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H7": {
+          "par": 4,
+          "name": "H7",
+          "pins": {
+            "1": {
+              "pinDistance": 424.1,
+              "pinHeight": -2.74,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 433.92,
+              "pinHeight": -2.78,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 439.87,
+              "pinHeight": -3.02,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H8": {
+          "par": 4,
+          "name": "H8",
+          "pins": {
+            "1": {
+              "pinDistance": 326.91,
+              "pinHeight": 2.76,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 334.81,
+              "pinHeight": 3.04,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 339.59,
+              "pinHeight": 2.97,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H10": {
+          "par": 4,
+          "name": "H10",
+          "pins": {
+            "1": {
+              "pinDistance": 456.15,
+              "pinHeight": -1.79,
+              "teeSlope": 0.02,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 465.44,
+              "pinHeight": -1.59,
+              "teeSlope": 0.02,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 472.04,
+              "pinHeight": -1.54,
+              "teeSlope": 0.02,
+              "ground": 100
+            }
+          }
+        },
+        "H11": {
+          "par": 4,
+          "name": "H11",
+          "pins": {
+            "1": {
+              "pinDistance": 447.18,
+              "pinHeight": 1.49,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 448.59,
+              "pinHeight": 1.21,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 455.93,
+              "pinHeight": 1.32,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H12": {
+          "par": 3,
+          "name": "H12",
+          "pins": {
+            "1": {
+              "pinDistance": 273.01,
+              "pinHeight": -2.58,
+              "teeSlope": -0.02,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 279.61,
+              "pinHeight": -2.48,
+              "teeSlope": -0.02,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 288.78,
+              "pinHeight": -2.41,
+              "teeSlope": -0.02,
+              "ground": 100
+            }
+          }
+        },
+        "H13": {
+          "par": 4,
+          "name": "H13",
+          "pins": {
+            "1": {
+              "pinDistance": 456.2,
+              "pinHeight": -2.51,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 464.99,
+              "pinHeight": -2.32,
+              "teeSlope": 0.01,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 472.08,
+              "pinHeight": -2.45,
+              "teeSlope": -0.01,
+              "ground": 100
+            }
+          }
+        },
+        "H15": {
+          "par": 4,
+          "name": "H15",
+          "pins": {
+            "1": {
+              "pinDistance": 428.54,
+              "pinHeight": -13.8,
+              "teeSlope": 0.02,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 441.82,
+              "pinHeight": -13.78,
+              "teeSlope": 0.02,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 445.1,
+              "pinHeight": -13.72,
+              "teeSlope": 0.02,
+              "ground": 100
+            }
+          }
+        },
+        "H16": {
+          "par": 3,
+          "name": "H16",
+          "pins": {
+            "1": {
+              "pinDistance": 259.69,
+              "pinHeight": -6.71,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 270.81,
+              "pinHeight": -6.52,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 275.42,
+              "pinHeight": -6.76,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H17": {
+          "par": 4,
+          "name": "H17",
+          "pins": {
+            "1": {
+              "pinDistance": 472.9,
+              "pinHeight": -11.74,
+              "teeSlope": -0.11,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 483.12,
+              "pinHeight": -12.1,
+              "teeSlope": -0.1,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 488.6,
+              "pinHeight": -11.86,
+              "teeSlope": -0.11,
+              "ground": 100
+            }
+          }
+        },
+        "H18": {
+          "par": 5,
+          "name": "H18",
+          "pins": {
+            "1": {
+              "pinDistance": 404.03,
+              "pinHeight": -2.86,
+              "teeSlope": 0.24,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 417.6,
+              "pinHeight": -2.87,
+              "teeSlope": 0.24,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 418.14,
+              "pinHeight": -2.85,
+              "teeSlope": 0.24,
+              "ground": 100
+            }
+          }
+        }
+      }
+    },
+    "Wiz Wiz": {
+      "name": "Wiz Wiz",
+      "holes": {
+        "H1": {
+          "par": 4,
+          "name": "H1",
+          "pins": {
+            "1": {
+              "pinDistance": 416.19,
+              "pinHeight": -3.98,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 423.11,
+              "pinHeight": -3.89,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 435.66,
+              "pinHeight": -4.21,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H3": {
+          "par": 4,
+          "name": "H3",
+          "pins": {
+            "1": {
+              "pinDistance": 220.92,
+              "pinHeight": -8.67,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 238.44,
+              "pinHeight": -8.74,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 243.36,
+              "pinHeight": -8.61,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H4": {
+          "par": 3,
+          "name": "H4",
+          "pins": {
+            "1": {
+              "pinDistance": 222.43,
+              "pinHeight": -0.45,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 236.68,
+              "pinHeight": -0.32,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 244.43,
+              "pinHeight": -0.51,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H7": {
+          "par": 4,
+          "name": "H7",
+          "pins": {
+            "1": {
+              "pinDistance": 404.63,
+              "pinHeight": -6.67,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 414.62,
+              "pinHeight": -6.36,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 423.6,
+              "pinHeight": -6.36,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H8": {
+          "par": 4,
+          "name": "H8",
+          "pins": {
+            "1": {
+              "pinDistance": 396.1,
+              "pinHeight": -6.93,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 407.27,
+              "pinHeight": -7.1,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 414.49,
+              "pinHeight": -7.27,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H9": {
+          "par": 3,
+          "name": "H9",
+          "pins": {
+            "1": {
+              "pinDistance": 216.28,
+              "pinHeight": -1.5,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 224.7,
+              "pinHeight": -1.24,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 229.43,
+              "pinHeight": -1.17,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H11": {
+          "par": 4,
+          "name": "H11",
+          "pins": {
+            "1": {
+              "pinDistance": 445.77,
+              "pinHeight": -6.54,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 463.73,
+              "pinHeight": -6.27,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 468.23,
+              "pinHeight": -6.65,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H13": {
+          "par": 3,
+          "name": "H13",
+          "pins": {
+            "1": {
+              "pinDistance": 213.14,
+              "pinHeight": -6.12,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 220.47,
+              "pinHeight": -6.2,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 225.33,
+              "pinHeight": -6.42,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H14": {
+          "par": 5,
+          "name": "H14",
+          "pins": {
+            "1": {
+              "pinDistance": 370.57,
+              "pinHeight": -8.86,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 377.6,
+              "pinHeight": -8.87,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 383.17,
+              "pinHeight": -8.99,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H15": {
+          "par": 4,
+          "name": "H15",
+          "pins": {
+            "1": {
+              "pinDistance": 385.4,
+              "pinHeight": -11.2,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 389.08,
+              "pinHeight": -11.3,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 399.72,
+              "pinHeight": -11.6,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H16": {
+          "par": 3,
+          "name": "H16",
+          "pins": {
+            "1": {
+              "pinDistance": 211.5,
+              "pinHeight": -5.83,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 221.09,
+              "pinHeight": -5.35,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 228.98,
+              "pinHeight": -4.96,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H17": {
+          "par": 4,
+          "name": "H17",
+          "pins": {
+            "1": {
+              "pinDistance": 257.65,
+              "pinHeight": -6.77,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 260.73,
+              "pinHeight": -6.9,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 272.48,
+              "pinHeight": -7.04,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H18": {
+          "par": 4,
+          "name": "H18",
+          "pins": {
+            "1": {
+              "pinDistance": 389.84,
+              "pinHeight": -9.1,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 405.86,
+              "pinHeight": -9.14,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 406.37,
+              "pinHeight": -8.83,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        }
+      }
+    },
+    "Deep Inferno": {
+      "name": "Deep Inferno",
+      "holes": {
+        "H1": {
+          "par": 4,
+          "name": "H1",
+          "pins": {
+            "1": {
+              "pinDistance": 359.46,
+              "pinHeight": -1.65,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 370.79,
+              "pinHeight": -1.39,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 373.9,
+              "pinHeight": -1.53,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H2": {
+          "par": 3,
+          "name": "H2",
+          "pins": {
+            "1": {
+              "pinDistance": 260.81,
+              "pinHeight": -11.3,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 263.23,
+              "pinHeight": -11.5,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 272.75,
+              "pinHeight": -11.4,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H6": {
+          "par": 3,
+          "name": "H6",
+          "pins": {
+            "1": {
+              "pinDistance": 237.2,
+              "pinHeight": -4.71,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 237.95,
+              "pinHeight": -4.68,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 241.04,
+              "pinHeight": -4.6,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H8": {
+          "par": 4,
+          "name": "H8",
+          "pins": {
+            "1": {
+              "pinDistance": 326.91,
+              "pinHeight": 2.15,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 334.8,
+              "pinHeight": 2.37,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 339.59,
+              "pinHeight": 2.4,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H10": {
+          "par": 4,
+          "name": "H10",
+          "pins": {
+            "1": {
+              "pinDistance": 456.16,
+              "pinHeight": -2.09,
+              "teeSlope": 0.02,
+              "ground": 100
+            }
+          }
+        },
+        "H12": {
+          "par": 3,
+          "name": "H12",
+          "pins": {
+            "1": {
+              "pinDistance": 273.01,
+              "pinHeight": -2.98,
+              "teeSlope": -0.02,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 279.61,
+              "pinHeight": -2.86,
+              "teeSlope": -0.02,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 288.78,
+              "pinHeight": -2.63,
+              "teeSlope": -0.02,
+              "ground": 100
+            }
+          }
+        },
+        "H15": {
+          "par": 4,
+          "name": "H15",
+          "pins": {
+            "1": {
+              "pinDistance": 428.54,
+              "pinHeight": -13.94,
+              "teeSlope": 0.02,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 445.1,
+              "pinHeight": -13.68,
+              "teeSlope": 0.02,
+              "ground": 100
+            }
+          }
+        },
+        "H16": {
+          "par": 3,
+          "name": "H16",
+          "pins": {
+            "1": {
+              "pinDistance": 259.68,
+              "pinHeight": -7.34,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 270.81,
+              "pinHeight": -6.71,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 275.42,
+              "pinHeight": -6.79,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H18": {
+          "par": 5,
+          "name": "H18",
+          "pins": {
+            "1": {
+              "pinDistance": 404.03,
+              "pinHeight": -3.21,
+              "teeSlope": 0.24,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 417.6,
+              "pinHeight": -2.8,
+              "teeSlope": 0.25,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 418.14,
+              "pinHeight": -3.24,
+              "teeSlope": 0.24,
+              "ground": 100
+            }
+          }
+        }
+      }
+    },
+    "Wind Hill": {
+      "name": "Wind Hill",
+      "holes": {
+        "H2": {
+          "par": 3,
+          "name": "H2",
+          "pins": {
+            "1": {
+              "pinDistance": 303.07,
+              "pinHeight": -7.67,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 311.76,
+              "pinHeight": -8.28,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 319.69,
+              "pinHeight": -7.68,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H7": {
+          "par": 3,
+          "name": "H7",
+          "pins": {
+            "1": {
+              "pinDistance": 244.47,
+              "pinHeight": -15.5,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 256.13,
+              "pinHeight": -15.1,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 257.88,
+              "pinHeight": -14.9,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H13": {
+          "par": 3,
+          "name": "H13",
+          "pins": {
+            "1": {
+              "pinDistance": 239.51,
+              "pinHeight": -14.8,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 240.73,
+              "pinHeight": -14.5,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 251.37,
+              "pinHeight": -14.8,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H14": {
+          "par": 4,
+          "name": "H14",
+          "pins": {
+            "1": {
+              "pinDistance": 349.57,
+              "pinHeight": -18.2,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 396.63,
+              "pinHeight": -18.3,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 401.93,
+              "pinHeight": -18.2,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H16": {
+          "par": 3,
+          "name": "H16",
+          "pins": {
+            "1": {
+              "pinDistance": 252.77,
+              "pinHeight": -6.44,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 264.37,
+              "pinHeight": -6.46,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 269.97,
+              "pinHeight": -6.39,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H18": {
+          "par": 4,
+          "name": "H18",
+          "pins": {
+            "1": {
+              "pinDistance": 393.02,
+              "pinHeight": -8.65,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 406.76,
+              "pinHeight": -8.72,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 418.61,
+              "pinHeight": -8.83,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        }
+      }
+    },
+    "Silvia Cannon": {
+      "name": "Silvia Cannon",
+      "holes": {
+        "H1": {
+          "par": 4,
+          "name": "H1",
+          "pins": {
+            "1": {
+              "pinDistance": 458.19,
+              "pinHeight": -22.7,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H2": {
+          "par": 3,
+          "name": "H2",
+          "pins": {
+            "1": {
+              "pinDistance": 229.48,
+              "pinHeight": -7.92,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 241.36,
+              "pinHeight": -7.98,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 242.6,
+              "pinHeight": -8.2,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H3": {
+          "par": 4,
+          "name": "H3",
+          "pins": {
+            "1": {
+              "pinDistance": 425.81,
+              "pinHeight": -19.7,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 464.6,
+              "pinHeight": -19.7,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H4": {
+          "par": 5,
+          "name": "H4",
+          "pins": {
+            "1": {
+              "pinDistance": 376.76,
+              "pinHeight": -27.1,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 389.89,
+              "pinHeight": -27.1,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 394.8,
+              "pinHeight": -27.1,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H5": {
+          "par": 4,
+          "name": "H5",
+          "pins": {
+            "1": {
+              "pinDistance": 570.13,
+              "pinHeight": -30,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 576.37,
+              "pinHeight": -30.1,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H8": {
+          "par": 4,
+          "name": "H8",
+          "pins": {
+            "1": {
+              "pinDistance": 304.9,
+              "pinHeight": -21.6,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 314.9,
+              "pinHeight": -21.6,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 334.5,
+              "pinHeight": -21.6,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H9": {
+          "par": 3,
+          "name": "H9",
+          "pins": {
+            "1": {
+              "pinDistance": 221.36,
+              "pinHeight": -1.12,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 234.45,
+              "pinHeight": -1.16,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 234.83,
+              "pinHeight": -1.29,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H10": {
+          "par": 4,
+          "name": "H10",
+          "pins": {
+            "1": {
+              "pinDistance": 554.05,
+              "pinHeight": -20.7,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H11": {
+          "par": 4,
+          "name": "H11",
+          "pins": {
+            "1": {
+              "pinDistance": 262.8,
+              "pinHeight": -11.6,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 273.16,
+              "pinHeight": -11.5,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 290.4,
+              "pinHeight": -11.6,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H12": {
+          "par": 3,
+          "name": "H12",
+          "pins": {
+            "1": {
+              "pinDistance": 167.68,
+              "pinHeight": -4.04,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 168.78,
+              "pinHeight": -4.01,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 179.46,
+              "pinHeight": -4,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H13": {
+          "par": 4,
+          "name": "H13",
+          "pins": {
+            "1": {
+              "pinDistance": 424.1,
+              "pinHeight": -18.9,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 437.18,
+              "pinHeight": -18.8,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H14": {
+          "par": 5,
+          "name": "H14",
+          "pins": {
+            "1": {
+              "pinDistance": 545.54,
+              "pinHeight": -43.3,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H15": {
+          "par": 4,
+          "name": "H15",
+          "pins": {
+            "1": {
+              "pinDistance": 499.39,
+              "pinHeight": -0.06,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H16": {
+          "par": 3,
+          "name": "H16",
+          "pins": {
+            "1": {
+              "pinDistance": 208.68,
+              "pinHeight": -18,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 209.04,
+              "pinHeight": -18,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 222.53,
+              "pinHeight": -18,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        }
+      }
+    },
+    "Mystic Ruine": {
+      "name": "Mystic Ruine",
+      "holes": {
+        "H1": {
+          "par": 4,
+          "name": "H1",
+          "pins": {
+            "1": {
+              "pinDistance": 417.48,
+              "pinHeight": 18.3,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 427.57,
+              "pinHeight": 18.1,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H2": {
+          "par": 3,
+          "name": "H2",
+          "pins": {
+            "1": {
+              "pinDistance": 225.39,
+              "pinHeight": 13,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 235.46,
+              "pinHeight": 13.4,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 247.35,
+              "pinHeight": 13.7,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H3": {
+          "par": 4,
+          "name": "H3",
+          "pins": {
+            "1": {
+              "pinDistance": 284.84,
+              "pinHeight": 1.52,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 286.76,
+              "pinHeight": 1.13,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H4": {
+          "par": 4,
+          "name": "H4",
+          "pins": {
+            "1": {
+              "pinDistance": 407.3,
+              "pinHeight": 2.09,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 412.08,
+              "pinHeight": 2.6,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 415.09,
+              "pinHeight": 2.2,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H5": {
+          "par": 5,
+          "name": "H5",
+          "pins": {
+            "1": {
+              "pinDistance": 443.08,
+              "pinHeight": 13.4,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 452.58,
+              "pinHeight": 13.2,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H6": {
+          "par": 3,
+          "name": "H6",
+          "pins": {
+            "1": {
+              "pinDistance": 228.98,
+              "pinHeight": 16.1,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H7": {
+          "par": 5,
+          "name": "H7",
+          "pins": {
+            "1": {
+              "pinDistance": 493.44,
+              "pinHeight": 24.6,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 497.8,
+              "pinHeight": 24.6,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 499.01,
+              "pinHeight": 24.6,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H8": {
+          "par": 4,
+          "name": "H8",
+          "pins": {
+            "1": {
+              "pinDistance": 414.37,
+              "pinHeight": -7.56,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 426.52,
+              "pinHeight": -7.57,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H9": {
+          "par": 4,
+          "name": "H9",
+          "pins": {
+            "1": {
+              "pinDistance": 283.79,
+              "pinHeight": 18,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 297.85,
+              "pinHeight": 17.7,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 299.54,
+              "pinHeight": 17.7,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H10": {
+          "par": 3,
+          "name": "H10",
+          "pins": {
+            "1": {
+              "pinDistance": 203.27,
+              "pinHeight": 4.06,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 224.72,
+              "pinHeight": 4.84,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H11": {
+          "par": 4,
+          "name": "H11",
+          "pins": {
+            "1": {
+              "pinDistance": 425.5,
+              "pinHeight": 16.3,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 449.05,
+              "pinHeight": 16.6,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H12": {
+          "par": 4,
+          "name": "H12",
+          "pins": {
+            "1": {
+              "pinDistance": 375.23,
+              "pinHeight": 24.4,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 380.21,
+              "pinHeight": 24.7,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H13": {
+          "par": 5,
+          "name": "H13",
+          "pins": {
+            "1": {
+              "pinDistance": 481.71,
+              "pinHeight": 19.2,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 490.6,
+              "pinHeight": 19.1,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H14": {
+          "par": 4,
+          "name": "H14",
+          "pins": {
+            "1": {
+              "pinDistance": 420.64,
+              "pinHeight": 15.3,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 427.97,
+              "pinHeight": 14.9,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H15": {
+          "par": 4,
+          "name": "H15",
+          "pins": {
+            "1": {
+              "pinDistance": 338.77,
+              "pinHeight": 17.5,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 363.33,
+              "pinHeight": 17.3,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H16": {
+          "par": 3,
+          "name": "H16",
+          "pins": {
+            "1": {
+              "pinDistance": 243.97,
+              "pinHeight": 9.15,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 253.34,
+              "pinHeight": 9.53,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H17": {
+          "par": 4,
+          "name": "H17",
+          "pins": {
+            "1": {
+              "pinDistance": 359.17,
+              "pinHeight": -0.84,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 372.23,
+              "pinHeight": -0.87,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 373.12,
+              "pinHeight": -0.83,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        },
+        "H18": {
+          "par": 5,
+          "name": "H18",
+          "pins": {
+            "1": {
+              "pinDistance": 528.12,
+              "pinHeight": 18.7,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "2": {
+              "pinDistance": 544.33,
+              "pinHeight": 18.7,
+              "teeSlope": 0,
+              "ground": 100
+            },
+            "3": {
+              "pinDistance": 561.7,
+              "pinHeight": 18.9,
+              "teeSlope": 0,
+              "ground": 100
+            }
+          }
+        }
+      }
+    }
+  }
+}

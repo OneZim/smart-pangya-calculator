@@ -221,6 +221,68 @@ body {
   transition: all 0.2s ease;
   font-size: 20px;
 }
+
+/* =====================================================================
+   AVERTISSEMENT DONNÉES DE PARCOURS
+   ---------------------------------------------------------------------
+   Affiché quand un fichier de parcours a été ignoré au chargement et que
+   l'application est repartie sur les données embarquées. Masqué par défaut.
+   N'utilise que des variables présentes dans tous les thèmes (palette CSS
+   ou fallback JS de themes.js).
+   ===================================================================== */
+.pin-data-warning {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 18px;
+  padding: 10px 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 6px;
+  color: var(--text);
+}
+
+.pin-data-warning[hidden] {
+  display: none;
+}
+
+.pin-data-warning-icon {
+  flex-shrink: 0;
+  line-height: 1.4;
+}
+
+.pin-data-warning-body {
+  flex: 1 1 auto;
+  min-width: 0;
+  line-height: 1.5;
+}
+
+.pin-data-warning-body ul {
+  margin: 6px 0 0;
+  padding-left: 18px;
+  color: var(--text-soft);
+}
+
+.pin-data-warning-body li + li {
+  margin-top: 2px;
+}
+
+.pin-data-warning-close {
+  flex-shrink: 0;
+  background: transparent;
+  border: none;
+  color: var(--text-soft);
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1.4;
+  padding: 0 2px;
+}
+
+.pin-data-warning-close:hover {
+  color: var(--text);
+}
 /* Cache les inputs radio (ils servent uniquement de contrôle) */
 .tabs input[type="radio"] {
   display: none;

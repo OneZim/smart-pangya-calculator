@@ -17,8 +17,24 @@ let availableLanguages = [];
 // silencieux sur localStorage si StorageService n'est pas chargé.
 let storage = null;
 
-window.t = function (key) {
-  return currentTranslations[key] || key;
+/**
+ * Traduit une clé.
+ *
+ * @param {string} key            clé de traduction
+ * @param {Object} [params]       remplacements `{nom}` optionnels
+ * @returns {string}              traduction, ou la clé si elle est absente
+ *
+ * L'appel à un seul argument reste inchangé. Les remplacements utilisent
+ * `split`/`join` plutôt que `replaceAll` pour ne dépendre d'aucune
+ * version de WebView2.
+ */
+window.t = function (key, params) {
+  let text = currentTranslations[key] || key;
+  if (!params) return text;
+  for (const [name, value] of Object.entries(params)) {
+    text = text.split(`{${name}}`).join(String(value));
+  }
+  return text;
 };
 
 function getTauriCore() {

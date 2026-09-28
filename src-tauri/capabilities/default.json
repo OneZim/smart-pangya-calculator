@@ -24,9 +24,6 @@
     "core:window:allow-outer-position",
     "core:window:allow-start-dragging",
     "core:webview:default",
-    "dialog:allow-open",
-    "dialog:allow-message",
-    "dialog:allow-confirm",
     "core:window:allow-set-ignore-cursor-events",
     "core:window:allow-show",
     "core:window:allow-hide",
@@ -39,6 +36,7 @@
     "global-shortcut:allow-unregister",
     "core:window:allow-set-focus",
     "core:window:allow-set-title",
+    "dialog:default",
     {
       "identifier": "core:event:allow-emit",
       "allow": ["*"]

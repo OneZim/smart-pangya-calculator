@@ -5,9 +5,7 @@
 
   let elements = {};
   let isSyncing = false;
-  let courseStore = null;
   let courseSelector = null;
-  let playerStore = null;
   let storage = null; // StorageService (Tauri Store), initialisé dans DOMContentLoaded
 
   // ================================================================
@@ -43,16 +41,6 @@
     }
   }
 
-  function emitDropdownSync(id, value) {
-    if (window.TauriService?.isAvailable) {
-      window.TauriService.emit("sync-dropdown-parcours", {
-        id,
-        value,
-        sender: "input_bar",
-      });
-    }
-  }
-
   function triggerCalc() {
     if (typeof window.triggerCalc === "function") {
       window.triggerCalc();
@@ -69,18 +57,11 @@
   // ================================================================
 
   function updateShotDependencies() {
-    if (playerStore) {
-      playerStore.refresh();
-    }
-
     const shot = parseInt(elements.shot?.value || 0);
 
     if (elements.power_shot) {
-      const value = playerStore
-        ? playerStore.getPowerShotForShot(shot)
-        : shot === 0
-          ? "0"
-          : "1";
+      // Dunk (0) = Off, tous les autres types de tir = On
+      const value = shot === 0 ? "0" : "1";
       elements.power_shot.value = value;
       emitSync("power_shot", value);
     }
@@ -271,6 +252,11 @@
         if (window.TauriService?.isAvailable) {
           window.TauriService.emit("click-spin-only", {});
         }
+        // Retour au début de la page (tabindex="1")
+        const firstTabbable = document.querySelector('[tabindex="1"]');
+        if (firstTabbable) {
+          firstTabbable.focus();
+        }
       });
     }
   }
@@ -389,13 +375,14 @@
       const x = west ? anchors.right - w : anchors.left;
       const y = north ? anchors.bottom - h : anchors.top;
 
-      const P = window.TauriService.window.PhysicalPosition;
-      const S = window.TauriService.window.PhysicalSize;
+      const { PhysicalPosition, PhysicalSize } = window.__TAURI__.dpi;
       if (west || north)
         appWindow
-          .setPosition(new P(Math.round(x), Math.round(y)))
+          .setPosition(new PhysicalPosition(Math.round(x), Math.round(y)))
           .catch(() => {});
-      appWindow.setSize(new S(Math.round(w), Math.round(h))).catch(() => {});
+      appWindow
+        .setSize(new PhysicalSize(Math.round(w), Math.round(h)))
+        .catch(() => {});
     });
 
     const onPointerUp = async () => {
@@ -434,10 +421,10 @@
       const appWindow = await window.TauriService.getCurrentWindow();
       if (!appWindow) return;
       const scale = window.devicePixelRatio || 1;
-      const S = window.TauriService.window.PhysicalSize;
+      const { PhysicalSize } = window.__TAURI__.dpi;
       const w = Math.max(Math.round(350 * scale), Math.round(saved.w));
       const h = Math.max(Math.round(420 * scale), Math.round(saved.h));
-      await appWindow.setSize(new S(w, h));
+      await appWindow.setSize(new PhysicalSize(w, h));
     } catch (err) {
       console.error("❌ Restauration taille fenêtre:", err);
     }
@@ -629,11 +616,6 @@
       ? window.CourseStore.createProxy(window.TauriService)
       : null;
 
-    playerStore = window.createPlayerStoreCalcOverlay
-      ? window.createPlayerStoreCalcOverlay(storage)
-      : null;
-    playerStore?.initialize();
-
     const container = document.getElementById("course-selector-container");
     if (container && window.CourseSelector) {
       courseSelector = window.CourseSelector(
@@ -656,6 +638,7 @@
       selectors: [".wind-panel", ".ball-panel", ".resize-grip"],
     });
     setupTextSelection();
+    setupTabLoop();
     updateOptimizeDunkBtnState();
 
     // === PANNEAU VENT (SLIDE-IN) ===
@@ -688,7 +671,33 @@
         resetBallDots();
       });
     }
+    // ================================================================
+    // NAVIGATION TAB CIRCULAIRE (curve → distance)
+    // ================================================================
 
+    function setupTabLoop() {
+      const first = document.getElementById("distance"); // tabindex="1"
+      const last = document.getElementById("curve"); // tabindex="8"
+      if (!first || !last) return;
+
+      // Tab sur le dernier champ → retour au premier
+      last.addEventListener("keydown", (e) => {
+        if (e.key === "Tab" && !e.shiftKey) {
+          e.preventDefault();
+          first.focus();
+          first.select();
+        }
+      });
+
+      // Shift+Tab sur le premier champ → va au dernier (boucle inverse)
+      first.addEventListener("keydown", (e) => {
+        if (e.key === "Tab" && e.shiftKey) {
+          e.preventDefault();
+          last.focus();
+          last.select();
+        }
+      });
+    }
     // === BOUTON ÉDITEUR DE PARCOURS (ouvre/ferme depuis l'overlay) ===
     const btnEditorToggle = document.getElementById("btn-editor-toggle");
     if (btnEditorToggle && window.TauriService?.isAvailable) {
@@ -705,12 +714,10 @@
 
     // === SÉLECTEUR D'ANGLE (canvas du panneau vent) ===
     window.angleSelector = window.WindAngleSelector?.({
-      storage,
       canvasId: "angle-canvas",
       displayId: "angle-display",
       degreeId: "degree",
       syncEnabled: true,
-      storageKey: "wind_angle",
     });
 
     // === IMAGE VENT ===
